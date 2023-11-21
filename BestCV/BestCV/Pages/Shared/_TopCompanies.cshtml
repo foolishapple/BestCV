@@ -1,0 +1,40 @@
+﻿<section class="pt-100  jbi-section">
+    <div class="pxp-container">
+        <h2 class="jbi-h2 text-center text-uppercase mb-4">Các công ty hàng đầu</h2>
+        <div class="row mt-2 mt-md-2 pxp-animate-in pxp-animate-in-top" id="listTopCompany">
+            @for (int i = 0; i < 8; i++)
+            {
+                <div class="col-md-6 col-xl-4 col-xxl-3 pxp-companies-card-1-container p--20">
+                    <div class="pxp-companies-card-1 pxp-has-border  hover-card skeleton skeleton-body">
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="row mt-4 mt-md-5 text-center pxp-animate-in pxp-animate-in-top">
+            <a href="@Url.Action("FindAllCompanies","Home")" class="btn rounded-pill pxp-section-cta custom-button">Tất cả công ty<span class="fa fa-angle-right"></span></a>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        loadDataTopCompany();
+    })
+    function loadDataTopCompany() {
+        $.ajax({
+            url: "/list-company",
+            type: "GET",
+            contentType: "application/json",
+            success: function (responseData) {
+                //console.log(responseData)
+                $("#listTopCompany").html(responseData);
+            },
+            error: function (e) {
+
+            },
+        })
+    }
+
+</script>

@@ -12,6 +12,7 @@
     <Folder Include="Services\" />
     <Folder Include="Repository\" />
     <Folder Include="View\Account\" />
+    <Folder Include="View\Home\" />
     <Folder Include="View\Shared\" />
   </ItemGroup>
 

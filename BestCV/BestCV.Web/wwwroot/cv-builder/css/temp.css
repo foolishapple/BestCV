@@ -1,0 +1,37 @@
+#cv-item-avatar img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+span[contenteditable=true]:focus-visible{
+    outline: 1px dashed var(--cv-primary-color);
+    outline-offset: -2px;
+}
+
+.cv-col-4{
+    color: white;
+    line-height: 2;
+    background-color: #626262;
+}
+
+.cv-col-8 {
+    line-height: 2;
+}
+
+.cv-col-8 .cv-item-header {
+    margin-top: 4px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 6px;
+    border-color: rgb(255 177 86 / 100%);
+}
+
+#cv-item-contact-info .cv-item-body {
+    
+}
+
+#cv-item-contact-info .cv-item-body i {
+    font-size: 13px; 
+    width: 20px;
+}

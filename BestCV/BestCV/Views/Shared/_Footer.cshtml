@@ -1,0 +1,116 @@
+﻿@using System.Text.RegularExpressions;
+<footer class="pxp-main-footer">
+    <div class="pxp-main-footer-top py--70 bg-white">
+        <div class="pxp-container">
+            <div class="row">
+                <div class="col-lg-12 col-xl-5 col-xxl-3 mb-4">
+                    <h3 class="jbi-footer-title">Về chúng tôi</h3>
+                    <div class="pxp-footer-logo">
+                        <a href="@Url.Action("index","home")" class="pxp-animate"><img src="~/assets/images/logo-1-250x100.png" /></a>
+                    </div>
+                    <div class="pxp-footer-section mt-3 mt-md-4">
+                        <div class="pxp-footer-phone jbi-footer-phone">
+                            @Regex.Replace(ViewBag.Phone, @"(\d{3})(\d{3})(\d{4})", "$1 $2 $3")
+                        </div>
+                    </div>
+                    <div class="mt-3 mt-md-4 pxp-footer-section">
+                        
+                    </div>
+                </div>
+                <div class="col-lg-12 col-xl-7 col-xxl-9">
+                    <div class="row" style="border-bottom: 1px solid #D9D9D9; gap:10px 94px">
+                        <div class="col-auto p-0 mb-4">
+                            <div class="pxp-footer-section">
+                                <h3 class="jbi-footer-title">Dành cho ứng viên</h3>
+                                <ul class="pxp-footer-list" id="footer-section">
+                                    <li><a href="#!" >Tìm việc làm</a></li>
+                                    <li><a href="@ViewBag.Candidate_dashboard" >Dashboard ứng viên</a></li>
+                                    <li><a href="#!">Đơn ứng tuyển</a></li>
+                                    <li><a href="@ViewBag.Favorite_job" >Công việc yêu thích</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-auto p-0 mb-4">
+                            <div class="pxp-footer-section">
+                                <h3 class="jbi-footer-title">Dành cho nhà tuyển dụng</h3>
+                                <ul class="pxp-footer-list">
+                                    <li><a href="#!">Tìm ứng viên</a></li>
+                                    <li><a href="@ViewBag.Company_information" >Dashboard công ty</a></li>
+                                    <li><a href="@ViewBag.Recruitment_campaign" >Chiến dịch tuyển dụng</a></li>
+                                    <li><a href="#!">Tin tuyển dụng</a></li>
+                                    <li><a href="@ViewBag.Candidate" >Ứng viên</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-auto p-0 mb-4">
+                            <div class="pxp-footer-section">
+                                <h3 class="jbi-footer-title">Giới thiệu</h3>
+                                <ul class="pxp-footer-list">
+                                    <li><a href="#!">Về chúng tôi</a></li>
+                                    <li><a href="#!">Định giá</a></li>
+                                    <li><a href="#!">Blog</a></li>
+                                    <li><a href="@ViewBag.Contact" >Liên hệ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-auto p-0 mb-4">
+                            <div class="pxp-footer-section">
+                                <h3 class="jbi-footer-title">Tài nguyên hữu ích</h3>
+                                <ul class="pxp-footer-list">
+                                    <li><a href="#!">Câu hỏi thường gặp</a></li>
+                                    <li><a href="#!">Đăng nhập</a></li>
+                                    <li><a href="#!">Đăng ký</a></li>
+                                    <li><a href="#!">Trang 404</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pxp-footer-section row pt--40">
+                        <h3 class="jbi-footer-title p-0 ">Thông tin liên hệ</h3>
+                        <ul class="pxp-footer-list mb-0" >
+                            <li>
+                                <div class="pxp-footer-text">
+                                    Trụ sở 1: @ViewBag.Address
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pxp-footer-text">
+                                    Trụ sở 2: @ViewBag.Address2
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pxp-footer-text">
+                                    Email: @ViewBag.Email
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pxp-main-footer-bottom-2">
+        <div class="pxp-container">
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <div>
+                    <div class="pxp-footer-copyright ">© 2023 Jobi Vietnam JSC. All rights reserved.</div>
+                </div>
+                <div >
+                    <div class="pxp-footer-social">
+                        <ul class="list-unstyled">
+                            <li><a class="text-white" href="@ViewBag.Facebook" ><span class="fa fa-facebook"></span></a></li>
+                            <li><a class="text-white" href="@ViewBag.Twitter" ><span class="fa fa-twitter" ></span></a></li>
+                            <li><a class="text-white" href="@ViewBag.Instagram" ><span class="fa fa-instagram" ></span></a></li>
+                            <li><a class="text-white" href="@ViewBag.Linkedin" ><span class="fa fa-linkedin" ></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+@*<script>
+    const FooterCandidate = @Html.Raw(ViewBag.FooterCandidate);
+</script>
+<script src="~/assets/js/pages/_footer.js"></script>*@

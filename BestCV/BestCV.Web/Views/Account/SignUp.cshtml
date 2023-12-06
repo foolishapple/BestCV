@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewData["Title"] = "Đăng ký";
+    ViewBag.IsHomePage = false;
+    ViewBag.IsSignUp = true;
+}
+<style>
+    .signup-button {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        width: 100% !important;
+    }
+
+    .text-muted {
+        bs-text-opacity: 1;
+        color: #6c757d !important;
+    }
+
+    .caption {
+        color: #6f7882;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 20px;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    a.btn.rounded-pill.pxp-user-nav-trigger.btn-signin.\){
+        color:#000;
+    }
+
+    .pxp-nav.pxp-light > ul > li > a {
+        color: #000;
+    }
+
+    .pxp-logo.pxp-light > a {
+        color: #000;
+    }
+
+    .pxp-user-nav-name {
+        color: #000;
+    }
+
+    .pxp-user-nav-dropdown > .dropdown-toggle::after {
+        margin-left: 7px;
+        border-top-color: #000;
+    }
+
+    .btn-signin {
+        align-items: center;
+        border-radius: 25px;
+        display: flex;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        gap: 4px;
+        height: 40px;
+        justify-content: center;
+        line-height: 20px;
+        width: 100%;
+        padding: 5px;
+    }
+
+    #login-width-facebook {
+        background: #0969C3;
+        /*border-color: #e73b2f;*/
+        color: #fff;
+    }
+
+    #login-width-google {
+        background: #e73b2f;
+        border-color: #e73b2f;
+        color: #fff;
+    }
+
+    #login-width-linkedin {
+        background: #0969C3;
+        color: #fff;
+    }
+
+    .signup-candidate-button {
+        padding: 1px;
+    }
+
+    .pxp-hero h1 {
+        font-size: 50px;
+    }
+
+    @@keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .fa.fa-eye, .fa.fa-eye-slash {
+        right: 50px !important;
+        cursor: pointer;
+    }
+</style>
+<section class="pxp-hero vh-100" style="background-color: var(--pxpMainColorLight);">
+    <div class="row align-items-center pxp-sign-hero-container">
+        <div class="col-xl-6 pxp-column">
+            <div class="pxp-sign-hero-fig text-center pb-100 pt-100">
+                <img src="~/assets/images/signup-big-fig.png" alt="Sign up" />
+                <h1 class="mt-4 mt-lg-5">Đăng ký tài khoản</h1>
+            </div>
+        </div>
+        <div class="col-xl-6 pxp-column pxp-is-light">
+            <div class="pxp-sign-hero-form pb-100 pt-100">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-xl-7 col-xxl-8">
+                        <div class="pxp-sign-hero-form-content">
+                            <h2 class="text-center">Chào mừng bạn đến với Jobi</h2>
+                            <div class="text-muted caption">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng</div>
+                            <form class="mt-4" id="form-signUp">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="pxp-signup-page-fullname" placeholder="Nhập họ tên">
+                                    <label for="pxp-signup-page-fullname">Họ và tên <span class="text-danger">*</span></label>
+                                    <span class="fa fa-regular fa-user"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Nhập email">
+                                    <label for="pxp-signup-page-email">Email <span class="text-danger">*</span></label>
+                                    <span class="fa fa-sharp fa-solid fa-envelope"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="pxp-signup-page-phone" placeholder="Nhập số điện thoại">
+                                    <label for="pxp-signup-page-phone">Số điện thoại <span class="text-danger">*</span></label>
+                                    <span class="fa fa-solid fa-phone"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="pxp-signup-page-password" placeholder="Nhập mật khẩu">
+                                    <label for="pxp-signup-page-password">Mật khẩu <span class="text-danger">*</span></label>
+                                    <span class="fa fa-eye cursor-pointer"></span>
+                                    <span class="fa fa-lock"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="pxp-signup-page-confirmpassword" placeholder="Xác nhận mật khẩu">
+                                    <label for="pxp-signup-page-confirmpassword">Nhập lại mật khẩu <span class="text-danger">*</span></label>
+                                    <span class="fa fa-eye cursor-pointer"></span>
+                                    <span class="fa fa-lock"></span>
+                                </div>
+                                <div class="col-12 mt-4 mb-3">
+                                    <input type="checkbox" class="form-check-input me-2 cursor-pointer" id="pxp-signup-page-confirmCheckbox">
+                                    <label for="pxp-signup-page-confirm-checkbox">Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chinh sách bảo mật</a> của Jobi.</label>
+                                </div>
+                                <button type="button" class="btn rounded-pill pxp-sign-hero-form-cta signup-button" id="btnSignUp">Đăng ký</button>
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-4 signup-candidate-button">
+                                        <a href="#" id="login-width-google" class="btn btn-default btn-signin input-block-level mx-1 h-40 my-3 btn-login-social">
+                                            <i class="fa fa-google" aria-hidden="true"></i>
+                                            <span class="ml-2">Google</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 signup-candidate-button">
+                                        <a href="#" id="login-width-facebook" class="btn btn-default btn-signin input-block-level mx-1 h-40 my-3 btn-login-social">
+                                            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                                            <span class="ml-2">Facebook</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 signup-candidate-button">
+                                        <a href="#" id="login-width-linkedin" class="btn btn-signin btn-signin-linkedin input-block-level mx-1 h-40 my-3 btn-login-social">
+                                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                                            <span class="ml-2">Linkedin</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="mt-4 text-center pxp-sign-hero-form-small">
+                                    Bạn đã có tài khoản? <a href="@Url.Action("SignIn","Home")">Đăng nhập</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script src="~/assets/js/pages/sign-up.js" asp-append-version="true"></script>
+    <script src="~/assets/js/pages/login-social-network.js"></script>
+}

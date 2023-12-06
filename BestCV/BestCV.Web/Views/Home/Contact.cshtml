@@ -1,0 +1,76 @@
+﻿@using System.Text.RegularExpressions;
+@{
+    ViewData["Title"] = "Liên hệ";
+    ViewBag.IsHomePage = false;
+}
+<style>
+    .pxp-nav.pxp-light > ul > li > a {
+        color: #000;
+    }
+
+    .pxp-logo.pxp-light > a {
+        color: #000;
+    }
+
+    .pxp-user-nav-name {
+        color: #000;
+    }
+
+    .pxp-user-nav-dropdown > .dropdown-toggle::after {
+        margin-left: 7px;
+        border-top-color: #000;
+    }
+
+    .w-100 {
+        width: 75% !important;
+    }
+</style>
+<section class="mt-100 pxp-no-hero">
+    <div class="pxp-container">
+        <h2 class="pxp-section-h2 text-center">Chúng tôi muốn nghe ý kiến từ bạn</h2>
+        <p class="pxp-text-light text-center">Hãy liên lạc với chúng tôi</p>
+
+        <div class="row mt-4 mt-md-5 justify-content-center pxp-animate-in pxp-animate-in-top pxp-in">
+            <div class="col-lg-4 col-xxl-3 pxp-contact-card-1-container">
+                <a href="#" class="pxp-contact-card-1">
+                    <div class="pxp-contact-card-1-icon-container">
+                        <div class="pxp-contact-card-1-icon">
+                            <span class="fa fa-globe"></span>
+                        </div>
+                    </div>
+                    <div class="pxp-contact-card-1-title">
+                        @ViewBag.Address
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-xxl-3 pxp-contact-card-1-container">
+                <a href="tel:@ViewBag.Phone" class="pxp-contact-card-1">
+                    <div class="pxp-contact-card-1-icon-container">
+                        <div class="pxp-contact-card-1-icon">
+                            <span class="fa fa-phone"></span>
+                        </div>
+                    </div>
+                    <div class="pxp-contact-card-1-title">
+                        @Regex.Replace(ViewBag.Phone, @"(\d{3})(\d{3})(\d{4})", "$1 $2 $3")
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-xxl-3 pxp-contact-card-1-container">
+                <a href="#" class="pxp-contact-card-1">
+                    <div class="pxp-contact-card-1-icon-container">
+                        <div class="pxp-contact-card-1-icon">
+                            <span class="fa fa-envelope-o"></span>
+                        </div>
+                    </div>
+                    <div class="pxp-contact-card-1-title">
+                        @ViewBag.Email
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-100 justify-content-center pxp-animate-in pxp-animate-in-top pxp-in">
+            <iframe src="@ViewBag.Map" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-100"></iframe>
+        </div>
+    </div>
+</section>

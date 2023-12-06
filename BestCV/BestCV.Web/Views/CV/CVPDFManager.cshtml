@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "Quản lý CV dạng PDF";
+    ViewBag.CurrentPage = "cv-pdf-manager";
+}
+<style>
+    .btn-function {
+        width: 25px;
+        height: 25px;
+        padding: 0;
+    }
+
+    .card-body {
+        background-color: #E6F0F9;
+    }
+
+    canvas {
+        aspect-ratio: 70/99;
+    }
+</style>
+<div class="d-flex justify-content-between">
+    <div>
+        <h1>Quản lý CV dạng PDF</h1>
+    </div>
+    <div>
+        <input type="file" id="inputUploadCVPDF" accept=".pdf" style="display: none;" />
+        <button id="btnUploadCVPDF" class="btn rounded-pill pxp-section-cta" style="white-space: nowrap;">
+            <i class="fa-solid fa-upload"></i>
+            Tải lên
+        </button>
+    </div>
+</div>
+<p class="pxp-text-light mt-4 mb-0" style="font-size: 20px;">Danh sách CV dạng PDF bạn đã tạo trên JOBI</p>
+
+<div class="row mt-4 mt-lg-5" id="areaListCVPDFGenerate">
+</div>
+
+<p class="pxp-text-light mt-4 mb-0" style="font-size: 20px;">Danh sách CV dạng PDF bạn đã tải lên</p>
+
+<div class="row mt-4 mt-lg-5" id="areaListCVPDFUpload">
+</div>
+
+@section Scripts {
+    <script>
+        var defaultTypeGenerate = @CandidateCVPDFTypeId.GENERATE;
+        var defaultTypeUpload = @CandidateCVPDFTypeId.UPLOAD;
+    </script>
+    <script src="~/lib/pdfjs/pdf.js"></script>
+    <script src="~/assets/js/pages/cv-pdf-manager.js" asp-append-version="true"></script>
+}

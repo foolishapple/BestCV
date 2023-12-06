@@ -1,0 +1,104 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    
+</style>
+<div class="row p-0" style="gap:20px 0px">
+
+    <div class="col-12 col-lg-4 px--20">
+        <div class="card card-item jbi-card-1 py--40 px--20">
+            <div class="jbi-card-title text-center mb--20">Việc làm tốt nhất</div>
+            <div class="pxp_slide h-100 owl-carousel owl-theme show" id="topJobExtra">
+                <div class="item">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <div class="card mt--20 hover-card-item card-border-item bg-light ske-job" style="max-height: 122px; min-height: 122px; border: none;">
+                            <div class="row p-4 align-items-center h-100">
+                                <div class="col-3 h-100">
+                                    <div class="skeleton image-skeleton-loading w-100 h-100 br-10"></div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="w-100 skeleton mb-2 br-5" style="height: 20px;"></div>
+                                    <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                    <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                    <div class="w-25 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center position-absolute w-100 bottom-0 mb--40">
+                <a href="/viec-lam-tot-nhat" class="btn rounded-pill btn-warning-2">Xem tất cả</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 col-lg-4 px--20">
+        <div class="card card-item jbi-card-1 py--40 px--20">
+            <div class="jbi-card-title text-center mb--20">Việc làm gấp</div>
+            <div class="pxp_slide h-100 owl-carousel owl-theme show" id="topJobUrgent">
+                <div class="item">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <div class="card mt--20 hover-card-item card-border-item bg-light ske-job" style="max-height: 122px; min-height: 122px; border: none;">
+                            <div class="row p-4 align-items-center h-100">
+                                <div class="col-3 h-100">
+                                    <div class="skeleton image-skeleton-loading w-100 h-100 br-10"></div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="w-100 skeleton mb-2 br-5" style="height: 20px;"></div>
+                                    <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                    <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                    <div class="w-25 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center position-absolute w-100 bottom-0 mb--40">
+                <a href="/viec-lam-gap" class="btn rounded-pill btn-warning-2">Xem tất cả</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-4 px--20">
+        <div class="card  card-item jbi-card-1 py--40 px--20">
+            <div class="jbi-card-title text-center mb--20">Việc làm mới</div>
+            <div class="pxp_slide h-100 owl-carousel owl-theme show" id="topFeatureJob">
+                <div class="item">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <div class="card mt--20 hover-card-item card-border-item bg-light ske-job" style="max-height: 122px; min-height: 122px; border: none;">
+                            <div class="row p-4 align-items-center h-100">
+                                <div class="col-3 h-100">
+                                    <div class="skeleton image-skeleton-loading w-100 h-100 br-10"></div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="w-100 skeleton mb-2 br-5" style="height: 20px;"></div>
+                                    <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                    <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                    <div class="w-25 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center position-absolute w-100 bottom-0 mb--40">
+                <a href="/viec-lam-moi" class="btn rounded-pill btn-warning-2">Xem tất cả</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    const salaryFrom = @SalaryTypeId.FROM;
+    const salaryTo = @SalaryTypeId.TO;
+    const salaryBetween = @SalaryTypeId.BETWEEN;
+    const salaryAgrrement = @SalaryTypeId.AGREEMENT;
+</script>
+<script src="~/assets/js/pages/danh-sach-viec-lam-trang-chu.js" asp-append-version="true"></script>

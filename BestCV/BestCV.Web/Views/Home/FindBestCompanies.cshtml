@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewData["Title"] = "Tìm kiếm công ty tốt nhất";
+    ViewBag.IsHomePage = false;
+}
+<style>
+    .row {
+        margin-bottom: 40px !important;
+    }
+
+    .pxp-single-company-hero-logo {
+        border-radius: 0;
+    }
+
+    .pxp-hero-opacity {
+        background-color: rgba(0,0,0,0.2) !important;
+    }
+</style>
+<section id="company-cover" class="pxp-single-company-hero pxp-cover">
+    <div class="pxp-hero-opacity"></div>
+    <div class="pxp-single-company-hero-caption">
+        <div class="pxp-container">
+            <div class="pxp-single-company-hero-content">
+                <div id="company-logo" class="pxp-single-company-hero-logo"></div>
+                <div class="pxp-single-company-hero-title">
+                    <h1 id="company-name"></h1>
+                    <div id="address-detail" class="pxp-single-company-hero-location"><span class="fa fa-globe"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-100">
+    <div class="pxp-container">
+        <div class="row">
+            <div class="col-lg-7 col-xl-8 col-xxl-9">
+                <div class="pxp-single-company-content">
+                    <h2 id="company-about">Về Jobi Company</h2>
+                    <p id="company-about-desription">
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-5 col-xl-4 col-xxl-3">
+                <div class="pxp-single-company-side-panel mt-5 mt-lg-0">
+                    <div class="mt-4">
+                        <div class="pxp-single-company-side-info-label pxp-text-light">Lĩnh vực hoạt động</div>
+                        <div id="company-activity" class="pxp-single-company-side-info-data">Tài chính</div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="pxp-single-company-side-info-label pxp-text-light">Quy mô công ty</div>
+                        <div id="company-size" class="pxp-single-company-side-info-data">50-100</div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="pxp-single-company-side-info-label pxp-text-light">Thành lập</div>
+                        <div id="company-foundedIn" class="pxp-single-company-side-info-data">2005</div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="pxp-single-company-side-info-label pxp-text-light">Số điện thoại</div>
+                        <div id="company-phone" class="pxp-single-company-side-info-data">0124 456 789</div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="pxp-single-company-side-info-label pxp-text-light">Email</div>
+                        <div id="company-email" class="pxp-single-company-side-info-data">office@Jobi.com</div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="pxp-single-company-side-info-label pxp-text-light">Địa điểm</div>
+                        <div id="company-address-detail" class="pxp-single-company-side-info-data">Hà Nội, Việt Nam</div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="pxp-single-company-side-info-label pxp-text-light">Trang</div>
+                        <div class="pxp-single-company-side-info-data"><a id="company-website" href="#">jobicompany.com</a></div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="pxp-single-company-side-info-data">
+                            <ul class="list-unstyled pxp-single-company-side-info-social">
+                                <li><a id="facebook" href="#"><span class="fa fa-facebook d-none"></span></a></li>
+                                <li><a id="twitter" href="#"><span class="fa fa-twitter d-none"></span></a></li>
+                                <li><a id="instagram" href="#"><span class="fa fa-instagram d-none"></span></a></li>
+                                <li><a id="linkedin" href="#"><span class="fa fa-linkedin d-none"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pxp-single-company-side-panel mt-4 mt-lg-5">
+                    <h3>Liên hệ công ty</h3>
+                    <form class="mt-4">
+                        <div class="mb-3">
+                            <label for="contact-company-name" class="form-label">Tên</label>
+                            <input type="text" class="form-control" id="contact-company-name" placeholder="Điền tên của bạn">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact-company-email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="contact-company-email" placeholder="Điền email của bạn">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact-company-message" class="form-label">Tin nhắn</label>
+                            <textarea class="form-control" id="contact-company-message" placeholder="Viết tin ở đây..."></textarea>
+                        </div>
+                        <a href="#" class="btn rounded-pill pxp-section-cta d-block">Gửi tin</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-100">
+    <div class="pxp-container">
+        <h2 class="pxp-subsection-h2">Công việc sẵn có</h2>
+        <p id="company-listJob" class="pxp-text-light">Danh sách việc gần đây được đăng bởi Jobi Company</p>
+
+        <div class="row mt-3 mt-md-4 pxp-animate-in pxp-animate-in-top pxp-in" id="list-job">
+@*            <div class="col-xl-6 pxp-jobs-card-2-container">
+                <div class="pxp-jobs-card-2 pxp-has-border">
+                    <div class="pxp-jobs-card-2-top">
+                        <a href="single-company-1.html" class="pxp-jobs-card-2-company-logo" style="background-image: url(assets/images/company-logo-1.png);"></a>
+                        <div class="pxp-jobs-card-2-info">
+                            <a href="single-job-1.html" class="pxp-jobs-card-2-title">Software Engineering Team Leader</a>
+                            <div class="pxp-jobs-card-2-details">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-2-location">
+                                    <span class="fa fa-globe"></span>Hà Nội, Việt Nam
+                                </a>
+                                <div class="pxp-jobs-card-2-type">Toàn thời gian</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pxp-jobs-card-2-bottom">
+                        <a href="jobs-list-1.html" class="pxp-jobs-card-2-category">
+                            <div class="pxp-jobs-card-2-category-label">Project Management</div>
+                        </a>
+                        <div class="pxp-jobs-card-2-bottom-right">
+                            <span class="pxp-jobs-card-2-date pxp-text-light">3 ngày trước</span> <a href="single-company-1.html" class="pxp-jobs-card-2-company">Jobi Company</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 pxp-jobs-card-2-container">
+                <div class="pxp-jobs-card-2 pxp-has-border">
+                    <div class="pxp-jobs-card-2-top">
+                        <a href="single-company-1.html" class="pxp-jobs-card-2-company-logo" style="background-image: url(assets/images/company-logo-1.png);"></a>
+                        <div class="pxp-jobs-card-2-info">
+                            <a href="single-job-1.html" class="pxp-jobs-card-2-title">Techincal Support Engineer</a>
+                            <div class="pxp-jobs-card-2-details">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-2-location">
+                                    <span class="fa fa-globe"></span>Hà Nội, Việt Nam
+                                </a>
+                                <div class="pxp-jobs-card-2-type">Toàn thời gian</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pxp-jobs-card-2-bottom">
+                        <a href="jobs-list-1.html" class="pxp-jobs-card-2-category">
+                            <div class="pxp-jobs-card-2-category-label">Customer Service</div>
+                        </a>
+                        <div class="pxp-jobs-card-2-bottom-right">
+                            <span class="pxp-jobs-card-2-date pxp-text-light">3 ngày trước</span> <a href="single-company-1.html" class="pxp-jobs-card-2-company">Jobi Company</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 pxp-jobs-card-2-container">
+                <div class="pxp-jobs-card-2 pxp-has-border">
+                    <div class="pxp-jobs-card-2-top">
+                        <a href="single-company-1.html" class="pxp-jobs-card-2-company-logo" style="background-image: url(assets/images/company-logo-1.png);"></a>
+                        <div class="pxp-jobs-card-2-info">
+                            <a href="single-job-1.html" class="pxp-jobs-card-2-title">Javascript Developer</a>
+                            <div class="pxp-jobs-card-2-details">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-2-location">
+                                    <span class="fa fa-globe"></span>Hà Nội, Việt Nam
+                                </a>
+                                <div class="pxp-jobs-card-2-type">Toàn thời gian</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pxp-jobs-card-2-bottom">
+                        <a href="jobs-list-1.html" class="pxp-jobs-card-2-category">
+                            <div class="pxp-jobs-card-2-category-label">Software Engineering</div>
+                        </a>
+                        <div class="pxp-jobs-card-2-bottom-right">
+                            <span class="pxp-jobs-card-2-date pxp-text-light">3 ngày trước</span> <a href="single-company-1.html" class="pxp-jobs-card-2-company">Jobi Company</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 pxp-jobs-card-2-container">
+                <div class="pxp-jobs-card-2 pxp-has-border">
+                    <div class="pxp-jobs-card-2-top">
+                        <a href="single-company-1.html" class="pxp-jobs-card-2-company-logo" style="background-image: url(assets/images/company-logo-1.png);"></a>
+                        <div class="pxp-jobs-card-2-info">
+                            <a href="single-job-1.html" class="pxp-jobs-card-2-title">Technical Writer</a>
+                            <div class="pxp-jobs-card-2-details">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-2-location">
+                                    <span class="fa fa-globe"></span>Hà Nội, Việt Nam
+                                </a>
+                                <div class="pxp-jobs-card-2-type">Toàn thời gian</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pxp-jobs-card-2-bottom">
+                        <a href="jobs-list-1.html" class="pxp-jobs-card-2-category">
+                            <div class="pxp-jobs-card-2-category-label">Business Development</div>
+                        </a>
+                        <div class="pxp-jobs-card-2-bottom-right">
+                            <span class="pxp-jobs-card-2-date pxp-text-light">3 ngày trước</span> <a href="single-company-1.html" class="pxp-jobs-card-2-company">Jobi Company</a>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        var idCompany = @ViewBag.id;
+    </script>
+    <script src="~/assets/js/pages/find-best-company.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,398 @@
+﻿@{
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "Cài đặt thông tin cá nhân";
+    ViewBag.CurrentPage = "update-profile";
+}
+<style>
+    .courseReview-rating {
+        font-size: 24px;
+        color: orange;
+        cursor: pointer;
+    }
+
+        .courseReview-rating i {
+            margin: 0 2px;
+        }
+
+            .courseReview-rating i:hover,
+            .courseReview-rating i:hover ~ i {
+               /* color: orange;*/
+            }
+
+    .selected-rating {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    #star-color{
+        color: orange;
+    }
+</style>
+<h1>Cài đặt thông tin cá nhân</h1>
+<p class="pxp-text-light">Chỉnh sửa thông tin trang cá nhân của bạn</p>
+<form>
+    <div class="row mt-4 mt-lg-5">
+        <div class="col-xxl-8">
+            <div class="mb-3">
+                <label for="pxp-candidate-name" class="form-label">Họ và tên  <span class="text-danger">*</span></label>
+                <input type="text" id="fullName" class="form-control">
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="gender" class="form-label">Giới tính</label>
+                    <select id="gender" class="form-select">
+                        <option value="1">Nam</option>
+                        <option value="2">Nữ</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label for="pxp-candidate-title" class="form-label">Nghề nghiệp</label>
+                        <input type="text" id="job-title" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label for="pxp-candidate-location" class="form-label">Địa chỉ</label>
+                        <input type="tel" id="address" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label for="pxp-candidate-email" class="form-label">Email <span class="text-danger">*</span></label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label for="pxp-candidate-phone" class="form-label">Số điện thoại  <span class="text-danger">*</span></label>
+                        <input type="tel" id="phone" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label for="pxp-candidate-title" class="form-label">Sở thích</label>
+                        <input type="text" id="hobby" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-4">
+            <div class="form-label">&nbsp;</div>
+            <div class="pxp-candidate-cover mb-3">
+                <input type="file" id="pxp-candidate-cover-choose-file" accept="image/*">
+                <label for="pxp-candidate-cover-choose-file" class="pxp-cover"><span>Tải ảnh bìa</span></label>
+            </div>
+            <div class="pxp-candidate-photo mb-3">
+                <input type="file" id="pxp-candidate-photo-choose-file" accept="image/*">
+                <label for="pxp-candidate-photo-choose-file" class="pxp-cover"><span>Tải ảnh<br>đại diện</span></label>
+               
+            </div>
+            <div class="pxp-candidate-photo mb-3">
+                <label>
+                    <li>Ảnh đại diện và ảnh bìa tải lên không được vượt quá 5M. Giảm dung lượng ảnh tại <a href="https://imagecompressor.com/vi/" target="_blank">đây</a></li>
+                </label>
+                </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="pxp-candidate-about" class="form-label">Mục tiêu</label>
+        <textarea class="form-control" id="objective"></textarea>
+    </div>
+
+    <div class="mt-4 mt-lg-5">
+        <h2>Kỹ năng</h2>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <tbody id="skill-table">
+                    <!-- Đây là ID của thẻ <tbody> để chèn dữ liệu -->
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng mã JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-3 mt-lg-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-title" class="form-label">Kỹ năng</label>
+                    @*<input type="text" id="skill-title" class="form-control">*@
+                    <select id="skill-title" class="form-control"> </select>
+                </div>
+            </div>          
+        </div>
+        <div class="col-md-4">
+            <label for="rating" class="form-label">Đánh giá</label>
+            <div class="courseReview-rating">
+                <i class="fa-solid fa-star hover-icon" id="skill-rating" data-rating="1"></i>
+                <i class="fa-light fa-star hover-icon" id="skill-rating" data-rating="2"></i>
+                <i class="fa-light fa-star hover-icon" id="skill-rating" data-rating="3"></i>
+                <i class="fa-light fa-star hover-icon" id="skill-rating" data-rating="4"></i>
+                <i class="fa-light fa-star hover-icon" id="skill-rating" data-rating="5"></i>
+            </div>
+            <span class="selected-rating" id="skill-level-rating">Chưa đánh giá</span>
+            @*<select id="skill-level" class="form-control rating-course"></select>*@
+        </div>
+        <div class="mb-3">
+            <label for="pxp-candidate-edu-about" class="form-label">Mô tả</label>
+            <textarea class="form-control pxp-smaller" id="skill-about"></textarea>
+        </div>
+        <button class="btn rounded-pill pxp-subsection-cta" id="add-skill">Thêm mới</button>
+    </div>
+
+    
+
+    <div class="mt-4 mt-lg-5">
+        <h2>Giáo dục và đào tạo</h2>
+        <div class="table-responsive">
+            <table class="table align-middle">              
+                <tbody id="education-table">
+                    <!-- Đây là ID của thẻ <tbody> để chèn dữ liệu -->
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng mã JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-3 mt-lg-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-title" class="form-label">Chuyên ngành</label>
+                    <input type="text" id="edu-title" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-school" class="form-label">Trường</label>
+                    <input type="text" id="edu-school" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-time" class="form-label">Thời gian</label>
+                    <input type="text" id="edu-time" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="pxp-candidate-edu-about" class="form-label">Mô tả</label>
+            <textarea class="form-control pxp-smaller" id="edu-about"></textarea>
+        </div>
+        <button class="btn rounded-pill pxp-subsection-cta" id="add-edu">Thêm mới</button>
+    </div>
+    <div class="mt-4 mt-lg-5">
+        <h2>Kinh nghiệm làm việc</h2>
+        <div class="table-responsive">
+            <table class="table align-middle">             
+                <tbody id="experiences-table">
+                    <!-- Đây là ID của thẻ <tbody> để chèn dữ liệu -->
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng mã JavaScript -->
+                </tbody>            
+            </table>
+        </div>
+
+        <div class="row mt-3 mt-lg-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-work-title" class="form-label">Chức vụ</label>
+                    <input type="text" id="work-title" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-work-company" class="form-label">Công ty</label>
+                    <input type="text" id="work-company" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-work-time" class="form-label">Thời gian</label>
+                    <input type="text" id="work-time" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="pxp-candidate-work-about" class="form-label">Mô tả</label>
+            <textarea class="form-control pxp-smaller" id="work-about"></textarea>
+        </div>
+        <button class="btn rounded-pill pxp-subsection-cta" id="add-exp">Thêm mới</button>
+    </div>
+    <div class="mt-4 mt-lg-5">
+        <h2>Chứng chỉ</h2>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <tbody id="certificate-table">
+                    <!-- Đây là ID của thẻ <tbody> để chèn dữ liệu -->
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng mã JavaScript -->
+                </tbody>
+                
+                
+            </table>
+        </div>
+
+        <div class="row mt-3 mt-lg-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-title" class="form-label">Tên chứng chỉ</label>
+                    <input type="text" id="cerfi-title" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-school" class="form-label">Nơi cấp</label>
+                    <input type="text" id="cerfi-school" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-time" class="form-label">Thời gian</label>
+                    <input type="text" id="cerfi-time" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="pxp-candidate-edu-about" class="form-label">Mô tả</label>
+            <textarea class="form-control pxp-smaller" id="cerfi-about"></textarea>
+        </div>
+        <button class="btn rounded-pill pxp-subsection-cta" id="add-cer">Thêm mới</button>
+    </div>
+    <div class="mt-4 mt-lg-5">
+        <h2>Dự án</h2>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <tbody id="projects-table">
+                    <!-- Đây là ID của thẻ <tbody> để chèn dữ liệu -->
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng mã JavaScript -->
+                </tbody>
+                
+            </table>
+        </div>
+
+        <div class="row mt-3 mt-lg-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-title" class="form-label">Tên dự án</label>
+                    <input type="text" id="project-title" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-time" class="form-label">Khách hàng</label>
+                    <input type="text" id="project-custumer" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-time" class="form-label">Số lượng thành viên</label>
+                    <input type="text" id="project-size" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 mt-lg-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-title" class="form-label">Chức vụ</label>
+                    <input type="text" id="project-position" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-time" class="form-label">Trách nhiệm</label>
+                    <input type="text" id="project-respon" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-time" class="form-label">Thời gian</label>
+                    <input type="text" id="project-time" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="pxp-candidate-edu-about" class="form-label">Mô tả</label>
+            <textarea class="form-control pxp-smaller" id="project-about"></textarea>
+        </div>
+        <button class="btn rounded-pill pxp-subsection-cta" id="add-project">Thêm mới</button>
+    </div>
+    <div class="mt-4 mt-lg-5">
+        <h2>Danh dự và giải thưởng</h2>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <tbody id="honor-table">
+                    <!-- Đây là ID của thẻ <tbody> để chèn dữ liệu -->
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng mã JavaScript -->
+                </tbody>
+             
+            </table>
+        </div>
+
+        <div class="row mt-3 mt-lg-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-title" class="form-label">Tên giải</label>
+                    <input type="text" id="honor-title" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-time" class="form-label">Thời gian</label>
+                    <input type="text" id="honor-time" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="pxp-candidate-edu-about" class="form-label">Mô tả</label>
+            <textarea class="form-control pxp-smaller" id="honor-about"></textarea>
+        </div>
+        <button class="btn rounded-pill pxp-subsection-cta" id="add-honor">Thêm mới</button>
+    </div>
+    
+    <div class="mt-4 mt-lg-5">
+        <h2>Hoạt động xã hội và tình nguyện</h2>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <tbody id="activites-table">
+                    <!-- Đây là ID của thẻ <tbody> để chèn dữ liệu -->
+                    <!-- Dữ liệu sẽ được thêm vào đây bằng mã JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-3 mt-lg-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-title" class="form-label">Tên hoạt động</label>
+                    <input type="text" id="activites-title" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="pxp-candidate-edu-time" class="form-label">Thời gian</label>
+                    <input type="text" id="activites-time" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="pxp-candidate-edu-about" class="form-label">Mô tả</label>
+            <textarea class="form-control pxp-smaller" id="activites-about"></textarea>
+        </div>
+        <button class="btn rounded-pill pxp-subsection-cta" id="add-activites">Thêm mới</button>
+    </div>
+    
+
+    <div class="mt-4 mt-lg-5">
+        <button class="btn rounded-pill pxp-section-cta" id="submitButton" type="button">Lưu thông tin</button>
+    </div>
+</form>
+<script src="~/assets/js/pages/update-profile.js" asp-append-version="true"></script>
+<script>
+    console.log("@ViewBag.Route")
+</script>

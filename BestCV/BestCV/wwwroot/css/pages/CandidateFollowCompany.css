@@ -1,0 +1,83 @@
+﻿/*
+    Author: HoanNK
+    Created: 28/08/2023
+    Description: Candidate Follow Company stylesheet
+*/
+@charset 'UTF-8';
+
+#table_candidate_follow_company thead tr th:nth-child(1),
+#table_candidate_follow_company tbody tr td:nth-child(1),
+#table_candidate_follow_company tfoot tr th:nth-child(1) {
+    width: 5px !important;
+    max-width: 5px !important;
+    text-align: center !important;
+}
+
+#table_candidate_follow_company thead tr th:nth-child(2),
+#table_candidate_follow_company tbody tr td:nth-child(2),
+#table_candidate_follow_company tfoot tr th:nth-child(2) {
+    width: 130px !important;
+    max-width: 130px !important;
+    text-align: left !important;
+/*    white-space: nowrap;*/
+}
+
+#table_candidate_follow_company thead tr th:nth-child(3),
+#table_candidate_follow_company tbody tr td:nth-child(3),
+#table_candidate_follow_company tfoot tr th:nth-child(3) {
+    width: 70px !important;
+    max-width: 70px !important;
+    text-align: left !important;
+}
+
+#table_candidate_follow_company thead tr th:nth-child(4),
+#table_candidate_follow_company tbody tr td:nth-child(4),
+#table_candidate_follow_company tfoot tr th:nth-child(4) {
+    width: 50px !important;
+    max-width: 50px !important;
+    text-align: center !important;
+}
+
+#table_candidate_follow_company thead tr th:nth-child(5),
+#table_candidate_follow_company tbody tr td:nth-child(5),
+#table_candidate_follow_company tfoot tr th:nth-child(5) {
+    width: 90px !important;
+    max-width: 90px !important;
+    text-align: center !important;
+}
+
+#table_candidate_follow_company thead tr th:nth-child(6),
+#table_candidate_follow_company tbody tr td:nth-child(6),
+#table_candidate_follow_company tfoot tr th:nth-child(6) {
+    width: 50px !important;
+    max-width: 50px !important;
+    text-align: center !important;
+}
+
+#table_candidate_follow_company thead tr th:nth-child(7),
+#table_candidate_follow_company tbody tr td:nth-child(7),
+#table_candidate_follow_company tfoot tr th:nth-child(7) {
+    width: 10px !important;
+    max-width: 10px !important;
+    text-align: center !important;
+}
+
+#loading.show {
+    visibility: visible;
+}
+
+div#table_candidate_follow_company_length {
+    display: none;
+}
+
+#table_candidate_follow_company tbody tr {
+    cursor: pointer;
+}
+
+#table_candidate_follow_company_info {
+    display: none;
+}
+
+.dataTables_paginate {
+    display: none;
+}

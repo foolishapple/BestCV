@@ -1,0 +1,132 @@
+﻿<style>
+    .custom-button {
+        width: 330px !important; /* Đặt chiều rộng cụ thể */
+        margin: 0 auto; /* Căn giữa nút */
+        display: block; /* Để margin hoạt động với thẻ <a> */
+    }
+
+    .skeleton-body-job {
+        height: 320px !important
+    }
+</style>
+<section class="pt-5 jbi-section">
+    <div class="pxp-container">
+        <h2 class="jbi-h2 text-center text-uppercase">Việc làm nổi bật</h2>
+        <div class="pxp-hero-subtitle  text-center mt-2 mt-lg-3">Tìm kiếm cơ hội nghề nghiệp thông qua <strong>@ViewBag.CountJob</strong> việc làm</div>
+
+        <div class="row pxp-animate-in pxp-animate-in-top justify-content-center mt--40 p-0" id="list-top-job">
+            <div class="row p-0" style="gap:20px 0px">
+
+                <div class="col-12 col-lg-4 px--20">
+                    <div class="card card-item jbi-card-1 py--40 px--20">
+                        <div class="jbi-card-title text-center mb--20">Việc làm tốt nhất</div>
+                        <div class="pxp_slide h-100 owl-carousel owl-theme show" id="topJobExtra">
+                            <div class="item">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <div class="card mt--20 hover-card-item card-border-item bg-light ske-job" style="max-height: 122px; min-height: 122px; border: none;">
+                                        <div class="row p-4 align-items-center h-100">
+                                            <div class="col-3 h-100">
+                                                <div class="skeleton image-skeleton-loading w-100 h-100 br-10"></div>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="w-100 skeleton mb-2 br-5" style="height: 20px;"></div>
+                                                <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                                <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                                <div class="w-25 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center position-absolute w-100 bottom-0 mb--40">
+                            <a href="/viec-lam-tot-nhat" class="btn rounded-pill btn-warning-2">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-lg-4 px--20">
+                    <div class="card card-item jbi-card-1 py--40 px--20">
+                        <div class="jbi-card-title text-center mb--20">Việc làm gấp</div>
+                        <div class="pxp_slide h-100 owl-carousel owl-theme show" id="topJobUrgent">
+                            <div class="item">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <div class="card mt--20 hover-card-item card-border-item bg-light ske-job" style="max-height: 122px; min-height: 122px; border: none;">
+                                        <div class="row p-4 align-items-center h-100">
+                                            <div class="col-3 h-100">
+                                                <div class="skeleton image-skeleton-loading w-100 h-100 br-10"></div>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="w-100 skeleton mb-2 br-5" style="height: 20px;"></div>
+                                                <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                                <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                                <div class="w-25 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center position-absolute w-100 bottom-0 mb--40">
+                            <a href="/viec-lam-gap" class="btn rounded-pill btn-warning-2">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 px--20">
+                    <div class="card  card-item jbi-card-1 py--40 px--20">
+                        <div class="jbi-card-title text-center mb--20">Việc làm mới</div>
+                        <div class="pxp_slide h-100 owl-carousel owl-theme show" id="topFeatureJob">
+                            <div class="item">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <div class="card mt--20 hover-card-item card-border-item bg-light ske-job" style="max-height: 122px; min-height: 122px; border: none;">
+                                        <div class="row p-4 align-items-center h-100">
+                                            <div class="col-3 h-100">
+                                                <div class="skeleton image-skeleton-loading w-100 h-100 br-10"></div>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="w-100 skeleton mb-2 br-5" style="height: 20px;"></div>
+                                                <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                                <div class="w-50 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                                <div class="w-25 skeleton mb-1 br-5" style="height: 15px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center position-absolute w-100 bottom-0 mb--40">
+                            <a href="/viec-lam-moi" class="btn rounded-pill btn-warning-2">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        loadDataTopJob();
+    })
+    function loadDataTopJob() {
+        $.ajax({
+            url: "/top-job-on-home-page",
+            type: "GET",
+            contentType: "application/json",
+            success: function (responseData) {
+                //console.log(responseData)
+                $("#list-top-job").html(responseData);
+            },
+            error: function (e) {
+
+            },
+        })
+    }
+
+</script>

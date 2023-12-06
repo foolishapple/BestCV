@@ -1,0 +1,445 @@
+﻿@{
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "CV Builder";
+    ViewBag.CurrentPage = "cv-builder";
+}
+
+
+<!-- google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Alfa+Slab+One&family=Amatic+SC:wght@400;700&family=Anton&family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Arima:wght@100;200;300;400;500;600;700&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Asap:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Baloo+2:wght@400;500;600;700;800&family=Bangers&family=Bevan:ital@0;1&family=Bungee&family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Chonburi&family=Coiny&family=Comfortaa:wght@300;400;500;600;700&family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Cuprum:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Dancing+Script:wght@400;500;600;700&family=David+Libre:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Francois+One&family=Gentium+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Inconsolata:wght@200;300;400;500;600;700;800;900&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Judson:ital,wght@0,400;0,700;1,400&family=Jura:wght@300;400;500;600;700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lalezar&family=Lemonada:wght@300;400;500;600;700&family=Lobster&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Maitree:wght@200;300;400;500;600;700&family=Maven+Pro:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Metrophobic&family=Mitr:wght@200;300;400;500;600;700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&family=Pacifico&family=Patrick+Hand&family=Pattaya&family=Paytone+One&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Play:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Podkova:wght@400;500;600;700;800&family=Pridi:wght@200;300;400;500;600;700&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rokkitt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sigmar+One&family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Taviraj:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Trirong:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&family=Varela+Round&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&family=Yeseva+One&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet" id="cv-builder-css" href="~/cv-builder/css/cv-builder.css">
+
+<!-- CSS bổ sung của theme -->
+<style class="additional-css">
+    .row-info {
+        min-height: unset !important;
+    }
+
+    .w-100p {
+        width: 100% !important;
+    }
+
+    .img-size {
+        width: 264px !important;
+        height: 380px !important;
+        object-fit: cover;
+    }
+
+    .cv-col {
+        outline: unset !important;
+    }
+
+
+    .cv-row {
+        outline: unset !important;
+    }
+
+    .header-info {
+        font-family: system-ui;
+        font-size: 14px;
+        color: white;
+        background-color: #223f4a;
+        /* text-align: right; */
+        padding: 15px;
+        height: 64px;
+        /* vertical-align: inherit; */
+        /* margin: auto; */
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .color-yippee-blue {
+        color: #223f4a;
+    }
+
+    .line-after-text {
+        border: 1px solid;
+        width: 100%;
+    }
+
+    /*Avatar*/
+    #profile-upload {
+        background-image: url('');
+        background-size: cover;
+        background-position: center;
+        width: 264px !important;
+        height: 380px !important;
+        position: relative;
+        overflow: hidden;
+    }
+
+        #profile-upload:hover input.upload {
+            display: block;
+        }
+
+        #profile-upload:hover .hvr-profile-img {
+            display: inline-block;
+        }
+
+        #profile-upload .upload-icon {
+            margin: auto;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            text-align: center;
+            right: 0;
+            padding: 6px;
+            opacity: 1;
+            transition: opacity 1s linear;
+            -webkit-transform: scale(1);
+        }
+
+        #profile-upload:hover .upload-icon {
+            opacity: 1;
+            -webkit-transform: scale(1);
+        }
+
+        #profile-upload input.upload {
+            z-index: 1;
+            left: 0;
+            margin: 0;
+            bottom: 0;
+            top: 0;
+            padding: 0;
+            opacity: 0;
+            outline: none;
+            cursor: pointer;
+            position: absolute;
+            background: #ccc;
+            width: 100%;
+            display: none;
+        }
+
+        #profile-upload .hvr-profile-img {
+            width: 100%;
+            height: 100%;
+            display: none;
+            position: absolute;
+            vertical-align: middle;
+            position: relative;
+            background: transparent;
+        }
+
+        #profile-upload .upload-icon:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0px;
+            background: rgba(0,0,0,0.3);
+            z-index: -1;
+            transition: height 0.3s;
+        }
+
+        #profile-upload:hover .upload-icon:after {
+            height: 100%;
+        }
+</style>
+
+
+<div class="cv-content-wrapper">
+    <div class="cv-container">
+        <div class="cv-page">
+            
+            <div class="cv-row">
+                <div class="cv-col-4 col-4" style=" background-color: #223f4a;">
+
+                    <div class="cv-row  flex-column">
+                        <div class="cv-col  row-info" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)"
+                             style="font-family: system-ui; font-size: 16px; line-height: 24px;">
+                            <div class="cv-item cv-item-name-card movable  border-bottom-2 w-100p">
+                                <div class="cv-item-body">
+                                    <div class="cv-item-fullname" contenteditable="true" onclick="onClickElement(this)"
+                                         style="font-size: 26px; font-family: system-ui; color: #223f4a; font-weight: 600; height: 64px;display: flex; align-items: center; padding: 15px">
+                                        <span class="fw-bold ">Trần Thùy Trang</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cv-col outline-1" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)">
+
+                            <div class="cv-item cv-item-avatar movable">
+                                <div class="cv-item-body" id='profile-upload' style="background-image: url(/cv-builder/images/girl1.jpeg)">
+
+                                    <div class="hvr-profile-img">
+                                        <input type="file" name="logo" id='getval' class="upload w180" title="Dimensions 180 X 180">
+                                    </div>
+                                    <i class="fa fa-camera upload-icon" data-html2canvas-ignore></i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="cv-col outline-1" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)"
+                             style="font-family: system-ui; font-size: 16px; line-height: 24px; background-color: #223f4a;">
+
+                            <div class="cv-item cv-item-name-card movable padding">
+                                <div class="cv-item-header">
+                                    <div class="cv-item-title" contenteditable="true" onclick="onClickElement(this)"
+                                         style="font-family: system-ui; font-size: 18px; line-height: 24px;">
+                                        <span class="text-white fw-bold">THÔNG TIN CÁ NHÂN</span>
+                                    </div>
+                                </div>
+                                <div class="cv-item-body row flex-column padding" style="font-family: system-ui; font-size: 16px; line-height: 24px; color: white;">
+
+                                    <div class="cv-item-email col-6 d-flex flex-column">
+                                        <i class="text-secondary">Email</i>
+                                        <span contenteditable="true" onclick="onClickElement(this)" class=""
+                                              style="font-family: system-ui; font-size: 16px; line-height: 24px; width: 220px; font-weight: 500;">thao.dinh@dion.vn</span>
+                                    </div>
+
+                                    <div class="cv-item-phone col-6 mt-2 d-flex flex-column">
+                                        <i class="text-secondary">Điện thoại</i>
+                                        <span contenteditable="true" onclick="onClickElement(this)" class=""
+                                              style="font-family: system-ui; font-size: 16px; line-height: 24px;  width: 220px; font-weight: 500;">0983762552</span>
+                                    </div>
+
+                                    <div class="cv-item-address col-6 mt-2 d-flex flex-column">
+                                        <i class="text-secondary">Địa chỉ</i>
+                                        <span contenteditable="true" onclick="onClickElement(this)" class=""
+                                              style="font-family: system-ui; font-size: 16px; line-height: 24px; width: 220px; font-weight: 500;">766 Đê La Thành</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-col outline-1" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)" style="background-color: #223f4a; color: white">
+                            <div class="cv-item cv-item-career-goals movable padding" id="cv-item-skill">
+                                <div class="cv-item-header">
+                                    <div class="cv-item-title" contenteditable="true" onclick="onClickElement(this)"
+                                         style="font-family: system-ui; font-size: 18px; line-height: 24px;">
+                                        <span class="text-white fw-bold">KỸ NĂNG</span>
+
+                                    </div>
+                                </div>
+                                <div class="cv-item-body padding">
+                                    <div class="cv-item-content" contenteditable="true" onclick="onClickElement(this)">
+                                        Tiếng Anh
+                                    </div>
+                                    <div class="cv-item-content" contenteditable="true" onclick="onClickElement(this)">
+                                        Phân tích nhu cầu người dùng
+                                    </div>
+                                    <div class="cv-item-content" contenteditable="true" onclick="onClickElement(this)">
+                                        Sử dụng Pivotal Tracker
+                                    </div>
+                                    <div class="cv-item-content" contenteditable="true" onclick="onClickElement(this)">
+                                        Vẽ Wireframe
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cv-col-8 col-8" style=" background-color: white;">
+                    <div class="cv-row  flex-column">
+                        <div class="cv-col  row-info" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)"
+                             style="font-family: system-ui; font-size: 16px; line-height: 24px;">
+                            <div class="cv-item cv-item-name-card movable  border-bottom-2 w-100p">
+                                <div class="cv-item-body">
+                                    <div class="cv-item-nominee text-uppercase header-info" contenteditable="true" onclick="onClickElement(this)">
+                                        <b>Nhân viên kinh doanh</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-col cv-col-12" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)">
+                            <div class="cv-item cv-item-career-goals movable padding">
+                                <div class="cv-item-header d-flex justify-content-between align-items-center">
+                                    <div class="cv-item-title text-uppercase mb-2 color-yippee-blue" contenteditable="true" onclick="onClickElement(this)"
+                                         style="font-family: system-ui; font-size: 22px; line-height: 24px;padding: 10px; white-space: nowrap;">
+                                        <span class="fw-bold">MỤC TIÊU NGHỀ NGHIỆP</span>
+                                    </div>
+                                    <div class="line-after-text">
+                                    </div>
+                                </div>
+                                <div class="cv-item-body movable copyable color-yippee-blue">
+                                    <div class="cv-item-content padding" contenteditable="true" onclick="onClickElement(this)"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-col cv-col-12" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)">
+                            <div class="cv-item cv-item-career-goals movable padding" id="cv-item-work-experience">
+                                <div class="cv-item-header d-flex justify-content-between align-items-center">
+                                    <div class="cv-item-title text-uppercase mb-2 color-yippee-blue" contenteditable="true" onclick="onClickElement(this)"
+                                         style="font-family: system-ui; font-size: 22px; line-height: 24px;padding: 10px; white-space: nowrap;">
+                                        <span class="fw-bold">Kinh nghiệm làm việc</span>
+                                    </div>
+                                    <div class="line-after-text">
+                                    </div>
+                                </div>
+                                <div class="cv-item-body movable copyable color-yippee-blue">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span class="cv-item-content padding" contenteditable="true"
+                                              onclick="onClickElement(this)" style="line-height: 24px; font-size: 14px;">
+                                            <span class="fw-bold">Giám đốc</span>
+                                        </span>
+                                        <span class="cv-item-content padding" contenteditable="true"
+                                              onclick="onClickElement(this)"
+                                              style="line-height: 24px; font-size: 14px;"><b>2020 - 2022</b></span>
+                                    </div>
+                                    <div class="cv-item-content padding" contenteditable="true"
+                                         onclick="onClickElement(this)" style="margin-top: -20px; font-size: 14px;">
+                                        <b><i>Digital Innovation</i></b>
+                                    </div>
+                                    <div class="cv-item-content padding" contenteditable="true"
+                                         onclick="onClickElement(this)"
+                                         style="margin-top: -10px; font-size: 14px; text-align: justify; line-height: 25px;">
+                                        Cung cấp thông tin, định hướng và hỗ trợ nhóm Agile trong quá trình phát triển phần mềm: <br>
+                                        -Làm việc với người dùng/ khách hàng, các bên liên quan và nhóm delivery để thu thập thông tin.<br>
+                                        -Thảo luận với developer, tester và BA để làm rõ và đảm bảo chức năng phù hợp với mong đợi của người dùng.<br>
+                                        -Chịu trách nhiệm tạo, lên danh sách và sắp xếp thứ tự ưu tiên của backlog cho sản phẩm web.<br>
+                                        -Làm việc với Project Manager để lên kế hoạch, chương trình dự phòng, đảm bảo sản phẩm đúng với tầm nhìn và lộ trình.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="cv-col cv-col-12" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)">
+                            <div class="cv-item cv-item-career-goals movable padding" id="cv-item-education">
+                                <div class="cv-item-header d-flex justify-content-between align-items-center">
+                                    <div class="cv-item-title text-uppercase mb-2 color-yippee-blue" contenteditable="true" onclick="onClickElement(this)"
+                                         style="font-family: system-ui; font-size: 22px; line-height: 24px;padding: 10px; white-space: nowrap;">
+                                        <span class="fw-bold">HỌC VẤN</span>
+                                    </div>
+                                    <div class="line-after-text">
+                                    </div>
+                                </div>
+                                <div class="cv-item-body movable copyable color-yippee-blue">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span class="cv-item-content padding d-flex flex-column" contenteditable="true" onclick="onClickElement(this)" style="line-height: 24px; font-size: 14px;">
+                                            <span class="fw-bold">Công nghệ thông tin</span>
+                                            <span>Đại học Bách Khoa Hà Nội</span>
+                                        </span>
+                                        <span class="cv-item-content padding text-nowrap" contenteditable="true"
+                                              onclick="onClickElement(this)"
+                                              style="line-height: 24px; font-size: 14px;">
+                                            2016 - 2022
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="cv-col cv-col-12" onmouseenter="onMouseEnterColumn(this)"
+                             onmouseleave="onMouseLeaveColumn(this)">
+                            <div class="cv-item cv-item-career-goals movable padding" id="cv-item-certificate">
+                                <div class="cv-item-header d-flex justify-content-between align-items-center">
+                                    <div class="cv-item-title text-uppercase mb-2 color-yippee-blue" contenteditable="true" onclick="onClickElement(this)"
+                                         style="font-family: system-ui; font-size: 22px; line-height: 24px;padding: 10px; white-space: nowrap;">
+                                        <span class="fw-bold">CHỨNG CHỈ</span>
+                                    </div>
+                                    <div class="line-after-text">
+                                    </div>
+                                </div>
+                                <div class="cv-item-body movable copyable color-yippee-blue">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span class="cv-item-content padding d-flex flex-column" contenteditable="true" onclick="onClickElement(this)" style="line-height: 24px; font-size: 14px;">
+                                            <b></b>
+                                            <span></span>
+                                        </span>
+                                        <span class="cv-item-content padding text-nowrap" contenteditable="true"
+                                              onclick="onClickElement(this)"
+                                              style="line-height: 24px; font-size: 14px;">
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="cv-properties p-3 d-none">
+    <div class="mb-3">
+        <label for="cv-edit-font-family" class="form-label">Phông</label>
+        <select class="form-select" id="cv-edit-font-family">
+            <option value="cursive">cursive</option>
+            <option value="emoji">emoji</option>
+            <option value="fangsong">fangsong</option>
+            <option value="fantasy">fantasy</option>
+            <option value="monospace">monospace</option>
+            <option value="system-ui">system-ui</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="cv-edit-font-size" class="form-label">Cỡ chữ</label>
+        <input type="number" class="form-control" id="cv-edit-font-size">
+    </div>
+
+    <div class="mb-3">
+        <label for="cv-edit-color" class="form-label">Màu chữ</label>
+        <input type="color" class="form-control" id="cv-edit-color">
+    </div>
+
+    <div class="mb-3">
+        <label for="cv-edit-line-height" class="form-label">Chiều cao dòng</label>
+        <input type="number" class="form-control" id="cv-edit-line-height">
+    </div>
+
+    <div class="mb-3">
+        <button class="cv-edit-font-style" id="cv-edit-font-style__bold">
+            <i class="fa-solid fa-bold"></i>
+        </button>
+        <button class="cv-edit-font-style" id="cv-edit-font-style__italic">
+            <i class="fa-solid fa-italic"></i>
+        </button>
+        <button class="cv-edit-font-style" id="cv-edit-font-style__underline">
+            <i class="fa-solid fa-underline"></i>
+        </button>
+    </div>
+
+    <div class="mb-3">
+        <button class="cv-edit-text-align" data-text-align="left">
+            <i class="fa-solid fa-align-left"></i>
+        </button>
+        <button class="cv-edit-text-align" data-text-align="center">
+            <i class="fa-solid fa-align-center"></i>
+        </button>
+        <button class="cv-edit-text-align" data-text-align="right">
+            <i class="fa-solid fa-align-right"></i>
+        </button>
+        <button class="cv-edit-text-align" data-text-align="justify">
+            <i class="fa-solid fa-align-justify"></i>
+        </button>
+    </div>
+</div>
+</div>
+
+
+<script>
+    var candidateCVId = @ViewBag.CandidateCVId;
+</script>
+
+<script src="~/cv-builder/js/lib_w3color.js" asp-append-version="true"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="~/cv-builder/js/configs.js" asp-append-version="true"></script>
+<script src="~/cv-builder/js/cv-builder.js" asp-append-version="true"></script>

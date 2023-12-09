@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Jobi.Infrastructure.Persistence.Migrations
+namespace BestCV.Infrastructure.Persistence.Migrations
 {
     public partial class updateEmployerWalletHistory_v2 : Migration
     {

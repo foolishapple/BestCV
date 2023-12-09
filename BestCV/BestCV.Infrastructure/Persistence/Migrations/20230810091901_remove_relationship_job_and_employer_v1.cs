@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Jobi.Infrastructure.Persistence.Migrations
+namespace BestCV.Infrastructure.Persistence.Migrations
 {
     public partial class remove_relationship_job_and_employer_v1 : Migration
     {

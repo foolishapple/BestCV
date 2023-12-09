@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Jobi.Infrastructure.Persistence.Migrations
+namespace BestCV.Infrastructure.Persistence.Migrations
 {
     public partial class edit_OrderSort_not_null_CVTemplate : Migration
     {

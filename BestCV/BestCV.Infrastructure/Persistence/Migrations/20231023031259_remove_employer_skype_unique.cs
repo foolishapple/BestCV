@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Jobi.Infrastructure.Persistence.Migrations
+namespace BestCV.Infrastructure.Persistence.Migrations
 {
     public partial class remove_employer_skype_unique : Migration
     {

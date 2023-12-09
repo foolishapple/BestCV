@@ -1,0 +1,33 @@
+﻿@using Jobi.Domain.Aggregates.Post;
+@model List<PostAggregates>;
+@{
+    Layout = null;
+}
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-xl-4 col-xxl-3 pxp-posts-card-1-container px--20">
+            <div class="pxp-posts-card-1">
+                <div class="pxp-posts-card-1-top">
+                    <div class="pxp-posts-card-1-top-bg">
+                        <div class="pxp-posts-card-1-image pxp-cover rounded-bottom-none" style="background-image: url(@(ViewBag.DefaultStorageURL + item.Photo));"></div>
+                    </div>
+                    <div class="pxp-posts-card-1-content">
+                        <a href="@("bai-viet/" + item.Id)" class="pxp-posts-card-1-title jbi-card-title-3">@item.Name</a>
+                        <div class="post-over-view mt--10">@item.Overview</div>
+                        <div class="mt--14">
+                            <a class="post-more" href="@("bai-viet/" + item.Id)">Xem chi tiết</a>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="pxp-posts-card-1-bottom d-flex flex-row justify-content-between">
+                    <div class="post-category">@item.PostCategoryName</div>
+                    <div class="post-createdTime">@item.CreatedTime.ToString("dd/MM/yyyy HH:mm")</div>
+                </div>
+            </div>
+        </div>
+    }
+}

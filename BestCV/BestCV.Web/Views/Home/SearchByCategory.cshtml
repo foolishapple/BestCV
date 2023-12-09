@@ -1,0 +1,492 @@
+﻿@{
+    ViewData["Title"] = "Danh mục việc làm";
+    ViewBag.IsHomePage = false;
+}
+<style>
+    .row {
+        margin-bottom: 40px !important;
+    }
+    .pxp-nav.pxp-light > ul > li > a{
+        color: #000;
+    }
+    .pxp-logo.pxp-light > a{
+        color: #000;
+    }
+    .pxp-user-nav-name{
+        color: #000;
+    }
+    .pxp-user-nav-dropdown > .dropdown-toggle::after{
+        margin-left: 7px;
+        border-top-color: #000;
+    }
+    .mb-100{
+        margin-bottom: 100px !important;
+    }
+</style>
+<section class="pxp-page-header-simple" style="background-color: var(--pxpMainColorLight);">
+    <div class="pxp-container">
+        <h1>Tìm việc làm</h1>
+        <div class="pxp-hero-subtitle pxp-text-light">Tìm kiếm cơ hội nghề nghiệp của bạn thông qua <strong>12,800</strong> việc làm</div>
+        <div class="pxp-hero-form pxp-hero-form-round pxp-large mt-3 mt-lg-4">
+            <form class="row gx-3 align-items-center">
+                <div class="col-12 col-lg">
+                    <div class="input-group mb-3 mb-lg-0">
+                        <span class="input-group-text"><span class="fa fa-search"></span></span>
+                        <input type="text" class="form-control" placeholder="Chức vụ hoặc từ khóa">
+                    </div>
+                </div>
+                <div class="col-12 col-lg pxp-has-left-border">
+                    <div class="input-group mb-3 mb-lg-0">
+                        <span class="input-group-text"><span class="fa fa-globe"></span></span>
+                        <input type="text" class="form-control" placeholder="Địa điểm">
+                    </div>
+                </div>
+                <div class="col-12 col-lg pxp-has-left-border">
+                    <div class="input-group mb-3 mb-lg-0">
+                        <span class="input-group-text"><span class="fa fa-folder-o"></span></span>
+                        <select class="form-select">
+                            <option selected>Tất cả danh mục</option>
+                            <option>Phát triển kinh doanh</option>
+                            <option>Xây dựng</option>
+                            <option>Dịch vụ khách hàng</option>
+                            <option>Tài chính</option>
+                            <option>Chăm sóc sức khỏe</option>
+                            <option>Nhân sự</option>
+                            <option>Tiếp thị & Truyền thông</option>
+                            <option>Quản lý dự án</option>
+                            <option>Kỹ thuật phần mềm</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-auto">
+                    <button>Tìm việc làm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="mt-100">
+    <div class="pxp-container">
+        <div class="row">
+            <div class="col-lg-5 col-xl-4 col-xxl-3">
+                <div class="pxp-jobs-list-side-filter">
+                    <div class="pxp-list-side-filter-header d-flex d-lg-none">
+                        <div class="pxp-list-side-filter-header-label">Filter Jobs</div>
+                        <a role="button"><span class="fa fa-sliders"></span></a>
+                    </div>
+                    <div class="mt-4 mt-lg-0 d-lg-block pxp-list-side-filter-panel">
+                        <h3>Loại công việc</h3>
+                        <div class="list-group mt-2 mt-lg-3">
+                            <label class="list-group-item d-flex justify-content-between align-items-center pxp-checked">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Toàn thời gian
+                                </span>
+                                <span class="badge rounded-pill">56</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Bán thời gian
+                                </span>
+                                <span class="badge rounded-pill">34</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Làm việc từ xa
+                                </span>
+                                <span class="badge rounded-pill">24</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Thực tập
+                                </span>
+                                <span class="badge rounded-pill">27</span>
+                            </label>
+                        </div>
+
+                        <h3 class="mt-3 mt-lg-4">Kinh nghiệm</h3>
+                        <div class="list-group mt-2 mt-lg-3">
+                            <label class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Chưa có kinh nghiệm
+                                </span>
+                                <span class="badge rounded-pill">98</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3 pxp-checked">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Dưới 1 năm
+                                </span>
+                                <span class="badge rounded-pill">44</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3 pxp-checked">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    1 năm
+                                </span>
+                                <span class="badge rounded-pill">35</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    2 năm
+                                </span>
+                                <span class="badge rounded-pill">45</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    3 năm
+                                </span>
+                                <span class="badge rounded-pill">21</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    4 năm
+                                </span>
+                                <span class="badge rounded-pill">23</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    5 năm
+                                </span>
+                                <span class="badge rounded-pill">25</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Trên 5 năm
+                                </span>
+                                <span class="badge rounded-pill">28</span>
+                            </label>
+                        </div>
+
+                        <h3 class="mt-3 mt-lg-4">Mức lương</h3>
+                        <div class="list-group mt-2 mt-lg-3">
+                            <label class="list-group-item d-flex justify-content-between align-items-center pxp-checked">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Dưới 3 triệu
+                                </span>
+                                <span class="badge rounded-pill">34</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3 pxp-checked">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    3 - 5 triệu
+                                </span>
+                                <span class="badge rounded-pill">22</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    5 - 7 triệu
+                                </span>
+                                <span class="badge rounded-pill">67</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    7 - 10 triệu
+                                </span>
+                                <span class="badge rounded-pill">12</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    10 - 12 triệu
+                                </span>
+                                <span class="badge rounded-pill">29</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    12 - 15 triệu
+                                </span>
+                                <span class="badge rounded-pill">22</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    15 - 20 triệu
+                                </span>
+                                <span class="badge rounded-pill">16</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    20 - 25 triệu
+                                </span>
+                                <span class="badge rounded-pill">21</span>
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                                    <input class="form-check-input me-2" type="checkbox" value="">
+                                    Thỏa thuận
+                                </span>
+                                <span class="badge rounded-pill">26</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-xl-8 col-xxl-9">
+                <div class="pxp-jobs-list-top mt-4 mt-lg-0">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-auto">
+                            <h2><span class="pxp-text-light">Đang xem </span>9 <span class="pxp-text-light">trên tổng số</span> 8,536 <span class="pxp-text-light"> mục</span></h2>
+
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-select">
+                                <option value="1" selected>Mới nhất</option>
+                                <option value="2">Cũ nhất</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-bullhorn"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Kinh doanh</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Business Analyst</a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>Dion Company, Hà Nội
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 ngày trước bởi</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">BestCV Company</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-1.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-calendar-o"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Quản lý dự án</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Chuyên Viên Phân Tích Tài Chính </a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>Keangnam, HN
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 ngày trước bởi</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">BestCV</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-2.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-comments-o"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Dịch vụ khách hàng</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Chuyên Viên Tư Vấn Tài Chính - Kênh Liên Kết Ngân Hàng </a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>Hà Nội, Việt Nam
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 ngày trước bởi</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">Dion Company</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-3.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-terminal"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Kinh doanh</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Nhân Viên Kinh Doanh - Telesales Data Có Sẵn</a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>FPT Tower
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 ngày trước bởi</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">Dion Company</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-4.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-pie-chart"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Phát triển kinh doanh</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Sale Admin (Nhân Viên Hỗ Trợ Kinh Doanh )</a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>Digital Innovation, Hà Nội
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 ngày trước bởi</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">BestCV Company</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-5.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-address-card-o"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Nguồn nhân lực</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Human Resources Coordinator</a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>Digital Innovation, Hà Nội
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 ngày trước bởi</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">Dion Company</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-6.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-terminal"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Kỹ thuật phần mềm</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Fullstack Web Developer</a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>Digital Innovation, HaNoi
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 ngày trước bởi</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">BestCV Company</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-7.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-bullhorn"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Truyền thông & tiếp thị</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Social Media Expert</a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>Digital Innovation, HaNoi
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 ngày trước bởi</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">Dion Company</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-1.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-4 pxp-jobs-card-1-container">
+                        <div class="pxp-jobs-card-1 pxp-has-border">
+                            <div class="pxp-jobs-card-1-top">
+                                <a href="jobs-list-1.html" class="pxp-jobs-card-1-category">
+                                    <div class="pxp-jobs-card-1-category-icon"><span class="fa fa-calendar-o"></span></div>
+                                    <div class="pxp-jobs-card-1-category-label">Quản lý dự án</div>
+                                </a>
+                                <a href="single-job-1.html" class="pxp-jobs-card-1-title">Software Engineering Team Leader</a>
+                                <div class="pxp-jobs-card-1-details">
+                                    <a href="jobs-list-1.html" class="pxp-jobs-card-1-location">
+                                        <span class="fa fa-globe"></span>Hà Nội, Việt Nam
+                                    </a>
+                                    <div class="pxp-jobs-card-1-type">Toàn thời gian</div>
+                                </div>
+                            </div>
+                            <div class="pxp-jobs-card-1-bottom">
+                                <div class="pxp-jobs-card-1-bottom-left">
+                                    <div class="pxp-jobs-card-1-date pxp-text-light">3 days ago by</div>
+                                    <a href="single-company-1.html" class="pxp-jobs-card-1-company">BestCV</a>
+                                </div>
+                                <a href="single-company-1.html" class="pxp-jobs-card-1-company-logo" style="background-image: url(images/company-logo-2.png);"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4 mt-lg-5 justify-content-between align-items-center">
+                    <div class="col-auto">
+                        <nav class="mt-3 mt-sm-0" aria-label="Jobs list pagination">
+                            <ul class="pagination pxp-pagination">
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">1</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

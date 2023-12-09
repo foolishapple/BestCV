@@ -1,0 +1,25 @@
+﻿@using Jobi.Domain.Entities;
+@model CandidateNotification
+@{
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "Chi tiết thông báo";
+}
+<div >
+    <h1>Chi tiết thông báo</h1>
+
+    <div class="mt-4 mt-lg-5">
+        <div class="pxp-dashboard-notifications-item-left">
+            <div class="pxp-dashboard-notifications-item-message">
+                <h5 class="notification-name">@Model.Name</h5>
+                <p class="notification-description">@Model.Description</p>
+                <p><a class="notification-link" href="@Model.Link">@Model.Link</a></p>
+                <p class="notification-createdtime">@Model.CreatedTime.ToString("dd/MM/yyyy HH:mm:ss")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

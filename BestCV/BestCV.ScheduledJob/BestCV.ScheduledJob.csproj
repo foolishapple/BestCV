@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Jobi.Application\Jobi.Application.csproj" />
-    <ProjectReference Include="..\Jobi.Core\Jobi.Core.csproj" />
   </ItemGroup>
 
 </Project>

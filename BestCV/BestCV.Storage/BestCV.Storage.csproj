@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.20">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\admin\thumbnails\" />
+    <Folder Include="wwwroot\uploads\admin\tungtd\hacker_lord\" />
+    <Folder Include="wwwroot\uploads\admin\tungtd\thumbnails\" />
+    <Folder Include="wwwroot\uploads\candidates\avatars\" />
+    <Folder Include="wwwroot\uploads\candidates\cvs\" />
+    <Folder Include="wwwroot\uploads\employers\avatars\" />
+    <Folder Include="wwwroot\uploads\employers\licenses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jobi.Application\Jobi.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\uploads\candidates\avatars\avatar.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

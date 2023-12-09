@@ -9,47 +9,113 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BestCV
 build_property.RootNamespace = BestCV
-build_property.ProjectDir = C:\Users\Admin\Source\Repos\BestCV\BestCV\BestCV\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = D:\Do an tot nghiep\BestCV\BestCV\BestCV\BestCV\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Admin\Source\Repos\BestCV\BestCV\BestCV
+build_property.MSBuildProjectDirectory = D:\Do an tot nghiep\BestCV\BestCV\BestCV\BestCV
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/Pages/Error.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/Pages/Index.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/Pages/Privacy.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/Pages/_ViewImports.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/Pages/_ViewStart.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/View/Shared/_Footer.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/_FilterCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9GaWx0ZXJDYXRlZ29yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/_FilterFindJob.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9GaWx0ZXJGaW5kSm9iLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/_Header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9IZWFkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/_TopCompanies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ub3BDb21wYW5pZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/_TopJobs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ub3BKb2JzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/View/Shared/_FilterCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld1xTaGFyZWRcX0ZpbHRlckNhdGVnb3J5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/View/Shared/_FilterFindJob.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld1xTaGFyZWRcX0ZpbHRlckZpbmRKb2IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/View/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld1xTaGFyZWRcX0Zvb3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/View/Shared/_Header.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/View/Shared/_Header.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld1xTaGFyZWRcX0hlYWRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Source/Repos/BestCV/BestCV/BestCV/Pages/Shared/_Layout.cshtml]
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/View/Shared/_TopCompanies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld1xTaGFyZWRcX1RvcENvbXBhbmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/View/Shared/_TopJobs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld1xTaGFyZWRcX1RvcEpvYnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-net2v1yafn
+
+[D:/Do an tot nghiep/BestCV/BestCV/BestCV/BestCV/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-o1pxm49q9u

@@ -1,0 +1,202 @@
+﻿@charset "UTF-8";
+/*
+    Author: TUNGTD
+    Created: 15/08/2023
+    Description: candidate stylesheet
+*/
+#table_candidate thead:nth-child(1) {
+    white-space: nowrap;
+    align-items: start;
+}
+
+#table_candidate tbody {
+    white-space: nowrap;
+    align-items: start;
+}
+
+.candidate_recruitment_campaign {
+    font-size: 14px;
+}
+
+.candidate_recruitment_campaign {
+    white-space: normal;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--pxpTextColor);
+}
+
+    .candidate_recruitment_campaign:hover {
+        text-decoration: underline;
+    }
+
+.candidate_contact {
+    font-size: 13px;
+}
+
+    .candidate_contact .item {
+        color: var(--pxpTextColor);
+    }
+
+.candidate_more {
+    font-size: 13px;
+    white-space: normal;
+}
+
+.btn_icon {
+    background-color: var(--pxpMainColorLight);
+    border: 0 none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--pxpMainColorDark);
+    text-align: center;
+    transition: var(--pxpHoverTransition);
+    transition-property: background-color, color;
+}
+
+    .btn_icon:hover {
+        color: #fff;
+        background-color: var(--pxpMainColor);
+    }
+
+    .btn_icon.dropdown-toggle::after {
+        display: none;
+    }
+
+.candidate_action .dropdown-menu {
+    border: none;
+    font-size: 13px;
+}
+
+#table_candidate .pxp-company-dashboard-candidate-avatar {
+    width: 60px;
+    height: 60px;
+    margin-right: 5px;
+}
+
+.column-avatar {
+    width: 40px !important;
+    max-width: 50px;
+}
+
+.tbl-data .table-responsive {
+    overflow-x: unset !important;
+}
+
+#table_candidate thead tr th:nth-child(1),
+#table_candidate tbody tr td:nth-child(1),
+#table_candidate tfoot tr th:nth-child(1) {
+    width: 3%;
+}
+
+
+
+#table_candidate_length {
+    display: none;
+}
+
+.dataTables_paginate {
+    display: none;
+}
+
+.btn_icon i {
+    width: 14px;
+}
+
+#table_candidate thead:nth-child(2) {
+    vertical-align: middle;
+}
+
+#table_candidate .select2-container {
+    width: auto !important;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    display: none;
+}
+
+.no-border {
+    font-size: 14px;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border: unset !important;
+    border-top: unset;
+}
+
+#collapseAdvancedSearch .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: #86b7fe !important;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25) !important;
+    border-bottom: unset !important;
+    border-radius: 0.25rem !important;
+}
+
+#collapseAdvancedSearch .select2-container--default .select2-selection--multiple {
+    border-radius: 0.25rem !important;
+}
+
+    #collapseAdvancedSearch .select2-container--default .select2-selection--multiple .select2-selection__clear {
+        margin-top: 0px !important;
+    }
+
+    #collapseAdvancedSearch .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        border-radius: 0.425rem !important;
+        border: unset !important;
+    }
+        #collapseAdvancedSearch .select2-container--default .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove{
+            border: unset !important;
+        }
+
+
+.text-color-money {
+    color: #ff7d55;
+}
+.candidate_more {
+    font-size: 13px;
+    white-space: normal;
+}
+
+.btn_icon {
+    background-color: var(--pxpMainColorLight);
+    border: 0 none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--pxpMainColorDark);
+    text-align: center;
+    transition: var(--pxpHoverTransition);
+    transition-property: background-color, color;
+}
+
+    .btn_icon:hover {
+        color: #fff;
+        background-color: var(--pxpMainColor);
+    }
+
+    .btn_icon.dropdown-toggle::after {
+        display: none;
+    }
+
+.candidate_action .dropdown-menu {
+    border: none;
+    font-size: 13px;
+}
+
+
+.font-size-table {
+    font-size: 13px;
+    white-space: normal;
+}
+
+#table_candidate thead tr th:nth-child(2),
+#table_candidate tbody tr td:nth-child(2),
+#table_candidate tfoot tr th:nth-child(2) {
+    width: 360px;
+}
+#table_candidate thead tr th:nth-child(3),
+#table_candidate tbody tr td:nth-child(3),
+#table_candidate tfoot tr th:nth-child(3) {
+    width: 160px;
+}

@@ -1,0 +1,210 @@
+﻿@*
+    author: truongthieuhuyen
+    creatd: 28.07.2023
+*@
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en" class="pxp-root">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>BestCV - Đăng ký</title>
+
+    <link rel="shortcut icon" href="~/images/logo-title.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/poppins.css" />
+
+    <!-- Select2 CSS -->
+    <link href="~/css/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+    <link href="~/css/custom-select2.css" rel="stylesheet" asp-append-version="true" />
+    <!-- jQuery JS -->
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <style>
+        .help-block {
+            font-size: 12px;
+            color: #868d94;
+            font-weight: 300;
+            padding-left: 1rem;
+        }
+
+        .pxp-hero h1 {
+            font-size: 50px;
+        }
+
+        .pxp-sign-hero-form .form-control {
+            padding-right: 3.5rem !important;
+        }
+
+        .pxp-sign-hero-form .form-floating > label span {
+            color: #dc3545;
+        }
+
+        .pxp-sign-hero-form .form-floating > span {
+            top: calc((58px)/2);
+        }
+
+        .pxp-sign-hero-form .form-floating > label {
+            padding-left: 1.75rem !important;
+        }
+
+        .fa.fa-eye,
+        .fa.fa-eye-slash {
+            display: none;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="pxp-preloader"><span>Loading...</span></div>
+
+    <header class="pxp-header fixed-top">
+        <div class="pxp-container">
+            <div class="pxp-header-container">
+                <div class="pxp-logo">
+                    <a href="/" class="pxp-animate"><img src="~/images/logo-1.png" width="100" /></a>
+                </div>
+
+                @*<nav class="pxp-user-nav pxp-on-light d-none d-sm-flex">
+                <a href="company-dashboard-new-job.html" class="btn rounded-pill pxp-nav-btn">Đăng tin tuyển dụng</a>
+                <a class="btn rounded-pill pxp-user-nav-trigger pxp-on-light" href="" role="button">Đăng nhập</a>
+                </nav>*@
+            </div>
+        </div>
+    </header>
+
+    <section class="pxp-hero vh-100" style="background-color: var(--pxpMainColorLight);">
+        <div class="row align-items-center pxp-sign-hero-container">
+            <div class="col-xl-6 pxp-column">
+                <div class="pxp-sign-hero-fig text-center pb-100 pt-100">
+                    <img src="~/images/signup-big-fig.png" alt="Sign up">
+                    <h1 class="mt-4 mt-lg-5">Đăng ký tài khoản</h1>
+                </div>
+            </div>
+            <div class="col-xl-6 pxp-column pxp-is-light">
+                <div class="pxp-sign-hero-form pb-100 pt-100">
+                    <div class="row justify-content-center">
+                        <div class="pxp-sign-hero-form-content" style="width: 80%;">
+
+                            <form class="mt-4 w-100 mx-auto row ">
+                                <h5 class="text-left">Tài khoản</h5>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="pxp-signup-page-email" placeholder="Email address">
+                                    <label for="pxp-signup-page-email">
+                                        Email <span>*</span>
+                                    </label>
+                                    <span class="fa fa-envelope"></span>
+                                    <div class="help-block">BestCV khuyến nghị đăng ký bằng email công ty (tên miền website công ty) để được hỗ trợ duyệt tin nhanh .</div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="pxp-signup-page-password" placeholder="Create password">
+                                    <label for="pxp-signup-page-password">Mật khẩu <span>*</span></label>
+                                    <span class="fa fa-eye" password></span>
+                                    <span class="fa fa-lock"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="pxp-signup-page-re-password" placeholder="Re-password">
+                                    <label for="pxp-signup-page-re-password">Nhập lại mật khẩu <span>*</span></label>
+                                    <span class="fa fa-eye" password></span>
+                                    <span class="fa fa-lock"></span>
+                                </div>
+
+                                <h5 class="text-left mt-4">Thông tin nhà tuyển dụng</h5>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="pxp-signup-page-fullname" placeholder="Fullname">
+                                    <label for="pxp-signup-page-fullname">Họ và tên <span>*</span></label>
+                                    <span class="fa fa-user"></span>
+                                </div>
+                                <div class="form-floating mb-3 col-12 col-lg-6">
+                                    <input type="text" class="form-control" id="pxp-signup-page-phone" placeholder="Phone">
+                                    <label for="pxp-signup-page-phone">Số điện thoại <span>*</span></label>
+                                    <span class="fa fa-phone"></span>
+                                </div>
+                                <div class="form-floating mb-3  col-12 col-lg-6 d-none">
+                                    <input type="text" class="form-control" id="pxp-signup-page-skype" placeholder="Skype account">
+                                    <label for="pxp-signup-page-password">Tài khoản Skype</label>
+                                    <span class="fa fa-skype"></span>
+                                </div>
+                                
+                                <div class="form-group mb-3 col-12 col-lg-6 ">
+                                    <select class="form-select" id="pxp-signup-page-position">
+                                    </select>
+                                    @*<label for="pxp-signup-page-position">Vị trí công tác <span>*</span></label>*@
+                                    @*<span class="fa fa-lock"></span>*@
+                                </div>
+                                <div class="form-floating mb-3 col-12 col-lg-6">
+                                    <label>Giới tính <span>*</span></label>
+                                    <div class="d-flex" style="padding-left: 120px; padding-top: 1rem; padding-bottom: 1rem;" id="pxp-signup-page-gender">
+                                        <input type="radio" class="me-1" id="gender-male" name="Gender" value="1">
+                                        <label for="gender-male">Nam</label>
+                                        <span class="mx-2"></span>
+                                        <input type="radio" class="me-1" id="gender-female" name="Gender" value="2">
+                                        <label for="gender-female">Nữ</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4 mb-3">
+                                    <input type="checkbox" class="form-check-input me-2" id="pxp-signup-page-confirm-checkbox">
+                                    <label for="pxp-signup-page-confirm-checkbox">
+                                        Tôi đồng ý với <a href="#!"><strong>Điều khoản dịch vụ</strong></a> của BestCV.
+                                    </label>
+                                </div>
+                                <a href="javascript:void(0)" class="btn rounded-pill pxp-sign-hero-form-cta" id="pxp-signup-button">Đăng ký</a>
+                                <div class="mt-4 text-center pxp-sign-hero-form-small">
+                                    Bạn đã có tài khoản? <a href="@Url.Action("SignIn","Account")">Đăng nhập</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/nav.js"></script>
+    <script src="~/js/Chart.min.js"></script>
+    <script src="~/js/main.js"></script>
+
+    <!-- Moment -->
+    <script src="~/js/moment-with-locales.js"></script>
+    <script>
+        moment.locale("vi");
+    </script>
+
+    <!--Select2-->
+    <script src="~/js/select2.min.js"></script>
+    <script src="~/js/select2_language_vi.js"></script>
+    <script>
+        var systemUrl = "@ViewBag.DefaultAPIURL";
+        $.fn.select2.defaults.set('language', 'vi');
+    </script>
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script src="~/js/pages/sign-up.js" asp-append-version="true"></script>
+</body>
+</html>

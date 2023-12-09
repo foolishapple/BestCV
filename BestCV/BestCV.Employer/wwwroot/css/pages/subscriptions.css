@@ -1,0 +1,15 @@
+﻿@charset "UTF-8";
+/*
+    Author: TUNGTD
+    Created: 18/09/2023
+    Description: subscriptions stylesheet
+*/
+.column-action, .column-index {
+    width: 5%;
+    max-width: 5% !important;
+    text-align: center !important;
+    align-items: center !important;
+}
+.table thead{
+    white-space: nowrap;  
+}

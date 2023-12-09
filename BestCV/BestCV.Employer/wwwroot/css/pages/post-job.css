@@ -1,0 +1,59 @@
+﻿/**
+    Author: TUNGTD
+    Creaetd: 13/09/2023
+    Description: Post a job style sheet
+*/
+@charset "UTF-8";
+.card-service-style {
+    background: #fefaef;
+    border: 1px solid #ffc107;
+    border-radius: 10px;
+    transition: box-shadow .8s;
+}
+
+    .card-service-style:hover {
+        box-shadow: #ffc10755 0px 5px 15px;
+    }
+    .card-service-style .card-title {
+        border-bottom: 1px solid #ffc107;
+    }
+.pxp_name .pxp_status {
+    font-size: 12px;
+    opacity: 0.7;
+}
+#table_recruitment_campagin thead{
+    display: none;
+}
+.modal-header .btn-close {
+    top: 10px;
+    right: 10px;
+}
+
+.modal .form-control {
+    font-weight: 300;
+    border: 1px solid rgba(0,0,0,.2);
+    color: var(--pxpTextColor);
+    font-size: 15px;
+    border-radius: 30px;
+}
+
+    .modal .form-control:focus {
+        box-shadow: none;
+    }
+
+.modal .modal-footer {
+    border-top: none;
+    padding: 0;
+}
+
+.modal .form-select {
+    border-radius: 30px;
+}
+
+    .modal .form-select:focus {
+        box-shadow: none;
+    }
+
+.modal .modal-btn {
+    min-width: 68.9062px;
+}

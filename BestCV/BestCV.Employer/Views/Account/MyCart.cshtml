@@ -1,0 +1,144 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Mua dịch vụ";
+    ViewBag.CurentPage = "my-cart";
+}
+<style>
+    .card-service-style {
+        background: #fefaef;
+        border: 1px solid #ffc107;
+        border-radius: 10px;
+        transition: box-shadow .8s;
+    }
+
+        .card-service-style:hover {
+            box-shadow: #ffc10755 0px 5px 15px;
+            cursor: pointer;
+        }
+
+    .btn-buy {
+        width: calc(50% - 2px);
+        padding: 8px;
+    }
+
+    .title-group-service {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -1px;
+    }
+
+    .service-package-price {
+        font-weight: 500;
+        color: #4aa900;
+    }
+
+    #table-vertical tr td {
+        text-align: end;
+    }
+
+    #tableData tbody tr {
+        vertical-align: middle;
+    }
+
+    .column-quantity {
+        width: 150px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
+    }
+
+    .card-fixed-top{
+        z-index: 95;
+        position: fixed;
+        top: 150px;
+        right: 100px;
+    }
+</style>
+<div class="pxp-dashboard-content-details">
+    <div class="row">
+        <div class="col-xl-8 col-lg-12 col-md-12 mt-lg-4">
+            <table class="table table-hover align-start" id="tableData">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" class="form-check-input" id="check-all" /></th>
+                        <th>Tên dịch vụ</th>
+                        <th class="text-nowrap">Đơn giá (VNĐ)</th>
+                        <th class='text-center column-quantity'>Số lượng</th>
+                        <th class="text-nowrap">Thành tiền (VNĐ)</th>
+                        <th class='text-center text-nowrap'>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-4 col-lg-12 col-md-12 mt-lg-4">
+            <div class="card card-service-style">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <table class="table table-hover align-start" id="table-vertical">
+
+                        <tbody>
+                            <tr>
+                                <th><h4>Thông tin đơn hàng</h4></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Tổng tiền :</th>
+                                <td id="total-money" class=" fw-bold"></td>
+                            </tr>
+                            <tr>
+                                <th>Thuế VAT :</th>
+                                <td class=" fw-bold">8%</td>
+                            </tr>
+                            <tr>
+                                <th>Thành tiền</th>
+                                <td id="final-money" class="fw-bold text-info"></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2"><div class="form-check"><input class="form-check-input" type="checkbox" id="accept-policy" /><label class="form-check-label" for="accept-policy">Đồng ý với các điều khoản của BestCV</label></div></th>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <button class="btn btn-outline-warning btn-md" id="btn-check-out">Tạo đơn hàng</button>
+
+                </div>
+            </div>
+            <div class="card mt-4 d-none" id="card-check-out">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <span class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                Thông tin thanh toán
+                            </button>
+                        </span>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne" style="">
+                            <div class="accordion-body">
+                                <img id="img-check-out-qr" style="width: 100%" src='' />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+        const BANKID = "@JobiBankInfo.BANKID";
+        const BANK_NUMBER = "@JobiBankInfo.BANK_NUMBER";
+        const TEMPLATE = "@JobiBankInfo.TEMPLATE";
+        const ACCOUNT_NAME = "@JobiBankInfo.ACCOUNT_NAME";
+
+        const CHUA_THANH_TOAN = @OrderStatusID.CHUA_THANH_TOAN;
+        const CHUYEN_KHOAN = @PaymentMethodId.CHUYEN_KHOAN;
+
+        var idCheckout = @ViewBag.EmployerServicePackageId;
+    </script>
+    <script src="~/js/pages/my-cart.js" asp-append-version="true"></script>
+}

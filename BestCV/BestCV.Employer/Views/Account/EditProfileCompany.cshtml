@@ -1,0 +1,319 @@
+﻿
+@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Cập nhật thông tin công ty";
+    ViewBag.CurentPage = "edit-profile-company";
+}
+@section Headers{
+    <link href="~/css/custom-select2.css" rel="stylesheet" asp-append-version="true" />
+}
+<style>
+    #licenseTable thead tr th:nth-child(1),
+    #licenseTable tbody tr td:nth-child(1),
+    #licenseTable tfoot tr th:nth-child(1) {
+        width: 70px !important;
+        text-align: center !important;
+    }
+    
+    #licenseTable thead tr th:nth-child(2),
+    #licenseTable tbody tr td:nth-child(2),
+    #licenseTable tfoot tr th:nth-child(2) {
+        width: 238px !important;
+        text-align: left !important;
+    }
+
+    #licenseTable thead tr th:nth-child(4),
+    #licenseTable tbody tr td:nth-child(4),
+    #licenseTable tfoot tr th:nth-child(4) {
+        width: 160px !important;
+        text-align: center;
+        white-space: nowrap !important;
+    }
+
+    #licenseTable thead tr th:nth-child(5),
+    #licenseTable tbody tr td:nth-child(5),
+    #licenseTable tfoot tr th:nth-child(5) {
+        width: 130px !important;
+        text-align: center !important;
+    }
+
+    #licenseTable thead tr th:nth-child(6),
+    #licenseTable tbody tr td:nth-child(6),
+    #licenseTable tfoot tr th:nth-child(6) {
+        width: 130px !important;
+        text-align: center !important;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        font-family: 'Poppins-SVN';
+        font-weight: 300;
+    }
+
+
+    #addNewLicense {
+        color: white !important;
+        background-color: #0969C3;
+    }
+    
+    #addNewLicense hover{
+        color: white !important;
+        background-color: #0969C3;
+    }
+
+    #cke_description .cke_reset {
+        min-height: 800px !important;
+    }
+
+    #activity ::after .select2-selection__choice__display {
+        font-weight: 300;
+    }
+
+    .cke_dialog_image_url .cke_dialog_ui_hbox_last a {
+        display: block !important;
+    }
+
+    #licenseType{
+        width: 400px;
+    }
+
+    #overview{
+        max-height:100px !important;
+    }
+</style>
+<div class="pxp-dashboard-content-details">
+    <h1>Cập nhật thông tin công ty</h1>
+    <p class="pxp-text-light">Cập nhật thông tin công ty của bạn.</p>
+
+    <form>
+        <div class="row mt-4 mt-lg-5">
+            <div class="col-xxl-8">
+                <div class="mb-3">
+                    <label for="companyName" class="form-label">Tên công ty</label>
+                    <input type="text" id="companyName" class="form-control" placeholder="Tên công ty">
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Địa chỉ email</label>
+                            <input type="email" id="email" class="form-control" placeholder="company@email.com">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="(+12) 345 6789">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="website" class="form-label">Website</label>
+                    <input type="url" id="website" class="form-control" placeholder="https:///">
+                </div>
+                <div class="mb-3">
+                    <label for="activity" class="form-label">Lĩnh vực hoạt động</label>
+                    <select id="activity" class="form-select" multiple="multiple">
+                    </select>
+                </div>
+            </div>
+            <div class="col-xxl-4">
+                <div class="form-label">&nbsp;</div>
+                <div class="pxp-company-cover mb-3">
+                    <input type="file" id="pxp-company-cover-choose-file" accept="image/*">
+                    <label for="pxp-company-cover-choose-file" class="pxp-cover"><span>Chọn ảnh bìa</span></label>
+                </div>
+                <div class="pxp-company-logo mb-3">
+                    <input type="file" id="pxp-company-logo-choose-file" accept="image/*">
+                    <label for="pxp-company-logo-choose-file" class="pxp-cover"><span>Chọn ảnh<br>logo</span></label>
+                </div>
+                <label>
+                    <li>Logo và ảnh bìa tải lên không được vượt quá 5M. Giảm dung lượng ảnh tại <a href="https://imagecompressor.com/vi/" target="_blank">đây</a></li>
+                </label>
+
+            </div>
+        </div>
+
+        <div class="row pt-5">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="taxCode" class="form-label">Mã số thuế</label>
+                    <input type="text" id="taxCode" class="form-control" placeholder="Mã số thuế">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="foundedIn" class="form-label">Năm thành lập</label>
+                    <input type="text" id="foundedIn" class="form-control" placeholder="ví dụ 2001">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="companySize" class="form-label">Quy mô công ty</label>
+                    <select id="companySize" class="form-select">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 pt-3">
+            <label for="description" class="form-label">Giới thiệu công ty</label>
+            <textarea class="form-control " rows="2"  id="overview" maxlength="255"></textarea>
+            
+        </div>
+        <div class="mb-3 pt-3">
+            <label for="description" class="form-label">Mô tả thêm về công ty</label>
+            <textarea class="form-control mb-3 mb-lg-0" id="description" placeholder="Một số thông tin về công ty ..."></textarea>
+            <input type="file" id="fileInput" style="display: none;">
+        </div>
+
+        <div class="mt-4 mt-lg-5">
+            <h2>Địa chỉ công ty</h2>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div id="chooseCity" class="mb-3">
+                        <label for="city" class="form-label">Tỉnh/Thành phố</label>
+                        <select id="city" class="form-select">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="province" class="form-label">Quận/Huyện</label>
+                        <select id="province" class="form-select">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="addressDetail" class="form-label">Địa chỉ chi tiết</label>
+                        <input type="text" id="addressDetail" class="form-control" placeholder="Địa chỉ chi tiết">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mt-4 mt-lg-5">
+            <h2>Mạng xã hội</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="facebook" class="form-label">Facebook</label>
+                        <input type="url" id="facebook" class="form-control" placeholder="https://www.facebook.com/">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="twitter" class="form-label">Twitter</label>
+                        <input type="url" id="twitter" class="form-control" placeholder="https://twitter.com/">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="instagram" class="form-label">Tiktok</label>
+                        <input type="url" id="tiktok" class="form-control" placeholder="https://www.tiktok.com/">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="linkedin" class="form-label">Linkedin</label>
+                        <input type="url" id="linkedin" class="form-control" placeholder="https://www.linkedin.com/">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="youtube" class="form-label">Youtube</label>
+                        <input type="url" id="youtube" class="form-control" placeholder="https://www.youtube.com/">
+                    </div>
+                </div>
+                @*<div class="col-md-6">
+                <div class="mb-3">
+                <label for="videoIntro" class="form-label">VideoIntro</label>
+                <input type="url" id="videoIntro" class="form-control" placeholder="https:///">
+                </div>
+                </div>*@
+            </div>
+        </div>
+
+        <div class="mt-4 mt-lg-5">
+            <button type="button" id="submitButtonCompany" class="btn rounded-pill pxp-section-cta">Lưu thông tin</button>
+        </div>
+    </form>
+    @*Bảng hiện thông tin giấy tờ*@
+    <div class="mt-4 mt-lg-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Giấy tờ</h2>
+            </div>
+            <div class="col-md-6 mb-2 mb-sm-2">
+                <a id="addNewLicense" class="btn rounded-pill  float-end">
+                    <span class="svg-icon svg-icon svg-icon-1 svg_plus p-0 ">
+                    </span> Thêm giấy tờ
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="licenseTable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Loại giấy tờ</th>
+                        <th>Tên file</th>
+                        <th>Phê duyệt</th>
+                        <th>Ngày phê duyệt</th>
+                        <th>Ngày tải file lên</th>
+                    </tr>
+                </thead>
+
+                <tbody id="bodyTable" style="display:none;">
+                </tbody>
+            </table>
+        </div>
+
+        <form id="add" class="row mt-2" style="display:none;">
+            <div class="col-md-4 d-flex flex-row align-items-center mb-2 mb-sm-2">
+                <label for="myfile" class="form-label mb-0 me-2">Chọn giấy tờ</label>
+                <input type="file" id="myfile" name="myfile" accept="image/*, applicaiton/pdf">
+            </div>
+            <div class="col-md-5 d-flex flex-row align-items-center mb-2 mb-sm-2">
+                <label class="form-label mb-0 me-2">Loại giấy tờ</label>
+                <select id="licenseType" class="form-select">
+                </select>
+            </div>
+
+            <div class="col-md-3 d-flex flex-row align-items-center justify-content-end">
+                <button type="button" id="submitButtonSave" class="btn rounded-pill pxp-section-cta">Lưu</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var DefaultAPIURL = "@ViewBag.DefaultAPIURL";
+    </script>
+    <script src="~/js/pages/edit-profile-company.js" asp-append-version="true"></script>
+
+    <script>
+        CKEDITOR.replace('description');
+        $(document).ready(async function() {
+            CKEDITOR.on('dialogDefinition', function(e) {
+                var dialogName = e.data.name;
+                var dialog = e.data.definition.dialog;
+                dialog.on('show', function() {
+                    setupCKUploadFile();
+                });
+            });
+        })
+    </script>
+
+}

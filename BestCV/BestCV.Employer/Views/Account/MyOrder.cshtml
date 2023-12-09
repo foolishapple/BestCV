@@ -1,0 +1,224 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Đơn hàng của tôi";
+    ViewBag.CurentPage = "my-order";
+}
+<style>
+    #tableDataOrder_length,
+    #tableDataOrder_length,
+    #tableDataOrder_length {
+        display: none;
+    }
+
+    .dataTables_paginate {
+        display: none;
+    }
+
+    .candidate_more {
+        font-size: 13px;
+        white-space: normal;
+    }
+
+    .btn_icon {
+        background-color: var(--pxpMainColorLight);
+        border: 0 none;
+        border-radius: 5px;
+        font-size: 14px;
+        color: var(--pxpMainColorDark);
+        text-align: center;
+        transition: var(--pxpHoverTransition);
+        transition-property: background-color, color;
+    }
+
+        .btn_icon:hover {
+            color: #fff;
+            background-color: var(--pxpMainColor);
+        }
+
+        .btn_icon.dropdown-toggle::after {
+            display: none;
+        }
+
+    .candidate_action .dropdown-menu {
+        border: none;
+        font-size: 13px;
+    }
+
+    #tableDataOrderDetail thead tr th:nth-child(1),
+    #tableDataOrderDetail tbody tr td:nth-child(1) {
+        width: 200px !important;
+        min-width: 200px !important;
+        max-width: 200px !important;
+    }
+
+    #tableDataOrderDetail {
+        margin: unset !important;
+    }
+
+        #tableDataOrderDetail tbody tr, #table-price tbody tr{
+            border-style: hidden !important;
+        }
+
+        #tableDataOrderDetail thead tr th, #table-price tbody tr th {
+            font-weight: 500 !important;
+        }
+
+    #modal-order-employer, #modal-order-status, #modal-order-is-approved {
+        font-weight: 500 !important;
+    }
+    .badge-order{
+        background-color: rgb(225, 227, 234);
+        padding: 4px 6px; 
+        border-radius: 5px;
+    }
+</style>
+<div class="pxp-dashboard-content-details">
+    <h2>Đơn hàng của tôi</h2>
+    <div class="row justify-content-end align-content-center">
+       
+        <div class="col-auto order-1 order-sm-2">
+            <div class="pxp-company-dashboard-jobs-search mb-3">
+                <div class="pxp-company-dashboard-jobs-search-results me-3" id="tbl_info"></div>
+                <div class="pxp-company-dashboard-jobs-search-search-form">
+                    <div class="input-group">
+                        <span class="input-group-text"><span type="button" class="fa fa-search btn_search_all"></span></span>
+                        <input type="text" class="form-control" id="search_all" placeholder="Tìm kiếm...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-start" id="tableDataOrder">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Người tạo đơn</th>
+                    <th>Giá trị đơn hàng (Có VAT)</th>
+                    <th>Trạng thái thanh toán</th>
+                    <th>Trạng thái đơn hàng</th>
+                    <th>Ngày tạo</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="w-100">
+        <div class="w-100 row mt-2 mt-lg-3 justify-content-between align-items-center">
+            <div class="col-auto">
+                <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
+                    <ul class="pagination pxp-pagination" id="my-order-paging">
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailOrderModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content p-4">
+            <div class="modal-header mb-3">
+                <h2 class="modal-title" id="detailOrderModal-label">Chi tiết đơn hàng</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 row">
+                        <div class="row">
+                            <div class="col-4">
+                                <p>Mã đơn hàng : <span id="modal-order-id"></span></p>
+                            </div>
+                            <div class="col-4">
+                                <p>Ngày tạo đơn : <span id="modal-order-created-time"></span></p>
+                            </div>
+                            <div class="col-4">
+                                <p>Ngày thanh toán : <span id="modal-order-checkout-time">N/A</span></p>
+                            </div>
+                            <div class="col-4">
+                                <p>Người tạo đơn : <span id="modal-order-employer"></span></p>
+                            </div>
+                            <div class="col-4">
+                                <p>Trạng thái đơn : <span id="modal-order-is-approved"></span></p>
+                            </div>
+                            <div class="col-4">
+                                <p>Thanh toán : <span id="modal-order-status"></span></p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card mb-4">
+                            <table class="table  align-start mb-0" id="tableDataOrderDetail">
+                                <thead>
+                                    <tr>
+                                        <th>Tên dịch vụ</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Số tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card">
+                            <table class="table align-start mb-0" id="table-price">
+                                <tbody>
+                                    <tr>
+                                        <th>Giá trị đơn hàng (chưa bao gồm VAT) :</th>
+                                        <td id="table-price-total-money" class=" fw-bold text-end">10.000.000 đ</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Thuế VAT : 8%</th>
+                                        <td class=" fw-bold text-end" id="table-price-vat">8%</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Thành tiền:</th>
+                                        <td id="table-price-final-money" class="fw-bold text-info text-end">10.800.000 đ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <span class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        Thông tin thanh toán
+                                    </button>
+                                </span>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne" style="">
+                                    <div class="accordion-body">
+                                        <img id="detail-order-img-check-out-qr" style="width: 100%" src='https://img.vietqr.io/image/bidv-4505034721-print.jpg?amount=10800000&accountName=Tran%20le%20minh' />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer mt-4">
+                <button type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        const BANKID = "@BestCVBankInfo.BANKID";
+        const BANK_NUMBER = "@BestCVBankInfo.BANK_NUMBER";
+        const TEMPLATE = "@BestCVBankInfo.TEMPLATE";
+        const ACCOUNT_NAME = "@BestCVBankInfo.ACCOUNT_NAME";
+    </script>
+    <script src="~/js/pages/don-hang-cua-toi.js" asp-append-version="true"></script>
+}

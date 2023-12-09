@@ -1,0 +1,27 @@
+﻿<nav class="pxp-nav-mobile">
+    <ul class="navbar-nav justify-content-end flex-grow-1">
+        <li class="pxp-dropdown-header">Quản trị</li>
+        <li class="nav-item"><a href="@Url.Action("CompanyDashboard", "Home")"><span class="fa fa-home"></span>Tổng quan</a></li>
+        <li class="nav-item"><a href="@Url.Action("EditProfile", "Account")"><span class="fa fa-pencil"></span>Thông tin cá nhân</a></li>
+        <li class="nav-item"><a href="@Url.Action("EditProfileCompany", "Account")"><span class="fa fa-pencil"></span>Thông tin công ty</a></li>
+        <li class="nav-item"><a href="@Url.Action("RecruitmentCampaigns", "Home")"><span class="fa fa-briefcase"></span>Chiến dịch tuyển dụng</a></li>
+        <li class="nav-item"><a href="@Url.Action("NewJobOffer", "Home")"><span class="fa fa-file-text"></span>Đăng tin tuyển dụng</a></li>
+        <li class="nav-item"><a href="@Url.Action("ManageJobs", "Home")"><span class="fa fa-briefcase"></span>Tin tuyển dụng</a></li>
+        <li class="nav-item"><a href="@Url.Action("Candidates", "Home")"><span class="fa fa-user-circle"></span>Ứng viên</a></li>
+        <li class="nav-item"><a href="@Url.Action("Subscriptions", "Home")"><span class="fa fa-credit-card"></span>Gói dịch vụ</a></li>
+        <li class="nav-item"><a href="@Url.Action("ChangePassword", "Account")"><span class="fa fa-lock"></span>Cập nhật mật khẩu</a></li>
+        <li class="pxp-dropdown-header mt-4">Thông tin</li>
+        <li class="nav-item">
+            <a href="@Url.Action("Inbox", "Home")" class="d-flex justify-content-between align-items-center">
+                <div><span class="fa fa-envelope"></span>Hòm thư</div>
+                <span class="badge rounded-pill">14</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="@Url.Action("Notifications", "Home")" class="d-flex justify-content-between align-items-center">
+                <div><span class="fa fa-bell"></span>Thông bâo</div>
+                <span class="badge rounded-pill">5</span>
+            </a>
+        </li>
+    </ul>
+</nav>

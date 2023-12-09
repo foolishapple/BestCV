@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Cập nhật thông tin cá nhân";
+    ViewBag.CurentPage = "edit-profile";
+}
+@section Headers{
+    <link href="~/css/custom-select2.css" rel="stylesheet" asp-append-version="true"/>
+}
+<div class="pxp-dashboard-content-details">
+    <h1>Cập nhật thông tin cá nhân</h1>
+    <p class="pxp-text-light">Cập nhật thông tin cá nhân của nhà tuyển dụng</p>
+
+    <form>
+        <div class="row mt-4 mt-lg-5">
+            <div class="row">
+                <div class="pxp-company-logo mb-3 col-sm-6">
+                    <input type="file" id="pxp-company-logo-choose-file" accept="image/*">
+                    <label for="pxp-company-logo-choose-file" class="pxp-cover"><span>Ảnh đại<br />diện</span></label>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Địa chỉ email</label>
+                        <input type="email" id="email" class="form-control" placeholder="employerInfo@email.com" disabled>
+                    </div>
+                </div>
+                <div class="mb-3 col-sm-6">
+                    <label for="fullName" class="form-label">Họ và tên</label>
+                    <input type="text" id="fullName" class="form-control" placeholder="Họ và tên">
+                </div>
+                <div class="mb-3 col-sm-6">
+                    <label for="gender" class="form-label">Giới tính</label>
+                    <select id="gender" class="form-select">
+                        <option value="1">Nam</option>
+                        <option value="2">Nữ</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-sm-6">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Số điện thoại" disabled>
+
+                </div>
+                <div class="mb-3 col-sm-6">
+                    <label for="position" class="form-label">Chức vụ</label>
+                    <select id="position" class="form-select">
+                    </select>
+                </div>
+                <div class="mb-3 col-12 d-none">
+                    <label for="skypeAccount" class="form-label">Tài khoản Skype</label>
+                    <input type="text" id="skypeAccount" class="form-control" placeholder="Skype">
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 mt-lg-5">
+            <button type="button" id="submitButton" class="btn rounded-pill pxp-section-cta">Lưu thông tin</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+        var DefaultAPIURL = "@ViewBag.DefaultAPIURL";
+    </script>
+    <script src="~/js/pages/edit-profile.js" asp-append-version="true"></script>
+}

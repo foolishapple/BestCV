@@ -1,0 +1,276 @@
+﻿<!doctype html>
+<html lang="en" class="pxp-root">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>@ViewBag.Title - Nhà tuyển dụng - BestCV</title>
+
+    <link rel="shortcut icon" href="~/images/logo-title.png" type="image/x-icon">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/fonts/fontawesome6-pro/style.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/poppins.css" asp-append-version="true">
+
+    <!-- Select2 CSS -->
+    <link href="~/css/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <!-- jQuery JS -->
+    <script src="~/js/jquery-3.4.1.min.js"></script>
+    <!-- Sweet Alert -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.css">
+
+    @await RenderSectionAsync("Headers",false)
+</head>
+<body>
+    @*<div class="pxp-preloader"><span>Loading...</span></div>*@
+    <div class="pxp-preloader">
+        <span>
+            <i class="fa-solid fa-spinner-third fa-spin fa-3x" style="color: #0969c3"></i>
+        </span>
+    </div>
+    <!-- Loading -->
+    <div id="loading">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+    <div class="container-xl mt-4">
+ 
+        @RenderBody()
+
+    </div>
+
+    <style>
+        #kt_docs_toast_stack_container {
+            z-index: 999999;
+        }
+
+        .toast {
+            font-size: 0.9em;
+            background-color: rgba(255, 255, 255);
+            box-shadow: 4px 9px 20px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 6px 6px 6px 6px !important;
+            border: 0px;
+        }
+
+            .toast .toast-header {
+                border-radius: inherit;
+            }
+
+            .toast .toast-time {
+                font-size: 0.7575em;
+            }
+
+            .toast .toast-body {
+                background-image: linear-gradient(to bottom right,#2f57ef14, #ffedff69);
+            }
+
+                .toast .toast-body .toast-content {
+                    max-height: 50px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+        .sticky-header-dashboard {
+            position: sticky;
+            position: -webkit-sticky;
+            top: 0;
+            z-index: 1000;
+            background: #e6f0f9;
+        }
+    </style>
+    <!--begin::Toast-->
+    <div id="kt_docs_toast_stack_container" class="toast-container position-fixed bottom-0 start-0 p-3 " style="margin-bottom: 50px;">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-kt-docs-toast="stack" data-bs-delay="@NotificationConfig.FadeTimne">
+            <div class="toast-header">
+                <img width="100" height="100" class="me-auto" src="~/images/company-logo-1.png" alt="BestCV Logo">
+                <button type="button" class="btn-close fs-6" data-bs-dismiss="toast" aria-label="Close"></button>
+
+            </div>
+            <div class="toast-body p-3">
+                <div class="toast-title h5 mb-1"></div>
+                <div class="toast-content noti-line-clamp"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        const systemConfig = {
+            defaultURL: window.origin,
+            defaultAPI_URL: "@ViewBag.DefaultAPIURL",
+            defaultStorage_URL: "@ViewBag.DefaultStorageURL",
+            defaultWebURL: "@ViewBag.DefaultWebURL",
+            languageDataTable: {
+                oAria: {
+                    sSortAscending: ": Sắp xếp thứ tự tăng dần",
+                    sSortDescending: ": Sắp xếp thứ tự giảm dần"
+                },
+                oPaginate: {
+                    sFirst: "Đầu tiên",
+                    sLast: "Cuối cùng",
+                    sNext: "Sau",
+                    sPrevious: "Trước"
+                },
+                sEmptyTable: "Không có dữ liệu",
+                sInfo: "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+                sThousands: ".",
+                sInfoEmpty: "Hiển thị 0 tới 0 của 0 dữ liệu",
+                sInfoFiltered: "(được lọc từ _MAX_ dữ liệu)",
+                sInfoPostFix: "",
+                sDecimal: ",",
+                sLengthMenu: "_MENU_ ",
+                sLoadingRecords: "Đang tải...",
+                sProcessing: ``,
+                //sProcessing: `<span class="svg-icon svg-icon-success svg-icon-2hx">
+                //                                <svg class="spin" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                //                                    <path opacity="0.3" d="M13.341 22H11.341C10.741 22 10.341 21.6 10.341 21V18C10.341 17.4 10.741 17 11.341 17H13.341C13.941 17 14.341 17.4 14.341 18V21C14.341 21.6 13.941 22 13.341 22ZM18.5409 10.7L21.141 9.19997C21.641 8.89997 21.7409 8.29997 21.5409 7.79997L20.5409 6.09997C20.2409 5.59997 19.641 5.49997 19.141 5.69997L16.5409 7.19997C16.0409 7.49997 15.941 8.09997 16.141 8.59997L17.141 10.3C17.441 10.8 18.0409 11 18.5409 10.7ZM8.14096 7.29997L5.54095 5.79997C5.04095 5.49997 4.44096 5.69997 4.14096 6.19997L3.14096 7.89997C2.84096 8.39997 3.04095 8.99997 3.54095 9.29997L6.14096 10.8C6.64096 11.1 7.24095 10.9 7.54095 10.4L8.54095 8.69997C8.74095 8.19997 8.64096 7.49997 8.14096 7.29997Z" fill="currentColor"/>
+                //                                    <path d="M13.3409 7H11.3409C10.7409 7 10.3409 6.6 10.3409 6V3C10.3409 2.4 10.7409 2 11.3409 2H13.3409C13.9409 2 14.3409 2.4 14.3409 3V6C14.3409 6.6 13.9409 7 13.3409 7ZM5.54094 18.2L8.14095 16.7C8.64095 16.4 8.74094 15.8 8.54094 15.3L7.54094 13.6C7.24094 13.1 6.64095 13 6.14095 13.2L3.54094 14.7C3.04094 15 2.94095 15.6 3.14095 16.1L4.14095 17.8C4.44095 18.3 5.04094 18.5 5.54094 18.2ZM21.1409 14.8L18.5409 13.3C18.0409 13 17.4409 13.2 17.1409 13.7L16.1409 15.4C15.8409 15.9 16.0409 16.5 16.5409 16.8L19.1409 18.3C19.6409 18.6 20.2409 18.4 20.5409 17.9L21.5409 16.2C21.7409 15.7 21.6409 15 21.1409 14.8Z" fill="currentColor"/>
+                //                                </svg>
+                //                            </span>   Đang tải...`,
+                sSearch: "Tìm kiếm:",
+                sSearchPlaceholder: "",
+                sUrl: "",
+                sZeroRecords: "Không tìm thấy kết quả"
+            }
+        }
+
+    </script>
+    <script src="~/js/http-service.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="~/js/jquery-3.4.1.min.js"></script>*@
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/nav.js"></script>
+    <script src="~/js/Chart.min.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    <!-- Datatable -->
+    <script src="~/lib/datatable/datatables.bundle.js" type="text/javascript" asp-append-version="true"></script>
+    <!-- Moment -->
+    <script src="~/js/moment-with-locales.js"></script>
+    <script>
+        moment.locale("vi");
+    </script>
+
+    <script src="~/js/pages/_layout.js" asp-append-version="true"></script>
+    <script src="~/js/form-validation.js" asp-append-version="true"></script>
+    <!--Select2-->
+    <script src="~/js/select2.min.js"></script>
+    <script src="~/js/select2_language_vi.js"></script>
+    <script>
+        $.fn.select2.defaults.set('language', 'vi');
+    </script>
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    <!-- Flatpickr -->
+    <script src="~/lib/flatpickr/flatpickr.js"></script>
+    <script src="~/lib/flatpickr/flatpickr_vn.js"></script>
+    <script>
+        flatpickr('.flatpickr', {
+            "locale": "vn" // locale for this instance only
+        });
+    </script>
+
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        const read = @NotificationConfig.Status.Read;
+        const unRead = @NotificationConfig.Status.Unread;
+    </script>
+
+    <script>
+        const MenuEmployer = @Html.Raw(ViewBag.MenuDashBoardEmployer);
+        const route = "@ViewBag.Route";
+    </script>
+    <script src="~/js/pages/notification.js" asp-append-version="true"></script>
+    <script src="~/js/pages/_layout-dashboard-employer.js" asp-append-version="true"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/employernotification.js" asp-append-version="true"></script>
+    <script>
+        function randomNumber() {
+            return Math.random().toString().substring(2);
+        }
+
+        /**
+        * author: truongthieuhuyen
+        * created: 21.08.2023
+        * format các ô input liên quan đến tiền
+        */
+        $("input[data-type='currency']").on({
+            keyup: function () {
+                formatCurrency($(this));
+            },
+            blur: function () {
+                formatCurrency($(this), "blur");
+            }
+        });
+        function formatCurrency(input) {
+            // appends $ to value, validates decimal side
+            // and puts cursor back in right position.
+
+            // get input value
+            var input_val = input.val();
+
+            // don't validate empty input
+            if (input_val === "") { return; }
+
+            // original length
+            var original_len = input_val.length;
+
+            // initial caret position
+            var caret_pos = input.prop("selectionStart");
+
+            // check for decimal
+            if (input_val.indexOf(",") >= 0) {
+
+                // get position of first decimal
+                // this prevents multiple decimals from
+                // being entered
+                var decimal_pos = input_val.indexOf(",");
+
+                // split number by decimal point
+                var left_side = input_val.substring(0, decimal_pos);
+                var right_side = input_val.substring(decimal_pos);
+
+                // add commas to left side of number
+                left_side = formatNumber(left_side);
+
+                // validate right side
+                right_side = formatNumber(right_side);
+
+
+                // Limit decimal to only 2 digits
+                right_side = right_side.substring(0, 2);
+
+                // join number by .
+                input_val = left_side + "," + right_side;
+
+            } else {
+                // no decimal entered
+                // add commas to number
+                // remove all non-digits
+                input_val = formatNumber(input_val);
+                input_val = input_val;
+
+            }
+
+            // send updated string to input
+            input.val(input_val);
+
+            // put caret back in the right position
+            var updated_len = input_val.length;
+            caret_pos = updated_len - original_len + caret_pos;
+            input[0].setSelectionRange(caret_pos, caret_pos);
+        }
+        function formatNumber(n) {
+            // format number 1000000 to 1,234,567
+            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        }
+    </script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

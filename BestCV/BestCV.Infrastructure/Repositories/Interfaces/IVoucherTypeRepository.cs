@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace BestCV.Infrastructure.Repositories.Interfaces
 {
-    public interface ISkillLevelRepository : IRepositoryBaseAsync<SkillLevel, int, JobiContext>
+    public interface IVoucherTypeRepository : IRepositoryBaseAsync<VoucherType, int, JobiContext>
     {
         /// <summary>
+        /// Description: Check voucher type name is existed
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="id"></param>
+        /// <param name="name">voucher type name</param>
+        /// <param name="id">voucher type id</param>
         /// <returns></returns>
-        Task<bool> IsNameExisAsync(string name, int id);
+        Task<bool> NameIsExisted(string name, int id);
     }
 }

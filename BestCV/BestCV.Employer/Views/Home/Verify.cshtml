@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = "_Layout2";
+}
+<style>
+    #pxp-re-send-email {
+        display: none;
+    }
+
+    .pxp-prepareVerifying{
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: aliceblue;
+        z-index: 111;
+    }
+</style>
+
+
+
+<div class="pxp-prepareVerifying">
+    <i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+    <span>Đang xác thực...</span>
+</div>
+<section class="mt-100 pxp-no-hero">
+    <div class="pxp-container">
+        <h2 class="pxp-section-h2 text-center">Xác thực tài khoản thành công</h2>
+        <p class="pxp-text-light pxp-text text-center">Chúc mừng bạn đã xác thực tài khoản thành công, hãy đăng nhập để sử dụng tính năng của nhà tuyển dụng</p>
+
+        <div class="pxp-404-fig text-center mt-4 mt-lg-5">
+            <img src="~/images/service-2-icon.png" alt="Page not found" id="img-success">
+            <img src="~/images/subscribe.png" alt="verify failed" id="img-failed">
+        </div>
+
+        <div class="my-4 my-lg-5 text-center" style="min-height: 50px;">
+            <a href="@Url.Action("SignIn","Account")" class="btn rounded-pill pxp-section-cta" id="pxp-sign-in">Đăng nhập<span class="fa fa-angle-right"></span></a>
+            <a href="javascript:void(0)" class="btn rounded-pill pxp-section-cta" id="pxp-re-send-email">Gửi lại<span class="fa fa-angle-right"></span></a>
+        </div>
+    </div>
+
+
+</section>
+
+
+@section Scripts{
+    <script>
+        var DefaultAPIURL = "@ViewBag.DefaultAPIURL";
+
+        var data = {
+            value: "@ViewBag.Value",
+            hash: "@ViewBag.Hash"
+        }
+
+
+        // hide elements for loading
+        $('body').addClass('no-scroll');
+    </script>
+    <script src="~/js/pages/verified.js" asp-append-version="true"></script>
+}

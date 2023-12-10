@@ -1,0 +1,389 @@
+﻿@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Đăng tin tuyển dụng";
+}
+@section Headers{
+    <link href="~/css/custom-select2.css" rel="stylesheet" asp-append-version="true"/>
+}
+
+<style>
+
+    .pxp-dashboard-content-details {
+        transition: 550ms ease transform;
+    }
+
+    #select-campaign-zone.pxp-dashboard-content-details.action {
+        transform: scale(0);
+        display: none;
+    }
+
+    #form-zone.pxp-dashboard-content-details {
+        transform: scale(0);
+        display: none;
+    }
+
+        #form-zone.pxp-dashboard-content-details.action {
+            transform: scale(1);
+            display: block
+        }
+
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .form-control, .form-select {
+        border: 1px solid rgba(0,0,0,.2);
+        font-weight: 300;
+        color: var(--pxpTextColor);
+        background-color: #fff;
+        border-radius: 30px;
+        padding: 1rem;
+    }
+
+    .division-bottom {
+        border-bottom: 1px solid var(--pxpLightGrayColor);
+    }
+
+    .pxp-nav-btn:hover {
+        color: #fff;
+        background-color: var(--pxpMainColorDark);
+    }
+
+    #reason-zone .form-control {
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        padding: 0.5rem 0.75rem;
+        border-radius: unset;
+    }
+
+    #workplace-zone .row-workplace select {
+        margin-right: 2.5%;
+    }
+
+    #workplace-zone .row-workplace .select2.select2-container {
+        padding: 0;
+        margin-right: 2.5%;
+    }
+
+
+    #receiver-info > div i.fa {
+        position: absolute;
+        top: 50%;
+        right: 1.75rem;
+        transform: translate(0, 50%);
+        cursor: pointer;
+    }
+
+    .pxp-dashboard-content-details form textarea {
+        height: auto;
+    }
+
+    .pxp-dashboard-content-details h1 {
+        display: inline;
+    }
+
+    .form-control[readonly],
+    .flatpickr-input[readonly] {
+        background-color: #fff !important;
+    }
+
+    .pxp-nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .pxp-hero-card {
+        min-height: fit-content;
+        height: fit-content;
+        background-color: #fff;
+        padding: 1.5rem;
+        box-shadow: 2px 2px 6px 4px silver;
+        display: none;
+    }
+
+    .btn_submit {
+        display: inline;
+        right: calc(-100% + 52px);
+        position: relative;
+    }
+</style>
+
+<div class="pxp-dashboard-content-details" >
+    <h1>Đăng tin tuyển dụng</h1>
+    <p class="pxp-text-light">Tin tuyển dụng của bạn sẽ được kiểm duyệt trước khi chính thức hiển thị với các ứng viên tiềm năng</p>
+
+    <form>
+        <div class="row mt-4 mt-lg-4 division-bottom">
+            <div class="col-12">
+                <h5>Ngành nghề & lĩnh vực</h5>
+            </div>
+            <div class="col-12 col-xxl-6">
+                <div class="mb-3">
+                    <label for="pxp-company-job-name" class="form-label">Tiêu đề tin tuyển dụng <span class="text-danger">*</span></label>
+                    <input type="text" id="pxp-company-job-title" class="form-control" placeholder="">
+                </div>
+            </div>
+            <div class="col-12 col-xxl-6">
+                <div class="mb-3">
+                    <label for="pxp-company-campaign-name" class="form-label">Tiêu đề chiến dịch <span class="text-danger">*</span></label>
+                    <input type="text" id="pxp-company-campaign-name" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="col-12 col-xxl-6">
+                <div class="mb-3">
+                    <label for="pxp-company-job-tag" class="form-label">Hastag <span class="text-info">(NOTE: dùng ký tự # ở đầu để tạo tag)</span></label>
+                    <select id="pxp-company-job-tag" class="form-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-xxl-3">
+                <div class="mb-3">
+                    <label for="pxp-company-job-primary-category" class="form-label">Ngành nghề chính <span class="text-danger">*</span></label>
+                    <select id="pxp-company-job-primary-category" class="form-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-xxl-3">
+                <div class="mb-3">
+                    <label for="pxp-company-job-secondary-category" class="form-label">Ngành nghề phụ</label>
+                    <select id="pxp-company-job-secondary-category" class="form-select">
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cols mt-4 mt-lg-4 division-bottom">
+            <div class="col-12">
+                <h5>Thông tin chung</h5>
+            </div>
+            <div class="col-6 col-xxl-3">
+                <div class="mb-3">
+                    <label for="pxp-company-job-total-recruitment" class="form-label">Số lượng tuyển <span class="text-danger">*</span></label>
+                    <input type="number" control="number" min="0" input-type="int" id="pxp-company-job-total-recruitment" class="form-control" placeholder="Nhập số lượng">
+                </div>
+            </div>
+            <div class="col-6 col-xxl-3">
+                <div class="mb-3">
+                    <label for="pxp-company-job-gender-requirement" class="form-label">Giới tính  <span class="text-danger">*</span></label>
+                    <select id="pxp-company-job-gender-requirement" class="form-select">
+                        <option selected value="0">Không</option>
+                        <option value="1">Nam</option>
+                        <option value="2">Nữ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label for="pxp-company-job-experience" class="form-label">Kinh nghiệm <span class="text-danger">*</span></label>
+                    <select id="pxp-company-job-experience" class="form-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label for="pxp-company-job-position" class="form-label">Ví trí tuyển <span class="text-danger">*</span></label>
+                    <select id="pxp-company-job-position" class="form-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label for="pxp-company-job-type" class="form-label">Loại công việc <span class="text-danger">*</span></label>
+                    <select id="pxp-company-job-type" class="form-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 mb-3" style="border-radius: 30px;">
+                <div class="row my-3">
+                    <div class="col-md-8 col-12 d-flex align-items-center">
+                        <h5 class="mb-0">Khu vực làm việc</h5>
+                    </div>
+                </div>
+                <!--begin::Repeater-->
+                <div id="kt_docs_repeater_advanced">
+                    <!--begin::Form group-->
+                    <div class="form-group">
+                        <div data-repeater-list="kt_docs_repeater_advanced">
+                            <div data-repeater-item class="workplace-item">
+                                <div class="form-group row mb-3">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Tỉnh/Thành phố <span class="text-danger">*</span></label>
+                                        <select class="form-select" data-repeater="select-city" data-placeholder="Chọn tỉnh/thành phố">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Quận/Huyện</label>
+                                        <select class="form-select" data-repeater="select-district" data-placeholder="Chọn quận/huyện">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="form-label">Địa chỉ</label>
+                                        <input class="form-control" data-repeater="address-detail" placeholder="Nhập địa chỉ" />
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-center justify-content-center pt-2">
+                                        <label class="form-label"></label>
+                                        <button type="button" data-repeater-delete class="btn rounded-pill btn-secondary btn-delete mt-4">
+                                            Xóa <span class="fa fa-minus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Form group-->
+                    <!--begin::Form group-->
+                    <div class="form-group">
+                        <button type="button" data-repeater-create class="btn rounded-pill pxp-nav-btn">
+                            Thêm mới <span class="fa fa-plus"></span>
+                        </button>
+                    </div>
+                    <!--end::Form group-->
+                </div>
+                <!--end::Repeater-->
+            </div>
+        </div>
+
+
+        <div class="row mt-4 mt-lg-4 division-bottom row-salary">
+            <div class="col-12">
+                <h5>Mức lương</h5>
+            </div>
+            <div class="col-3 col-salary">
+                <div class="mb-3">
+                    <label for="pxp-company-job-currency" class="form-label">Loại tiền tệ <span class="text-danger">*</span></label>
+                    <select id="pxp-company-job-currency" class="form-select">
+                        @*<option value="0">USD</option>*@
+                        <option selected value="@CurrencyConst.DEFAULT_CURRENCY">VND</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-3 col-salary">
+                <div class="mb-3">
+                    <label for="pxp-company-job-salaryType" class="form-label">Kiểu lương <span class="text-danger">*</span></label>
+                    <select id="pxp-company-job-salaryType" class="form-select">
+                    </select>
+                </div>
+            </div>
+            <div class="col-3 col-salary">
+                <div class="mb-3">
+                    <label for="pxp-company-job-salary-from" class="form-label">Từ </label>
+                    <input type="text" id="pxp-company-job-salary-from" class="form-control" data-type="currency">
+                </div>
+            </div>
+            <div class="col-3  col-salary">
+                <div class="mb-3">
+                    <label for="pxp-company-job-salary-to" class="form-label">Đến </label>
+                    <input type="text" id="pxp-company-job-salary-to" class="form-control" data-type="currency">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 mt-lg-4 division-bottom" id="reason-zone">
+            <div class="col-12">
+                <h5>
+                    Quyền lợi nổi bật
+                </h5>
+                <p class="pxp-text-light" style="font-size: 14px;">Bổ sung quyền lợi nổi bật sẽ giúp tin tuyển dụng của bạn trở nên nổi bật và hấp dẫn hơn so với các tin đăng cùng loại</p>
+            </div>
+            <div class="col-12 mb-3 d-flex row-reason">
+                <div class="row align-items-center w-100">
+                    <label for="" class="form-label col-2">Quyền lợi 1: </label>
+                    <input class="form-control col" />
+                </div>
+            </div>
+            <div class="col-12 mb-3 d-flex row-reason">
+                <div class="row align-items-center w-100">
+                    <label for="" class="form-label col-2">Quyền lợi 2: </label>
+                    <input class="form-control col" />
+                </div>
+            </div>
+            <div class="col-12 mb-3 d-flex row-reason">
+                <div class="row align-items-center w-100">
+                    <label for="" class="form-label col-2">Quyền lợi 3: </label>
+                    <input class="form-control col" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 mt-lg-4 division-bottom">
+            <div class="col-12">
+                <h5>
+                    Nội dung tuyển dụng chi tiết
+                </h5>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="pxp-company-job-requirementSkill" class="form-label">Yêu cầu kỹ năng <span class="text-danger">*</span></label>
+                <select class="form-select" id="pxp-company-job-requirementSkill">
+                </select>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="pxp-company-job-overview" class="form-label">Mô tả</label>
+                <textarea class="form-control text_editor" rows="5" id="pxp-company-job-overview"></textarea>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="pxp-company-job-requirement" class="form-label">Yêu cầu ứng viên <span class="text-danger">*</span></label>
+                <textarea class="form-control text_editor" rows="1" id="pxp-company-job-requirement"></textarea>
+            </div>
+        </div>
+
+        <div class="row mt-4 mt-lg-4 division-bottom">
+            <div class="col-12">
+                <h5>
+                    Quyền lợi của ứng viên
+                </h5>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="pxp-company-job-benefit" class="form-label">Quyền lợi <span class="text-danger">*</span></label>
+                <textarea class="form-control text_editor" rows="5" id="pxp-company-job-benefit"></textarea>
+            </div>
+        </div>
+
+        <div class="row mt-4 mt-lg-4 division-bottom" id="receiver-info">
+            <div class="col-12">
+                <h5>
+                    Thông tin nhận CV
+                </h5>
+            </div>
+            <div class="col-md-3 col-12 mb-3 position-relative">
+                <label for="pxp-company-job-applyDate" class="form-label flatpickr">Hạn chót nhận CV</label>
+                <input type="date" class="form-control" id="pxp-company-job-applyDate" />
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+                <label for="pxp-company-job-requirement" class="form-label">Người nhận</label>
+                <input type="text" class="form-control" id="pxp-company-job-receiverName" />
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+                <label for="pxp-company-job-requirement" class="form-label">Số điện thoại</label>
+                <input type="tel" class="form-control" id="pxp-company-job-receiverPhone" />
+            </div>
+            <div class="col-md-3 col-12 mb-3">
+                <label for="pxp-company-job-requirement" class="form-label">Email</label>
+                <input type="email" class="form-control" id="pxp-company-job-receiverEmail" />
+            </div>
+        </div>
+
+
+        <div class="mt-4 mt-lg-5">
+            <button type="button" class="btn rounded-pill pxp-section-cta save-button" id="save-job">Lưu</button>
+            <button type="button" class="btn rounded-pill pxp-section-cta-o ms-3 save-button" id="save-draft-job">Lưu bản nháp</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery.repeater/1.2.1/jquery.repeater.min.js"></script>
+    <script src="~/js/pages/new-job.js" asp-append-version="true"></script>
+    <script>
+        const SALARY_TYPE_FROM = @SalaryTypeId.FROM;
+        const SALARY_TYPE_TO = @SalaryTypeId.TO;
+        const SALARY_TYPE_BETWEEN = @SalaryTypeId.BETWEEN;
+        const SALARY_TYPE_AGREEMENT = @SalaryTypeId.AGREEMENT;
+        const TAG_TYPE = @TagTypeId.JOB;
+        const recruitmentCampaginId = @ViewBag.recruitmentCampaginId;
+    </script>
+}

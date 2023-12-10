@@ -1,0 +1,133 @@
+﻿@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Ứng viên";
+}
+@section Headers{
+    <link href="~/css/pages/candidates.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/select2-table.css" rel="stylesheet" asp-append-version="true"/>
+}
+<div class="pxp-dashboard-content-details">
+    <h1>Ứng viên</h1>
+    <div class="mt-2 mt-lg-3">
+        <div class="row justify-content-between align-content-center">
+            <div class="col-auto order-2 order-sm-1">
+                <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                    <select class="form-select" control="select2" data-width="155px" id="fillter_unread" style="display: none;">
+                        <option value="all">Hiển thị tất cả</option>
+                        <option value="unread">Hiển thị chưa đọc</option>
+                    </select>
+                    <div class="ps-2">
+                        <select class="form-select fillter_tbl" id="fillterRecruitmentCampaig"  style="display: none;">
+                        </select>
+                    </div>
+                    <div class="ps-2">
+                        <select class="form-select form-control fillter_tbl"  id="fillterStatus" style="display: none;">
+                        </select>
+                    </div>
+                    <div class="ps-2">
+                        <select class="form-select form-control fillter_tbl" id="fillterSource" style="display: none;">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto order-1 order-sm-2">
+                <div class="pxp-company-dashboard-jobs-search mb-3">
+                    <div class="pxp-company-dashboard-jobs-search-results me-3" id="tbl_info">0 ứng viên</div>
+                    <div class="pxp-company-dashboard-jobs-search-search-form">
+                        <div class="input-group">
+                            <span class="input-group-text"><span type="button" class="fa fa-search btn_search_all"></span></span>
+                            <input type="text" class="form-control" id="search_all" placeholder="Tìm kiếm...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tbl-data table-responsive">
+            <table id="table_candidate" class="table table-hover align-start w-100">
+                <thead>
+                    <tr>
+                        <th class="text-center">STT</th>
+                        <th>Ứng viên</th>
+                        <th></th>
+                        <th>Chiến dịch</th>
+                        <th>Thông tin liên hệ</th>
+                        <th>Khác</th>
+                        <th>Trạng thái</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody class="fw-normal text-gray">
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+            <div class="w-100"> 
+                <div class="w-100 row ,-0 mt-2 mt-lg-3 justify-content-between align-items-center">
+                    <div class="col-auto">
+                        <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
+                            <ul class="pagination pxp-pagination" id="candidate_paging">
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">1</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-auto d-none">
+                        <a href="#" class="btn rounded-pill pxp-section-cta mt-3 mt-sm-0">Show me more<span class="fa fa-angle-right"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade pxp-user-modal" id="modal_addNote" aria-labelledby="modal_addNote" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-4 text-start " id="signinModal">Cập nhật ghi chú</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="">
+                        <label class="fw-bold" for="candidateApplyJobDescription">Ghi chú</label>
+                        <textarea id="candidateApplyJobDescription" class="form-control" placeholder="Ghi chú..." maxlength="500" autosize="true" rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="model-footer px-5 py-3 d-flex justify-content-end">
+                <a href="#" class="btn btn-primary rounded-pill btn_submit">Lưu</a>
+                <a href="#" class="btn btn-secondary rounded-pill ms-3" data-bs-dismiss="modal">Hủy</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade pxp-user-modal" id="modal_change_status" aria-labelledby="modal_change_status" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-4 text-start " id="signinModal">Cập nhật trạng thái CV ứng viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row">
+                <div class="col-auto">
+                    <label for="candidateApplyJobStatus" class="fw-bold">Trạng thái CV <span class="text-danger">*</span></label>
+                    <ul class="nav nav-pills my-2 pxp-company-dashboard-jobs-bulk-actions" id="pills-tab-status" role="tablist">
+                    </ul>
+                </div>
+                <div class="col-12">
+                    <label class="fw-bold" for="ApplyJobDescription">Ghi chú</label>
+                    <textarea id="ApplyJobDescription" class="form-control" placeholder="Ghi chú..." maxlength="500" autosize="true" rows="6"></textarea>
+                </div>
+            </div>
+            <div class="model-footer px-5 py-3 d-flex justify-content-end">
+                <a href="#" class="btn btn-primary rounded-pill btn_submit">Lưu</a>
+                <a href="#" class="btn btn-secondary rounded-pill ms-3" data-bs-dismiss="modal">Hủy</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/pages/candidates.js" asp-append-version="true"></script>
+}

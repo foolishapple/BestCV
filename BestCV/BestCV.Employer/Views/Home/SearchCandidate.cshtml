@@ -1,0 +1,156 @@
+﻿@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Tìm kiếm ứng viên";
+}
+@section Headers{
+    <link href="~/css/pages/search-candidate.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/select2-table.css" rel="stylesheet" asp-append-version="true"/>
+}
+<div class="pxp-dashboard-content-details">
+    <h1>Tìm kiếm ứng viên</h1>
+    <div class="mt-2 mt-lg-3">
+
+        @*lọc nâng cao*@
+        <div class="d-flex mb-2 justify-content-end">
+            <button type="button" class="btn btn-success me-2" id="show-advanced-search" data-bs-toggle="collapse" data-bs-target="#collapseAdvancedSearch">
+                <span class="svg-icon svg-icon-muted svg-icon-1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
+                    </svg>
+                </span><span id="advanced-search-text">Lọc nâng cao</span>
+            </button>
+        </div>
+
+
+        <div class="collapse mb-2" id="collapseAdvancedSearch">
+            <div class="card card-body advanced-search">
+                <div class="row">
+                    <div class="col-md-3 mb-4 item">
+                        <select placeholder="Kinh nghiệm làm việc" class="form-select advanced-search-form" multiple="multiple" is-count="false" id="advanced-experience-range" data-width="100%"></select>
+                    </div>
+                    <div class="col-md-3 mb-4 item">
+                        <select placeholder="Ngành nghề quan tâm" class="form-select advanced-search-form" multiple="multiple" is-count="false" id="advanced-suggest-job-category" data-width="100%"></select>
+                    </div>
+                    <div class="col-md-3 mb-4 item">
+                        <select placeholder="Vị trí" class="form-select advanced-search-form" multiple="multiple" is-count="false" id="advanced-position" data-width="100%"></select>
+                    </div>
+                    <div class="col-md-3 mb-4 item">
+                        <select placeholder="Kỹ năng công việc" class="form-select advanced-search-form" multiple="multiple" is-count="false" id="advanced-skill" data-width="100%"></select>
+                    </div>
+                    <div class="col-md-3 mb-4 item">
+                        <select placeholder="Địa điểm làm việc" class="form-select advanced-search-form" multiple="multiple" is-count="false" id="advanced-job-city" data-width="100%"></select>
+                    </div>
+                    <div class="col-md-3 mb-4 item">
+                        <select placeholder="Mức lương" class="form-select advanced-search-form" multiple="multiple" is-count="false" id="advanced-salary-range" data-width="100%"></select>
+                    </div>
+                    <div class="col-md-3 mb-4 item">
+                        <input placeholder="Học vấn" class="form-control advanced-search-form" is-count="false" id="advanced-education">
+                    </div>
+                    <div class="col-md-3 mb-4 item">
+                        <input placeholder="Chứng chỉ" class="form-control advanced-search-form" is-count="false" id="advanced-certificate">
+                    </div>
+                    <div class="col-md-6 item">
+                        <input placeholder="Kỹ năng cá nhân" class="form-control advanced-search-form" is-count="false" id="advanced-candidate-skill">
+                    </div>
+                    <div class="col-md-6 item d-none">
+                        <select placeholder="Mức độ" class="form-select advanced-search-form" multiple="multiple" is-count="false" id="advanced-skill-level" data-width="100%"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-between align-content-center">
+            <div class="col-auto order-2 order-sm-1">
+                <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                    <select class="form-select" control="select2" id="fillter_unread">
+                        <option value="all">Hiển thị tất cả</option>
+                        <option value="unread">Chưa sử dụng dịch vụ</option>
+                        <option value="read">Đã sử dụng dịch vụ</option>
+                        <option value="refund">Yêu cầu hoàn tiền</option>
+                    </select>
+                    <div class="ps-2">
+                        <select class="form-select form-control fillter_tbl"  id="fillterStatus" style="display: none;">
+                        </select>
+                    </div>
+                    <div class="ps-2">
+                        <select class="form-select form-control fillter_tbl" id="fillterSource" style="display: none;">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto order-1 order-sm-2">
+
+                <div class="pxp-company-dashboard-jobs-search mb-3">
+                    <span id="info-wallet" class="me-2 fw-bold">Ví : 0 Credit</span>
+
+                    <div class="pxp-company-dashboard-jobs-search-search-form">
+                        <div class="input-group">
+                            <span class="input-group-text"><span type="button" class="fa fa-search btn_search_all"></span></span>
+                            <input type="text" class="form-control" id="search_all" placeholder="Tìm kiếm...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tbl-data table-responsive">
+            <table id="table_candidate" class="table table-hover align-start w-100">
+                <thead>
+                    <tr>
+                        <th class="text-center">STT</th>
+                        <th>Ứng viên</th>
+                        <th>Kinh nghiệm</th>
+                        <th>Mong muốn</th>
+                        <th>Chứng chỉ</th>
+                        <th class="text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody class="fw-normal text-gray">
+                </tbody>
+            </table>
+        </div>
+        <div class="w-100">
+            <div class="w-100 row mt-2 mt-lg-3 justify-content-between align-items-center">
+                <div class="col-auto">
+                    <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
+                        <ul class="pagination pxp-pagination" id="candidate_paging">
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">1</span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-auto d-none">
+                    <a href="#" class="btn rounded-pill pxp-section-cta mt-3 mt-sm-0">Show me more<span class="fa fa-angle-right"></span></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade pxp-user-modal" id="modal_report" aria-labelledby="modal_addNote" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-4 text-center" id="report-candidate">Xác nhận yêu cầu hoàn Credit</h5>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="">
+                        <label class="fw-bold" for="description">Nội dung</label>
+                        <textarea id="description" class="form-control mt-2" placeholder="Nhập nội dung báo cáo" maxlength="500" rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="model-footer px-5 py-3 d-flex justify-content-end">
+                <a href="#!" class="btn btn-primary rounded-pill btn_submit" id="submit-form-report">Xác nhận</a>
+                <a href="#!" class="btn btn-secondary rounded-pill ms-3" data-bs-dismiss="modal">Hủy</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/pages/search-candidate.js" asp-append-version="true"></script>
+}

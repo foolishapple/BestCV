@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Thông báo";
+}
+
+
+<style>
+    #loading.show {
+        visibility: visible;
+    }
+
+    .read {
+        font-weight: 300;
+    }
+
+    .unread {
+        font-weight: 600;
+    }
+
+    #table_employer_notification thead tr th:nth-child(1),
+    #table_employer_notification tbody tr td:nth-child(1) {
+        text-align: center !important;
+        width: 60px !important;
+    }
+
+    #table_employer_notificationn thead:nth-child(1) {
+        white-space: nowrap;
+        align-items: start;
+    }
+
+    #table_employer_notificationn tbody {
+        white-space: nowrap;
+        align-items: start;
+        vertical-align: top;
+    }
+
+    .tbl-data .table-responsive {
+        overflow-x: unset !important;
+    }
+
+
+    div#table_employer_notification_length {
+        display: none;
+    }
+
+    #table_employer_notification tbody tr {
+        cursor: pointer;
+    }
+    
+
+    .dataTables_paginate {
+        display: none;
+    }
+</style>
+<div class="pxp-dashboard-content-details">
+    <h1>Thông báo</h1>
+    <p class="pxp-text-light">Lịch sử thông báo các hoạt động.</p>
+    <div class="row justify-content-between align-content-center">
+        <div class="col-auto order-2 order-sm-1">
+        </div>
+        <div class="col-auto order-1 order-sm-2">
+            <div class="pxp-company-dashboard-jobs-search mb-3">
+                <div class="pxp-company-dashboard-jobs-search-search-form">
+                    <div class="input-group">
+                        <span class="input-group-text"><span type="button" class="fa fa-search btn_search_all"></span></span>
+                        <input type="text" class="form-control" id="search_all" placeholder="Tìm kiếm...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="employer-notification">
+            <table class="table table-hover align-middle" id="table_employer_notification">
+                <thead>
+                    <tr>
+                        <th >STT</th>
+                        <th >Thông báo</th>
+                        <th >Thời gian</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody class="align-start fw-normal">
+                </tbody>
+            </table>
+            <div class="w-100">
+                <div class="w-100 row ,-0 mt-2 mt-lg-3 justify-content-between align-items-center">
+                    <div class="col-auto">
+                        <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
+                            <ul class="pagination pxp-pagination" id="candidate_paging">
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">1</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-auto d-none">
+                        <a href="#" class="btn rounded-pill pxp-section-cta mt-3 mt-sm-0">Show me more<span class="fa fa-angle-right"></span></a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+    </script>
+    
+}

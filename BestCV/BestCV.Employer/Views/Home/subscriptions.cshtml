@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Dịch vụ của tôi";
+}
+@section Headers{
+    <link href="~/css/pages/subscriptions.css" rel="stylesheet" asp-append-version="true"/>
+}
+<div class="pxp-dashboard-content-details">
+    <h1>Dịch vụ của tôi</h1>
+
+    <div class="mt-4 mt-lg-5">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle" id="tbl_service_pack">
+                <thead>
+                    <tr>
+                        <th class="column-index">Mã đơn hàng</th>
+                        <th>Tên gói</th>
+                        <th>Nhóm</th>
+                        <th>Loại</th>
+                        <th>Số lượng</th>
+                        <th class="column-action">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/pages/subscriptions.js" asp-append-version="true"></script>
+}

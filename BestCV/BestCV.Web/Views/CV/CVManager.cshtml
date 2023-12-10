@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "Quản lý CV";
+    ViewBag.CurrentPage = "cv-manager";
+}
+<style>
+    .btn-function {
+        width: 25px;
+        height: 25px;
+        padding: 0;
+    }
+</style>
+<div class="d-flex justify-content-between">
+    <div>
+        <h1>Quản lý CV</h1>
+       <p class="pxp-text-light">Danh sách CV bạn đã tạo trên BestCV</p>
+    </div>
+    <div>
+        <button class="btn rounded-pill pxp-section-cta" style="white-space: nowrap;" onclick="editItem(0)">
+            <i class="fa-solid fa-plus me-2"></i>
+            Tạo mới
+        </button>
+    </div>
+</div>
+
+<div class="row mt-4 mt-lg-5" id="areaListCV">
+</div>
+
+<script src="~/assets/js/pages/cv-manager.js" asp-append-version="true"></script>

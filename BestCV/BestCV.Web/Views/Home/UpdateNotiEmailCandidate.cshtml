@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "Cài đặt thông báo";
+    ViewBag.CurrentPage = "notification-settings";
+}   
+<style>
+    .form-check-input.me-2 {
+        border: 1px solid rgba(0,0,0,.25);   
+    }
+
+    .pxp-jobs-list-side-filter{
+        box-shadow: 0px 6px 12px rgba(0,0,0,0.05);
+    }
+</style>
+            <div class="pxp-jobs-list-side-filter bg-white">
+                <h1>Cài đặt thông báo qua Email</h1>              
+                 <p class="pxp-text-light">Đánh dấu <i style="color: #0940f6" class="fa fa-check-square" aria-hidden="true"></i> vào những email bạn muốn nhận</p>
+                    <div class="mt-4 mt-lg-0 d-lg-block pxp-list-side-filter-panel">
+                        <h3 class="mt-3 mt-lg-4">Email Thông báo từ hệ thống</h3>
+                        <div class="list-group mt-2 mt-lg-3">
+                            <label class="list-group-item d-flex justify-content-between align-items-center pxp-checked">
+                                <span class="d-flex">
+                    <input id="check_ImportantSystemUpdate" class="form-check-input me-2" type="checkbox" value="">
+                                    Cập nhật quan trọng từ hệ thống
+                                </span>                              
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                    <input id="check_EmployerViewCV" class="form-check-input me-2" type="checkbox" value="">
+                                    Thông báo NTD đã xem CV
+                                </span>                                
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                    <input id="check_NewFeatureUpdate" class="form-check-input me-2" type="checkbox" value="">
+                                    Thông báo tính năng & mẫu CV nới từ BestCV
+                                </span>                            
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                    <input id="check_OtherSystemNotification" class="form-check-input me-2" type="checkbox" value="">
+                                    Thông báo khác từ hệ thống
+                                </span>                              
+                            </label>                          
+                        </div>
+                        <h3 class="mt-3 mt-lg-4">Email nhận cơ hội việc làm</h3>
+                        <div class="list-group mt-2 mt-lg-3">
+                            <label class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="d-flex">
+                    <input id="check_JobSuggestion" class="form-check-input me-2" type="checkbox" value="">
+                                   Thông báo việc làm phù hợp từ BestCV
+                                </span>
+                                
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3 pxp-checked">
+                                <span class="d-flex">
+                    <input id="check_EmployerInviteJob" class="form-check-input me-2" type="checkbox" value="">
+                                    Thông báo NTD gửi lời mời Phỏng vấn/Ứng tuyến 
+                                </span>
+                                
+                            </label>                         
+                        </div>
+                        <h3 class="mt-3 mt-lg-4">Email Giới thiệu dịch vụ</h3>
+                        <div class="list-group mt-2 mt-lg-3">
+                            <label class="list-group-item d-flex justify-content-between align-items-center pxp-checked">
+                                <span class="d-flex">
+                    <input id="check_ServiceIntro" class="form-check-input me-2" type="checkbox" value="">
+                                    Giới thiệu cá dịch vụ
+                                </span>
+                                
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3 pxp-checked">
+                                <span class="d-flex">
+                    <input id="check_ProgramEventIntro" class="form-check-input me-2" type="checkbox" value="">
+                                    Giới thiệu chương trình, sự kiện
+                                </span>                           
+                            </label>
+                            <label class="list-group-item d-flex justify-content-between align-items-center mt-2 mt-lg-3">
+                                <span class="d-flex">
+                    <input id="check_GiftCoupon" class="form-check-input me-2" type="checkbox" value="">
+                                    Quà tặng / Mã giảm giá từ cá đối tác của BestCV
+                                </span>                                
+                            </label>                           
+                        </div>
+                <div class="mt-4 mt-lg-5">
+                    <button class="btn rounded-pill pxp-section-cta" id="btnUpdatePassword">Cập nhật</button>
+                 </div>
+                </div>
+            </div>
+
+    <script src="~/assets/js/pages/update-noti-email.js" asp-append-version="true" type = "text/javascript" ></script>
+
+
+
+  
+                  
+       
+

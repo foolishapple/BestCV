@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<section class="pt-100 jbi-section">
+    <div class="pxp-container" >
+        <div class="jbi-h2 text-uppercase text-center">Coaching & Chuyên gia</div>
+        <div class="row mt-5 pxp-animate-in pxp-animate-in-top" id="jbi-coaching" style="gap: 20px 0px;"> 
+            @for(int i = 0; i < 4; i++)
+            {
+                <div class="col-md-6 col-xl-4 col-xxl-3 pxp-posts-card-1-container px--20">
+                    <div class="jbi-coaching-card-1">
+                        <div class="card-top">
+                            <div class="card-image" style="background-image: url(/assets/images/coaching1.png);"></div>
+                        </div>
+                        <div class="card-body">
+                            <a href="#!" class="card-title">3 kỹ năng hàng đầu được các nhà tuyển dụng tìm kiếm ở ứng viên trẻ</a>
+                            <div class="card-overview">Động lực làm việc là yếu tố vô cùng quan trọng, quyết định lớn đến năng suất cũng như hiệu quả công việc, đặc biệt mang đến khả năng thăng tiến của chúng ta trong một công việc. Cảm thấy mệt mỏi hay chán nản công việc chính là những dấu hiệu đáng báo động để chúng ta có thể đánh thức chính mình.</div>
+                            <div class="d-flex flex-row justify-content-between mt--10">
+                                <div class="coaching-author">
+                                    <img class="rounded-circle me-2" width="24" height="24" src="~/assets/images/avartar-2.png" />Chuyên gia - NĐ.Thanh
+                                </div>
+                                <a class="text-warning-2 coaching-more" href="#!">Xem chi Tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row mt--40 text-center pxp-animate-in pxp-animate-in-top">
+            <a href="#!" class="btn rounded-pill pxp-section-cta custom-button">XEM THÊM</a>
+        </div>
+    </div>
+</section>

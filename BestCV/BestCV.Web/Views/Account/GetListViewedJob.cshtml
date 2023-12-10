@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "Công việc đã xem";
+    ViewBag.CurrentPage = "save-job";
+}
+<h1>Công việc đã xem</h1>
+<p class="pxp-text-light">Danh sách chi tiết các công việc đã xem của bạn.</p>
+
+<div class="mt-4 mt-lg-5">
+    <div class="row justify-content-between align-content-center">
+
+        <div class="col-12 order-1 order-sm-2">
+            <div class="pxp-candidate-dashboard-jobs-search mb-3">
+                <div class="pxp-candidate-dashboard-jobs-search-results me-3"></div>
+                <div class="pxp-candidate-dashboard-jobs-search-search-form">
+                    <div class="input-group">
+                        <span class="input-group-text"><span class="fa fa-search"></span></span>
+                        <input type="text" class="form-control" id="table_search_all" placeholder="Tìm kiếm...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle" id="table_candidate_save_job">
+            <thead>
+                <tr>
+                    @*<th class="pxp-is-checkbox" style="width: 1%;"><input type="checkbox" class="form-check-input"></th>*@
+                    <th style="width: 25%;">Công việc</th>
+                    <th style="width: 20%;">Công ty</th>
+                    <th style="width: 20%;">Danh mục</th>
+                    <th style="width: 12%;">Loại</th>
+                    <th style="width: 10%;">Ngày tạo</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/assets/js/pages/get-list-viewed-job.js"></script>
+}

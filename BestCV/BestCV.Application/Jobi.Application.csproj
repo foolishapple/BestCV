@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
+    <PackageReference Include="Handlebars.Net" Version="2.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
+    <PackageReference Include="NPOI" Version="2.6.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BestCV.Core\BestCV.Core.csproj" />
+    <ProjectReference Include="..\BestCV.Domain\BestCV.Domain.csproj" />
+    <ProjectReference Include="..\BestCV.Infrastructure\BestCV.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validators\CandidateHonorAward\" />
+    <Folder Include="Validators\CandidateCertificate\" />
+    <Folder Include="Validators\CandidateActivites\" />
+    <Folder Include="Validators\Candidateprojects\" />
+  </ItemGroup>
+
+</Project>

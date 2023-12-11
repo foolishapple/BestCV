@@ -1,0 +1,35 @@
+/*modal start*/
+.modal-header .btn-close {
+    top: 10px;
+    right: 10px;
+}
+
+.modal .form-control {
+    font-weight: 300;
+    border: 1px solid rgba(0,0,0,.2);
+    color: var(--pxpTextColor);
+    font-size: 15px;
+    border-radius: 30px;
+}
+
+    .modal .form-control:focus {
+        box-shadow: none;
+    }
+
+.modal .modal-footer {
+    border-top: none;
+    padding: 0;
+}
+
+.modal .form-select {
+    border-radius: 30px;
+}
+
+    .modal .form-select:focus {
+        box-shadow: none;
+    }
+
+.modal .modal-btn {
+    min-width: 68.9062px;
+}
+/*modal end*/

@@ -1,0 +1,467 @@
+﻿@using static BestCV.Domain.Constants.CandidateApplyJobConst;
+@{
+    ViewData["Title"] = "Chi tiết công việc";
+    ViewBag.IsHomePage = false;
+}
+<style>
+    .pxp-nav.pxp-light > ul > li > a {
+        color: #000;
+    }
+
+    .pxp-logo.pxp-light > a {
+        color: #000;
+    }
+
+    .pxp-user-nav-name {
+        color: #000;
+    }
+
+    .pxp-user-nav-dropdown > .dropdown-toggle::after {
+        margin-left: 7px;
+        border-top-color: #000;
+    }
+
+    .logo-company-detail {
+        background: white !important;
+        padding: 5px !important;
+    }
+
+        .logo-company-detail img {
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+        }
+
+    .badge-job-expire {
+        font-weight: 500 !important;
+        color: gray !important;
+    }
+
+    .badge-other {
+        font-weight: 500 !important;
+        color: black !important;
+    }
+
+    #company-logo-2 {
+        border-radius: unset !important;
+    }
+
+    .banner-img {
+        width: 100% !important;
+    }
+
+    /*wish list css*/
+    .icon-wishlist {
+        cursor: pointer;
+        width: 22px;
+        height: 21px;
+        opacity: .5;
+        background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0LjI1IDQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQuMjUgNDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxwYXRoIGQ9Ik0yLjEyLDRDMi4xLDQsMi4wNywzLjk5LDIuMDUsMy45OEMxLjk4LDMuOTIsMC4zLDIuNjgsMC4wNCwxLjYyYy0wLjEtMC40My0wLjAxLTAuODgsMC4yNC0xLjJDMC41LDAuMTUsMC44MSwwLDEuMTYsMAoJCWMwLjUsMCwwLjgsMC4yNiwwLjk2LDAuNTFDMi4yOCwwLjI2LDIuNTksMCwzLjA4LDBjMC4zNSwwLDAuNjYsMC4xNSwwLjg4LDAuNDNjMC4yNSwwLjMyLDAuMzQsMC43NywwLjI0LDEuMgoJCUMzLjk1LDIuNjgsMi4yNywzLjkyLDIuMiwzLjk4QzIuMTgsMy45OSwyLjE1LDQsMi4xMiw0eiBNMS4xNiwwLjI1Yy0wLjM1LDAtMC41NywwLjE4LTAuNjgsMC4zM0MwLjI4LDAuODQsMC4yLDEuMjIsMC4yOSwxLjU3CgkJYzAuMjEsMC44NSwxLjUxLDEuOSwxLjg0LDIuMTVjMC4zMy0wLjI1LDEuNjMtMS4zMSwxLjg0LTIuMTVjMC4wOC0wLjM1LDAuMDEtMC43My0wLjE5LTAuOThDMy42NSwwLjQzLDMuNDMsMC4yNSwzLjA4LDAuMjUKCQljLTAuNjcsMC0wLjg0LDAuNTctMC44NCwwLjU4QzIuMjMsMC44OCwyLjE4LDAuOTIsMi4xMiwwLjkyaDBjLTAuMDYsMC0wLjEtMC4wNC0wLjEyLTAuMDlDMiwwLjgxLDEuODMsMC4yNSwxLjE2LDAuMjV6Ii8+CjwvZz4KPC9zdmc+Cg==');
+    }
+
+
+    .in-wishlist {
+        opacity: 1;
+        animation-name: wishlist-ani;
+        animation-duration: 1000ms;
+    }
+
+    .in-wishlist-2 {
+        cursor: pointer;
+        width: 22px;
+        height: 21px;
+        opacity: .5;
+        background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjE5NyAtODYuNzIgODE0LjA5NSA3NjgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMTk3IC04Ni43MiA4MTQuMDk1IDc2ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6IzIwMjAyMDt9DQoJLnN0MXtmaWxsOiNDQUQ3NDc7fQ0KPC9zdHlsZT4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02MDQuMDQ3LDY4MS4yOGMtMy44NCwwLTkuNi0xLjkyLTEzLjQ0LTMuODRjLTEzLjQ0LTExLjUyLTMzNi0yNDkuNi0zODUuOTItNDUzLjEyDQoJYy0xOS4yLTgyLjU2LTEuOTItMTY4Ljk2LDQ2LjA4LTIzMC40YzQyLjI0LTUxLjg0LDEwMS43Ni04MC42NCwxNjguOTYtODAuNjRjOTYsMCwxNTMuNiw0OS45MiwxODQuMzIsOTcuOTINCgljMzAuNzItNDgsOTAuMjQtOTcuOTIsMTg0LjMyLTk3LjkyYzY3LjIsMCwxMjYuNzIsMjguOCwxNjguOTYsODIuNTZjNDgsNjEuNDQsNjUuMjgsMTQ3Ljg0LDQ2LjA4LDIzMC40DQoJYy00OCwyMDEuNi0zNzAuNTYsNDM5LjY4LTM4NCw0NTEuMkM2MTUuNTY4LDY3OS4zNiw2MDkuODA3LDY4MS4yOCw2MDQuMDQ3LDY4MS4yOHoiLz4NCjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik00MTkuNzI4LTM4LjcyYy02Ny4yLDAtMTA5LjQ0LDM0LjU2LTEzMC41Niw2My4zNmMtMzguNCw0OS45Mi01My43NiwxMjIuODgtMzYuNDgsMTkwLjA4DQoJYzQwLjMyLDE2My4yLDI4OS45MiwzNjQuOCwzNTMuMjgsNDEyLjhjNjMuMzYtNDgsMzEyLjk2LTI1MS41MiwzNTMuMjgtNDEyLjhjMTUuMzYtNjcuMiwxLjkyLTE0MC4xNi0zNi40OC0xODguMTYNCgljLTI0Ljk2LTMwLjcyLTY3LjItNjUuMjgtMTM0LjQtNjUuMjhjLTEyOC42NCwwLTE2MS4yOCwxMDkuNDQtMTYxLjI4LDExMS4zNmMtMS45Miw5LjYtMTEuNTIsMTcuMjgtMjMuMDQsMTcuMjhsMCwwDQoJYy0xMS41MiwwLTE5LjItNy42OC0yMy4wNC0xNy4yOEM1ODEuMDA4LDY4LjgsNTQ4LjM2Ny0zOC43Miw0MTkuNzI4LTM4LjcyeiIvPg0KPC9zdmc+DQo=');
+    }
+
+    @@keyframes wishlist-ani {
+        0% {
+            transform: scale(1);
+        }
+
+        25% {
+            transform: scale(.5);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    #btn-save-job {
+        padding: 12px !important;
+        border: 1px solid black;
+        border-radius: 50px !important;
+    }
+
+    .btn-border-10 {
+        border-radius: 10px !important;
+    }
+
+
+
+    .form-check .form-check-input {
+        float: left;
+        margin-left: -0.5em !important;
+    }
+
+    .modal-content {
+        border-radius: 0.25rem !important;
+    }
+
+    div:where(.swal2-container) .swal2-html-container{
+        margin : unset !important;
+        font-size: 1em !important;
+    }
+
+    .badge-city {
+        background-color: rgb(169 169 169 / 41%);
+        color: #000000;
+        font-size: 13px;
+        display: inline-block;
+        border-radius: 3px;
+        padding: 3px 8px;
+        text-decoration: none;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        transition: var(--pxpHoverTransition);
+        transition-property: background-color, color;
+    }
+
+
+    .title-reference-job{
+        border-left: 6px solid #ffca2c;
+        color: #212f3f;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: -.2px;
+        line-height: 28px;
+        margin: 0 0 20px;
+        padding-left: 10px;
+    }
+
+
+    .job-name, .job-company, .text-ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 500;
+    }
+
+    .box-card-title, .salary-job {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .hover-card-item {
+        cursor: pointer;
+    }
+
+    .badge-city {
+        background-color: rgb(169 169 169 / 41%);
+        color: #000000;
+        font-size: 13px;
+        display: inline-block;
+        border-radius: 3px;
+        padding: 3px 8px;
+        text-decoration: none;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        transition: var(--pxpHoverTransition);
+        transition-property: background-color, color;
+    }
+
+    .text-color-money {
+        color: #ff7d55 !important;
+    }
+
+    .card-border-item {
+        border-radius: 10px !important;
+    }
+
+    .card-item {
+        min-height: 770px;
+        max-height: 770px;
+    }
+
+    .ribbon-job {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 10px;
+        position: absolute;
+        z-index: 1;
+        background-color: #f85a5a;
+        box-shadow: var(--bs-ribbon-label-box-shadow);
+        color: var(--bs-primary-inverse);
+        top: 50%;
+        right: 0;
+        transform: translateX(5px) translateY(-50%);
+        border-top-left-radius: 0.475rem;
+        border-bottom-left-radius: 0.475rem;
+        right: -5px
+    }
+
+    .m-10px {
+        margin: 10px;
+    }
+
+    .bg-urgent {
+        color: rgb(255, 125, 85);
+        background-color: rgb(255, 236, 230);
+    }
+
+    .bg-top {
+        color: red;
+        background-color: rgb(255 0 0 / 20%)
+    }
+
+    .img-cover-fit {
+        object-fit: scale-down;
+        display: block;
+        width: 100%;
+    }
+
+    .border-ribbon {
+        border-radius: 0.25rem 0 0 0.25rem !important;
+    }
+</style>
+<section>
+    <div class="pxp-container">
+        <div class="pxp-single-job-cover pxp-cover" id="company-cover-photo"></div>
+        <div class="pxp-single-job-cover-logo logo-company-detail">
+            <img id="company-logo" />
+        </div>
+
+        <div class="pxp-single-job-content mt-4 mt-lg-5">
+            <div class="row">
+                <div class="col-lg-7 col-xl-8 col-xxl-9">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-xl-8 col-xxl-8" id="job-header">
+                            <h1 id="job-name"></h1>
+                            @*<span class="badge bg-secondary badge-job-expire">Hạn nộp hồ sơ : <span id="job-apply-end-date"></span></span>*@
+                            @*<div class="pxp-single-job-company-location">
+                            bởi <a href="single-company-1.html" class="pxp-single-job-company" id="company-name">BestCV Company</a> tại
+                            <span class="pxp-single-job-location" id="job-location"></span>
+                            </div>*@
+                        </div>
+                        <div class="col-auto">
+                            <div class="pxp-single-job-options col-xl-0">
+                                @*<button class="btn pxp-single-job-save-btn btn-save-job"><span class="fa fa-heart-o"></span></button>*@
+                                <a class="rbt-round-btn btn-save-job" id="btn-save-job" title="Lưu việc làm" href="#!">
+                                    <div id="is-in-save-job-list" class="icon-wishlist"></div>
+                                </a>
+                                <div class="dropdown ms-2">
+                                    <button class="btn pxp-single-job-share-btn dropdown-toggle" type="button" id="socialShareBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="fa fa-share-alt">
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu pxp-single-job-share-dropdown" aria-labelledby="socialShareBtn">
+                                        <li><a class="dropdown-item" id="dropdown-facebook"><span class="fa fa-facebook"></span> Facebook</a></li>
+                                        <li><a class="dropdown-item" id="dropdown-twitter"><span class="fa fa-twitter"></span> Twitter</a></li>
+                                        <li><a class="dropdown-item" id="dropdown-linked-in"><span class="fa fa-linkedin"></span> LinkedIn</a></li>
+                                    </ul>
+                                </div>
+                                <button class="btn ms-2 pxp-single-job-apply-btn rounded-pill apply-job-btn" id="apply-job"><i class="fa fa-paper-plane me-2" aria-hidden="true"></i>Ứng tuyển ngay</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 justify-content-between align-items-center">
+                        <div class="col-6">
+                            <a href="#!" class="pxp-single-job-category" id="job-category-filter">
+                                <div class="pxp-single-job-category-icon" id="job-category-icon"><span class="fa fa-bullhorn"></span></div>
+                                <div class="pxp-single-job-category-label" id="job-category"></div>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <div class="pxp-single-job-date pxp-text-light" id="job-createdTime"></div>
+                        </div>
+                    </div>
+
+                    <div class="pxp-single-job-content-details mt-4 mt-lg-5">
+                        <div class="mt-4" id="job-overView">
+                        </div>
+                        <div class="mt-4" id="job-description">
+                        </div>
+                        <div class="mt-4" id="job-benefit">
+                        </div>
+                        <div class="mt-4" id="job-requirement">
+                        </div>
+                        <div class="mt-4 mt-lg-5">
+                            <button class="btn rounded-pill pxp-section-cta apply-job-btn" id="apply-job-2"><i class="fa fa-paper-plane me-2" aria-hidden="true"></i>Ứng tuyển ngay</button>
+
+                        </div>
+                        <div class="pxp-container mt-100 mb-4" id="div-reference-job">
+                            <h2 class="title-reference-job">Công việc liên quan</h2>
+                            <p class="pxp-text-light">Các công việc tương tự khác có thể bạn quan tâm</p>
+
+                            <div class="row mt-3 mt-md-4 pxp-animate-in pxp-animate-in-top pxp-in" id="job-reference">
+                                
+                            </div>
+                        </div>
+
+                        <div class="pxp-container mt-100 mb-4" id="div-reference-company">
+                            <h2 class="title-reference-job">Công ty bạn sẽ thích </h2>
+                            <p class="pxp-text-light">
+                                Tìm hiểu văn hoá công ty và chọn cho bạn nơi làm việc phù hợp nhất.
+                            </p>
+
+                            <div class="row mt-3 mt-md-4 pxp-animate-in pxp-animate-in-top pxp-in" id="company-reference">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-xl-4 col-xxl-3">
+                    <div class="pxp-single-job-side-panel mt-5 mt-lg-0">
+                        <div>
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Kinh nghiệm</div>
+                            <div class="pxp-single-job-side-info-data" id="job-experience"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Cấp bậc</div>
+                            <div class="pxp-single-job-side-info-data" id="job-position"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Hình thức làm việc</div>
+                            <div class="pxp-single-job-side-info-data" id="job-type"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Mức lương</div>
+                            <div class="pxp-single-job-side-info-data" id="job-offer"></div>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Số lượng cần tuyển</div>
+                            <div class="pxp-single-job-side-info-data" id="job-total-requirement"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Giới tính</div>
+                            <div class="pxp-single-job-side-info-data" id="job-gender"></div>
+                        </div>
+                        <div class="mt-4" id="">
+                            <div class="pxp-single-job-side-info-label pxp-text-light" id="div-job-address">Địa điểm</div>
+                            <div class="pxp-single-job-side-info-data" id="job-address"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light" id="div-job-skill-requirement">Kỹ năng cần có</div>
+                            <div class="pxp-single-job-side-info-data" id="job-skill-requirement"></div>
+                        </div>
+        
+
+                    </div>
+                    <div class="mt-3 mt-lg-4 pxp-single-job-side-panel">
+                        <div class="pxp-single-job-side-company">
+                            <div class="pxp-single-job-side-company-logo pxp-cover" id="company-logo-2"></div>
+                            <div class="pxp-single-job-side-company-profile">
+                                <div class="pxp-single-job-side-company-name" id="company-name"></div>
+                                <a id="company-detail">Xem hồ sơ</a>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light" id="div-company-field-of-activity">Lĩnh vực hoạt động</div>
+                            <div class="pxp-single-job-side-info-data" id="company-field-of-activity"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Quy mô</div>
+                            <div class="pxp-single-job-side-info-data" id="company-size"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Thành lập</div>
+                            <div class="pxp-single-job-side-info-data" id="company-founded-in"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Số điện thoại</div>
+                            <div class="pxp-single-job-side-info-data" id="company-phone"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Email</div>
+                            <div class="pxp-single-job-side-info-data" id="company-email"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Địa điểm</div>
+                            <div class="pxp-single-job-side-info-data" id="company-address"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-label pxp-text-light">Trang web</div>
+                            <div class="pxp-single-job-side-info-data" id="company-website"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="pxp-single-job-side-info-data">
+                                <ul class="list-unstyled pxp-single-job-side-info-social" id="company-social">
+                                    @*<li><a href="#"><span class="fa fa-facebook"></span></a></li>
+                                    <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                                    <li><a href="#"><span class="fa fa-instagram"></span></a></li>
+                                    <li><a href="#"><span class="fa fa-linkedin"></span></a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pxp-blogs-list-side-panel sticky-top mb-100" id="right-side-panel">
+                        <h3>Có thể bạn quan tâm</h3>
+                        <a href="#!"><img src="/assets/images/4-500x600_123819.png" class="banner-img mt-2" /></a>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <div class="modal fade" id="apply-job-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content p-4">
+                <div class="modal-header mb-3">
+                    <h5 class="modal-title">Ứng tuyển</h5>
+                    @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+                </div>
+                <div class="modal-body p-0 mb-4">
+                    <form>
+                        <div class="col-12 d-flex justify-content-end">
+                            <a class="btn btn-outline-primary mb-3" id="upload-cv"><i class="fa fa-upload" aria-hidden="true"></i>Tải CV lên</a>
+                            <input id="upload-cv-file" type="file" class="d-none" accept=".pdf,.doc,.docx" />
+                        </div>
+                        <div class="col-12 mb-2" id="default-cv-div">
+                            <label class="fs-5 fw-500">Sử dụng CV sẵn có</label>
+                        </div>
+                        <div class="col-12" id="body-list-cv">
+                        </div>
+
+                        <div class="col-12 mb-2 mt-4" id="upload-cv-div">
+                            <label class="fs-5 fw-500">Sử dụng CV đã tải lên</label>
+                        </div>
+                        <div class="col-12" id="body-list-cv-upload">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer pt-4">
+                    <button type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary modal-btn" id="send-cv">Nộp CV</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@section Scripts{
+    <script>
+        const salaryFrom = @SalaryTypeId.FROM;
+        const salaryTo = @SalaryTypeId.TO;
+        const salaryBetween = @SalaryTypeId.BETWEEN;
+        const salaryAgrrement = @SalaryTypeId.AGREEMENT;
+        var jobId = @Html.Raw(ViewBag.DetailJobId);
+        const applySource = @CandidateApplyStatusId.Receive;
+        const applyStatus = @CandidateApplySourceId.Apply;
+    </script>
+
+    <script src="~/assets/js/pages/chi-tiet-tin-tuyen-dung.js" asp-append-version="true"></script>
+}

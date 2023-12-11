@@ -1,0 +1,271 @@
+﻿@{
+    ViewBag.Title = "Đăng nhập";
+    ViewBag.IsHomePage = false;
+}
+<style>
+    .pt-12px{
+        padding-top: 12px;
+    }
+
+    .pb-12px{
+        padding-bottom: 12px;
+    }
+
+    .pxp-nav.pxp-light > ul > li > a {
+        color: #000;
+    }
+
+    .pxp-logo.pxp-light > a {
+        color: #000;
+    }
+
+    .pxp-user-nav-name {
+        color: #000;
+    }
+
+    .pxp-user-nav-dropdown > .dropdown-toggle::after {
+        margin-left: 7px;
+        border-top-color: #000;
+    }
+
+    .btn-signin {
+        align-items: center;
+        border-radius: 25px;
+        display: flex;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        gap: 4px;
+        height: 40px;
+        justify-content: center;
+        line-height: 20px;
+        width: 100%;
+        padding: 5px;
+    }
+
+    #login-width-facebook {
+        background: #0969C3;
+        /*border-color: #e73b2f;*/
+        color: #fff;
+    }
+
+    #login-width-google {
+        background: #e73b2f;
+        border-color: #e73b2f;
+        color: #fff;
+    }
+
+    #login-width-linkedin {
+        background: #0969C3;
+        color: #fff;
+    }
+
+    .signup-candidate-button {
+        padding: 1px;
+    }
+
+    .text-muted {
+        bs-text-opacity: 1;
+        color: #6c757d !important;
+    }
+
+    .caption {
+        color: #6f7882;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 20px;
+        margin-bottom: 0;
+        text-align: center;
+    }
+    .fa.fa-eye,
+    .fa.fa-eye-slash {
+        display: none;
+        margin-right: 1rem;
+    }
+
+    #loading {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgb(0 0 0 / 70%);
+        visibility: hidden;
+    }
+
+        #loading.show {
+            visibility: visible;
+        }
+
+    .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border: 8px solid #2f57ef;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #2f57ef transparent transparent transparent;
+        }
+
+            .lds-ring div:nth-child(1) {
+                animation-delay: -0.45s;
+            }
+
+            .lds-ring div:nth-child(2) {
+                animation-delay: -0.3s;
+            }
+
+            .lds-ring div:nth-child(3) {
+                animation-delay: -0.15s;
+            }
+
+    @@keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<section class="pxp-hero vh-100" style="background-color: var(--pxpMainColorLight);">
+    <div class="row align-items-center pxp-sign-hero-container">
+        <div class="col-xl-6 pxp-column">
+            <div class="pxp-sign-hero-fig text-center pb-100 pt-100">
+                <img src="assets/images/signin-big-fig.png" alt="Sign In">
+                <h1 class="mt-4 mt-lg-5">Đăng nhập tài khoản</h1>
+            </div>
+        </div>
+        <div class="col-xl-6 pxp-column pxp-is-light">
+            <div class="pxp-sign-hero-form pb-100 pt-100">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xl-9 col-xxl-7">
+                        <div class="pxp-sign-hero-form-content">
+                            <h2 class="text-center">Chào mừng bạn đã quay trở lại</h2>
+                            <div class="text-muted caption">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng</div>
+                            <form class="mt-4" id="form-signIn">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="signin-email" placeholder="Email address" fdprocessedid="ntc2uc">
+                                    <label for="pxp-signin-page-email">Nhập email hoặc số điện thoại <span class="text-danger">*</span></label>
+
+                                    <span class="fa fa-envelope-o"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="signin-password" placeholder="Password" fdprocessedid="qjyy3j">
+                                    <label for="pxp-signin-page-password">Mật khẩu <span class="text-danger">*</span></label>
+                                    <span class="fa fa-lock"></span>
+                                    <span class="fa fa-eye cursor-pointer"></span>
+                                </div>
+                                <div class="row mb--30 pb-12px">
+                                    <div class="col-lg-12">
+                                        <div class="rbt-lost-password text-end">
+                                            <a class="rbt-btn-link" id="btn-forgot-password" href="#">Quên mật khẩu?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-submit-group">
+                                    <button class="btn rounded-pill pxp-sign-hero-form-cta w-100" type="button" id="submit-signin">
+                                        <span class="icon-reverse-wrapper">
+                                            <span class="btn-text">Đăng nhập</span>
+                                            <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                            <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                @*<a href="#" class="btn rounded-pill pxp-sign-hero-form-cta">Đăng nhập</a>*@
+                                <p class="or text-center mb-0 fz-12px pt-12px">Hoặc đăng nhập bằng</p>
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-4 signup-candidate-button">
+                                        <a href="#" id="login-width-google" class="btn btn-default btn-signin input-block-level mx-1 h-40 my-3 btn-login-social">
+                                            <i class="fa fa-google" aria-hidden="true"></i>
+                                            <span class="ml-2">Google</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 signup-candidate-button">
+                                        <a href="#" id="login-width-facebook" class="btn btn-default btn-signin input-block-level mx-1 h-40 my-3 btn-login-social">
+                                            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                                            <span class="ml-2">Facebook</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 signup-candidate-button">
+                                        <a href="#" id="login-width-linkedin" class="btn btn-signin btn-signin-linkedin input-block-level mx-1 h-40 my-3 btn-login-social">
+                                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                                            <span class="ml-2">Linkedin</span>
+                                        </a>
+                                        <script type="in/Login"></script>
+                                    </div>
+                                </div>
+                                @*<div class="mt-4 text-center pxp-sign-hero-form-small">
+                                <a href="#" id="btn-forgot-password" class="pxp-modal-link">quên mật khẩu</a>
+                                </div>*@
+                                <div class="mt-4 text-center pxp-sign-hero-form-small">
+                                    Bạn chưa có tài khoản? <a href="@Url.Action("signup","account")">Đăng ký</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade pxp-user-modal" id="pxp-forgot-password-modal" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="pxp-user-modal-fig text-center">
+                    <img src="~/assets/images/signin-fig.png" alt="Sign in">
+                </div>
+                <h5 class="modal-title text-center mt-4">Quên mật khẩu ?</h5>
+                <form class="mt-4">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="Email" placeholder="Email ">
+                        <label for="pxp-signin-email">Email </label>
+                        <span class="fa fa-envelope-o"></span>
+                    </div>
+                    @*   <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="pxp-signin-password" placeholder="Password">s
+                    <label for="pxp-signin-password">Password</label>
+                    <span class="fa fa-lock"></span>
+                    </div>*@
+                    <a href="#" class="btn rounded-pill pxp-modal-cta" id="btn-submit">Gửi email</a>
+                    @*  <div class="mt-4 text-center pxp-modal-small">
+                    <a href="#" class="pxp-modal-link">Forgot password</a>
+                    </div>*@
+                    <div class="mt-4 text-center pxp-modal-small">
+                        Chưa có tài khoản? <a role="button" class="" href="@Url.Action("SignUp", "Account")">Đăng ký ngay</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="loading">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</div>
+@section Scripts{
+    <script src="~/assets/js/jquery-3.4.1.min.js"></script>
+    <script src="~/assets/js/pages/sign-in.js"></script>
+    <script src="~/assets/js/pages/login-social-network.js"></script>
+    <script src="~/assets/js/pages/forgot-password.js" asp-append-version="true"></script>
+}
+

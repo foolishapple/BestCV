@@ -1,0 +1,477 @@
+﻿@using BestCV.Web.Utilities;
+@{
+    ViewData["Title"] = Model.Name;
+    ViewBag.IsHomePage = false;
+    Layout = "_Layout";
+}
+
+<style>
+    .pxp-nav.pxp-light > ul > li > a {
+        color: #000;
+    }
+
+    .pxp-logo.pxp-light > a {
+        color: #000;
+    }
+
+    .pxp-user-nav-name {
+        color: #000;
+    }
+
+    .pxp-user-nav-dropdown > .dropdown-toggle::after {
+        margin-left: 7px;
+        border-top-color: #000;
+    }
+
+    a.btn.rounded-pill.pxp-user-nav-trigger.btn-signin.\) {
+        color: #000;
+        background: white;
+    }
+
+    .text-color-money {
+        color: #ff7d55;
+    }
+
+    .hash-tag {
+        background-color: rgb(169 169 169 / 41%);
+        color: #000000;
+        font-size: 13px;
+        display: inline-block;
+        border-radius: 3px;
+        padding: 3px 8px;
+        text-decoration: none;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        transition: var(--pxpHoverTransition);
+        transition-property: background-color, color
+    }
+
+    .banner-img {
+        width: 100% !important;
+    }
+
+    .pxp-blogs-list-side-panel{
+        margin-right: -5rem;
+    }
+
+    .sticky-top {
+        top: 100px !important;
+    }
+
+    .pxp-blogs-list-side-panel {
+        margin-top: 0 !important;
+    }
+
+    .select2-selection {
+        border: unset !important;
+    }
+
+
+    /*wishlist css*/
+    .icon-wishlist {
+        cursor: pointer;
+        width: 22px;
+        height: 21px;
+        opacity: .5;
+        background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA0LjI1IDQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQuMjUgNDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxwYXRoIGQ9Ik0yLjEyLDRDMi4xLDQsMi4wNywzLjk5LDIuMDUsMy45OEMxLjk4LDMuOTIsMC4zLDIuNjgsMC4wNCwxLjYyYy0wLjEtMC40My0wLjAxLTAuODgsMC4yNC0xLjJDMC41LDAuMTUsMC44MSwwLDEuMTYsMAoJCWMwLjUsMCwwLjgsMC4yNiwwLjk2LDAuNTFDMi4yOCwwLjI2LDIuNTksMCwzLjA4LDBjMC4zNSwwLDAuNjYsMC4xNSwwLjg4LDAuNDNjMC4yNSwwLjMyLDAuMzQsMC43NywwLjI0LDEuMgoJCUMzLjk1LDIuNjgsMi4yNywzLjkyLDIuMiwzLjk4QzIuMTgsMy45OSwyLjE1LDQsMi4xMiw0eiBNMS4xNiwwLjI1Yy0wLjM1LDAtMC41NywwLjE4LTAuNjgsMC4zM0MwLjI4LDAuODQsMC4yLDEuMjIsMC4yOSwxLjU3CgkJYzAuMjEsMC44NSwxLjUxLDEuOSwxLjg0LDIuMTVjMC4zMy0wLjI1LDEuNjMtMS4zMSwxLjg0LTIuMTVjMC4wOC0wLjM1LDAuMDEtMC43My0wLjE5LTAuOThDMy42NSwwLjQzLDMuNDMsMC4yNSwzLjA4LDAuMjUKCQljLTAuNjcsMC0wLjg0LDAuNTctMC44NCwwLjU4QzIuMjMsMC44OCwyLjE4LDAuOTIsMi4xMiwwLjkyaDBjLTAuMDYsMC0wLjEtMC4wNC0wLjEyLTAuMDlDMiwwLjgxLDEuODMsMC4yNSwxLjE2LDAuMjV6Ii8+CjwvZz4KPC9zdmc+Cg==');
+    }
+
+
+    .in-wishlist {
+        opacity: 1;
+        animation-name: wishlist-ani;
+        animation-duration: 1000ms;
+    }
+
+    .in-wishlist-2 {
+        cursor: pointer;
+        width: 22px;
+        height: 21px;
+        opacity: .5;
+        background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjE5NyAtODYuNzIgODE0LjA5NSA3NjgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMTk3IC04Ni43MiA4MTQuMDk1IDc2ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6IzIwMjAyMDt9DQoJLnN0MXtmaWxsOiNDQUQ3NDc7fQ0KPC9zdHlsZT4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02MDQuMDQ3LDY4MS4yOGMtMy44NCwwLTkuNi0xLjkyLTEzLjQ0LTMuODRjLTEzLjQ0LTExLjUyLTMzNi0yNDkuNi0zODUuOTItNDUzLjEyDQoJYy0xOS4yLTgyLjU2LTEuOTItMTY4Ljk2LDQ2LjA4LTIzMC40YzQyLjI0LTUxLjg0LDEwMS43Ni04MC42NCwxNjguOTYtODAuNjRjOTYsMCwxNTMuNiw0OS45MiwxODQuMzIsOTcuOTINCgljMzAuNzItNDgsOTAuMjQtOTcuOTIsMTg0LjMyLTk3LjkyYzY3LjIsMCwxMjYuNzIsMjguOCwxNjguOTYsODIuNTZjNDgsNjEuNDQsNjUuMjgsMTQ3Ljg0LDQ2LjA4LDIzMC40DQoJYy00OCwyMDEuNi0zNzAuNTYsNDM5LjY4LTM4NCw0NTEuMkM2MTUuNTY4LDY3OS4zNiw2MDkuODA3LDY4MS4yOCw2MDQuMDQ3LDY4MS4yOHoiLz4NCjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik00MTkuNzI4LTM4LjcyYy02Ny4yLDAtMTA5LjQ0LDM0LjU2LTEzMC41Niw2My4zNmMtMzguNCw0OS45Mi01My43NiwxMjIuODgtMzYuNDgsMTkwLjA4DQoJYzQwLjMyLDE2My4yLDI4OS45MiwzNjQuOCwzNTMuMjgsNDEyLjhjNjMuMzYtNDgsMzEyLjk2LTI1MS41MiwzNTMuMjgtNDEyLjhjMTUuMzYtNjcuMiwxLjkyLTE0MC4xNi0zNi40OC0xODguMTYNCgljLTI0Ljk2LTMwLjcyLTY3LjItNjUuMjgtMTM0LjQtNjUuMjhjLTEyOC42NCwwLTE2MS4yOCwxMDkuNDQtMTYxLjI4LDExMS4zNmMtMS45Miw5LjYtMTEuNTIsMTcuMjgtMjMuMDQsMTcuMjhsMCwwDQoJYy0xMS41MiwwLTE5LjItNy42OC0yMy4wNC0xNy4yOEM1ODEuMDA4LDY4LjgsNTQ4LjM2Ny0zOC43Miw0MTkuNzI4LTM4LjcyeiIvPg0KPC9zdmc+DQo=');
+    }
+
+    @@keyframes wishlist-ani {
+        0% {
+            transform: scale(1);
+        }
+
+        25% {
+            transform: scale(.5);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /*skeleton*/
+    .image-skeleton-loading, .title-skeleton-loading, .read-more-skeleton-loading {
+        background: #eee;
+        background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+        border-radius: 5px;
+        background-size: 200% 100%;
+        animation: 1.5s shine linear infinite;
+    }
+
+    .title-skeleton-loading {
+        height: 20px;
+        margin-bottom: 5px;
+    }
+
+    .read-more-skeleton-loading {
+        height: 20px;
+    }
+
+    .image-skeleton-loading {
+        height: 80px;
+        width: 80px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    @@keyframes shine {
+        to {
+            background-position-x: -200%;
+        }
+    }
+
+    .skeleton {
+        background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+        background-size: 200% 100%;
+        animation: 1.5s shine linear infinite;
+    }
+
+    .skeleton-body {
+        height: 180px !important
+    }
+
+    .skeleton-filter {
+        height: 20px !important
+    }
+
+    .pxp-header {
+        border-bottom: 1px solid var(--pxpLightGrayColor);
+    }
+
+    .ren-content h1,
+    .ren-content h2,
+    .ren-content h3,
+    .ren-content h4,
+    .ren-content h5,
+    .ren-content h6{
+        margin-top  : 2rem;
+    }
+
+    .post-tag {
+        padding: 4.8px 6px;
+        background: rgb(225,236, 244);
+        margin-left: 10px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .pxp-single-blog-share {
+        margin-top: -10rem;
+        margin-bottom: 2rem;
+    }
+
+    .pxp-single-blog-top-category {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<div class="container">
+    <div class="pxp-preloader" style="display: none;"><span>Loading...</span></div>
+    <section>
+        <div class="pxp-container">
+            <div class="pxp-blog-hero">
+                <div class="row justify-content-between ">
+                    <div class="col-lg-8 col-xxl-9">
+                        <h1>@Model.Name</h1>
+                        <div class="pxp-hero-subtitle ">@Model.Overview</div>
+                        <div class="text-start text-lg-end mt-4 mt-lg-0">
+                            <div class="pxp-single-blog-top-category text-left">
+                                Đăng vào lúc <a>@Model.PublishedTime.ToString("dd/MM/yyy HH:mm")</a> bởi <a>@Model.AuthorName</a>
+                            </div>
+                            <div class="pxp-single-blog-top-author">
+                                
+                            </div>
+                        </div>
+                        <img class="pxp-single-blog-featured-img" src="@ViewBag.defaultStorageURL@Model.Photo" alt="">
+                        <div class="ren-content">
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-xl-3 col-xxl-3">
+                        <div class="pxp-blogs-list-side-panel sticky-top" id="right-side-panel">
+                            <h3>Có thể bạn quan tâm</h3>
+                            <a href="#!"><img src="/assets/images/4-500x600_123819.png" class="banner-img mt-2" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section class="mt-100">
+        <div class="pxp-container">
+            <div class="row justify-content-left">
+                <div class="col-xl-7">
+                    <div class="mt-100">
+                        <div class="pxp-single-blog-share">
+                            <span class="me-4">Chia sẻ bài viết </span>
+                            <ul class="list-unstyled">
+                                <li><a onclick='OpenshareUrl()'><span class="fa fa-facebook"></span></a></li>
+                               @* <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                                <li><a href="#"><span class="fa fa-pinterest-p"></span></a></li>
+                                <li><a href="#"><span class="fa fa-linkedin"></span></a></li>*@
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-xxl-12">
+                            <div class="label">
+                                Từ khoá:
+                                    @{
+                                        for (var i = 0; i < @Model.ListTag.Count; i++)
+                                        {
+                                        <a href="/tags/@(StringExtension.ConvertToSlug(Model.ListTag[i].Name) + "-" + Model.ListTag[i].Id)" class="post-tag">
+                                                @Model.ListTag[i].Name
+                                            </a>
+                                        }
+                                     }
+                        </div>
+                        </div>
+                    </div>
+
+                    @*Comments*@
+                    @*<div class="mt-100">
+                        <div class="pxp-blog-comments-block">
+                            <div class="pxp-blog-post-comments">
+                                <h4>Bình luận</h4>
+                                <div class="mt-3 mt-lg-4">
+                                    <ol class="pxp-comments-list">
+                                        <li>
+                                            <div class="pxp-comments-list-item">
+                                                <img src="images/avatar-1.jpg" alt="Melvin Blackwell">
+                                                <div class="pxp-comments-list-item-body">
+                                                    <h5>Melvin Blackwell</h5>
+                                                    <div class="pxp-comments-list-item-date">November 6, 2021 at 9:10 am</div>
+                                                    <div class="pxp-comments-list-item-content mt-2">Your resume is perfect. It's keyword-optimized, industry-specified, full of achievements, backed by data, and double-checked by an expert. If it's none of these things, stop right here and learn how to get your resume ready for a job search.</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mt-3 mt-lg-4">
+                                            <div class="pxp-comments-list-item">
+                                                <img src="images/avatar-2.jpg" alt="Wade Warren">
+                                                <div class="pxp-comments-list-item-body">
+                                                    <h5>Wade Warren</h5>
+                                                    <div class="pxp-comments-list-item-date">November 6, 2021 at 9:10 am</div>
+                                                    <div class="pxp-comments-list-item-content mt-2">Your resume is key to kicking off a strong job search. Not sure how yours stacks up? Let the experts at Jobster create your resume. </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="mt-3 mt-lg-4">
+                                    <h4>Leave a Reply</h4>
+                                    <form class="pxp-comments-form">
+                                        <div class="pxp-comments-logged-as">
+                                            Logged in as Melvin Blackwell. <a href="#">Log out?</a>
+                                        </div>
+                                        <div class="mt-3 mt-lg- mb-3">
+                                            <label for="pxp-comments-comment" class="form-label">Bình Luận</label>
+                                            <textarea class="form-control" id="pxp-comments-comment" placeholder="Viết bình luận của bạn ở đây..."></textarea>
+                                        </div>
+                                        <button class="btn rounded-pill pxp-section-cta">Đăng Bình Luận</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-100">
+        <div class="pxp-container">
+            @*<h2 class="pxp-subsection-h2">Những Bài Viết Liên Quan</h2>*@
+
+            @*<div class="row mt-3 mt-md-4">
+                <div class="col-md-6 col-xl-4 col-xxl-3 pxp-posts-card-1-container">
+                    <div class="pxp-posts-card-1 pxp-has-border">
+                        <div class="pxp-posts-card-1-top">
+                            <div class="pxp-posts-card-1-top-bg">
+                                <div class="pxp-posts-card-1-image pxp-cover" style="background-image: url(images/post-card-1.jpg);"></div>
+                                <div class="pxp-posts-card-1-info">
+                                    <div class="pxp-posts-card-1-date">August 31, 2021</div>
+                                    <a href="blog-list-1.html" class="pxp-posts-card-1-category">Assessments</a>
+                                </div>
+                            </div>
+                            <div class="pxp-posts-card-1-content">
+                                <a href="single-blog-post.html" class="pxp-posts-card-1-title">10 awesome free career self assessments</a>
+                                <div class="pxp-posts-card-1-summary pxp-text-light">Figuring out what you want to be when you grow up is hard, but a career test can make it easier to find...</div>
+                            </div>
+                        </div>
+                        <div class="pxp-posts-card-1-bottom">
+                            <div class="pxp-posts-card-1-cta">
+                                <a href="single-blog-post.html">Đọc thêm<span class="fa fa-angle-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4 col-xxl-3 pxp-posts-card-1-container">
+                    <div class="pxp-posts-card-1 pxp-has-border">
+                        <div class="pxp-posts-card-1-top">
+                            <div class="pxp-posts-card-1-top-bg">
+                                <div class="pxp-posts-card-1-image pxp-cover" style="background-image: url(images/post-card-2.jpg);"></div>
+                                <div class="pxp-posts-card-1-info">
+                                    <div class="pxp-posts-card-1-date">September 5, 2021</div>
+                                    <a href="blog-list-1.html" class="pxp-posts-card-1-category">Jobs</a>
+                                </div>
+                            </div>
+                            <div class="pxp-posts-card-1-content">
+                                <a href="single-blog-post.html" class="pxp-posts-card-1-title">How to start looking for a job</a>
+                                <div class="pxp-posts-card-1-summary pxp-text-light">Your resume is perfect. It's keyword-optimized, industry-specified, full of achievements, backed by data...</div>
+                            </div>
+                        </div>
+                        <div class="pxp-posts-card-1-bottom">
+                            <div class="pxp-posts-card-1-cta">
+                                <a href="single-blog-post.html">Đọc thêm<span class="fa fa-angle-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4 col-xxl-3 pxp-posts-card-1-container">
+                    <div class="pxp-posts-card-1 pxp-has-border">
+                        <div class="pxp-posts-card-1-top">
+                            <div class="pxp-posts-card-1-top-bg">
+                                <div class="pxp-posts-card-1-image pxp-cover" style="background-image: url(images/post-card-3.jpg);"></div>
+                                <div class="pxp-posts-card-1-info">
+                                    <div class="pxp-posts-card-1-date">September 10, 2021</div>
+                                    <a href="blog-list-1.html" class="pxp-posts-card-1-category">Resume</a>
+                                </div>
+                            </div>
+                            <div class="pxp-posts-card-1-content">
+                                <a href="single-blog-post.html" class="pxp-posts-card-1-title">Resume samples</a>
+                                <div class="pxp-posts-card-1-summary pxp-text-light">Need help writing a resume? Looking for resume examples for specific industries? You’ll find a variety...</div>
+                            </div>
+                        </div>
+                        <div class="pxp-posts-card-1-bottom">
+                            <div class="pxp-posts-card-1-cta">
+                                <a href="single-blog-post.html">Đọc thêm<span class="fa fa-angle-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4 col-xxl-3 pxp-posts-card-1-container">
+                    <div class="pxp-posts-card-1 pxp-has-border">
+                        <div class="pxp-posts-card-1-top">
+                            <div class="pxp-posts-card-1-top-bg">
+                                <div class="pxp-posts-card-1-image pxp-cover" style="background-image: url(images/post-card-4.jpg);"></div>
+                                <div class="pxp-posts-card-1-info">
+                                    <div class="pxp-posts-card-1-date">September 15, 2021</div>
+                                    <a href="blog-list-1.html" class="pxp-posts-card-1-category">Interview</a>
+                                </div>
+                            </div>
+                            <div class="pxp-posts-card-1-content">
+                                <a href="single-blog-post.html" class="pxp-posts-card-1-title">100 top interview questions - be prepared</a>
+                                <div class="pxp-posts-card-1-summary pxp-text-light">While there are as many different possible interview questions as there are interviewers, it always helps...</div>
+                            </div>
+                        </div>
+                        <div class="pxp-posts-card-1-bottom">
+                            <div class="pxp-posts-card-1-cta">
+                                <a href="single-blog-post.html">Đọc thêm<span class="fa fa-angle-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </section>
+
+    <div class="modal fade pxp-user-modal" id="pxp-signin-modal" aria-hidden="true" aria-labelledby="signinModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="pxp-user-modal-fig text-center">
+                        <img src="images/login-fig@2x.png" alt="">
+                    </div>
+                    <h5 class="modal-title text-center mt-4" id="signinModal">Welcome back!</h5>
+                    <form class="mt-4">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="pxp-signin-email" placeholder="Email address">
+                            <label for="pxp-signin-email">Email address</label>
+                            <span class="fa fa-envelope-o"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="pxp-signin-password" placeholder="Password">
+                            <label for="pxp-signin-password">Password</label>
+                            <span class="fa fa-lock"></span>
+                        </div>
+                        <a href="#" class="btn rounded-pill pxp-modal-cta">Continue</a>
+                        <div class="mt-4 text-center pxp-modal-small">
+                            <a href="#" class="pxp-modal-link">Forgot password</a>
+                        </div>
+                        <div class="mt-4 text-center pxp-modal-small">
+                            New to Jobster? <a role="button" class="" data-bs-target="#pxp-signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">Create an account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade pxp-user-modal" id="pxp-signup-modal" aria-hidden="true" aria-labelledby="signupModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="pxp-user-modal-fig text-center">
+                        <img src="images/signup-fig@2x.png" alt="">
+                    </div>
+                    <h5 class="modal-title text-center mt-4" id="signupModal">Create an account</h5>
+                    <form class="mt-4">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="pxp-signup-email" placeholder="Email address">
+                            <label for="pxp-signup-email">Email address</label>
+                            <span class="fa fa-envelope-o"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="pxp-signup-password" placeholder="Create password">
+                            <label for="pxp-signup-password">Create password</label>
+                            <span class="fa fa-lock"></span>
+                        </div>
+                        <a href="#" class="btn rounded-pill pxp-modal-cta">Continue</a>
+                        <div class="mt-4 text-center pxp-modal-small">
+                            Already have an account? <a role="button" class="" data-bs-target="#pxp-signin-modal" data-bs-toggle="modal">Sign in</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function OpenshareUrl() {
+            var url = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href;
+            window.open(url, "mywindow", "location=0,menubar=0,status=0,scrollbars=0,width=650,height=691");
+        }
+
+    </script>
+    <script src="~/assets/js/pages/post.js" asp-append-version="true"></script>
+}

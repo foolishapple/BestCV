@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+    ViewBag.IsHomePage = true;
+}
+<partial name="_FilterFindJob"></partial>
+<partial name="_TopJobs"></partial>
+<partial name="_TopCompanies"></partial>
+<partial name="_FilterCategory"></partial>
+<partial name="_OurService"></partial>
+<partial name="_Coaching"></partial>
+<partial name="_FilterTopCareerAdvice"></partial>
+@*<partial name="_FilterOfferWeb"></partial>*@
+@*<partial name="_FilterAllJobOffer"></partial>*@
+@*@section Scripts{
+    <script>
+        var countJob = @(Html.Raw(ViewBag.CountJob));
+        $(document).ready(function(){
+            $(".count-job").text(countJob);
+        })
+    </script>
+}*@

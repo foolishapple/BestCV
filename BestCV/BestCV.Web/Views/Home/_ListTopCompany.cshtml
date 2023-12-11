@@ -1,0 +1,62 @@
+﻿@using BestCV.Domain.Aggregates.TopCompany;
+@model List<TopCompanyAggregates>;
+@{
+    Layout = null;
+}
+<style>
+    .hover-card:hover {
+        border: 1px solid gray !important;
+        box-shadow: rgba(108, 117, 125, 0.4) 0px 5px 15px;
+    }
+
+    .company-logo {
+        background-repeat: no-repeat;
+    }
+
+    .btn-add-candidate {
+        border-radius: 10px;
+        border: 1px solid #000;
+        background: #FFF;
+        transition: background-color 0.3s, color 0.3s;
+        padding: 10px 15px;
+        color: #2E2165;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+        .btn-add-candidate.unfollow {
+        border-radius: 10px;
+        border: 1px solid #F4C634;
+        background: #F4C634;
+    }
+
+</style>
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-xl-4 col-xxl-3 pxp-companies-card-1-container p--20">
+            <div class="pxp-companies-card-1 pxp-has-border  hover-card jbi-card-3 p--20">
+                <div class="pxp-companies-card-1-top d-flex flex-column align-items-center ">
+                    <div class="w-100 d-flex flex-row justify-content-between align-items-center mb--40">
+                        <div class="w-50 pe-20 d-flex justify-content-between align-items-center">
+                            <a href="@(Url.Action("FindBestCompanies","Home",new{@slug=item.Name.GenerateSlug()+"-"+item.TopCompanyId}))" class="jbi-company-logo-2 bg-white" style="background-image:url(@(ViewBag.defaultStorageURL + item.Logo));"></a>
+                        </div>
+                        <div class="h-100 w-50 d-flex flex-column justify-content-between align-items-center">
+                            <a href="@Url.Action("AllSearchByCategory", "home", new{@tukhoa=@item.Name})" class="pxp-companies-card-1-company-jobs mt--20">@item.CountJob việc làm</a>
+                            <button href="#!" class="w-100 btn btn-add-candidate mb--20" data-company-id="@item.TopCompanyId" data-company-name="@item.Name">
+                                @*<span><i class="fa fa-plus"></i></span>*@
+                                <span class="btn-text">Theo dõi</span>
+                            </button>
+                        </div>
+                    </div>
+                     <a href="@(Url.Action("FindBestCompanies","Home",new{@slug=item.Name.GenerateSlug()+"-"+item.TopCompanyId}))" class="pxp-companies-card-1-company-name text-center jbi-card-title-2 mt-0">@item.Name</a>
+                    @*<div class="pxp-companies-card-1-company-description pxp-text-light">@item.Description</div>*@
+                </div>
+            </div>
+        </div>
+    }
+}
+<script src="~/assets/js/pages/add-candidate-follow-company.js" asp-append-version="true"></script>

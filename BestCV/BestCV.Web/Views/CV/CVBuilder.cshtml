@@ -1,0 +1,673 @@
+﻿@{
+    Layout = "_LayoutDashBoard";
+    ViewBag.Title = "CV Builder";
+    ViewBag.CurrentPage = "cv-builder";
+}
+
+
+<!-- google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Alfa+Slab+One&family=Amatic+SC:wght@400;700&family=Anton&family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Arima:wght@100;200;300;400;500;600;700&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Asap:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Baloo+2:wght@400;500;600;700;800&family=Bangers&family=Bevan:ital@0;1&family=Bungee&family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Chonburi&family=Coiny&family=Comfortaa:wght@300;400;500;600;700&family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=Cuprum:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Dancing+Script:wght@400;500;600;700&family=David+Libre:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Francois+One&family=Gentium+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Inconsolata:wght@200;300;400;500;600;700;800;900&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Judson:ital,wght@0,400;0,700;1,400&family=Jura:wght@300;400;500;600;700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lalezar&family=Lemonada:wght@300;400;500;600;700&family=Lobster&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Maitree:wght@200;300;400;500;600;700&family=Maven+Pro:wght@400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Metrophobic&family=Mitr:wght@200;300;400;500;600;700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&family=Pacifico&family=Patrick+Hand&family=Pattaya&family=Paytone+One&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Play:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Podkova:wght@400;500;600;700;800&family=Pridi:wght@200;300;400;500;600;700&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rokkitt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sigmar+One&family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Taviraj:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Trirong:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=VT323&family=Varela+Round&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&family=Yeseva+One&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet" id="cv-builder-css" href="~/cv-builder/css/cv-builder.css">
+
+<!-- CSS bổ sung của theme -->
+<style class="additional-css"></style>
+
+
+<div class="cv-content-wrapper">
+    <div class="cv-properties-horizontal">
+        <!-- cv name -->
+        <input type="text" id="inputCandidateCVName" class="px-3 cv-edit cv-input-edit" placeholder="CV chưa đặt tên">
+
+        <div class="cv-properties-separator ms-2"></div>
+
+        <!-- save -->
+        <button id="btnSave" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-floppy-disk"></i>
+        </button>
+
+        <!-- template -->
+        <button id="btnSelectTemplate" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-file-lines"></i>
+        </button>
+
+        <!-- print preview -->
+        <button id="btnPrint" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-print"></i>
+        </button>
+
+        <!-- print -->
+        @*<button id="btnPrintPreview" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>*@
+    </div>
+    <div class="cv-properties-horizontal">
+        @*<!-- undo -->
+        <button id="btnUndo" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-rotate-left"></i>
+        </button>
+
+        <!-- redo -->
+        <button id="btnRedo" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-rotate-right"></i>
+        </button>*@
+
+        <div class="cv-properties-separator"></div>
+
+        <!-- bold -->
+        <button id="btnBold" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-bold"></i>
+        </button>
+
+        <!-- italic -->
+        <button id="btnItalic" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-italic"></i>
+        </button>
+
+        <!-- underline -->
+        <button id="btnUnderline" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-underline"></i>
+        </button>
+
+        <!-- strikethrough -->
+        <button id="btnStrikeThrough" class="cv-edit cv-btn-edit">
+            <i class="fa-solid fa-strikethrough"></i>
+        </button>
+
+        <div class="cv-properties-separator"></div>
+
+        <!-- left -->
+        <button class="cv-edit cv-btn-edit cv-edit-text-align" data-text-align="left">
+            <i class="fa-solid fa-align-left"></i>
+        </button>
+
+        <!-- center -->
+        <button class="cv-edit cv-btn-edit cv-edit-text-align" data-text-align="center">
+            <i class="fa-solid fa-align-center"></i>
+        </button>
+
+        <!-- right -->
+        <button class="cv-edit cv-btn-edit cv-edit-text-align" data-text-align="right">
+            <i class="fa-solid fa-align-right"></i>
+        </button>
+
+        <!-- justify -->
+        <button class="cv-edit cv-btn-edit cv-edit-text-align" data-text-align="justify">
+            <i class="fa-solid fa-align-justify"></i>
+        </button>
+
+        <div class="cv-properties-separator me-2"></div>
+
+        <!-- font-family -->
+        <select class="cv-edit cv-select-edit" id="selectFontFamily" style="width: 170px;">
+        </select>
+
+        <!-- font-size -->
+        <select class="cv-edit cv-select-edit" id="selectFontSize" style="width: 140px">
+        </select>
+
+        <!-- line-height -->
+        <select class="cv-edit cv-select-edit" id="selectLineHeight" style="width: 100px">
+        </select>
+
+        <div class="cv-properties-separator ms-2"></div>
+
+        <!-- color -->
+        <div class="cv-edit cv-btn-edit cv-color-edit" id="btnSelectColor">
+            <i class="fa-solid fa-font"></i>
+            <input id="selectColor" type="color">
+        </div>
+
+        <!-- background-color -->
+        <div class="cv-edit cv-btn-edit cv-color-edit" id="btnSelectBackgroundColor">
+            <i class="fa-solid fa-fill-drip"></i>
+            <input id="selectBackgroundColor" type="color">
+        </div>
+
+        <div class="cv-properties-separator me-2"></div>
+    </div>
+
+    <div class="cv-container">
+        <div class="cv-page">
+
+            <div class="d-none" id="cv-btn-add-item" onclick="addItem(this)" style="top: 115.391px;" data-html2canvas-ignore>
+                <div class="btn" data-html2canvas-ignore>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <!-- <div>Thêm mục</div> -->
+            </div>
+
+            <div class="d-flex d-none">
+                <!-- button thêm hàng -->
+                <button id="cv-btn-add-row" onclick="editRow(this, 0)">
+                    <i class="fa-solid fa-plus"></i>
+                    Thêm hàng
+                </button>
+            </div>
+        </div>
+
+        <!-- Context menu ngang -->
+        <div id="cv-context-menu-horizontal" class="d-none">
+            <button class="cv-btn-horizontal cv-color-primary d-none" id="btnGoDown" data-bs-toggle="tooltip"
+                    data-bs-title="Default tooltip">
+                <i class="fa-solid fa-arrow-down"></i>
+            </button>
+            <button class="cv-btn-horizontal cv-color-primary d-none" id="btnGoUp">
+                <i class="fa-solid fa-arrow-up"></i>
+            </button>
+            <button class="cv-btn-horizontal cv-color-secondary d-none">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+            <!-- Nút copy -->
+            <button class="cv-btn-horizontal cv-color-secondary d-none" id="btnCopy" data-bs-toggle="tooltip"
+                    data-bs-title="Tạo bản sao">
+                <i class="fa-light fa-copy"></i>
+            </button>
+
+            <!-- Nút tăng khoảng cách lề -->
+            <button class="cv-btn-horizontal cv-color-secondary" id="btnAddPadding" data-bs-toggle="tooltip"
+                    data-bs-title="Tăng khoảng cách lề">
+                <i class="fa-solid fa-arrow-right-from-line"></i>
+            </button>
+            <!-- Nút giảm khoảng cách lề -->
+            <button class="cv-btn-horizontal cv-color-secondary" id="btnRemovePadding" data-bs-toggle="tooltip"
+                    data-bs-title="Giảm khoảng cách lề">
+                <i class="fa-solid fa-arrow-left-to-line"></i>
+            </button>
+            <button class="cv-btn-horizontal cv-color-secondary d-none">
+                <i class="fa-regular fa-folder-user"></i>
+            </button>
+
+            <!-- Nút đổi bố cục -->
+            <button class="cv-btn-horizontal cv-color-secondary d-none" id="btn-change-layout" data-bs-toggle="tooltip"
+                    data-bs-title="Đổi bố cục">
+                <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+
+            <!-- Nút xóa phần tử -->
+            <button class="cv-btn-horizontal cv-color-error" id="btn-remove-element" data-bs-toggle="tooltip"
+                    data-bs-title="Xóa">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+            <!--Nút đóng-->
+            <button class="cv-btn-horizontal cv-color-error" id="btn-exit" data-bs-toggle="tooltip"
+                    data-bs-title="Đóng">
+                <i class="fa-solid fa-x"></i>
+            </button>
+        </div>
+
+        <!-- Context menu dọc -->
+        <!--
+        <div id="cv-context-menu-vertical" class="d-none">
+            <div class="cv-btn-vertical cv-color-primary" id="btn-info">
+                <i class="fa-solid fa-circle-info"></i>
+                Chi tiết
+            </div>
+
+            <div class="cv-btn-vertical cv-color-secondary" id="btn-go-to-header">
+                <i class="fa-solid fa-heading"></i>
+                Đi đến tiêu đề mục
+            </div>
+
+            <div class="cv-btn-vertical cv-color-secondary" id="btn-go-to-body">
+                <i class="fa-solid fa-code-simple"></i>
+                Đi đến thân mục
+            </div>
+
+            <div class="cv-btn-vertical cv-color-secondary" id="btn-go-to-item">
+                <i class="fa-solid fa-file"></i>
+                Đi đến mục
+            </div>
+
+            <div class="cv-btn-vertical cv-color-secondary" id="btn-go-to-column">
+                <i class="fa-solid fa-chart-simple"></i>
+                Đi đến cột
+            </div>
+            <div class="cv-btn-vertical cv-color-secondary" id="btn-go-to-row">
+                <i class="fa-solid fa-chart-simple-horizontal"></i>
+                Đi đến hàng
+            </div>
+            <div class="cv-btn-vertical cv-color-error" id="btn-exit">
+                <i class="fa-regular fa-right-from-bracket"></i>
+                Thoát
+            </div>
+        </div>
+            -->
+    </div>
+
+    <div class="cv-properties p-3 d-none">
+        <div class="mb-3">
+            <label for="cv-edit-font-family" class="form-label">Phông</label>
+            <select class="form-select" id="cv-edit-font-family">
+                <option value="cursive">cursive</option>
+                <option value="emoji">emoji</option>
+                <option value="fangsong">fangsong</option>
+                <option value="fantasy">fantasy</option>
+                <option value="monospace">monospace</option>
+                <option value="system-ui">system-ui</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="cv-edit-font-size" class="form-label">Cỡ chữ</label>
+            <input type="number" class="form-control" id="cv-edit-font-size">
+        </div>
+
+        <div class="mb-3">
+            <label for="cv-edit-color" class="form-label">Màu chữ</label>
+            <input type="color" class="form-control" id="cv-edit-color">
+        </div>
+
+        <div class="mb-3">
+            <label for="cv-edit-line-height" class="form-label">Chiều cao dòng</label>
+            <input type="number" class="form-control" id="cv-edit-line-height">
+        </div>
+
+        <div class="mb-3">
+            <button class="cv-edit-font-style" id="cv-edit-font-style__bold">
+                <i class="fa-solid fa-bold"></i>
+            </button>
+            <button class="cv-edit-font-style" id="cv-edit-font-style__italic">
+                <i class="fa-solid fa-italic"></i>
+            </button>
+            <button class="cv-edit-font-style" id="cv-edit-font-style__underline">
+                <i class="fa-solid fa-underline"></i>
+            </button>
+        </div>
+
+        <div class="mb-3">
+            <button class="cv-edit-text-align" data-text-align="left">
+                <i class="fa-solid fa-align-left"></i>
+            </button>
+            <button class="cv-edit-text-align" data-text-align="center">
+                <i class="fa-solid fa-align-center"></i>
+            </button>
+            <button class="cv-edit-text-align" data-text-align="right">
+                <i class="fa-solid fa-align-right"></i>
+            </button>
+            <button class="cv-edit-text-align" data-text-align="justify">
+                <i class="fa-solid fa-align-justify"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- button thêm mục -->
+<div class="d-none" id="cv-btn-add-item" onclick="addItem(this)" data-html2canvas-ignore>
+    <div class="btn d-none" data-html2canvas-ignore="true">
+        <i class="fa-solid fa-plus"></i>
+    </div>
+    <!-- <div>Thêm mục</div> -->
+</div>
+
+<!-- modal xác nhận xóa -->
+<div id="modalConfirmRemoveElement" class="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content p-4">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa-regular fa-trash me-3 text-danger"></i>
+                    Xóa nội dung?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <p>Bạn chắc chắn muốn xóa nội dung này?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Hủy</button>
+                <button id="btnConfirmRemoveElement" type="button" class="btn btn-danger rounded-pill">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal chọn template -->
+<div class="modal fade" id="modalSelectTemplate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content p-4">
+            <div class="modal-header mb-3">
+                <h5 class="modal-title">Chọn mẫu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-0" style="display: flex; gap: 20px;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Đóng</button>
+                <button id="btnChooseTemplate" type="button" class="btn btn-primary cv-color-primary rounded-pill">Chọn</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal chọn bố cục cột trong hàng -->
+<div id="modalEditRow" class="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Đổi bố cục</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Bố cục phổ biến</strong></p>
+                <div class="cv-column-layout">
+                    <div class="cv-column-layout-item active">
+                        <img src="~/cv-builder/images/column-layouts/1.png" alt="">
+                        <p>1</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/1-1.png" alt="">
+                        <p>1:1</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/2-1.png" alt="">
+                        <p>2:1</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/1-2.png" alt="">
+                        <p>1:2</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/3-1.png" alt="">
+                        <p>3:1</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/1-3.png" alt="">
+                        <p>1:3</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/7-5.png" alt="">
+                        <p>7:5</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/5-7.png" alt="">
+                        <p>5:7</p>
+                    </div>
+                </div>
+                <p><strong>Bố cục sáng tạo</strong></p>
+                <div class="cv-column-layout">
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/1-1-1.png" alt="">
+                        <p>1:1:1</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/1-2-1.png" alt="">
+                        <p>1:2:1</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/1-1-2.png" alt="">
+                        <p>1:1:2</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/2-1-1.png" alt="">
+                        <p>2:1:1</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/3-4-5.png" alt="">
+                        <p>3:4:5</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/4-3-5.png" alt="">
+                        <p>4:3:5</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/5-4-3.png" alt="">
+                        <p>5:4:3</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/3-5-4.png" alt="">
+                        <p>3:5:4</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/4-5-3.png" alt="">
+                        <p>4:5:3</p>
+                    </div>
+
+                    <div class="cv-column-layout-item">
+                        <img src="~/cv-builder/images/column-layouts/1-1-1-1.png" alt="">
+                        <p>1:1:1:1</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button id="btnChooseColumnLayout" type="button" class="btn btn-primary cv-color-primary">
+                    Chọn bố
+                    cục
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal thêm mục -->
+<div id="modalAddItem" class="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm mục</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><i>Click Thêm hoặc Double click để thêm mục</i></p>
+                <p><strong>Mục chưa sử dụng</strong></p>
+                <div class="cv-list-item" id="cv-list-item-unused">
+                    <div class="cv-list_item__item" data-item-name="avatar">
+                        <div class="left-side">
+                            <i class="fa-solid fa-image-portrait"></i>
+                            Ảnh đại diện
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="name-card">
+                        <div class="left-side">
+                            <i class="fa-solid fa-user-tag"></i>
+                            Danh thiếp
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="contact-info">
+                        <div class="left-side">
+                            <i class="fa-solid fa-circle-info"></i>
+                            Thông tin liên hệ
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="career-goals">
+                        <div class="left-side">
+                            <i class="fa-solid fa-bullseye-arrow"></i>
+                            Mục tiêu nghề nghiệp
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="work-experience">
+                        <div class="left-side">
+                            <i class="fa-solid fa-briefcase"></i>
+                            Kinh nghiệm làm việc
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="education">
+                        <div class="left-side">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            Học vấn
+                        </div>
+                        <div class="right-side d-none" data-item-name="work-experience">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="skill">
+                        <div class="left-side">
+                            <i class="fa-solid fa-pen-fancy"></i>
+                            Kỹ năng
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="project">
+                        <div class="left-side">
+                            <i class="fa-solid fa-diagram-project"></i>
+                            Dự án
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="certificate">
+                        <div class="left-side">
+                            <i class="fa-solid fa-file-certificate"></i>
+                            Chứng chỉ
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="activity">
+                        <div class="left-side">
+                            <i class="fa-solid fa-hand"></i>
+                            Hoạt động
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="prize">
+                        <div class="left-side">
+                            <i class="fa-solid fa-award"></i>
+                            Giải thưởng
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="reference-person">
+                        <div class="left-side">
+                            <i class="fa-regular fa-user-plus"></i>
+                            Người tham chiếu
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="more-information">
+                        <div class="left-side">
+                            <i class="fa-regular fa-hashtag"></i>
+                            Thông tin thêm
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="cv-list_item__item" data-item-name="interest">
+                        <div class="left-side">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            Sở thích
+                        </div>
+                        <div class="right-side d-none">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <p><strong>Mục đã sử dụng</strong></p>
+                <div class="cv-list-item" id="cv-lít-item-used">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button id="btnChooseItem" type="button" class="btn btn-primary cv-color-primary">Thêm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal xem trước khi in -->
+<div class="modal fade" id="modalPrintPreview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content p-4">
+            <div class="modal-header mb-3">
+                <h5 class="modal-title">Xem trước khi in</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-0">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Đóng</button>
+                @* <button id="btnChooseTemplate" type="button" class="btn btn-primary cv-color-primary rounded-pill">Chọn</button> *@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal save -->
+<div class="modal fade" id="modalSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content p-4">
+            <div class="modal-header mb-3">
+                <h5 class="modal-title">Đặt tên cho CV của bạn</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-0">
+                <p>Việc đặt tên cho CV sẽ khiến việc quản lý CV trở nên dễ dàng hơn.</p>
+                <input type="text" id="modalInputCandidateCVName" class="form-control" placeholder="Tên CV (Ví dụ: CV Marketing, CV Lập trình...)">
+                <p class="feedback text-danger mt-2 d-none" style="font-size: 14px;">Tên CV không được để trống</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Đóng</button>
+                <button id="modalBtnSave" type="button" class="btn btn-primary cv-color-primary rounded-pill">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var candidateCVId = @ViewBag.CandidateCVId;
+</script>
+
+<script src="~/cv-builder/js/lib_w3color.js" asp-append-version="true"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="~/cv-builder/js/configs.js" asp-append-version="true"></script>
+<script src="~/cv-builder/js/cv-builder.js" asp-append-version="true"></script>

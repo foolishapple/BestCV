@@ -1,0 +1,102 @@
+﻿@{
+    Layout = "_LayoutEmployer";
+    ViewBag.Title = "Đăng tin tuyển dụng";
+}
+@section Headers{
+    <link href="~/css/pages/post-job.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/select2-table.css" rel="stylesheet" asp-append-version="true"/>
+}
+<div class="pxp-dashboard-content-details" id="select-campaign-zone">
+    <h1>Đăng tin tuyển dụng mới</h1>
+    <p class="pxp-text-light">Bạn đang muốn đăng tin cho chiến dịch tuyển dụng nào?</p>
+    <div class="row mt-5">
+        <div class="col-12 mb-4">
+            <div class="card card-service-style">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center text-nowrap"><span class="w-10"><i class="fa-solid fa-sparkles fs-4 pe-4"></i></span> Đăng tin với một chiến dịch tuyển dụng mới</div>
+                        <button class="btn btn-warning btn-md btn-buy" id="btn_add_recruitment_campagin">Tạo mới</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-4">
+            <div class="card card-service-style">
+                <div class="card-title p-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center text-nowrap"><span class="w-10"><i class="fa-solid fa-campground fs-4 pe-4"></i></span>  Đăng tin cho chiến dịch đã được tạo từ trước</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="mt-2 mt-lg-3">
+                        <div class="row justify-content-between align-content-center">
+                            <div class="col-auto order-2 order-sm-1">
+                                <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                                </div>
+                            </div>
+                            <div class="col-auto order-1 order-sm-2">
+                                <div class="pxp-company-dashboard-jobs-search mb-3">
+                                    <div class="pxp-company-dashboard-jobs-search-search-form">
+                                        <div class="input-group">
+                                            <span class="input-group-text"><span type="button" class="fa fa-search" id="btn_search_all_recruitment_campagin"></span></span>
+                                            <input type="text" class="form-control" id="search_all_recruitment_campagin" placeholder="Tìm kiếm...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tbl-data table-responsive">
+                            <table id="table_recruitment_campagin" class="table table-hover align-middle w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Chiến dịch</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-normal text-gray">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content p-4">
+            <div class="modal-header mb-3">
+                <h5 class="modal-title" id="staticBackdropLabel">Tạo mới chiến dịch</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <form>
+                    <div class="mb-3">
+                        <label for="campaign-name" class="form-label">Tên chiến dịch <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="campaign-name" maxlength="255">
+                    </div>
+                    <div class="mb-3">
+                        <label for="campaign-status" class="form-label">Trạng thái <span class="text-danger">*</span></label>
+                        <select class="form-select" control="select2" id="campaign-status" data-dropdown-parent="#editModal" data-width="100%" aria-describedby="campaign-status-help">
+                        </select>
+                        <div id="campaign-status-help" class="form-text">Chọn trạng thái đăng cho chiến dịch của bạn.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="campaign-description" class="form-label">Mô tả</label>
+                        <textarea class="form-control" maxlength="500" rows="8" id="campaign-description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary rounded-pill modal-btn" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary rounded-pill modal-btn btn_submit">Lưu và đăng tin</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/pages/post-job.js" asp-append-version="true"></script>
+}

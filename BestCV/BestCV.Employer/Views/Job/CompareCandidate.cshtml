@@ -1,0 +1,223 @@
+﻿@{
+    Layout = "_LayoutFindCV";
+}
+<style>
+    .card-cv {
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        background: white;
+        border-radius: 10px;
+        height: 95vh;
+        width: 100%;
+    }
+
+    .pdfContainer {
+        width: 100%;
+        height: 95vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .btn-compare {
+        width: 100%;
+        padding: 10px 20px !important;
+    }
+
+    .card-cv-footer div {
+        width: 50%;
+    }
+
+    .card-cv-footer .btn-success {
+        border-radius: 0 0 0 10px !important;
+    }
+
+    .card-cv-footer .btn-danger {
+        border-radius: 0 0 10px 0 !important;
+    }
+
+    .bg-image {
+        width: 60px;
+        height: 60px;
+        margin-right: 5px;
+        border-radius: 50%;
+    }
+
+    .bg-image-mini {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        border-radius: 50%;
+    }
+
+    .card-cv-header {
+        padding: 1em;
+    }
+
+    .card-cv-body {
+        height: 80vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .btn-success-cv {
+        color: #198754 !important;
+        background-color: #1ab86f4d !important;
+        border-color: #1ab86f00 !important
+    }
+
+    .btn-danger-cv {
+        color: #3e35dc !important;
+        background-color: #3e35dc4d !important;
+        border-color: #3e35dc00 !important
+    }
+    .input-group-text-1{
+        display: flex;
+        align-items: center;
+        padding: 0.775rem 1rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        line-height: 1.5;
+        color: var(--bs-gray-700);
+        text-align: center;
+        white-space: nowrap;
+        background-color: var(--bs-gray-100);
+        border: 1px solid var(--bs-gray-300);
+        border-radius: 0.475rem;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow{
+        height: 44px;
+    }
+
+    .select2-container .select2-selection--single{
+        height: 44px;
+    }
+
+    .select2-container--default .select2-search--dropdown .select2-search__field{
+        background-color: var(--bs-body-bg);
+        padding: 0.55rem rem 0.75rem;
+        color: var(--bs-gray-700);
+        font-size: .95rem;
+        border: 1px solid var(--bs-gray-300);
+        border-radius: 0.425rem;
+        outline: 0 !important;
+    }
+
+    .select2-container--default .select2-results > .select2-results__options {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    </style>
+<div class="row">
+    <div class="col-6 d-flex">
+        <div class="card-cv d-flex flex-column justify-content-between">
+            <div class="card-cv-header d-flex ">
+                <div class="pxp-cover bg-secondary bg-image" id="avatar-current">
+                </div>
+                <div class="d-flex flex-column">
+                    <span class="fw-bold" id="fullName-current">Nguyễn Đức Thanh</span>
+                    <span id="info-current">nguyenducthanh15698@gmail.com | 0353175663</span>
+                    <span id="address-current">766 Đê La Thành</span>
+                </div>
+            </div>
+            <div class="card-cv-body" id="card-body-1">
+            </div>
+            <div class="card-cv-footer justify-content-between d-flex">
+                <div class="">
+                    <button class="btn btn-success btn-success-cv btn-compare btn_change_status" id="btn_change_status_left"><i class="fa-solid fa-square-pen me-2"></i>Thay đổi trạng thái</button>
+                </div>
+                <div class="">
+                    <button class="btn btn-danger btn-danger-cv btn-compare btn_add_description" id="btn_add_description_left"><i class="fa-solid fa-note-sticky me-2"></i>Ghi chú</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 d-flex">
+        <div class="card-cv d-flex flex-column justify-content-between">
+            <div class="card-cv-header d-flex flex-column">
+                <div>
+                    <span>Tin tuyển dụng : 
+                        <span class="fw-bold" id="job-name"></span>
+                    </span>
+                </div>
+
+                <div class="input-group flex-nowrap mt-1">
+                    <span class="input-group-text-1">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                    </span>
+                    <div class="overflow-hidden flex-grow-1">
+                        <select class="form-select rounded-start-0" data-control="select2" data-placeholder="Tìm ứng viên khác" id="select-more-candidate">
+                           
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="card-cv-body" id="card-body-2">
+            </div>
+            <div class="card-cv-footer justify-content-between d-flex">
+                <div class="">
+                    <button class="btn btn-success btn-success-cv btn-compare btn_change_status" id="btn_change_status_right"><i class="fa-solid fa-square-pen me-2"></i>Thay đổi trạng thái</button>
+                </div>
+                <div class="">
+                    <button class="btn btn-danger btn-danger-cv btn-compare btn_add_description" id="btn_add_description_right"><i class="fa-solid fa-note-sticky me-2"></i>Ghi chú</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade pxp-user-modal" id="modal_change_status" aria-labelledby="modal_change_status" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-4 text-start " id="signinModal">Cập nhật trạng thái CV ứng viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row">
+                <div class="col-auto">
+                    <label for="candidateApplyJobStatus" class="fw-bold">Trạng thái CV <span class="text-danger">*</span></label>
+                    <ul class="nav nav-pills my-2 pxp-company-dashboard-jobs-bulk-actions" id="pills-tab-status" role="tablist">
+                    </ul>
+                </div>
+                <div class="col-auto col-md-12">
+                    <label class="fw-bold" for="ApplyJobDescription">Ghi chú</label>
+                    <textarea id="ApplyJobDescription" class="form-control" placeholder="Ghi chú..." maxlength="500" rows="6"></textarea>
+                </div>
+            </div>
+            <div class="model-footer px-5 py-3 d-flex justify-content-end">
+                <a href="#" class="btn btn-primary rounded-pill btn_submit" id="submit-status">Lưu</a>
+                <a href="#" class="btn btn-secondary rounded-pill ms-3" data-bs-dismiss="modal">Hủy</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade pxp-user-modal" id="modal_addNote" aria-labelledby="modal_addNote" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-4 text-start " id="signinModal">Cập nhật ghi chú</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="">
+                        <label class="fw-bold" for="candidateApplyJobDescription">Ghi chú</label>
+                        <textarea id="candidateApplyJobDescription" class="form-control" placeholder="Ghi chú..." maxlength="500" rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="model-footer px-5 py-3 d-flex justify-content-end">
+                <a href="#" class="btn btn-primary rounded-pill btn_submit" id="submit-description">Lưu</a>
+                <a href="#" class="btn btn-secondary rounded-pill ms-3" data-bs-dismiss="modal">Hủy</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        const jobId = @ViewBag.JobId;
+        const candidateApplyJobId = @ViewBag.CandidateApplyJobId;
+    </script>
+    <script src="~/js/pages/compare-candidate.js" asp-append-version="true"></script>
+}

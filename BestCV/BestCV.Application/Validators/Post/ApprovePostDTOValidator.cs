@@ -1,0 +1,20 @@
+using FluentValidation;
+using BestCV.Application.Models.Post;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BestCV.Application.Validators.Post
+{
+    public class ApprovePostDTOValidator : AbstractValidator<ApprovePostDTO>
+    {
+        public ApprovePostDTOValidator()
+        {
+            RuleFor(x => x.Id)
+                .NotNull().WithMessage("Mã bài viết không được bỏ trống.")
+                .GreaterThan(0).WithMessage("Mã bài viết phải lớn hơn 0.");
+        }
+    }
+}

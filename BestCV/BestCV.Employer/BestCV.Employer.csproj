@@ -28,4 +28,10 @@
     <Folder Include="wwwroot\lib\jquery.repeater\1.2.1\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BestCV.Application\BestCV.Application.csproj" />
+    <ProjectReference Include="..\BestCV.Domain\BestCV.Domain.csproj" />
+    <ProjectReference Include="..\BestCV.Infrastructure\BestCV.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,350 @@
+﻿@{
+    Layout = "_LayoutEmployer";
+    ViewBag.CurentPage = "recruitment-campaigns";
+    ViewBag.Title = "Quản lý chiến dịch tuyển dụng";
+}
+@section Headers{
+    <link href="~/css/pages/recruitment-campaigns-dashboard.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/select2-table.css" rel="stylesheet" asp-append-version="true"/>
+}
+    <style>
+        .border-r {
+            border-bottom-right-radius: 1.25rem !important;
+            border-top-right-radius: 1.25rem !important;
+        }
+
+        .flatpickr-input[readonly] {
+            background-color: #fff !important;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        #time > div i.fa {
+            position: absolute;
+            top: 50%;
+            right: 1.75rem;
+            transform: translate(0, 50%);
+            cursor: pointer;
+        }
+    </style>
+    <div class="pxp-dashboard-content-details">
+        <h1 class="mb-2 mb-lg-4"><span id="card_title">Chiến dịch</span></h1>
+        <div class="row align-items-center">
+            <div class="col-sm-6 col-xxl-3">
+                <div class="pxp-dashboard-stats-card bg-primary bg-opacity-10 mb-3 mb-xxl-0">
+                    <div class="pxp-dashboard-stats-card-icon text-primary">
+                        <span class="fa fa-user"></span>
+                    </div>
+                    <div class="pxp-dashboard-stats-card-info">
+                        <div class="pxp-dashboard-stats-card-info-number" id="total_cv">0</div>
+                        <div class="pxp-dashboard-stats-card-info-text pxp-text-light">Tổng số CV</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xxl-3">
+                <div class="pxp-dashboard-stats-card bg-primary bg-opacity-10 mb-3 mb-xxl-0">
+                    <div class="pxp-dashboard-stats-card-icon text-success">
+                        <span class="fa fa-user-circle"></span>
+                    </div>
+                    <div class="pxp-dashboard-stats-card-info">
+                        <div class="pxp-dashboard-stats-card-info-number" id="total_cv_candidate_apply">0</div>
+                        <div class="pxp-dashboard-stats-card-info-text pxp-text-light">CV ứng tuyển</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xxl-3">
+                <div class="pxp-dashboard-stats-card bg-primary bg-opacity-10 mb-3 mb-xxl-0">
+                    <div class="pxp-dashboard-stats-card-icon text-warning">
+                        <span class="fa fa-envelope"></span>
+                    </div>
+                    <div class="pxp-dashboard-stats-card-info">
+                        <div class="pxp-dashboard-stats-card-info-number">15</div>
+                        <div class="pxp-dashboard-stats-card-info-text pxp-text-light">Tin chưa đọc</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xxl-3">
+                <div class="pxp-dashboard-stats-card bg-primary bg-opacity-10 mb-3 mb-xxl-0">
+                    <div class="pxp-dashboard-stats-card-icon text-danger">
+                        <span class="fa fa-bell"></span>
+                    </div>
+                    <div class="pxp-dashboard-stats-card-info">
+                        <div class="pxp-dashboard-stats-card-info-number">4</div>
+                        <div class="pxp-dashboard-stats-card-info-text pxp-text-light">Thông báo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="nav nav-pills my-3 mt-lg-5 pxp-company-dashboard-jobs-bulk-actions" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="btn nav-link active me-2 mb-1" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Tin tuyển dụng</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="btn nav-link me-2 mb-1 nav-cv" id="pills-cv-apply-tab" data-source-id="@CandidateApplyJobSourceConst.CANDIDATE_APPLY" data-bs-toggle="pill" data-bs-target="#pills-cv" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">CV ứng tuyển</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="btn nav-link me-2 mb-1 nav-cv" id="pills-cv-find-tab" data-source-id="@CandidateApplyJobSourceConst.FIND_CV" data-bs-toggle="pill" data-bs-target="#pills-cv" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">CV tìm kiếm</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="btn nav-link me-2 mb-1 nav-cv d-none" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false">CV đang theo dõi</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="btn nav-link me-2 mb-1 nav-cv d-none" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false">CV được hỗ trợ</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                <div class="row mt-2 mt-lg-3">
+                    <div class="col-md-12 col-lg-6 mb-sm-3">
+                        <div class="pxp-dashboard-chart-container">
+                            <div class="row justify-content-between align-content-center mb-4">
+                                <div class="col-auto">
+                                    <span class="pxp-dashboard-chart-value">154</span><span class="pxp-dashboard-chart-percent text-success"><span class="fa fa-long-arrow-up"></span> 34%</span><span class="pxp-dashboard-chart-vs">7 ngày gần nhất</span>
+                                </div>
+                                <div class="col-auto">
+                                    <select class="form-select">
+                                        <option value="-7 days">7 ngày gần nhất</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <canvas id="pxp-company-dashboard-visits-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6 mb-sm-3">
+                        <div class="pxp-dashboard-chart-container">
+                            <div class="row justify-content-between align-content-center mb-4">
+                                <div class="col-auto">
+                                    <span class="pxp-dashboard-chart-value">280</span><span class="pxp-dashboard-chart-percent text-success"><span class="fa fa-long-arrow-up"></span> 56%</span><span class="pxp-dashboard-chart-vs">7 ngày gần nhất</span>
+                                </div>
+                                <div class="col-auto">
+                                    <select class="form-select">
+                                        <option value="-7 days">7 ngày gần nhất</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <canvas id="pxp-company-dashboard-app-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="tbl-data table-responsive mt-3">
+                        <table id="tbl_job" class="table tbl_data table-hover align-start w-100">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">STT</th>
+                                    <th>Tin tuyển dụng</th>
+                                    <th class="text-end">Số lượt xem</th>
+                                    <th class="text-end">Số lượt ứng tuyển</th>
+                                    <th class="text-center">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-normal text-gray">
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <div class="tab-pane fade" id="pills-cv" role="tabpanel" aria-labelledby="pills-cv" tabindex="0">
+
+                <div class="mt-2 mt-lg-3">
+                    <div class="row justify-content-between align-content-center">
+                        <div class="col-auto order-2 order-sm-1">
+                            <div class="pxp-company-dashboard-jobs-bulk-actions mb-3">
+                            <select class="form-select" data-minimum-results-for-search="-1" control="select2" data-width="155px" id="fillter_unread">
+                                    <option value="all">Hiển thị tất cả</option>
+                                    <option value="unread">Hiển thị chưa đọc</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-auto order-1 order-sm-2">
+                            <div class="pxp-company-dashboard-jobs-search mb-3">
+                                <div class="pxp-company-dashboard-jobs-search-results me-3" id="tbl_info">0 ứng viên</div>
+                                <div class="pxp-company-dashboard-jobs-search-search-form">
+                                    <div class="input-group">
+                                        <span class="input-group-text"><span type="button" class="fa fa-search btn_search_all"></span></span>
+                                        <input type="text" class="form-control" id="search_all" placeholder="Tìm kiếm...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tbl-data table-responsive">
+                        <table id="table_candidate" class="table table-hover align-start w-100">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">STT</th>
+                                    <th>Ứng viên</th>
+                                    <th></th>
+                                    <th>Thông tin liên hệ</th>
+                                    <th>Khác</th>
+                                    <th>Trạng thái</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th class="text-center"></th>
+                                    <th colspan="2"><input class="form-control fillter_tbl" id="fillter_title" /></th>
+                                    <th><input class="form-control fillter_tbl" id="fillter_contact" /></th>
+                                    <th><input class="form-control fillter_tbl" id="fillter_other" /></th>
+                                    <th>
+                                        <select class="form-select form-control fillter_tbl" multiple id="fillterStatus" style="display: none;">
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex flex-column">
+                                            <button class="btn_icon mb-1 btn_search"><i class="fa fa-search"></i></button>
+                                            <button class="btn_icon mt-1 btn_reset"><i class="fa fa-close"></i></button>
+                                        </div>
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-normal text-gray">
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
+                        <div class="w-100">
+                            <div class="w-100 row ,-0 mt-2 mt-lg-3 justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <nav class="mt-3 mt-sm-0" aria-label="Candidates pagination">
+                                        <ul class="pagination pxp-pagination" id="candidate_paging">
+                                            <li class="page-item active" aria-current="page">
+                                                <span class="page-link">1</span>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="col-auto d-none">
+                                    <a href="#" class="btn rounded-pill pxp-section-cta mt-3 mt-sm-0">Show me more<span class="fa fa-angle-right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
+
+        </div>
+    </div>
+    <div class="modal fade pxp-user-modal" id="modal_addNote" aria-labelledby="modal_addNote" tabindex="-1" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-4 text-start " id="signinModal">Cập nhật ghi chú</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <div class="">
+                            <label class="fw-bold" for="candidateApplyJobDescription">Ghi chú</label>
+                            <textarea id="candidateApplyJobDescription" class="form-control" placeholder="Ghi chú..." maxlength="500" rows="6"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="model-footer px-5 py-3 d-flex justify-content-end">
+                    <a href="#" class="btn btn-primary rounded-pill btn_submit">Lưu</a>
+                    <a href="#" class="btn btn-secondary rounded-pill ms-3" data-bs-dismiss="modal">Hủy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade pxp-user-modal" id="modal_change_status" aria-labelledby="modal_change_status" tabindex="-1" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-4 text-start " id="signinModal">Cập nhật trạng thái CV ứng viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-auto">
+                        <label for="candidateApplyJobStatus" class="fw-bold">Trạng thái CV <span class="text-danger">*</span></label>
+                        <ul class="nav nav-pills my-2 pxp-company-dashboard-jobs-bulk-actions" id="pills-tab-status" role="tablist">
+                        </ul>
+                    </div>
+                    <div class="col-auto col-md-12">
+                        <label class="fw-bold" for="ApplyJobDescription">Ghi chú</label>
+                        <textarea id="ApplyJobDescription" class="form-control" placeholder="Ghi chú..." maxlength="500" rows="6"></textarea>
+                    </div>
+                </div>
+                <div class="model-footer px-5 py-3 d-flex justify-content-end">
+                    <a href="#" class="btn btn-primary rounded-pill btn_submit">Lưu</a>
+                    <a href="#" class="btn btn-secondary rounded-pill ms-3" data-bs-dismiss="modal">Hủy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade pxp-user-modal" id="modal_create_interview" aria-labelledby="modal_create_interview" tabindex="-1" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-4 text-start " id="signinModal">Tạo lịch hẹn phỏng vấn với ứng viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body row d-">
+                    @*name*@
+                    <div class="col-auto col-md-12">
+                        <label class="fw-bold" for="interview_name">Tên cuộc phỏng vấn</label>
+                        <input id="interview_name" class="form-control" placeholder="Tên..." />
+                    </div>
+                    @*trạng thái và loại*@
+                    <div class="col-auto col-md-12 row mt-3" style="display:contents">
+                        <div class="col-md-6 mt-3">
+                            <label class="fw-bold">Trạng thái lịch phỏng vấn <span class="text-danger">*</span></label>
+                            <select id="interview_status" class="form-control form-select  pointer">
+                            </select>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label class="fw-bold">Loại lịch phỏng vấn <span class="text-danger">*</span></label>
+                            <select id="interview_type" class="form-control form-select  pointer">
+                            </select>
+                        </div>
+                    </div>
+                    @*thời gian*@
+                    <div id="time" class="col-auto col-md-12 row pointer" style="display:contents">
+                        <div id="startDate"  class="col-auto col-md-6 mt-3 position-relative">
+                            <label for="startDate_value" class="form-label fw-bold flatpickr">thời gian bắt đầu</label>
+                            <input type="date" class="form-control" id="startDate_value" />
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                        <div id="endDate" class="col-auto col-md-6 mt-3 pointer position-relative">
+                            <label for="endDate_value" class="form-label fw-bold flatpickr">thời gian kết thúc</label>
+                            <input type="date" class="form-control" id="endDate_value" />
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    @*Location*@
+                    <div class="col-auto col-md-12 mt-3">
+                        <label class="fw-bold" for="interview_location">Địa điểm</label>
+                        <input id="interview_location" class="form-control" placeholder="Đại điểm" />
+                    </div>
+                    @*Link*@
+                    <div class="col-auto col-md-12 mt-3">
+                        <label class="fw-bold" for="interview_link">Link cuộc họp</label>
+                        <input id="interview_link" class="form-control" placeholder="Đường dẫn" />
+                    </div>
+                    <div class="col-auto col-md-12 mt-3">
+                        <label class="fw-bold" for="interview_schedule_description">Ghi chú</label>
+                        <textarea id="interview_schedule_description" class="form-control" placeholder="Ghi chú..." maxlength="500" rows="6"></textarea>
+                    </div>
+                </div>
+                <div class="model-footer px-5 py-3 d-flex justify-content-end">
+                    <a href="#" class="btn btn-primary rounded-pill btn_submit">Lưu</a>
+                    <a href="#" class="btn btn-secondary rounded-pill ms-3" data-bs-dismiss="modal">Hủy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <script>
+        const CandidateApplyStatusId_Interview = @CandidateApplyStatusId.Interview;
+        const recruimentCampaignId = @ViewBag.RecruitmentCampaignId;
+        const candidateApplyJobSource = {
+            CANDIDATE_APPLY: @CandidateApplyJobSourceConst.CANDIDATE_APPLY
+                                                        };
+    </script>
+    <script src="~/js/pages/recruitment-campaigns-dashboard.js" asp-append-version="true"></script>
+}

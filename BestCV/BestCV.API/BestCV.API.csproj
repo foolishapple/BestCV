@@ -28,4 +28,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BestCV.Application\BestCV.Application.csproj" />
+    <ProjectReference Include="..\BestCV.Core\BestCV.Core.csproj" />
+    <ProjectReference Include="..\BestCV.Infrastructure\BestCV.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

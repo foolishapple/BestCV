@@ -1,5 +1,5 @@
-﻿using Jobi.Core.Entities;
-using Jobi.Core.Entities.Interfaces;
+﻿using BestCV.Core.Entities;
+using BestCV.Core.Entities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobi.Domain.Entities
+namespace BestCV.Domain.Entities
 {
     public class Company : EntityFullTextSearch<int>
     {

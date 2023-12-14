@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobi.Domain.Entities
+namespace BestCV.Domain.Entities
 {
     public partial class AccountStatus : EntityCommon<int>
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobi.Domain.Constants
+namespace BestCV.Domain.Constants
 {
     public static class CVTemplateStatusId
     {

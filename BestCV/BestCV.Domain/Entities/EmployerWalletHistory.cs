@@ -1,4 +1,4 @@
-﻿using Jobi.Core.Entities;
+﻿using BestCV.Core.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobi.Domain.Entities
+namespace BestCV.Domain.Entities
 {
     /// <summary>
     /// Lịch sử sử dụng ví

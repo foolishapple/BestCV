@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobi.Domain.Constants
+namespace BestCV.Domain.Constants
 {
-    /// <summary>
-    /// Author: TUNGTD
-    /// Creaed: 28/07/2023
-    /// </summary>
+
     public class FolderUploadConst
     {
         public static int[] INSTANT_FOLDERS = { 1000, 1001, 1002 };

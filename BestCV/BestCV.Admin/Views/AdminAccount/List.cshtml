@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách tài khoản quản trị viên";
+}
+@section Headers{
+    <link href="~/assets/css/pages/admin-account.css" rel="stylesheet" asp-append-version="true"/>
+}
+<!--begin::Toolbar-->
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <!--begin::Toolbar container-->
+    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <!--begin::Title-->
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Danh sách tài khoản quản trị viên</h1>
+            <!--end::Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a href="@Url.Action("Index","Home")" class="text-muted text-hover-primary">Trang chủ</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Quản lý QTV</li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Danh sách tài khoản quản trị viên</li>
+                <!--end::Item-->
+            </ul>
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title-->
+    </div>
+    <!--end::Toolbar container-->
+</div>
+<!--end::Toolbar-->
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container  container-fluid ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header border-0 pt-6">
+                        <!--begin::Card title-->
+                        <div class="card-title">
+                            <!--begin::Search-->
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <span class="svg-icon svg-icon-1 fs-3 position-absolute ms-5 di-duotone di-search"><span class="path1"></span><span class="path2"></span></span>
+                                <input type="text" id="table_search_all" data-course-type="search" class="form-control form-control-solid w-250px ps-13" placeholder="Tìm kiếm" />
+                            </div>
+                            <!--end::Search-->
+                        </div>
+                        <div class="card-toolbar">
+                            <!--begin::Toolbar-->
+                            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                <!--begin::Add user-->
+                                    <button type="button" class="btn btn-primary" id="btn_add_admin_account">
+                                    <i class="di-duotone di-plus svg-icon svg-icon-1 fs-3 m-0"><span class="path1"></span><span class="path2"></span></i> Thêm mới
+                                    </button>
+                                
+                                <!--end::Add user-->
+                            </div>
+                            <!--end::Toolbar-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="table_admin_account" class="table table-row-bordered align-middle table-hover">
+                            <thead>
+                                <tr class="fw-semibold fs-6 text-muted text-uppercase">
+                                    <th class="column_index text-center">STT</th>
+                                    <th>TÊN đăng nhập</th>
+                                    <th>VAI TRÒ</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th class="column_date text-center">NGÀY TẠO</th>
+                                    <th class="text-center colum_action">THAO TÁC</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr class="fs-6 ">
+                                    <th></th>
+                                    <th><input type="text" class="form-control tableheaderFillter" /></th>
+                                    <th><select id="fillterRole" class="form-select tableheaderFillter" data-control="select2" data-allowclear="true" data-placeholder="" multiple></select></th>
+                                    <th><input type="text" class="form-control tableheaderFillter" /></th>
+                                    <th><input type="text" class="form-control tableheaderFillter" /></th>
+                                    <th class="column_date">
+                                        <div class="input-group mb-1 date_picker" id="fillter_startDate" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                            <input id="fillter_startDate_value" readonly type="text" class="form-control tableheaderFillter" data-td-target="#fillter_startDate" />
+                                            <span type="button" class="input-group-text" data-td-target="#fillter_startDate" title="Ngày bắt đầu" data-td-toggle="datetimepicker">
+                                                <i class="di-duotone di-calender svg-icon svg-icon-1 fs-3"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                            </span>
+                                        </div>
+                                        <div class="input-group date_picker" id="fillter_endDate" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                            <input id="fillter_endDate_value" readonly type="text" class="form-control tableheaderFillter" data-td-target="#fillter_endDate" />
+                                            <span type="button" class="input-group-text" data-td-target="#fillter_endDate" title="Ngày kết thúc" data-td-toggle="datetimepicker">
+                                                <i class="di-duotone di-calender svg-icon svg-icon-1 fs-3"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th class="text-center colum_action">
+                                        <div class="search-control">
+                                            <button class="btn btn-primary mb-1" title="Tìm kiếm" id="btnTableSearch">
+                                                <i class="di-duotone di-search svg-icon svg-icon-1 fs-3 m-0"><span class="path1"></span><span class="path2"></span></i>
+                                            </button>
+                                            <button class="btn btn-secondary" title="Reset" id="btnTableResetSearch">
+                                                <i class="di-duotone di-arr061 svg-icon svg-icon-1 fs-3 m-0"><span class="path1"></span><span class="path2"></span></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 fw-semibold">
+                            </tbody>
+                            <tfoot>
+                                <tr class="fw-semibold fs-6 text-muted text-uppercase">
+                                    <th class="column_index text-center">STT</th>
+                                    <th>TÊN đăng nhập</th>
+                                    <th>VAI TRÒ</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th class="column_date text-center">NGÀY TẠO</th>
+                                    <th class="text-center colum_action">THAO TÁC</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Content-->
+
+<div class="modal fade" id="modal_admin_account" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" data-bs-focus="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header" id="kt_modal_add_customer_header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bold modal-title">Thêm mới tài khoản quản trị viên</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2 btn-close" data-bs-dismiss="modal" aria-label="Dong">
+                </div>
+                <!--end::Close-->
+            </div>
+            <div class="modal-body scroll-y mx-5 my-7">
+                <div id="frm_admin_account" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
+                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="defaultModal_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#defaultModal_header" data-kt-scroll-wrappers="#defaultModal_scroll" data-kt-scroll-offset="300px" style="max-height: 707px;">
+                        <div class="row">
+                            <div class="col-md-4 mb-7">
+                                <div class="image-input image-input-outline image-input-placeholder ms-20 mt-7" data-kt-image-input="true">
+                                    <div class="w-150px h-150px" id="divImage"><img id="adminAccountPhoto" src="/assets/media/images/blog/NoImage.png" class="w-150px h-150px rounded thumbnail" file-accept="image/*" /></div>
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow choseFile" data-fm-target="#adminAccountPhoto" data-kt-image-input-action="change" data-bs-toggle="tooltip" aria-label="Change avatar" data-bs-original-title="Change avatar" data-kt-initialized="1">
+                                        <i class="ki-duotone ki-pencil fs-7">
+                                            <span class="path1 ki-uniEDBC"></span>
+                                            <span class="path2 ki-uniEDBD"></span>
+                                        </i>
+                                    </label>
+                                </div>
+                            </div>      
+                            <div class="col-md-8 mb-7 fv-plugins-icon-container">
+                                <label class="fw-semibold fs-6 mb-2" for="adminAccountDescription">Thông tin</label>
+                                <textarea id="adminAccountDescription" rows="6" class="form-control  mb-3 mb-lg-0 bs_max_length" maxlength="500" placeholder="" data-kt-autosize="true" value=""></textarea>
+                            </div>
+                            <div class="col-md-4 mb-7 fv-plugins-icon-container">
+                                <label class="required fw-semibold fs-6 mb-2" for="adminAccountFullName">Họ và tên</label>
+                                <input type="text" id="adminAccountFullName" class="form-control mb-3 mb-lg-0 bs_max_length" maxlength="255">
+                            </div>
+                            <div class="col-md-4 mb-7 fv-plugins-icon-container">
+                                <label class="required fw-semibold fs-6 mb-2" for="adminAccountEmail">Email</label>
+                                <input type="text" id="adminAccountEmail" class="form-control mb-3 mb-lg-0 none-space bs_max_length" placeholder="" value="" maxlength="500">
+                            </div>
+                            <div class="col-md-4 mb-7 fv-plugins-icon-container">
+                                <label class="fw-semibold fs-6 mb-2 required" for="adminAccountPhone">Số điện thoại</label>
+                                <input type="text" id="adminAccountPhone" class="form-control mb-3 mb-lg-0 none-space bs_max_length" maxlength="25">
+                            </div>
+                            <div class=" col-md-4 mb-7 fv-plugins-icon-container">
+                                <label class=" required fw-semibold fs-6 mb-2" for="adminAccountUserName">Tên đăng nhập</label>
+                                <input type="text" id="adminAccountUserName" class="form-control mb-3 mb-lg-0 bs_max_length" maxlength="255">
+                            </div>
+                            <div class="col-md-4 mb-7 fv-plugins-icon-container">
+                                <label id="password__title" class="fw-semibold required fs-6 mb-2" for="adminAccountPassword">Mật khẩu</label>
+                                <label type="button" id="btnChangePassword" class="float-end d-none text-primary">Đặt lại mật khẩu</label>
+                                <div class="position-relative d-flex align-items-center input-group-pass">
+                                    <span type="button" class="svg-icon svg-icon-1 fs-3 position-absolute me-5 end-0 btn_show_pass" data-target="#adminAccountPassword">
+                                        <i class="ki-duotone ki-eye fs-3">
+                                            <span class="path1 ki-uniEC0B"></span>
+                                            <span class="path2 ki-uniEC0B"></span>
+                                            <span class="path3 ki-uniEC0D"></span>
+                                        </i>
+                                    </span>
+                                    <input type="password" id="adminAccountPassword" class="form-control pe-13  mb-3 mb-lg-0 none-space bs_max_length" maxlength="255">
+                                </div>
+                            </div>
+                            <div class="col-md-1 mb-7 fv-plugins-icon-container d-none">
+                                <label class="fw-semibold fs-6 mb-2" for="adminAccountLockEnabled">Khóa</label>
+                                <div>
+                                    <input class="form-check-input mt-2 ms-2" type="checkbox" value="" id="adminAccountLockEnabled" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-7 fv-plugins-icon-container">
+                                <label class="fw-semibold fs-6 mb-2" for="adminAccountCreatedTime">Ngày tạo</label>
+                                <input class="form-control mb-3 mb-lg-0" type="text" readonly value="" id="adminAccountCreatedTime" />
+                            </div>
+                            <div class="col-md-12 fv-plugins-icon-container">
+                                <label class="fw-semibold fs-6 mb-2">Vai trò truy cập</label>
+                                <select class="form-select  dataSelect" id="selectAccountRole" multiple="multiple" data-control="select2" data-placeholder="">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer text-center justify-content-center">
+                <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
+                    Hủy
+                </button>
+
+                <button  class="btn btn-primary" id="saveData">
+                    <span class="indicator-label">
+                        Lưu
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/assets/js/pages/admin-account.js" asp-append-version="true"></script>
+    <partial name="_FileExplorer" />
+}

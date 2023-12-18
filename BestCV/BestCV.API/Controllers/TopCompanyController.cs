@@ -21,12 +21,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -42,12 +37,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <param></param>
-        /// <returns></returns>
+   
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertTopCompanyDTO model)
         {
@@ -63,13 +53,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// Description: cap nhat top company
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateTopCompanyDTO model)
         {
@@ -85,13 +69,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// Description: xoa top company
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+ 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -107,12 +85,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// Description: getlist top company
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -145,12 +118,7 @@ namespace BestCV.API.Controllers
         #endregion
 
         #region Additional Resources
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// Description: get list top company show on homepage
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list-top-company")]
         public async Task<IActionResult> GetListTopCompanyShowOnHomePage()
         {

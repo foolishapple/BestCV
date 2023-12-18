@@ -19,13 +19,7 @@ namespace BestCV.API.Controllers
             _service = service;
             _logger = loggerFactory.CreateLogger<EmployerServicePackageEmployerController>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 17/09/2023
-        /// Description: API Post get list service package group of employer
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("list-service-of-employer")]
         public async Task<IActionResult> ListServiceOfEmployer()
@@ -45,13 +39,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 17/09/2023
-        /// Description: API Post get list service package group add on of employer
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("list-service-of-employer-add-on")]
         public async Task<IActionResult> ListServiceOfEmployerAddOn()

@@ -42,13 +42,7 @@ namespace BestCV.API.Controllers
 
         #region Additional Resources
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 28/07/2023
-        /// Description: Chức năng đăng nhập nhà tuyển dụng
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("sign-in")]
         public async Task<IActionResult> SignIn([FromBody] SignInEmployerDTO obj)
         {
@@ -64,13 +58,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 28/07/2023
-        /// Description: Chức năng cập nhật mật khẩu nhà tuyển dụng
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+ 
         [HttpPut("change-password")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordEmployerDTO obj)
@@ -90,12 +78,7 @@ namespace BestCV.API.Controllers
         }
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 26-07-2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns>Gửi request đến api send email bên ScheduledJobController & trả về response</returns>
+
         [HttpPost("sign-up")]
         public async Task<IActionResult> SignUp([FromBody] EmployerSignUpDTO obj)
         {
@@ -132,11 +115,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 31.07.2023
-        /// </summary>
-        /// <returns></returns>
+
         [HttpPost("re-send-email")]
         public async Task<IActionResult> ReSendEmailConfirm([FromBody] ConfirmEmailEmployerDTO obj)
         {
@@ -183,12 +162,6 @@ namespace BestCV.API.Controllers
 
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 29.07.2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
         [HttpPut("verify-email-code")]
         public async Task<IActionResult> VerifyEmailCode([FromBody] ConfirmEmailEmployerDTO obj)
         {
@@ -221,12 +194,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 04/08/2023
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [HttpPost("list-employer-aggregates")]
         public async Task<IActionResult> ListEmployerAgrregates(DTParameters parameters)
         {
@@ -240,13 +208,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedDate: 8/08/2023
-        /// Description: Chức năng gửi email khi quên mật khẩu
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO obj)
         {
@@ -284,13 +246,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: Chức năng thay đổi mật khẩu từ link email quên mật khẩu
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+ 
         [HttpPost("reset-password")]
         public async Task<IActionResult> RestPassword([FromBody] ResetPasswordEmployerDTO obj)
         {
@@ -317,13 +273,7 @@ namespace BestCV.API.Controllers
 
 
         #region CRUD     
-        /// <summary>
-        ///  Author: HuyDQ
-        /// CreatedTime : 28/07/2023
-        /// Description : Detail by id
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update-profile")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Update([FromBody] UpdateEmployerDTO obj)
@@ -341,13 +291,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        ///  Author: HuyDQ
-        /// CreatedTime : 28/07/2023
-        /// Description : Detail by id
-        /// </summary>
-        /// <param"></param>
-        /// <returns></returns>
+  
         [HttpGet("detail")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Detail()
@@ -365,12 +309,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhNd 
-        /// CreatedTime: 04/08/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail-admin/{id}")]
         public async Task<IActionResult> DetailAdmin([Required] long id)
         {
@@ -386,12 +325,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 04/08/2023
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
         [HttpPut("change-password-admin")]
         public async Task<IActionResult> ChangePasswordAdmin([FromBody] ChangePasswordDTO model)
         {
@@ -408,12 +342,7 @@ namespace BestCV.API.Controllers
         }
 
 
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 04/08/2023
-        /// </summary>
-        /// <param name="id">EmployerId</param>
-        /// <returns></returns>
+
         [HttpPut("quick-activated")]
         public async Task<IActionResult> QuickActivated([Required] long id)
         {

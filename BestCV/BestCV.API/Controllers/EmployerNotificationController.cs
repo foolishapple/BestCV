@@ -26,12 +26,7 @@ namespace BestCV.API.Controllers
 
         #region CRUD
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 08.08.2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>danh sách tất cả thông báo của từng employer theo employerId</returns>
+
         [HttpGet("list/{id}")]
         public async Task<IActionResult> GetAllNotificationByEmployer(long id)
         {
@@ -56,12 +51,7 @@ namespace BestCV.API.Controllers
 
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 09.08.2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>api xóa notification của employer theo id</returns>
+
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteNotification(long id)
         {
@@ -92,12 +82,7 @@ namespace BestCV.API.Controllers
         }
         #endregion
         #region ADDITTIONAL_RESOURCES
-        /// <summary>
-        /// Author : Thoai Anh
-        /// CreatedDate : 27/07/2023
-        /// Description : Lấy ra danh sách thông báo của ứng viên theo mã ứng viên 
-        /// </summary>
-        /// <returns></returns>
+ 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("list-employer-notification")]
         public async Task<IActionResult> ListEmployerNotificationByEmployerIdAsync([FromBody] EmployerNotificationParameter parameters)
@@ -115,11 +100,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author :Thoại Anh 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpPut("MakeAsRead/{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> MakeAsRead(long id)

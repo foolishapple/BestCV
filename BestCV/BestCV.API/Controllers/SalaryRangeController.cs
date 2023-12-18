@@ -20,12 +20,7 @@ namespace BestCV.API.Controllers
 
 
         #region CRUD
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 02/08/2023
-        /// </summary>
-        /// <param name="id">salaryRangeId</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -41,12 +36,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 02/08/2023
-        /// </summary>
-        /// <param name="model">InsertSalaryRangeDTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertSalaryRangeDTO model)
         {
@@ -62,12 +52,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 02/08/2023
-        /// </summary>
-        /// <param name="model">UpdateSalaryRangeDTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateSalaryRangeDTO model)
         {
@@ -83,12 +68,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 02/08/2023
-        /// </summary>
-        /// <param name="id">salaryRangeId</param>
-        /// <returns></returns>
+
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -104,11 +84,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 02/08/2023
-        /// </summary>
-        /// <returns>List SalaryRange</returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {

@@ -19,13 +19,7 @@ namespace BestCV.API.Controllers
             _roleService = roleService;
             _logger = loggerFactory.CreateLogger<RoleController>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: API POST create new role
-        /// </summary>
-        /// <param name="obj">insert role dto object</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertRoleDTO obj)
         {
@@ -40,13 +34,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Auhthor: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: API POST create list role
-        /// </summary>
-        /// <param name="objs">list role</param>
-        /// <returns></returns>
+
         [HttpPost("add-many")]
         public async Task<IActionResult> AddMany([FromBody] IEnumerable<InsertRoleDTO> objs)
         {
@@ -61,13 +49,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: API DELETE delete role by id
-        /// </summary>
-        /// <param name="id">role id</param>
-        /// <returns></returns>
+
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete([Required(ErrorMessage = "Mã vai trò không được để trống")]int id)
         {
@@ -82,13 +64,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: API GET get role detail by id
-        /// </summary>
-        /// <param name="id">role id</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail(int id)
         {
@@ -103,12 +79,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: API GET get list all role
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list-all")]
         public async Task<IActionResult> ListAll()
         {
@@ -123,13 +94,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: API PUT update role
-        /// </summary>
-        /// <param name="obj">update role DTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateRoleDTO obj)
         {
@@ -144,13 +109,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: API PUT update list role
-        /// </summary>
-        /// <param name="obj">list update role DTO</param>
-        /// <returns></returns>
+
         [HttpPut("update-many")]
         public async Task<IActionResult> UpdateMany([FromBody] IEnumerable<UpdateRoleDTO> objs)
         {

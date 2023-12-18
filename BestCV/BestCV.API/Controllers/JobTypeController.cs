@@ -18,12 +18,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : get All
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetAll() 
         {
@@ -42,13 +37,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : Detail by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -63,13 +52,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : add JobType 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertJobTypeDTO obj)
         {
@@ -84,13 +67,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : update JobType 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateJobTypeDTO obj)
         {
@@ -105,13 +82,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : delete JobType 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete([Required] int id)

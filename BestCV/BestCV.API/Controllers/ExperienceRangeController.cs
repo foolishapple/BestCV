@@ -21,12 +21,7 @@ namespace BestCV.API.Controllers
 
 
 		#region CRUD
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">experienceRangeId</param>
-		/// <returns></returns>
+
 		[HttpGet("detail/{id}")]
 		public async Task<IActionResult> Detail([Required] int id)
 		{
@@ -42,12 +37,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="model">InsertExperienceRangeDTO</param>
-		/// <returns></returns>
+
 		[HttpPost("add")]
 		public async Task<IActionResult> Add([FromBody] InsertExperienceRangeDTO model)
 		{
@@ -63,12 +53,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="model">UpdateExperienceRangeDTO</param>
-		/// <returns></returns>
+
 		[HttpPut("update")]
 		public async Task<IActionResult> Update([FromBody] UpdateExperienceRangeDTO model)
 		{
@@ -84,12 +69,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">experienceRangeId</param>
-		/// <returns></returns>
+
 		[HttpDelete("delete")]
 		public async Task<IActionResult> Delete([Required] int id)
 		{
@@ -106,11 +86,7 @@ namespace BestCV.API.Controllers
 		}
 
 
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <returns>List ExperienceRange</returns>
+
 		[HttpGet("list")]
 		public async Task<IActionResult> GetList()
 		{

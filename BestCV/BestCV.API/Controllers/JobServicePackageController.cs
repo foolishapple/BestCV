@@ -21,13 +21,7 @@ namespace BestCV.API.Controllers
             _service = service;
             _logger = loggerFactory.CreateLogger<JobServicePackageController>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 19/09/2023
-        /// Description: API GET list job service aggregate
-        /// </summary>
-        /// <param name="BestCVd">job id</param>
-        /// <returns></returns>
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("list-all-add-on-of-job/{BestCVd}")]
         public async Task<IActionResult> ListAllAddOnOfJob(long BestCVd)

@@ -21,13 +21,7 @@ namespace BestCV.API.Controllers
 			_fileExplorerService = fileExplorerService;
 			_logger = loggerFactory.CreateLogger<FileExplorerController>();
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30/07/2023
-		/// Description: API POST add folder upload
-		/// </summary>
-		/// <param name="obj">insert folder upload DTP object</param>
-		/// <returns></returns>
+
 		[HttpPost("add-folder")]		
 		public async Task<IActionResult> AddFolder([FromBody]InsertFolderUploadDTO obj)
 		{
@@ -42,12 +36,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30/07/2023
-		/// Description: API GET get list all folder upload
-		/// </summary>
-		/// <returns></returns>
+
 		[HttpGet("list-all-folder")]		
 		public async Task<IActionResult> ListAllFolder()
 		{
@@ -62,13 +51,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 31/07/2023
-		/// Description: API POST upload file
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+
 		[HttpPost("upload-file")]
 		[MultipartFormData]
 		public async Task<IActionResult> UploadFile([FromForm] InsertUploadFileDTO obj)
@@ -84,12 +67,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
+
 		[HttpPost("upload-large-file/{id}")]
 		[MultipartFormData]
 		[DisableFormValueModelBinding]
@@ -119,13 +97,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 31/07/2023
-		/// Description: API POST get list paging upload file
-		/// </summary>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
+
 		[HttpPost("list-upload-file")]
 		public async Task<IActionResult> ListUploadFile([FromBody] PagingUploadFileParameter parameters)
 		{
@@ -140,13 +112,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 31/07/2023
-		/// Description: User not admin upload file
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+
 		[HttpPost("upload/{user}/{type}")]		
 		public async Task<IActionResult> Upload([FromForm] InsertUploadFileDTO obj, string user, string type)
 		{

@@ -21,12 +21,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: list interview status
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -42,13 +37,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: detail interview status by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail(int id)
         {
@@ -65,13 +54,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: insert interview status
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertInterviewStatusDTO obj)
         {
@@ -88,13 +71,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: update interview status
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateInterviewStatusDTO obj)
         {
@@ -113,13 +90,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: delete interview status by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {

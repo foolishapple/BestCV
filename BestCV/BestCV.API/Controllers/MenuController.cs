@@ -29,12 +29,7 @@ namespace BestCV.API.Controllers
 
 
         #region CRUD
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 27/07/2023
-        /// </summary>
-        /// <param name="id">MenuID</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -50,12 +45,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 27/07/2023
-        /// </summary>
-        /// <param name="model">InsertMenuDTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertMenuDTO model)
         {
@@ -89,12 +79,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 27/07/2023
-        /// </summary>
-        /// <param name="model">UpdateMenuDTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateMenuDTO model)
         {
@@ -131,12 +116,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 27/07/2023
-        /// </summary>
-        /// <param name="id">MenuId</param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -176,11 +156,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 27/07/2023
-        /// </summary>
-        /// <returns>List Menu</returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -196,11 +172,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 07/09/2023
-        /// </summary>
-        /// <returns>List Menu Admin</returns>
         [HttpGet("list-all-menu-admin")]
         public async Task<IActionResult> GetListMenuAdmin()
         {
@@ -225,11 +196,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 07/09/2023
-        /// </summary>
-        /// <returns>List Menu Admin</returns>
         [HttpGet("list-menu-admin")]
         public async Task<IActionResult> GetListMenePageAdmin()
         {
@@ -247,11 +213,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 12/09/2023
-        /// </summary>
-        /// <returns>List Menu Employer</returns>
+
         [HttpGet("list-all-employer")]
         public async Task<IActionResult> GetListMenuDashboardEmployer()
         {
@@ -273,11 +235,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 07/09/2023
-        /// </summary>
-        /// <returns>List Menu Employer</returns>
+
         [HttpGet("list-all-candidate")]
         public async Task<IActionResult> GetListMenuDashboardCandidate()
         {
@@ -299,11 +257,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 13/09/2023
-        /// </summary>
-        /// <returns>List Header Candidate</returns>
+
         [HttpGet("list-all-header-candidate")]
         public async Task<IActionResult> GetListMenuHeaderCandidate()
         {

@@ -23,12 +23,7 @@ namespace BestCV.API.Controllers
 
         #region CRUD
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: list post layout
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -44,13 +39,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: detail post layout
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -67,13 +56,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: insert post layout
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertPostLayoutDTO obj)
         {
@@ -90,13 +73,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: update post layout
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdatePostLayoutDTO obj)
         {
@@ -115,13 +92,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: delete post layout by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {

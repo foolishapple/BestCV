@@ -20,12 +20,7 @@ namespace BestCV.API.Controllers
             this.logger = loggerFactory.CreateLogger<MultimediaTypeController>();
         }
         #region CRUD
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: list multimedia type
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -41,13 +36,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: detail multimedia type by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -64,13 +53,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: insert multimedia type
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertMultimediaTypeDTO obj)
         {
@@ -87,13 +70,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: update multimedia type
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateMultimediaTypeDTO obj)
         {
@@ -112,13 +89,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: delete multimedia type by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {

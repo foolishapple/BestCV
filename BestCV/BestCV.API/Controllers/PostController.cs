@@ -23,13 +23,7 @@ namespace BestCV.API.Controllers
         }
 
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 28/07/2023
-        /// Description: get list post aggregates
-        /// </summary>
-        /// <param name="parameters">DataTableModel DTParameters</param>
-        /// <returns></returns>
+
         [HttpPost("list-by-post-aggregates")]
         public async Task<IActionResult> GetListPostAggregates([FromBody] DTParameters parameters)
         {
@@ -44,13 +38,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: detail post
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -67,13 +55,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: insert post
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertPostDTO obj)
         {
@@ -90,13 +72,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: update post
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdatePostDTO obj)
         {
@@ -115,13 +91,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: delete post by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -156,12 +126,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedAt: 21/08/2023
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [HttpPost("list-post")]
         public async Task<IActionResult> ListPost([FromBody] PostParameters parameters)
         {
@@ -175,11 +140,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedAt: 21/08/2023
-        /// </summary>
-        /// <returns></returns>
+  
         [HttpGet("filter-post")]
         public async Task<IActionResult> filterPost()
         {

@@ -34,11 +34,7 @@ namespace BestCV.API.Controllers
 
         #region CRUD
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns>tạo mới job</returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> AddJob(InsertJobDTO obj)
         {
@@ -55,13 +51,7 @@ namespace BestCV.API.Controllers
         }
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 24.08.2023
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+  
         [HttpPut("update")]
         public async Task<IActionResult> UpdateJob(UpdateJobDTO obj)
         {
@@ -77,11 +67,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 08/09/2023
-        /// </summary>
-		/// <returns>List MenuType</returns>
+
 		[HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -98,12 +84,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 21.08.2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>chi tiết tin tuyển dụng</returns>
+
         [HttpGet("job-detail/{id}")]
         public async Task<IActionResult> GetDetailById(long id)
         {
@@ -119,13 +100,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 22/08/2023
-        /// Description: API GET get list job aggregate by recruit campain id
-        /// </summary>
-        /// <param name="id">recruit campain id</param>
-        /// <returns></returns>
+
         [HttpGet("list-to-recruit-campain/{id}")]
         public async Task<IActionResult> ListToRecruitCampain(long id)
         {
@@ -140,12 +115,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author : Nam Anh 
-        /// CreatedTime: 22/08/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail-admin/{id}")]
         public async Task<IActionResult> DetailAdmin([Required] long id)
         {
@@ -246,13 +216,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 23/08/2023
-        /// Description: Get list job aggregate datatables paging
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [HttpPost("dt-paging-to-employer")]
         public async Task<IActionResult> DTPagingToEmployer([FromBody] DTJobPagingParameters parameters)
         {
@@ -285,13 +249,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/08//2023
-        /// Description: API POST count job by condition to employer
-        /// </summary>
-        /// <param name="condition">count job condition</param>
-        /// <returns></returns>
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("count-to-employer")]
         public async Task<IActionResult> CountToEmployer([FromBody] CountJobCondition condition)
@@ -309,12 +267,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author : Nam Anh
-        /// CreatedTime : 22/08/2023
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [HttpPost("list-recruitment-news-aggregates")]
         public async Task<IActionResult> ListRecruitmentNewsAggregates(DTParameters parameters)
         {

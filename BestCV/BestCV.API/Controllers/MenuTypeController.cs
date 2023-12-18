@@ -20,12 +20,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// </summary>
-        /// <param name="id">menutypeId</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -41,12 +36,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertMenuTypeDTO model)
         {
@@ -62,12 +52,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateMenuTypeDTO model)
         {
@@ -83,12 +68,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -104,11 +84,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// </summary>
-		/// <returns>List MenuType</returns>
+
 		[HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -125,11 +101,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// </summary>
-		/// <returns>List MenuType</returns>
+
 		[HttpGet("list-menu-type")]
         public async Task<IActionResult> GetListMenuType()
         {

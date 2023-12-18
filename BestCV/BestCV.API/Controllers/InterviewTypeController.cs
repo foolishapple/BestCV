@@ -16,12 +16,7 @@ namespace BestCV.API.Controllers
             _service = service;
             _logger = loggerFactory.CreateLogger<InterviewTypeController>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API GET get list all interview type
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> List()
         {
@@ -36,13 +31,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API GET get interview type detail by id
-        /// </summary>
-        /// <param name="id">interview type id</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required(ErrorMessage = "Mã không được để trống")] int id)
         {
@@ -57,13 +46,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API POST create new interview type
-        /// </summary>
-        /// <param name="obj">insert interview type DTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertInterviewTypeDTO obj)
         {
@@ -78,13 +61,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API PUT update interview type
-        /// </summary>
-        /// <param name="obj">update interview type DTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateInterviewTypeDTO obj)
         {
@@ -99,13 +76,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API DELETE soft delete interview type by id
-        /// </summary>
-        /// <param name="id">interview type id</param>
-        /// <returns></returns>
+ 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete([Required(ErrorMessage = "Mã không được để trống")] int id)
         {

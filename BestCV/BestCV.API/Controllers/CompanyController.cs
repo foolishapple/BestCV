@@ -29,13 +29,7 @@ namespace BestCV.API.Controllers
         //}
 
         #region CRUD     
-        /// <summary>
-        ///  Author: HuyDQ
-        /// CreatedTime : 02/08/2023
-        /// Description : add company
-        /// </summary>
-        /// <param"></param>
-        /// <returns></returns>
+
         [HttpPost("add-profile-company")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Add([FromBody] InsertCompanyDTO obj)
@@ -53,13 +47,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        ///  Author: HuyDQ
-        /// CreatedTime : 02/08/2023
-        /// Description : Detail by id
-        /// </summary>
-        /// <param"></param>
-        /// <returns></returns>
+
         [HttpGet("detailByEmployerId")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> detailByEmployerId()
@@ -77,13 +65,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        ///  Author: HuyDQ
-        /// CreatedTime : 02/08/2023
-        /// Description : Detail by id
-        /// </summary>
-        /// <param"></param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> detail([Required] int id)
         {
@@ -99,13 +81,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        ///  Author: HuyDQ
-        /// CreatedTime : 09/08/2023
-        /// Description : aggregates Detail by id
-        /// </summary>
-        /// <param"></param>
-        /// <returns></returns>
+
         [HttpGet("detailAggregate/{id}")]
         public async Task<IActionResult> GetDetailAggregatesById([Required] int id)
         {
@@ -121,13 +97,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        ///  Author: HuyDQ
-        /// CreatedTime : 02/08/2023
-        /// Description : Update profile company
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update-profile-company")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Update([FromBody] UpdateCompanyDTO obj)
@@ -147,13 +117,6 @@ namespace BestCV.API.Controllers
         #endregion
 
         #region Additional Resources
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 07/08/2023
-        /// Description : Load danh sách tổ chức tuyển dụng admin server side
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
         [HttpPost("list-company-aggregates")]
         public async Task<IActionResult> ListCompanyAgrregates(DTParameters parameters)
         {
@@ -167,12 +130,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 07/08/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail-admin/{id}")]
         public async Task<IActionResult> DetailAdmin(int id)
         {
@@ -188,13 +146,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhnD
-        /// CreatedTime : 07/08/2023
-        /// </summary>
-        /// <param name="fileGuid"></param>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
+
         [HttpGet]
         [Route("download-excel")]
         public IActionResult DownloadExcel(string fileGuid, string fileName)
@@ -217,12 +169,7 @@ namespace BestCV.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 07/08/2023
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+
         [HttpPost("export-excel")]
         public async Task<IActionResult> ExportExcel(List<CompanyAggregates> data)
         {

@@ -19,12 +19,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: list job category
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -40,13 +35,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: detail job category by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -63,13 +52,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: insert job category
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+ 
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertJobCategoryDTO obj)
         {
@@ -86,13 +69,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: update job category
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateJobCategoryDTO obj)
         {
@@ -111,13 +88,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 25/07/2023
-        /// Description: delete job category by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {

@@ -21,12 +21,7 @@ namespace BestCV.API.Controllers
 
         #region CRUD
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// CreatedAt: 23/08/2023
-        /// Description: get list interview Schedule by candidate id
-        /// </summary>
-        /// <returns></returns>
+ 
         [HttpGet("getListInterviewByCandiddateId")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> ListInterviewByCandidateId()
@@ -44,12 +39,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// CreatedAt: 29/08/2023
-        /// Description: get list interview Schedule by employer id
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("getListInterviewByEmployerId")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> ListInterviewByEmployerId()
@@ -67,12 +57,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// CreatedAt: 30/08/2023
-        /// Description: get list interview Schedule by candidate id
-        /// </summary>
-        /// <returns></returns>
+
         [HttpPost("add")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Add([FromBody] InsertInterviewScheduleDTO obj)

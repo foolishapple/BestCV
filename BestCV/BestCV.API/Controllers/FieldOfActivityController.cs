@@ -17,12 +17,7 @@ namespace BestCV.API.Controllers
 			_service = service;
 			_logger = loggerFactory.CreateLogger<FieldOfActivityController>();
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: API GET get list all Field Of Activity
-		/// </summary>
-		/// <returns></returns>
+
 		[HttpGet("list")]
 		public async Task<IActionResult> List()
 		{
@@ -37,13 +32,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: API GET get Field Of Activity detail by id
-		/// </summary>
-		/// <param name="id">Field Of Activity id</param>
-		/// <returns></returns>
+
 		[HttpGet("detail/{id}")]
 		public async Task<IActionResult> Detail([Required(ErrorMessage = "Mã không được để trống")] int id)
 		{
@@ -58,13 +47,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: API POST create new Field Of Activity
-		/// </summary>
-		/// <param name="obj">insert Field Of Activity DTO</param>
-		/// <returns></returns>
+
 		[HttpPost("add")]
 		public async Task<IActionResult> Add([FromBody] InsertFieldOfActivityDTO obj)
 		{
@@ -79,13 +62,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: API PUT update Field Of Activity
-		/// </summary>
-		/// <param name="obj">update Field Of Activity DTO</param>
-		/// <returns></returns>
+
 		[HttpPut("update")]
 		public async Task<IActionResult> Update([FromBody] UpdateFieldOfActivityDTO obj)
 		{
@@ -100,13 +77,7 @@ namespace BestCV.API.Controllers
 				return BadRequest();
 			}
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: API DELETE soft delete Field Of Activity by id
-		/// </summary>
-		/// <param name="id">Field Of Activity id</param>
-		/// <returns></returns>
+
 		[HttpDelete("delete/{id}")]
 		public async Task<IActionResult> Delete([Required(ErrorMessage = "Mã không được để trống")] int id)
 		{
@@ -122,13 +93,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author: HuyDQ
-		/// Created: 16/08/2023
-		/// Description: lấy dữ liệu và đếm xem có bảo nhiêu nhà tuyển dụng có lĩnh vực này
-		/// </summary>
-		/// <param></param>
-		/// <returns></returns>
+
 		[HttpGet("filter-field-of-activity")]
 		public async Task<IActionResult> filterJob()
 		{

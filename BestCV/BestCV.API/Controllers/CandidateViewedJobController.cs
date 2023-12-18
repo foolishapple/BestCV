@@ -82,13 +82,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 13/09/2023
-        /// Description: datatable paging candidate viewed job parameter
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("dt-paging")]
         public async Task<IActionResult> DTPaging([FromBody]DTCandidateViewedJobParameters parameters)

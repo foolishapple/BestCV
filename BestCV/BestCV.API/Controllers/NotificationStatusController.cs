@@ -17,12 +17,7 @@ namespace BestCV.API.Controllers
             _service = service;
             _logger = loggerFactory.CreateLogger<NotificationStatusController>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API GET get list all notification status
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> List()
         {
@@ -37,13 +32,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API GET get notification status detail by id
-        /// </summary>
-        /// <param name="id">notification status id</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required(ErrorMessage = "Mã không được để trống")] int id)
         {
@@ -58,13 +47,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API POST create new notification status
-        /// </summary>
-        /// <param name="obj">insert notification status DTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertNotificationStatusDTO obj)
         {
@@ -79,13 +62,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API PUT update notification status
-        /// </summary>
-        /// <param name="obj">update notification status DTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateNotificationStatusDTO obj)
         {
@@ -100,13 +77,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API DELETE soft delete notification status by id
-        /// </summary>
-        /// <param name="id">notification status id</param>
-        /// <returns></returns>
+
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete([Required(ErrorMessage = "Mã không được để trống")] int id)
         {

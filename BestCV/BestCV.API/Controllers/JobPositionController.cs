@@ -21,12 +21,7 @@ namespace BestCV.API.Controllers
 
 
 		#region CRUD
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">jobPositionId</param>
-		/// <returns></returns>
+
 		[HttpGet("detail/{id}")]
 		public async Task<IActionResult> Detail([Required] int id)
 		{
@@ -42,12 +37,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="model">InsertJobPositionDTO</param>
-		/// <returns></returns>
+
 		[HttpPost("add")]
 		public async Task<IActionResult> Add([FromBody] InsertJobPositionDTO model)
 		{
@@ -63,12 +53,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="model">UpdateJobPositionDTO</param>
-		/// <returns></returns>
+
 		[HttpPut("update")]
 		public async Task<IActionResult> Update([FromBody] UpdateJobPositionDTO model)
 		{
@@ -84,12 +69,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">jobPositionId</param>
-		/// <returns></returns>
+
 		[HttpDelete("delete")]
 		public async Task<IActionResult> Delete([Required] int id)
 		{
@@ -105,11 +85,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : ThanhND
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <returns>List Job position</returns>
+
 		[HttpGet("list")]
 		public async Task<IActionResult> GetList()
 		{

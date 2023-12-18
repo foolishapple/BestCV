@@ -37,12 +37,7 @@ namespace BestCV.API.Controllers
         #endregion
 
         #region Additional Resources
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 22/08/2023
-        /// Description: Lấy danh sách template publish
-        /// </summary>
-        /// <returns></returns>
+ 
         [HttpGet("get-all-publish")]
         public async Task<IActionResult> GetAllPublish()
         {

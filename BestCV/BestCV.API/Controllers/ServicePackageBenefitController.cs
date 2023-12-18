@@ -20,12 +20,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 11/09/2023
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns></returns>
+  
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -41,12 +36,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 11/09/2023
-        /// </summary>
-        /// <param name="model">InsertServicePackageBenefitDTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertServicePackageBenefitDTO model)
         {
@@ -62,12 +52,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 11/09/2023
-        /// </summary>
-        /// <param name="model">UpdateServicePackageBenefitDTO</param>
-        /// <returns></returns>
+ 
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateServicePackageBenefitDTO model)
         {
@@ -83,12 +68,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 11/09/2023
-        /// </summary>
-        /// <param name="id">id</param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -104,11 +84,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 09/08/2023
-        /// </summary>
-        /// <returns>List</returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -127,12 +103,7 @@ namespace BestCV.API.Controllers
         #endregion
 
         #region Additional Resources
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 11/09/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpGet("list-by-service-package-id/{id}")]
         public async Task<IActionResult> GetListByServicePackageId(int id)
         {

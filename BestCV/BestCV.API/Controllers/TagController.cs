@@ -25,12 +25,6 @@ namespace BestCV.API.Controllers
 
         #region CRUD
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: list tag
-        /// </summary>
-        /// <returns></returns>
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -46,13 +40,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: detail tag
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -69,13 +56,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: insert tag
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertTagDTO obj)
         {
@@ -92,13 +72,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: update tag
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateTagDTO obj)
         {
@@ -117,13 +91,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: delete tag by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+ 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -141,13 +109,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: Add tag with tag type post
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("add-tag-for-post")]
         public async Task<IActionResult> AddTagForPost([FromBody] InsertTagDTO obj)
         {
@@ -164,12 +126,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: list tag
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list-tag-select")]
         public async Task<IActionResult> GetListTagSelect([FromQuery] TagForSelect2DTO obj)
         {
@@ -186,12 +143,7 @@ namespace BestCV.API.Controllers
         }
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 18.08.2023
-        /// Description: danh sách tag type job
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list-tag-type-job")]
         public async Task<IActionResult> GetListTagTypeJob()
         {
@@ -209,13 +161,7 @@ namespace BestCV.API.Controllers
 
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 18.08.2023
-        /// description: Add tag with tag type job
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("add-tag-for-job")]
         public async Task<IActionResult> AddTagForJob(InsertTagDTO obj)
         {
@@ -232,10 +178,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// </summary>
-        /// <returns></returns>
         [HttpGet("list-post-tag")]
         public async Task<IActionResult> ListPostTag()
         {

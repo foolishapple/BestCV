@@ -22,12 +22,7 @@ namespace BestCV.API.Controllers
 
 
 		#region CRUD
-		/// <summary>
-		/// Author : HuyDQ
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">LicenseId</param>
-		/// <returns></returns>
+
 		[HttpGet("detail/{id}")]
 		public async Task<IActionResult> Detail([Required] long id)
 		{
@@ -43,12 +38,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : HuyDQ
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="model">InsertLicenseDTO</param>
-		/// <returns></returns>
+
 		[HttpPost("add")]
 		public async Task<IActionResult> Add([FromBody] InsertLicenseDTO model)
 		{
@@ -64,12 +54,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : HuyDQ
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="model">UpdateLicenseDTO</param>
-		/// <returns></returns>
+
 		[HttpPut("update")]
 		public async Task<IActionResult> Update([FromBody] UpdateLicenseDTO model)
 		{
@@ -85,12 +70,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : HuyDQ
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">LicenseId</param>
-		/// <returns></returns>
+
 		[HttpDelete("delete/{id}")]
 		public async Task<IActionResult> Delete([Required] long id)
 		{
@@ -106,11 +86,7 @@ namespace BestCV.API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Author : HuyDQ
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <returns>List by companyId</returns>
+
 		[HttpGet("listByCompanyId/{id}")]
 		public async Task<IActionResult> ListByCompanyId([Required] int id)
 		{
@@ -129,12 +105,7 @@ namespace BestCV.API.Controllers
 
 
 		#region Additional Resources
-		/// <summary>
-		/// Author : HuyDQ
-		/// CreatedTime : 07/09/2023
-		/// </summary>
-		/// <param name="parameters"></param>
-		/// <returns></returns>
+
 		[HttpPost("list-license-aggregates")]
 		public async Task<IActionResult> ListLicenseAgrregates(DTParameters parameters)
 		{

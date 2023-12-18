@@ -18,12 +18,7 @@ namespace BestCV.API.Controllers
             _service = service;
             _logger = loggerFactory.CreateLogger<RolePermissionController>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get list all role permission
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> List()
         {
@@ -38,13 +33,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNNGTD
-        /// Created: 09/08/2023
-        /// Description: Update list role permission
-        /// </summary>
-        /// <param name="obj">update list role permission DTO</param>
-        /// <returns></returns>
+
         [HttpPost("update-list")]
         public async Task<IActionResult> UpdateList([FromBody] UpdateListRolePermissionDTO obj)
         {

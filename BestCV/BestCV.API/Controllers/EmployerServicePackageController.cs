@@ -20,12 +20,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 03/08/2023
-        /// </summary>
-        /// <param name="id">employerServicePackageId</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -41,12 +36,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 03/08/2023
-        /// </summary>
-        /// <param name="model">InsertEmployerServicePackageDTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertEmployerServicePackageDTO model)
         {
@@ -62,12 +52,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 03/08/2023
-        /// </summary>
-        /// <param name="model">UpdateEmployerServicePackageDTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateEmployerServicePackageDTO model)
         {
@@ -83,12 +68,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 03/08/2023
-        /// </summary>
-        /// <param name="id">employerServicePackageId</param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -104,11 +84,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 03/08/2023
-        /// </summary>
-        /// <returns>List Employer Service Package</returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {

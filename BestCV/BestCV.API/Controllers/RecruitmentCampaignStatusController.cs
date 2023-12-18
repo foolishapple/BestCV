@@ -16,12 +16,7 @@ namespace BestCV.API.Controllers
             _service = service;
             _logger = loggerFactory.CreateLogger<RecruitmentCampaignStatusController>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API GET get list all Recruitment Campaign Status
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> List()
         {
@@ -36,13 +31,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API GET get Recruitment Campaign Status detail by id
-        /// </summary>
-        /// <param name="id">Recruitment Campaign Status id</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required(ErrorMessage = "Mã không được để trống")] int id)
         {
@@ -57,13 +46,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API POST create new Recruitment Campaign Status
-        /// </summary>
-        /// <param name="obj">insert Recruitment Campaign Status DTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertRecruitmentCampaignStatusDTO obj)
         {
@@ -78,13 +61,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API PUT update Recruitment Campaign Status
-        /// </summary>
-        /// <param name="obj">update Recruitment Campaign Status DTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateRecruitmentCampaignStatusDTO obj)
         {
@@ -99,13 +76,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: API DELETE soft delete Recruitment Campaign Status by id
-        /// </summary>
-        /// <param name="id">Recruitment Campaign Status id</param>
-        /// <returns></returns>
+  
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete([Required(ErrorMessage = "Mã không được để trống")] int id)
         {

@@ -24,13 +24,6 @@ namespace BestCV.API.Controllers
 
         #region CRUD
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Lấy dữ liệu province chi tiết
-        /// </summary>
-        /// <param name="id">ID province</param>
-        /// <returns>Dữ liệu province chi tiết</returns>
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -46,12 +39,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Lấy danh sách tất cả Province
-        /// </summary>
-        /// <returns>Danh sách tất cả Province</returns>
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -71,12 +58,7 @@ namespace BestCV.API.Controllers
 
         #region Additional Resources
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: API Lấy dữ liệu hành chính VN đưa vào DB
-        /// </summary>
-        /// <returns>Đưa thành công hay không</returns>
+
         [HttpGet("get-province-data")]
         public async Task<IActionResult> GetProvinceData()
         {
@@ -92,13 +74,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/20923
-        /// Description: Lấy danh sách quận huyện từ ID tỉnh thành
-        /// </summary>
-        /// <param name="cityId">ID tỉnh thành</param>
-        /// <returns>Danh sách quận huyện</returns>
         [HttpGet("list-district-by-cityid/{cityId}")]
         public async Task<IActionResult> GetListDistrictByCityId(int cityId) {
             try
@@ -113,12 +88,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Lấy danh sách toàn bộ tỉnh thành
-        /// </summary>
-        /// <returns>Danh sách toàn bộ tỉnh thành</returns>
+
         [HttpGet("list-city")]
         public async Task<IActionResult> GetListCity()
         {

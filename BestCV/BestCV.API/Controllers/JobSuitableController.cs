@@ -130,11 +130,7 @@ namespace BestCV.API.Controllers
 
 
         #region Additional Resources
-		/// <summary>
-		/// Author : Nam Anh
-		/// CreatedTime : 8/09/2023
-		/// </summary>
-		/// <returns></returns>
+
         [HttpGet("list-aggregates")]
         public async Task<IActionResult> GetListAggregates()
         {

@@ -21,12 +21,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 10/08/2023
-        /// </summary>
-        /// <param name="id">employer servicepackageemployerbenefitId </param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -42,12 +37,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 10/08/2023
-        /// </summary>
-        /// <param name="model">InsertEmployerServicePackageEmployerBenefitDTO</param>
-        /// <returns></returns>
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertEmployerServicePackageEmployerBenefitDTO model)
         {
@@ -63,12 +52,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 10/08/2023
-        /// </summary>
-        /// <param name="model">UpdateEmployerServicePackageEmployerBenefitDTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateEmployerServicePackageEmployerBenefitDTO model)
         {
@@ -84,12 +68,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 10/08/2023
-        /// </summary>
-        /// <param name="id">employer servicepackageemployerbenefitId </param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -105,11 +84,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 10/08/2023
-        /// </summary>
-        /// <returns>List employer service package employer benefit </returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {

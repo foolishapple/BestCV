@@ -23,12 +23,7 @@ namespace BestCV.API.Controllers
 
 
         #region CRUD
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 02/10/2023
-        /// </summary>
-        /// <param name="id">id</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] long id)
         {
@@ -44,12 +39,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime :  02/10/2023
-        /// </summary>
-        /// <param name="model">InsertEmployerWalletHistoryDTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertEmployerWalletHistoryDTO model)
         {
@@ -64,12 +54,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author : Thoại Anh
-        /// CreatedTime : 04/10/2023
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [HttpPost("list-employer-wallet-history")]
         public async Task<IActionResult> ListEmployerWalletHistories(DTParameters parameters)
         {
@@ -83,12 +68,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: Thoại Anh
-        /// CreatedTime : 04/10/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpPut("quick-isApproved")]
         public async Task<IActionResult> QuickIsApproved([Required] long id)
         {
@@ -103,12 +83,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 02/10/2023
-        /// </summary>
-        /// <param name="model">UpdateEmployerWalletHistoryDTO</param>
-        /// <returns></returns>
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateEmployerWalletHistoryDTO model)
         {
@@ -124,12 +99,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 02/10/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] int id)
         {
@@ -146,11 +116,7 @@ namespace BestCV.API.Controllers
         }
 
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime :02/10/2023
-        /// </summary>
-        /// <returns>List</returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {

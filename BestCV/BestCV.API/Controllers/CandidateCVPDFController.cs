@@ -23,12 +23,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 21/08/2023
-        /// </summary>
-        /// <param name="id">candidate CV PDF id</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -44,12 +39,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 21/08/2023
-        /// </summary>
-        /// <param name="model">InsertCandidateCVPDFDTO</param>
-        /// <returns></returns>
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertCandidateCVPDFDTO model)
         {
@@ -65,12 +54,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 21/08/2023
-        /// </summary>
-        /// <param name="model">UpdateCandidateCVPDFDTO</param>
-        /// <returns></returns>
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateCandidateCVPDFDTO model)
         {
@@ -86,12 +69,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 21/08/2023
-        /// </summary>
-        /// <param name="id">candidate CV PDF id</param>
-        /// <returns></returns>
         [HttpDelete("delete")]
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete([Required] int id)
@@ -108,11 +85,6 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 21/08/2023
-        /// </summary>
-        /// <returns>List candidate CV PDF </returns>
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -150,12 +122,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 21/08/2023
-        /// </summary>
-        /// <param name="model">InsertCandidateCVPDFDTO</param>
-        /// <returns></returns>
+
         [HttpPost("add-cv")]
         public async Task<IActionResult> AddCV([FromBody] UploadCandidateCVPDFDTO model)
         {

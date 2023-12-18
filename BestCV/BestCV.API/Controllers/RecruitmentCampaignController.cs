@@ -21,13 +21,7 @@ namespace BestCV.API.Controllers
             _logger = loggerFactory.CreateLogger<RecruitmentCampaignController>();
         }
         #region CRUD
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 22/08/2023
-        /// Description: API POST add new recruitment campagin to employer
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost("add-to-employer")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> AddToEmployer([FromBody] InsertRecruitmentCampaignDTO obj)
@@ -45,13 +39,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 22/08/2023
-        /// Description: API PUT update recruitment campagin to employer
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("update-to-employer")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> UpdateToEmployer([FromBody] UpdateRecruitmentCampaignDTO obj)
@@ -67,13 +55,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 22/08/2023
-        /// Description: API PUT update recruitment campagin to employer
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPut("change-approved-to-employer")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> ChangeApprovedToEmployer([FromBody] ChangeApproveRecruitmentCampaignDTO obj)
@@ -89,13 +71,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 22/08/2023
-        /// Description: API GET get recruitment campagin detail by id
-        /// </summary>
-        /// <param name="id">recruitment campaign id</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail(long id)
         {
@@ -111,12 +87,7 @@ namespace BestCV.API.Controllers
             }
         }
         #endregion
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 16/08/2023
-        /// Description: API GET get list Recruitment Campaign to employer 
-        /// </summary>
-        /// <returns></returns>
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("list-to-employer")]
         public async Task<IActionResult> ListToEmployer()
@@ -133,13 +104,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 21/08/2023
-        /// Description: API POST get list recruitment campaign datatables paging
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("list-dt-paging")]
         public async Task<IActionResult> ListDTPaging([FromBody] DTRecruitmentCampaignParameter parameters)
@@ -157,12 +122,7 @@ namespace BestCV.API.Controllers
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 13/09/2023
-        /// Description: API Get list recruitment campagin opened to eployer
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("list-opening-to-employer")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> ListOpeningToEmployer()

@@ -20,12 +20,7 @@ namespace BestCV.API.Controllers
         }
 
         #region CRUD
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 13/09/2023
-        /// </summary>
-        /// <param name="id">employercartId</param>
-        /// <returns></returns>
+
         [HttpGet("detail/{id}")]
         public async Task<IActionResult> Detail([Required] int id)
         {
@@ -41,12 +36,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 13/09/2023
-        /// </summary>
-        /// <param name="model">InsertEmployerCartDTO</param>
-        /// <returns></returns>
+
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] InsertEmployerCartDTO model)
         {
@@ -62,12 +52,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 13/09/2023
-        /// </summary>
-        /// <param name="model">UpdateEmployerCartDTO</param>
-        /// <returns></returns>
+ 
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateEmployerCartDTO model)
         {
@@ -83,12 +68,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 13/09/2023
-        /// </summary>
-        /// <param name="id">employercartid</param>
-        /// <returns></returns>
+
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([Required] long id)
         {
@@ -104,11 +84,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 13/09/2023
-        /// </summary>
-        /// <returns>List employer cart</returns>
+
         [HttpGet("list")]
         public async Task<IActionResult> GetList()
         {
@@ -161,13 +137,7 @@ namespace BestCV.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Author ThanhND
-        /// CreatedTime 14/09/2023
-        /// Description Add 1 item to cart
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         [HttpPost("add-to-cart/{id}")]
         public async Task<IActionResult> AddToCart(int id)
         {

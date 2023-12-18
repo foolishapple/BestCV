@@ -26,14 +26,8 @@ namespace BestCV.Application.Services.Implement
             _logger = loggerFactory.CreateLogger<SlideService>();
             _mapper = mapper;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Create new slide
-        /// </summary>
-        /// <param name="obj">slide DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertSlideDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertSlideDTO obj)
         {
             List<string> listErrors = new List<string>();
             
@@ -45,7 +39,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             
             
@@ -61,16 +55,10 @@ namespace BestCV.Application.Services.Implement
             
             await _repository.CreateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Create new list slide
-        /// </summary>
-        /// <param name="objs">list slide DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertSlideDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertSlideDTO> objs)
         {
             List<string> errors = new();
             var items = objs.Select(c => _mapper.Map<Slide>(c));
@@ -82,85 +70,52 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateListAsync(items);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get list all slide
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _repository.GetAllSort();
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get slide by id
-        /// </summary>
-        /// <param name="id">slide id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> GetByIdAsync(int id)
+   
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var item = await _repository.GetByIdAsync(id);
             if (item == null)
             {
                 throw new Exception($"Not found slide by id: {id}");
             }
-            return DionResponse.Success(item);
+            return BestCVResponse.Success(item);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Soft delete slide by id
-        /// </summary>
-        /// <param name="id">slide by id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var result = await _repository.SoftDeleteAsync(id);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(id);
+                return BestCVResponse.Success(id);
             }
             throw new Exception($"Not found slide by id: {id}");
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Soft delete list slide by list slide id
-        /// </summary>
-        /// <param name="objs">list slide id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Failed delete</exception>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             var result = await _repository.SoftDeleteListAsync(objs);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(objs);
+                return BestCVResponse.Success(objs);
             }
             throw new Exception($"Failed to soft delete list slide by list slide id");
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Update slide
-        /// </summary>
-        /// <param name="obj">update slide DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateAsync(UpdateSlideDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateSlideDTO obj)
         {
             var item = await _repository.GetByIdAsync(obj.Id);
            
@@ -183,22 +138,15 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             
             await _repository.UpdateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: update list slide
-        /// </summary>
-        /// <param name="obj">list slide DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateSlideDTO> obj)
+
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateSlideDTO> obj)
         {
             List<Slide> updateItems = new();
             List<string> errors = new();
@@ -215,19 +163,13 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateListAsync(updateItems);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Validate to slide
-        /// </summary>
-        /// <param name="obj">slide object</param>
-        /// <returns></returns>
+
         private async Task<List<string>> Validate(Slide obj)
         {
             List<string> errors = new();
@@ -237,12 +179,7 @@ namespace BestCV.Application.Services.Implement
             }
             return errors;
         }
-        /// <summary>
-        /// Author : Thoại Anh
-        /// CreatedTime : 10/09/2023
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+
         public async Task<bool> ChangeOrderSlide(ChangeSlideDTO model)
         {
             var courseLectueUp = _mapper.Map<Slide>(model.SlideUp);
@@ -264,14 +201,14 @@ namespace BestCV.Application.Services.Implement
             return false;
         }
 
-        public async Task<DionResponse> ListSlideShowonHomepage()
+        public async Task<BestCVResponse> ListSlideShowonHomepage()
         {
             var data = await _repository.ListSlideShowonHomepage();
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

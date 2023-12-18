@@ -12,7 +12,7 @@ namespace BestCV.Application.Services.Interfaces
 {
 	public interface ICouponService : IServiceQueryBase<int, InsertCouponDTO, UpdateCouponDTO,CouponDTO>
 	{
-        Task<DionResponse> ListAggregatesAsync();
+        Task<BestCVResponse> ListAggregatesAsync();
 
     }
 }

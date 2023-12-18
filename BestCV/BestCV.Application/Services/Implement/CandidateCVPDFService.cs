@@ -28,78 +28,78 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
 
         }
-        public async Task<DionResponse> CreateAsync(InsertCandidateCVPDFDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertCandidateCVPDFDTO obj)
         {
             var data = _mapper.Map<CandidateCVPDF>(obj);
             data.Active = true;
             data.CreatedTime = DateTime.Now;
             await _candidateCVPDFRepository.CreateAsync(data);
             await _candidateCVPDFRepository.SaveChangesAsync();
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateCVPDFDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateCVPDFDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _candidateCVPDFRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = _mapper.Map<List<CandidateCVPDFDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByCandidateId(long candidateId)
+        public async Task<BestCVResponse> GetByCandidateId(long candidateId)
         {
             var data = await _candidateCVPDFRepository.FindByConditionAsync(x=>x.CandidateId == candidateId && x.Active);
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = _mapper.Map<List<CandidateCVPDFDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await _candidateCVPDFRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = _mapper.Map<CandidateCVPDFDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var data = await _candidateCVPDFRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await _candidateCVPDFRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateCandidateCVPDFDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateCandidateCVPDFDTO obj)
         {
             var data = await _candidateCVPDFRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var update = _mapper.Map(obj, data);
             
@@ -108,21 +108,21 @@ namespace BestCV.Application.Services.Implement
 
             await _candidateCVPDFRepository.SaveChangesAsync();
 
-            return DionResponse.Success(update);
+            return BestCVResponse.Success(update);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateCVPDFDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateCVPDFDTO> obj)
         {
             throw new NotImplementedException();
         }
-        public async Task<DionResponse> UploadCV(UploadCandidateCVPDFDTO model)
+        public async Task<BestCVResponse> UploadCV(UploadCandidateCVPDFDTO model)
         {
             var data = _mapper.Map<CandidateCVPDF>(model);
             data.Active = true;
             data.CreatedTime = DateTime.Now;
             await _candidateCVPDFRepository.CreateAsync(data);
             await _candidateCVPDFRepository.SaveChangesAsync();
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

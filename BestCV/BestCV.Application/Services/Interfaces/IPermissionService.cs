@@ -11,13 +11,7 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IPermissionService : IServiceQueryBase<int, InsertPermissionDTO, UpdatePermissionDTO, PermissionDTO>
     {
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 07/08/2023
-        /// Description: Get permission detail by id
-        /// </summary>
-        /// <param name="id">permission id</param>
-        /// <returns></returns>
-        Task<DionResponse> Detail(int id);
+
+        Task<BestCVResponse> Detail(int id);
     }
 }

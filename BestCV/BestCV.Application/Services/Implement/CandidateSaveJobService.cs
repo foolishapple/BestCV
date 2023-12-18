@@ -29,31 +29,31 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
             repositoryCandidate = _repositoryCandidate;
         }
-        public Task<DionResponse> CreateAsync(InsertCandidateSaveJobDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertCandidateSaveJobDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateSaveJobDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateSaveJobDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetByIdAsync(long id)
+        public Task<BestCVResponse> GetByIdAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetListJobByCandidateId(long candidateId)
+        public async Task<BestCVResponse> GetListJobByCandidateId(long candidateId)
         {
             var dataCandidat =  await repository.ListCandidateSaveJobByCandidateId(candidateId);
 
-            return DionResponse.Success(dataCandidat);
+            return BestCVResponse.Success(dataCandidat);
         }
 
         public Task<DTResult<CandidateSaveJobAggregates>> PagingByCandidateId(DTPagingCandidateSaveJobParameters parameters)
@@ -61,12 +61,12 @@ namespace BestCV.Application.Services.Implement
             return repository.PagingByCandidateId(parameters);
         }
 
-        public async Task<DionResponse> QuickSaveJob(long id, long accountId)
+        public async Task<BestCVResponse> QuickSaveJob(long id, long accountId)
         {
             var dataAccount = await repositoryCandidate.GetByIdAsync(accountId);
             if(dataAccount == null)
             {
-                return DionResponse.NotFound("Tài khoản không tồn tại", dataAccount);
+                return BestCVResponse.NotFound("Tài khoản không tồn tại", dataAccount);
             }
             //nếu đã tồn tại thì xóa
             if(await repository.IsJobIdExist(accountId, id))
@@ -76,7 +76,7 @@ namespace BestCV.Application.Services.Implement
                 {
                     await repository.HardDeleteAsync(saveJob.Id);
                     await repository.SaveChangesAsync();
-                    return DionResponse.Success(saveJob, "Deleted");
+                    return BestCVResponse.Success(saveJob, "Deleted");
                 }
             }
             //nếu chưa tồn tại thì thêm mới
@@ -91,35 +91,35 @@ namespace BestCV.Application.Services.Implement
             result.Id = 0;
             await repository.CreateAsync(result);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(candidateSaveJob);
+            return BestCVResponse.Success(candidateSaveJob);
 
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var res = await repository.SoftDeleteAsync(id);
             await repository.SaveChangesAsync();
             if (res)
             {
-                return DionResponse.Success();
+                return BestCVResponse.Success();
             }
             else
             {
-                return DionResponse.Error();
+                return BestCVResponse.Error();
             }
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateCandidateSaveJobDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateCandidateSaveJobDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateSaveJobDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateSaveJobDTO> obj)
         {
             throw new NotImplementedException();
         }

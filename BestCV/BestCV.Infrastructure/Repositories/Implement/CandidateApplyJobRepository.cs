@@ -24,13 +24,7 @@ namespace BestCV.Infrastructure.Repositories.Implement
             _db = db;
             _unitOfWork = unitOfWork;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 24/08/2023
-        /// Description: count candidate apply job by condition
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
+       
         public async Task<int> CountByCondition(CountCandidateApplyJobCondition condition)
         {
             var query = from caj in _db.CandidateApplyJobs
@@ -55,13 +49,7 @@ namespace BestCV.Infrastructure.Repositories.Implement
             return count;
         }
 
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 15/08/2023
-        /// Description: Datatables pagging candidate apply job
-        /// </summary>
-        /// <param name="parameters">Paging parameters</param>
-        /// <returns></returns>
+       
         public async Task<DTResult<CandidateApplyJobAggregate>> DTPaging(DTPagingCandidateApplyJobParameters parameters)
         {
             //0.Opttion

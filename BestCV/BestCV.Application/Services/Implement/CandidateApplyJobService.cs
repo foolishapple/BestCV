@@ -41,12 +41,12 @@ namespace BestCV.Application.Services.Implement
             _config = config;
         }
 
-        public async Task<DionResponse> ApplyJob(long jobId, long candidateId)
+        public async Task<BestCVResponse> ApplyJob(long jobId, long candidateId)
         {
             var dataAccount = await _candidateRepository.GetByIdAsync(candidateId);
             if (dataAccount == null)
             {
-                return DionResponse.NotFound("Tài khoản không tồn tại", dataAccount);
+                return BestCVResponse.NotFound("Tài khoản không tồn tại", dataAccount);
             }
             //nếu đã tồn tại thì xóa
             if (await _candidateApplyJobRepository.IsJobIdExist(candidateId, jobId))
@@ -56,7 +56,7 @@ namespace BestCV.Application.Services.Implement
                 {
                     await _candidateApplyJobRepository.HardDeleteAsync(applyJob[0].Id);
                     await _candidateApplyJobRepository.SaveChangesAsync();
-                    return DionResponse.Success(applyJob, "Deleted");
+                    return BestCVResponse.Success(applyJob, "Deleted");
                 }
             }
             //nếu chưa tồn tại thì thêm mới
@@ -76,7 +76,7 @@ namespace BestCV.Application.Services.Implement
             var result = _mapper.Map<CandidateApplyJob>(candidateApplyJob);
             await _candidateApplyJobRepository.CreateAsync(result);
             await _candidateApplyJobRepository.SaveChangesAsync();
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public async Task<DionResponse> ChangeStatus(ChangeStatusCandidateApplyJobDTO obj)
+        public async Task<BestCVResponse> ChangeStatus(ChangeStatusCandidateApplyJobDTO obj)
         {
             var item = await _candidateApplyJobRepository.GetByIdAsync(obj.Id);
             if (item == null)
@@ -96,7 +96,7 @@ namespace BestCV.Application.Services.Implement
             var model = _mapper.Map(obj, item);
             await _candidateApplyJobRepository.UpdateAsync(model);
             await _candidateApplyJobRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
         /// <summary>
         /// Author: TUNGTD
@@ -105,9 +105,9 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param name="id">employer id</param>
         /// <returns></returns>
-        public async Task<DionResponse> CountTotalCVByEmployer(long id)
+        public async Task<BestCVResponse> CountTotalCVByEmployer(long id)
         {
-            return DionResponse.Success(await _candidateApplyJobRepository.CountByCondition(new CountCandidateApplyJobCondition()
+            return BestCVResponse.Success(await _candidateApplyJobRepository.CountByCondition(new CountCandidateApplyJobCondition()
             {
                 RecruitmentCampaginIds = new () { id }
             }));
@@ -119,9 +119,9 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param name="id">employer id</param>
         /// <returns></returns>
-        public async Task<DionResponse> CountTotalCVCandidateApplyByEmployer(long id)
+        public async Task<BestCVResponse> CountTotalCVCandidateApplyByEmployer(long id)
         {
-            return DionResponse.Success(await _candidateApplyJobRepository.CountByCondition(new CountCandidateApplyJobCondition()
+            return BestCVResponse.Success(await _candidateApplyJobRepository.CountByCondition(new CountCandidateApplyJobCondition()
             {
                 RecruitmentCampaginIds = new () { id },
                 CandidateApplyJobSourceIds = new () {CandidateApplyJobSourceConst.CANDIDATE_APPLY}
@@ -136,7 +136,7 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param name="obj">insert candidate apply job DTO</param>
         /// <returns>dion response</returns>
-        public async Task<DionResponse> CreateAsync(InsertCandidateApplyJobDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertCandidateApplyJobDTO obj)
         {
             
             var item = _mapper.Map<CandidateApplyJob>(obj);
@@ -151,7 +151,7 @@ namespace BestCV.Application.Services.Implement
             }
             if(listErr.Count > 0)
             {
-                return DionResponse.BadRequest(listErr);
+                return BestCVResponse.BadRequest(listErr);
             }
             await _candidateApplyJobRepository.CreateAsync(item);
             await _candidateApplyJobRepository.SaveChangesAsync();
@@ -179,10 +179,10 @@ namespace BestCV.Application.Services.Implement
                 _logger.LogError("Fail send notification", ex);
 
             }
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateApplyJobDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateApplyJobDTO> objs)
         {
             throw new NotImplementedException();
         }
@@ -205,7 +205,7 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param name="id">Mã ứng viên ứng tuyển tin tuyển dụng</param>
         /// <returns></returns>
-        public async Task<DionResponse> EmployerViewed(long id)
+        public async Task<BestCVResponse> EmployerViewed(long id)
         {
             var entity = await _candidateApplyJobRepository.GetByIdAsync(id);
             if (entity != null)
@@ -213,17 +213,17 @@ namespace BestCV.Application.Services.Implement
                 entity.IsEmployerViewed = true;
                 await _candidateApplyJobRepository.UpdateAsync(entity);
                 await _candidateApplyJobRepository.SaveChangesAsync();
-                return DionResponse.Success();
+                return BestCVResponse.Success();
             }
             throw new Exception($"Not found candidate apply job with id: {id}");
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetByIdAsync(long id)
+        public Task<BestCVResponse> GetByIdAsync(long id)
         {
             throw new NotImplementedException();
         }
@@ -233,17 +233,17 @@ namespace BestCV.Application.Services.Implement
             return _candidateApplyJobRepository.PagingByCandidateId(parameters);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateCandidateApplyJobDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateCandidateApplyJobDTO obj)
         {
             throw new NotImplementedException();
         }
@@ -255,7 +255,7 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public async Task<DionResponse> UpdateDescription(AddNoteCandidateApplyJobDTO obj)
+        public async Task<BestCVResponse> UpdateDescription(AddNoteCandidateApplyJobDTO obj)
         {
             var item = await _candidateApplyJobRepository.GetByIdAsync(obj.Id);
             if (item == null)
@@ -265,11 +265,11 @@ namespace BestCV.Application.Services.Implement
             var model = _mapper.Map(obj, item);
             await _candidateApplyJobRepository.UpdateAsync(model);
             await _candidateApplyJobRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateApplyJobDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateApplyJobDTO> obj)
         {
             throw new NotImplementedException();
         }
@@ -280,9 +280,9 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param name="id">job id</param>
         /// <returns></returns>
-        public async Task<DionResponse> CountTotalToJob(long id)
+        public async Task<BestCVResponse> CountTotalToJob(long id)
         {
-            return DionResponse.Success(await _candidateApplyJobRepository.CountByCondition(new CountCandidateApplyJobCondition()
+            return BestCVResponse.Success(await _candidateApplyJobRepository.CountByCondition(new CountCandidateApplyJobCondition()
             {
                 JobIds = new() { id }
             }));
@@ -294,34 +294,34 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param name="id">job id</param>
         /// <returns></returns>
-        public async Task<DionResponse> CountTotalCVCandidateApplyToJob(long id)
+        public async Task<BestCVResponse> CountTotalCVCandidateApplyToJob(long id)
         {
-            return DionResponse.Success(await _candidateApplyJobRepository.CountByCondition(new CountCandidateApplyJobCondition()
+            return BestCVResponse.Success(await _candidateApplyJobRepository.CountByCondition(new CountCandidateApplyJobCondition()
             {
                 JobIds = new() { id },
                 CandidateApplyJobSourceIds = new() { CandidateApplyJobSourceConst.CANDIDATE_APPLY }
             }));
         }
 
-        public async Task<DionResponse> GetListCandidateApplyToJob(long jobId, long candidateApplyJobId)
+        public async Task<BestCVResponse> GetListCandidateApplyToJob(long jobId, long candidateApplyJobId)
         {
             //var data = await _candidateApplyJobRepository.FindByConditionAsync(x=>x.Active && x.Id != candidateApplyJobId && x.JobId == jobId);
             var data = await _candidateApplyJobRepository.GetListCandidateApplyJobCompare(jobId, candidateApplyJobId);
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> DetailById(long jobId,long candidateApplyJobId)
+        public async Task<BestCVResponse> DetailById(long jobId,long candidateApplyJobId)
         {
             var data = await _candidateApplyJobRepository.DetailById(jobId, candidateApplyJobId);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

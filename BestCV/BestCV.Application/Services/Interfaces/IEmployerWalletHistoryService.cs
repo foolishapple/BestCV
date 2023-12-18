@@ -12,8 +12,8 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IEmployerWalletHistoryService : IServiceQueryBase<long, InsertEmployerWalletHistoryDTO, UpdateEmployerWalletHistoryDTO, EmployerWalletHistoryDTO>
     {
-        Task<DionResponse> ReportCVCandidate(ReportCandidateDTO model);
+        Task<BestCVResponse> ReportCVCandidate(ReportCandidateDTO model);
         Task<object> ListEmployerWalletHistories(DTParameters parameters);
-        Task<DionResponse> QuickIsApprovedAsync(long id);
+        Task<BestCVResponse> QuickIsApprovedAsync(long id);
     }
 }

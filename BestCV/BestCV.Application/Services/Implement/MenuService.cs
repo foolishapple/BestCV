@@ -34,13 +34,8 @@ namespace BestCV.Application.Services.Implement
             _serviceProvider = serviceProvider;
         }
 
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime: 27/07/2023
-        /// </summary>
-        /// <param name="obj">InsertMenuDTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertMenuDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertMenuDTO obj)
         {
             var menu = mapper.Map<Menu>(obj);
             menu.Active = true;
@@ -56,7 +51,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             using (var trans = await menuRepository.BeginTransactionAsync())
             {
@@ -97,115 +92,97 @@ namespace BestCV.Application.Services.Implement
                     throw new Exception("Failed to create new menu");
                 }
             }
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertMenuDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertMenuDTO> objs)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime: 27/07/2023
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await menuRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<MenuDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 07/09/2023
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllMenuAdmin()
+
+        public async Task<BestCVResponse> GetAllMenuAdmin()
         {
             var data = await menuRepository.FindByConditionAsync(x => x.Active && x.MenuTypeId == MenuConstant.DEFAULT_VALUE_MENU_ADMIN);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<MenuDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetAllMenuDashboardCandidate()
+        public async Task<BestCVResponse> GetAllMenuDashboardCandidate()
         {
             var data = await menuRepository.FindByConditionAsync(x => x.Active && x.MenuTypeId == MenuConstant.DEFAULT_VALUE_DASHBOARD_CANDIDATE);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<MenuDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetAllMenuDashboardEmployer()
+        public async Task<BestCVResponse> GetAllMenuDashboardEmployer()
         {
             var data = await menuRepository.FindByConditionAsync(x => x.Active && x.MenuTypeId == MenuConstant.DEFAULT_VALUE_DASHBOARD_EMPLOYER);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<MenuDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetAllMenuHeaderCandidate()
+        public async Task<BestCVResponse> GetAllMenuHeaderCandidate()
         {
             var data = await menuRepository.FindByConditionAsync(x => x.Active && x.MenuTypeId == MenuConstant.DEFAULT_VALUE_HEADER_CANDIDATE);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<MenuDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime: 27/07/2023
-        /// </summary>
-        /// <param name="id">MenuId</param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await menuRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<MenuDTO>(data);
             var roles = await _roleMenuRepository.FindByConditionAsync(c => c.MenuId == data.Id);
             HashSet<int> roleIds = roles.Select(c => c.RoleId).ToHashSet();
             result.Roles = roleIds;
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetListMenuHomepage()
+        public async Task<BestCVResponse> GetListMenuHomepage()
         {
             var data = await menuRepository.ListMenuHomepage();
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime: 27/07/2023
-        /// </summary>
-        /// <param name="id">MenuId</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+  
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await menuRepository.SoftDeleteAsync(id);
             if (data)
@@ -221,35 +198,30 @@ namespace BestCV.Application.Services.Implement
                     bool isDelete = await menuRepository.SoftDeleteListAsync(listIds);
                     if (!isDelete)
                     {
-                        return DionResponse.BadRequest("Không thể xóa menu, hãy thử lại sau");
+                        return BestCVResponse.BadRequest("Không thể xóa menu, hãy thử lại sau");
                     }
                 }
                 await menuRepository.SaveChangesAsync();
 
-                return DionResponse.Success();
+                return BestCVResponse.Success();
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
 
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime: 27/07/2023
-        /// </summary>
-        /// <param name="obj">UpdateMenuDTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateMenuDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateMenuDTO obj)
         {
             var menu = await menuRepository.GetByIdAsync(obj.Id);
             if (menu == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var updateMenu = mapper.Map(obj, menu);
             menu.Description = !string.IsNullOrEmpty(menu.Description) ? menu.Description.ToEscape() : null;
@@ -263,7 +235,7 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             using(var trans = await menuRepository.BeginTransactionAsync())
             {
@@ -298,10 +270,10 @@ namespace BestCV.Application.Services.Implement
                     throw new Exception("Failed to update menu");
                 }
             }
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateMenuDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateMenuDTO> obj)
         {
             throw new NotImplementedException();
         }

@@ -11,6 +11,6 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ISkillLevelService : IServiceQueryBase<int, InsertSkillLevelDTO, UpdateSkillLevelDTO, SkillLevelDTO>
     {
-        Task<DionResponse> UpdateAsync(UpdateSkillLevelDTO obj);
+        Task<BestCVResponse> UpdateAsync(UpdateSkillLevelDTO obj);
     }
 }

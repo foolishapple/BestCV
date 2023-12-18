@@ -28,14 +28,8 @@ namespace BestCV.Application.Services.Implement
             this.logger = loggerFactory.CreateLogger<MultimediaTypeService>();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: add multimedia type 
-        /// </summary>
-        /// <param name="obj">InsertMultimediaTypeDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> CreateAsync(InsertMultimediaTypeDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertMultimediaTypeDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await multimediaTypeRepository.IsNameExistAsync(0, obj.Name.Trim());
@@ -46,7 +40,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var newObj = mapper.Map<MultimediaType>(obj);
             newObj.Id = 0;
@@ -56,82 +50,59 @@ namespace BestCV.Application.Services.Implement
 
             await multimediaTypeRepository.CreateAsync(newObj);
             await multimediaTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(newObj);
+            return BestCVResponse.Success(newObj);
 
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertMultimediaTypeDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertMultimediaTypeDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get list multimedia type 
-        /// </summary>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await multimediaTypeRepository.FindByConditionAsync(c => c.Active);
             if (data==null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", data);
+                return BestCVResponse.NotFound("Không có dữ liệu.", data);
             }
             var temp = mapper.Map<List<MultimediaTypeDTO>>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get multimedia type by id 
-        /// </summary>
-        /// <param name="id">MultimediaTypeId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await multimediaTypeRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", id);
+                return BestCVResponse.NotFound("Không có dữ liệu.", id);
             }
             var temp = mapper.Map<MultimediaTypeDTO>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: soft delete multimedia type by id
-        /// </summary>
-        /// <param name="id">MultimediaTypeId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await multimediaTypeRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await multimediaTypeRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu.", id);
+            return BestCVResponse.NotFound("Không có dữ liệu.", id);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: update multimedia type
-        /// </summary>
-        /// <param name="obj">UpdateMultimediaTypeDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> UpdateAsync(UpdateMultimediaTypeDTO obj)
+ 
+        public async Task<BestCVResponse> UpdateAsync(UpdateMultimediaTypeDTO obj)
         {
             var listErrors = new List<string>();
 
@@ -142,23 +113,23 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var data = await multimediaTypeRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var updateObj = mapper.Map(obj, data);
             updateObj.Description = !string.IsNullOrEmpty(updateObj.Description) ? updateObj.Description.ToEscape() : null;
             await multimediaTypeRepository.UpdateAsync(updateObj);
             await multimediaTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateMultimediaTypeDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateMultimediaTypeDTO> obj)
         {
             throw new NotImplementedException();
         }

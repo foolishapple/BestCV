@@ -24,14 +24,8 @@ namespace BestCV.Application.Services.Implement
             _logger = loggerFactory.CreateLogger<EmployerActivityLogTypeService>();
             _mapper = mapper;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Create new employer activity log type
-        /// </summary>
-        /// <param name="obj">employer activity log type DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertEmployerActivityLogTypeDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertEmployerActivityLogTypeDTO obj)
         {
             var item = _mapper.Map<EmployerActivityLogType>(obj);
             item.Active = true;
@@ -39,20 +33,14 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Create new list employer activity log type
-        /// </summary>
-        /// <param name="objs">list employer activity log type DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertEmployerActivityLogTypeDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertEmployerActivityLogTypeDTO> objs)
         {
             List<string> errors = new();
             var items = objs.Select(c => _mapper.Map<EmployerActivityLogType>(c));
@@ -64,85 +52,52 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateListAsync(items);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get list all employer activity log type
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _repository.FindByConditionAsync(c => c.Active);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get employer activity log type by id
-        /// </summary>
-        /// <param name="id">employer activity log type id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var item = await _repository.GetByIdAsync(id);
             if (item == null)
             {
                 throw new Exception($"Not found employer activity log type by id: {id}");
             }
-            return DionResponse.Success(item);
+            return BestCVResponse.Success(item);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Soft delete employer activity log type by id
-        /// </summary>
-        /// <param name="id">employer activity log type by id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var result = await _repository.SoftDeleteAsync(id);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(id);
+                return BestCVResponse.Success(id);
             }
             throw new Exception($"Not found employer activity log type by id: {id}");
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Soft delete list employer activity log type by list employer activity log type id
-        /// </summary>
-        /// <param name="objs">list employer activity log type id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Failed delete</exception>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             var result = await _repository.SoftDeleteListAsync(objs);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(objs);
+                return BestCVResponse.Success(objs);
             }
             throw new Exception($"Failed to soft delete list employer activity log type by list employer activity log type id");
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Update employer activity log type
-        /// </summary>
-        /// <param name="obj">update employer activity log type DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateAsync(UpdateEmployerActivityLogTypeDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateEmployerActivityLogTypeDTO obj)
         {
             var item = await _repository.GetByIdAsync(obj.Id);
             if (item == null)
@@ -153,21 +108,14 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: update list employer activity log type
-        /// </summary>
-        /// <param name="obj">list employer activity log type DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateEmployerActivityLogTypeDTO> obj)
+
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateEmployerActivityLogTypeDTO> obj)
         {
             List<EmployerActivityLogType> updateItems = new();
             List<string> errors = new();
@@ -184,19 +132,13 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateListAsync(updateItems);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Validate to employer activity log type
-        /// </summary>
-        /// <param name="obj">employer activity log type object</param>
-        /// <returns></returns>
+
         private async Task<List<string>> Validate(EmployerActivityLogType obj)
         {
             List<string> errors = new();

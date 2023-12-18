@@ -27,7 +27,7 @@ namespace BestCV.Application.Services.Implement
             logger = loggerFactory.CreateLogger<IAccountStatusService>();
             mapper = _mapper;
         }
-        public async Task<DionResponse> CreateAsync(InsertAccountStatusDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertAccountStatusDTO obj)
         {
             var accountStatus = mapper.Map<AccountStatus>(obj);
             accountStatus.Active = true;
@@ -46,65 +46,65 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await accountStatusRepository.CreateAsync(accountStatus);
             await accountStatusRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertAccountStatusDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertAccountStatusDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await accountStatusRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<AccountStatusDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await accountStatusRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<AccountStatusDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await accountStatusRepository.SoftDeleteAsync(id);
             if (data)
             {
-                //return DionResponse.Success();
+                //return BestCVResponse.Success();
                 await accountStatusRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateAccountStatusDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateAccountStatusDTO obj)
         {
             var accountStatus = await accountStatusRepository.GetByIdAsync(obj.Id);
             if (accountStatus == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var updateSalary = mapper.Map(obj, accountStatus);
             accountStatus.Description = !string.IsNullOrEmpty(accountStatus.Description) ? accountStatus.Description.ToEscape() : null;
@@ -123,19 +123,19 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             await accountStatusRepository.UpdateAsync(updateSalary);
 
             await accountStatusRepository.SaveChangesAsync();
 
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
-            //return DionResponse.Error("Cập nhật loại lương không thành công");
+            //return BestCVResponse.Error("Cập nhật loại lương không thành công");
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateAccountStatusDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateAccountStatusDTO> obj)
         {
             throw new NotImplementedException();
         }

@@ -18,11 +18,11 @@ namespace BestCV.Application.Services.Interfaces
     {
         Task<CandidateFollowCompany> GetAsyncByCandidateIdAndCompanyI(long candidateId, int companyId);
 
-        public Task<DionResponse> InsertCandidateWithViewModel(InsertCandidateFollowCompanyDTO candidateDTO, long candidateId);
+        public Task<BestCVResponse> InsertCandidateWithViewModel(InsertCandidateFollowCompanyDTO candidateDTO, long candidateId);
 
-        Task<DionResponse> GetListCompanyByCandidateId(long candidateId);
+        Task<BestCVResponse> GetListCompanyByCandidateId(long candidateId);
 
-        Task<DionResponse> HardDeleteAsync(long id);
+        Task<BestCVResponse> HardDeleteAsync(long id);
 
         Task<DTResult<CandidateFollowCompanyAggregates>> PagingByCandidateId(DTPagingCandidateFollowCompanyParameters parameters);
     }

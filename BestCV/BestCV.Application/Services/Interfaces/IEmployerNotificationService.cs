@@ -16,9 +16,9 @@ namespace BestCV.Application.Services.Interfaces
     {
         Task<List<EmployerNotification>> GetAllByEmployerId(long employerId);
         Task<DTResult<EmployerNotification>> DTPaging(EmployerNotificationParameter parameters, long employerId);
-        Task<DionResponse> MakeAsRead(long id);
-        Task<DionResponse> CountUnreadByEmployerId(long id);
-        Task<DionResponse> ListRecented(long id);
+        Task<BestCVResponse> MakeAsRead(long id);
+        Task<BestCVResponse> CountUnreadByEmployerId(long id);
+        Task<BestCVResponse> ListRecented(long id);
 
     }
 }

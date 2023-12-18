@@ -36,14 +36,8 @@ namespace BestCV.Application.Services.Implement
 			_logger = loggerFactory.CreateLogger<FileExplorerService>();
 			_fileStorageService = fileStorageService;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30/07/2023
-		/// Description: add folder upload
-		/// </summary>
-		/// <param name="obj">insert folder upload DTO object</param>
-		/// <returns></returns>
-		public async Task<DionResponse> AddFolder(InsertFolderUploadDTO obj)
+
+		public async Task<BestCVResponse> AddFolder(InsertFolderUploadDTO obj)
 		{
 			FolderUpload? parent = null;
 			List<string> errors = new();
@@ -54,7 +48,7 @@ namespace BestCV.Application.Services.Implement
 				if (parent == null)
 				{
 					errors.Add("Mã thư mục cha không chính xác.");
-					return DionResponse.BadRequest(errors);
+					return BestCVResponse.BadRequest(errors);
 				}
 			}
 			string newFolderName = obj.Name.GetValidFolderName();
@@ -83,15 +77,10 @@ namespace BestCV.Application.Services.Implement
 			};
 			await _folderUploadRepository.CreateAsync(model);
 			await _folderUploadRepository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30/07/2023
-		/// Description: Get list all folder upload
-		/// </summary>
-		/// <returns></returns>
-		public async Task<DionResponse> GetAllFolders()
+
+		public async Task<BestCVResponse> GetAllFolders()
 		{
 			var data = await _folderUploadRepository.GetAllAsync();
 			foreach(var item in data)
@@ -99,17 +88,10 @@ namespace BestCV.Application.Services.Implement
 				item.TreeIds = $"{item.TreeIds}_{item.Id}";
 			}
 			data.OrderByDescending(c => c.TreeIds);
-			return DionResponse.Success(data);
+			return BestCVResponse.Success(data);
 		}
-		/// <summary>
-		/// Auhthor: TUNGTD
-		/// Created: 31/07/2023
-		/// Description: Save many file
-		/// </summary>
-		/// <param name="obj">insert upload file DTO</param>
-		/// <returns></returns>
-		/// <exception cref="Exception">not found folder root</exception>
-		public async Task<DionResponse> SaveFile(InsertUploadFileDTO obj)
+
+		public async Task<BestCVResponse> SaveFile(InsertUploadFileDTO obj)
 		{
 			var folder = await _folderUploadRepository.GetByIdAsync(obj.FolderUploadId);
 			if (folder == null)
@@ -120,17 +102,10 @@ namespace BestCV.Application.Services.Implement
 			var models = await _fileStorageService.SaveManyFile(obj,rootFolder);
 			await _uploadFileRepository.CreateListAsync(models);
 			await _uploadFileRepository.SaveChangesAsync();
-			return DionResponse.Success(models);
+			return BestCVResponse.Success(models);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 31/07/2023
-		/// Description: save large file
-		/// </summary>
-		/// <param name="obj">insert large upload file DTO</param>
-		/// <returns></returns>
-		/// <exception cref="Exception">folder not found</exception>
-		public async Task<DionResponse> SaveLargeFile(InsertLargeUploadFileDTO obj)
+
+		public async Task<BestCVResponse> SaveLargeFile(InsertLargeUploadFileDTO obj)
 		{
 			var folder = await _folderUploadRepository.GetByIdAsync(obj.FolderUploadId);
 			if (folder == null)
@@ -142,15 +117,10 @@ namespace BestCV.Application.Services.Implement
 			var models = await _fileStorageService.SaveLargeFile(obj, rootFolder);
 			await _uploadFileRepository.CreateListAsync(models);
 			await _uploadFileRepository.SaveChangesAsync();
-			return DionResponse.Success();
+			return BestCVResponse.Success();
 		}
 
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30/07/2023
-		/// Description: Get root web folder in JOBI storage
-		/// </summary>
-		/// <returns></returns>
+
 		private string GetRootFolderPath()
 		{
 			string rootPath = _webHostEnvironment.ContentRootPath;
@@ -161,33 +131,19 @@ namespace BestCV.Application.Services.Implement
 			}
 			return rootPath;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 31/07/2023
-		/// Description: get list paging upload file
-		/// </summary>
-		/// <param name="parameters">paging upload file parameters</param>
-		/// <returns></returns>
-		public async Task<DionResponse> ListPagingFile(PagingUploadFileParameter parameters)
+
+		public async Task<BestCVResponse> ListPagingFile(PagingUploadFileParameter parameters)
 		{
 			var data = await _uploadFileRepository.ListPaging(parameters);
-			return DionResponse.Success(data);
+			return BestCVResponse.Success(data);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 01/08/2023
-		/// Description: Current usre upload file
-		/// </summary>
-		/// <param name="obj">insert upload file DTO</param>
-		/// <param name="user">type user upload</param>
-		/// <param name="type">type file upload</param>
-		/// <returns></returns>
-		public async Task<DionResponse> CurrentUserSaveFile(InsertUploadFileDTO obj, string user, string type)
+
+		public async Task<BestCVResponse> CurrentUserSaveFile(InsertUploadFileDTO obj, string user, string type)
 		{
 
             if (obj.Files.Any(c=>c.Length > UploadFileConst.MAXIMUM_UPLOAD_SIZE))
 			{
-				return DionResponse.BadRequest("Dung lượng tối đa của tệp tin tải lên là 5MB");
+				return BestCVResponse.BadRequest("Dung lượng tối đa của tệp tin tải lên là 5MB");
 			}
 			var folder = await _folderUploadRepository.GetByIdAsync(obj.FolderUploadId);
 			if (folder == null)
@@ -210,7 +166,7 @@ namespace BestCV.Application.Services.Implement
 			}
 			await _uploadFileRepository.CreateListAsync(data);
 			await _uploadFileRepository.SaveChangesAsync();
-			return DionResponse.Success(data);
+			return BestCVResponse.Success(data);
 		}
 	}
 }

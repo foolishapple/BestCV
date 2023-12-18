@@ -31,14 +31,8 @@ namespace BestCV.Application.Services.Implement
             this.mapper = mapper;
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: add recruitment status
-        /// </summary>
-        /// <param name="obj">InsertRecruitmentStatusDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> CreateAsync(InsertRecruitmentStatusDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertRecruitmentStatusDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await recruitmentStatusRepository.IsNameExistAsync(0, obj.Name.Trim());
@@ -56,7 +50,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var newObj = mapper.Map<RecruitmentStatus>(obj);
@@ -67,81 +61,58 @@ namespace BestCV.Application.Services.Implement
 
             await recruitmentStatusRepository.CreateAsync(newObj);
             await recruitmentStatusRepository.SaveChangesAsync();
-            return DionResponse.Success(newObj);
+            return BestCVResponse.Success(newObj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertRecruitmentStatusDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertRecruitmentStatusDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get list recruitment status
-        /// </summary>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await recruitmentStatusRepository.FindByConditionAsync(s=>s.Active);
             if (data ==null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", data);
+                return BestCVResponse.NotFound("Không có dữ liệu.", data);
             }
             var temp = mapper.Map<List<RecruitmentStatusDTO>>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get recruitment status by id
-        /// </summary>
-        /// <param name="id">RecruitmentStatusId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await recruitmentStatusRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", id);
+                return BestCVResponse.NotFound("Không có dữ liệu.", id);
             }
             var temp = mapper.Map<RecruitmentStatusDTO>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: soft delte recruitment status by id
-        /// </summary>
-        /// <param name="id">RecruitmentStatusId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+ 
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await recruitmentStatusRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await recruitmentStatusRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu.", id);
+            return BestCVResponse.NotFound("Không có dữ liệu.", id);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: update recruitment status 
-        /// </summary>
-        /// <param name="obj">UpdateRecruitmentStatusDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> UpdateAsync(UpdateRecruitmentStatusDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateRecruitmentStatusDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await recruitmentStatusRepository.IsNameExistAsync(obj.Id, obj.Name.Trim());
@@ -157,24 +128,24 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var data = await recruitmentStatusRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var updateObj = mapper.Map(obj, data);
             updateObj.Description = !string.IsNullOrEmpty(updateObj.Description) ? updateObj.Description.ToEscape() : null;
 
             await recruitmentStatusRepository.UpdateAsync(updateObj);
             await recruitmentStatusRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateRecruitmentStatusDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateRecruitmentStatusDTO> obj)
         {
             throw new NotImplementedException();
         }

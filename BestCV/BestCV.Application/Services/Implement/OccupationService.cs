@@ -23,14 +23,8 @@ namespace BestCV.Application.Services.Implement
             occupationRepository = _occupationRepository;
             mapper = _mapper;
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:27/07/2023
-        /// Description: insert occupation
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertOccupationDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertOccupationDTO obj)
         {
             List<string> listError = new List<string>();
             var isNameExist = await occupationRepository.IsNameExisAsync(obj.Name, 0);
@@ -40,7 +34,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listError.Count > 0)
             {
-                return DionResponse.BadRequest(listError);
+                return BestCVResponse.BadRequest(listError);
             }    
 
             var model = mapper.Map<Occupation>(obj);
@@ -51,70 +45,47 @@ namespace BestCV.Application.Services.Implement
             await occupationRepository.CreateAsync(model);
             
             await occupationRepository.SaveChangesAsync();
-			return DionResponse.Success(model);
+			return BestCVResponse.Success(model);
 		}
 
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:27/07/2023
-        /// Description: get all occupation
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await occupationRepository.FindByConditionAsync(c => c.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var model = data.Select(c => mapper.Map<OccupationDTO>(c));
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-		/// <summary>
-		/// Author: TrungHieuTr
-		/// CreatedTime:27/07/2023
-		/// Description: get occupation by id 
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		public async Task<DionResponse> GetByIdAsync(int id)
+
+		public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await occupationRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var model = mapper.Map<OccupationDTO>(data);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-		/// <summary>
-		/// Author: TrungHieuTr
-		/// CreatedTime:27/07/2023
-		/// Description: delete occupation
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		public async Task<DionResponse> SoftDeleteAsync(int id)
+
+		public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var result = await occupationRepository.SoftDeleteAsync(id);
             if (!result)
             {
-                return DionResponse.NotFound("Không có dữ liệu", id);
+                return BestCVResponse.NotFound("Không có dữ liệu", id);
 			}
 			await occupationRepository.SaveChangesAsync();
-			return DionResponse.Success();
+			return BestCVResponse.Success();
         }
 
-		/// <summary>
-		/// Author: TrungHieuTr
-		/// CreatedTime:27/07/2023
-		/// Description: update occupation
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
-		public async Task<DionResponse> UpdateAsync(UpdateOccupationDTO obj)
+
+		public async Task<BestCVResponse> UpdateAsync(UpdateOccupationDTO obj)
         {
             List<string> listErrors = new List<string>();
             var checkName = await occupationRepository.IsNameExisAsync(obj.Name, obj.Id);
@@ -124,29 +95,29 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var occupation = await occupationRepository.GetByIdAsync(obj.Id);
             if (occupation == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var model = mapper.Map(obj, occupation);
             model.Description = !string.IsNullOrEmpty(model.Description) ? model.Description.ToEscape() : null;
             await occupationRepository.UpdateAsync(model);
             await occupationRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateOccupationDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateOccupationDTO> obj)
         {
             throw new NotImplementedException();
         }
-		public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+		public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
 		{
 			throw new NotImplementedException();
 		}
-		public Task<DionResponse> CreateListAsync(IEnumerable<InsertOccupationDTO> objs)
+		public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertOccupationDTO> objs)
 		{
 			throw new NotImplementedException();
 		}

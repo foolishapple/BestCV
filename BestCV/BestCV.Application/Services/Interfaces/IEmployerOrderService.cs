@@ -19,22 +19,16 @@ namespace BestCV.Application.Services.Interfaces
         Task<object> ListOrderAggregates(DTParameters parameters);
         Task<List<SelectListItem>> ListOrderStatusSelected();
         Task<List<SelectListItem>> ListPaymentMethodSelected();
-        Task<DionResponse> QuickIsApprovedAsync(long id);
-        Task<DionResponse> AdminDetailAsync(long id);
+        Task<BestCVResponse> QuickIsApprovedAsync(long id);
+        Task<BestCVResponse> AdminDetailAsync(long id);
         Task<EmployerOrderAndOrderDetailDTO> ListOrderDetailByOrderId(long id);
-        Task<DionResponse> UpdateInfoOrder(UpdateInfoOrderDTO model);
-        Task<DionResponse> AddOrder(CreateEmployerOrderDTO model);
-        Task<DionResponse> ListByEmployerId(long employerId);
+        Task<BestCVResponse> UpdateInfoOrder(UpdateInfoOrderDTO model);
+        Task<BestCVResponse> AddOrder(CreateEmployerOrderDTO model);
+        Task<BestCVResponse> ListByEmployerId(long employerId);
         Task<object> PagingByEmployerId(DTPagingEmployerOrderParameters parameters);
-        Task<DionResponse> DetailByOrderId(long orderId);
-        Task<DionResponse> CancelOrder(long orderId);
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 21/09/2023
-        /// Description: Update order status
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        Task<DionResponse> UpdateOrderStatus(UpdateEmployerOrderStatusDTO obj);
+        Task<BestCVResponse> DetailByOrderId(long orderId);
+        Task<BestCVResponse> CancelOrder(long orderId);
+
+        Task<BestCVResponse> UpdateOrderStatus(UpdateEmployerOrderStatusDTO obj);
     }
 }

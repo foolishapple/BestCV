@@ -43,12 +43,12 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        public async Task<DionResponse> CreateAsync(InsertCompanyDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertCompanyDTO obj)
         {
             var isNameExist = await companyRepository.IsNameExist(obj.Name.Trim());
             if (isNameExist)
             {
-                return DionResponse.Error("Tên đã tồn tại.");
+                return BestCVResponse.Error("Tên đã tồn tại.");
 
             }
             var newObj = mapper.Map<Company>(obj);
@@ -67,53 +67,46 @@ namespace BestCV.Application.Services.Implement
             var result = await companyRepository.SaveChangesAsync();
             if (result > 0)
             {
-                return DionResponse.Success(newObj);
+                return BestCVResponse.Success(newObj);
 
             }
             else
             {
-                return DionResponse.Error("Thêm mới công ty không thành công.");
+                return BestCVResponse.Error("Thêm mới công ty không thành công.");
             }
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCompanyDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCompanyDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await companyRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<CompanyDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// Create: 02/08/2023
-        /// Description: Detail company by employerId
-        /// </summary>
-        /// <param name="obj">Update employer DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetDetailByEmnployerId(long CompanyId)
+        public async Task<BestCVResponse> GetDetailByEmnployerId(long CompanyId)
         {
             var data = await companyRepository.GetDetailByEmnployerId(CompanyId);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", data);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", data);
             }
             var model = mapper.Map<CompanyDTO>(data);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
         public Task<bool> IsNameExist(string name)
@@ -126,58 +119,47 @@ namespace BestCV.Application.Services.Implement
             return await companyRepository.ListCompanyAggregates(parameters);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(int id)
+        public Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// Create: 01/08/2023
-        /// Description: Update company
-        /// </summary>
-        /// <param name="obj">Update employer DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateCompanyDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateCompanyDTO obj)
         {
             var company = await companyRepository.GetDetailByEmnployerId(obj.EmployerId);
             if (company == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", obj);
             }
             var model = mapper.Map(obj, company);
             await companyRepository.UpdateAsync(model);
             await companyRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCompanyDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCompanyDTO> obj)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> DetailAdmin(int id)
+        public async Task<BestCVResponse> DetailAdmin(int id)
         {
             var company = await companyRepository.GetByIdAsync(id);
             var companyDetail = mapper.Map<CompanyAdminDTO>(company);
             var employer = await employerRepository.GetByIdAsync(companyDetail.EmployerId);
 
             companyDetail.Employer = mapper.Map<EmployerDetailDTO>(employer);
-            return DionResponse.Success(companyDetail);
+            return BestCVResponse.Success(companyDetail);
         }
 
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime : 04/08/2023
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> ExportExcel(List<CompanyAggregates> data)
+
+        public async Task<BestCVResponse> ExportExcel(List<CompanyAggregates> data)
         {
             if (data.Count > 0)
             {
@@ -340,11 +322,11 @@ namespace BestCV.Application.Services.Implement
                     FileGuid = handle,
                     FileName = fileName,
                 };
-                return DionResponse.Success(obj);
+                return BestCVResponse.Success(obj);
             }
             else
             {
-                return DionResponse.BadRequest("Failed to export Excel");
+                return BestCVResponse.BadRequest("Failed to export Excel");
             }
         }
 
@@ -362,39 +344,27 @@ namespace BestCV.Application.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Author : HuyDQ
-        /// CreatedTime : 09/08/2023
-        /// Description : Lấy chi tiết tổ chức tuyển dụng
-        /// </summary>
-        /// <param name="companyId"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetCompanyAggregatesById(int companyId)
+
+        public async Task<BestCVResponse> GetCompanyAggregatesById(int companyId)
         {
             var data = await companyRepository.GetCompanyAggregatesById(companyId);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
 
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        /// <summary>
-        /// Author : HuyDQ
-        /// CreatedTime : 17/08/2023
-        /// Description : Tìm kiếm công ty trang chủ (server side)
-        /// </summary>
-        /// <param name="parameter">SearchingCompanyParameters</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SearchCompanyHomePageAsync(SearchingCompanyParameters parameter)
+ 
+        public async Task<BestCVResponse> SearchCompanyHomePageAsync(SearchingCompanyParameters parameter)
         {
             var data = await companyRepository.SearchCompanyHomePageAsync(parameter);
             if (data.DataSource == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

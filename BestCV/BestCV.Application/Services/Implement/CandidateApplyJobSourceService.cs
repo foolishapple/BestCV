@@ -27,13 +27,7 @@ namespace BestCV.Application.Services.Implement
             _logger = loggerFactory.CreateLogger<CandidateApplyJobSourceService>();
             mapper = _mapper;
         }
-        /// <summary>
-        /// Author : Thoai Anh
-        /// CreatedTime : 05/09/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertCandidateApplyJobSourceDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertCandidateApplyJobSourceDTO obj)
         {
             List<string> listErrors = new List<string>();
             var checkName = await _candidateApplyJobSourceRepository.IsNameExistAsync(obj.Name, 0);
@@ -43,7 +37,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var model = mapper.Map<CandidateApplyJobSource>(obj);
             model.Id = 0;
@@ -52,64 +46,49 @@ namespace BestCV.Application.Services.Implement
             model.Description = !string.IsNullOrEmpty(model.Description) ? model.Description.ToEscape() : null;
             await _candidateApplyJobSourceRepository.CreateAsync(model);
             await _candidateApplyJobSourceRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateApplyJobSourceDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateApplyJobSourceDTO> objs)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 16/08/2023
-        /// Description: Get list all candidate apply job source
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _candidateApplyJobSourceRepository.FindByConditionAsync(c => c.Active);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await _candidateApplyJobSourceRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", data);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", data);
             }
             var model = mapper.Map<CandidateApplyJobSourceDTO>(data);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author : Thoai Anh
-        /// CreatedTime : 05/09/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await _candidateApplyJobSourceRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await _candidateApplyJobSourceRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
             }
 
-            return DionResponse.NotFound("Không có dữ liệu. ", id);
+            return BestCVResponse.NotFound("Không có dữ liệu. ", id);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author : Thoai Anh
-        /// CreatedTime : 05/09/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateCandidateApplyJobSourceDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateCandidateApplyJobSourceDTO obj)
         {
             List<string> listErrors = new List<string>();
             var checkName = await _candidateApplyJobSourceRepository.IsNameExistAsync(obj.Name, obj.Id);
@@ -119,21 +98,21 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var candidateApplyJobSource = await _candidateApplyJobSourceRepository.GetByIdAsync(obj.Id);
             if (candidateApplyJobSource == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", obj);
             }
             var model = mapper.Map(obj, candidateApplyJobSource);
             model.Description = !string.IsNullOrEmpty(model.Description) ? model.Description.ToEscape() : null;
             await _candidateApplyJobSourceRepository.UpdateAsync(model);
             await _candidateApplyJobSourceRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateApplyJobSourceDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateApplyJobSourceDTO> obj)
         {
             throw new NotImplementedException();
         }

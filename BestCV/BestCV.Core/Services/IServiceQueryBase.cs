@@ -1,11 +1,11 @@
-﻿using Jobi.Core.Entities;
+﻿using BestCV.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobi.Core.Services
+namespace BestCV.Core.Services
 {
 
     /// <summary>
@@ -17,13 +17,13 @@ namespace Jobi.Core.Services
     /// <typeparam name="J">Detail DTO</typeparam>
     public interface IServiceQueryBase<T, K, L, J> where K : class where L : class where J : class
     {
-        Task<DionResponse> GetByIdAsync(T id);
-        Task<DionResponse> CreateAsync(K obj);
-        Task<DionResponse> CreateListAsync(IEnumerable<K> objs);
-        Task<DionResponse> UpdateAsync(L obj);
-        Task<DionResponse> UpdateListAsync(IEnumerable<L> obj);
-        Task<DionResponse> SoftDeleteAsync(T id);
-        Task<DionResponse> SoftDeleteListAsync(IEnumerable<T> objs);
-        Task<DionResponse> GetAllAsync();
+        Task<BestCVResponse> GetByIdAsync(T id);
+        Task<BestCVResponse> CreateAsync(K obj);
+        Task<BestCVResponse> CreateListAsync(IEnumerable<K> objs);
+        Task<BestCVResponse> UpdateAsync(L obj);
+        Task<BestCVResponse> UpdateListAsync(IEnumerable<L> obj);
+        Task<BestCVResponse> SoftDeleteAsync(T id);
+        Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<T> objs);
+        Task<BestCVResponse> GetAllAsync();
     }
 }

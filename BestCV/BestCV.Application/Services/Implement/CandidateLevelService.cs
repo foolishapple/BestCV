@@ -27,7 +27,7 @@ namespace BestCV.Application.Services.Implement
             logger = loggerFactory.CreateLogger<ICandidateLevelService>();
             mapper = _mapper;
         }
-        public async Task<DionResponse> CreateAsync(InsertCandidateLevelDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertCandidateLevelDTO obj)
         {
             var candidateLevel = mapper.Map<CandidateLevel>(obj);
             candidateLevel.Active = true;
@@ -42,65 +42,65 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await candidateLevelRepository.CreateAsync(candidateLevel);
             await candidateLevelRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateLevelDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateLevelDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await candidateLevelRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<CandidateLevelDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await candidateLevelRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<CandidateLevelDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await candidateLevelRepository.SoftDeleteAsync(id);
             if (data)
             {
-                //return DionResponse.Success();
+                //return BestCVResponse.Success();
                 await candidateLevelRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateCandidateLevelDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateCandidateLevelDTO obj)
         {
             var candidateLevel = await candidateLevelRepository.GetByIdAsync(obj.Id);
             if (candidateLevel == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var updateSalary = mapper.Map(obj, candidateLevel);
             candidateLevel.Description = !string.IsNullOrEmpty(candidateLevel.Description) ? candidateLevel.Description.ToEscape() : null;
@@ -113,17 +113,17 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             await candidateLevelRepository.UpdateAsync(updateSalary);
 
             await candidateLevelRepository.SaveChangesAsync();
 
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateLevelDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateLevelDTO> obj)
         {
             throw new NotImplementedException();
         }

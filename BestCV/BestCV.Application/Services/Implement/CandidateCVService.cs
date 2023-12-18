@@ -30,139 +30,99 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 11/09/2023
-        /// Description: Insert CandidateCV
-        /// </summary>
-        /// <param name="obj">DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertOrUpdateCandidateCVDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertOrUpdateCandidateCVDTO obj)
         {
             var candidateCV = MappingInsertCandidateCV(obj);
             var candidateCVId = await _candidateCVRepository.CreateAsync(candidateCV);
             var result = await _candidateCVRepository.SaveChangesAsync();
             if (result > 0)
             {
-                return DionResponse.Success(candidateCVId);
+                return BestCVResponse.Success(candidateCVId);
             }
             else
             {
-                return DionResponse.Error("Lưu CV không thành công");
+                return BestCVResponse.Error("Lưu CV không thành công");
             }
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertOrUpdateCandidateCVDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertOrUpdateCandidateCVDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 24/08/2023
-        /// Description: Lấy chi tiết CandidateCV theo ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetByIdAsync(long id)
+
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await _candidateCVRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
 
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 20/09/2023
-        /// Description: Soft delete CandidateCV
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var data = await _candidateCVRepository.SoftDeleteAsync(id);
             if (data)
             {
                 if (await _candidateCVRepository.SaveChangesAsync() > 0)
                 {
-                    return DionResponse.Success();
+                    return BestCVResponse.Success();
                 }
             }
-            return DionResponse.Error();
+            return BestCVResponse.Error();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 11/09/2023
-        /// Description: Update CandidateCV
-        /// </summary>
-        /// <param name="obj">DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(InsertOrUpdateCandidateCVDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(InsertOrUpdateCandidateCVDTO obj)
         {
             var candidateCV = await MappingUpdateCandidateCV(obj);
             await _candidateCVRepository.UpdateAsync(candidateCV);
             var result = await _candidateCVRepository.SaveChangesAsync();
             if (result > 0)
             {
-                return DionResponse.Success(obj);
+                return BestCVResponse.Success(obj);
             }
             else
             {
-                return DionResponse.Error("Lưu CV không thành công");
+                return BestCVResponse.Error("Lưu CV không thành công");
             }
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<InsertOrUpdateCandidateCVDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<InsertOrUpdateCandidateCVDTO> obj)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 20/09/2023
-        /// Description: Lấy danh sách theo CandidateId
-        /// </summary>
-        /// <param name="candidateId">CandidateId</param>
-        public async Task<DionResponse> GetListAsyncByCandidateId(long candidateId)
+
+        public async Task<BestCVResponse> GetListAsyncByCandidateId(long candidateId)
         {
             var listCandidateCV = await _candidateCVRepository.GetListAsyncByCandidateId(candidateId);
-            return DionResponse.Success(listCandidateCV);
+            return BestCVResponse.Success(listCandidateCV);
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 20/09/2023
-        /// Description: Lấy danh sách Aggregate theo candidateId
-        /// </summary>
-        /// <param name="candidateId">candidateId</param>
-        /// <returns>Danh sách Aggregate theo candidateId</returns>
-        public async Task<DionResponse> GetListAggregateAsyncByCandidateId(long candidateId)
+
+        public async Task<BestCVResponse> GetListAggregateAsyncByCandidateId(long candidateId)
         {
             var listCandidateCVAggregate = await _candidateCVRepository.GetListAggregateAsyncByCandidateId(candidateId);
-            return DionResponse.Success(listCandidateCVAggregate);
+            return BestCVResponse.Success(listCandidateCVAggregate);
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 11/09/2023
-        /// Description: Mapping DTO to insert CandidateCV
-        /// </summary>
-        /// <param name="obj">DTO object</param>
+
         public CandidateCV MappingInsertCandidateCV(InsertOrUpdateCandidateCVDTO obj)
         {
             var candidateCV = _mapper.Map<CandidateCV>(obj);
@@ -174,14 +134,7 @@ namespace BestCV.Application.Services.Implement
             return candidateCV;
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 20/08/2023
-        /// Description: Mapping DTO to update CandidateCV
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+
         public async Task<CandidateCV> MappingUpdateCandidateCV(InsertOrUpdateCandidateCVDTO obj)
         {
             var candidateCV = await _candidateCVRepository.GetByIdAsync(obj.Id);

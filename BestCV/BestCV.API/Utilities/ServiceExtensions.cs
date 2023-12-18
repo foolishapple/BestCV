@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
-namespace Jobi.API.Utilities
+namespace BestCV.API.Utilities
 {
     public static class ServiceExtensions
     {

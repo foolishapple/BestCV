@@ -15,9 +15,9 @@ namespace BestCV.Application.Services.Interfaces
     public interface ICandidateNotificationService : IServiceQueryBase<long , InsertCandidateNotificationDTO, UpdateCandidateNotificationDTO , CandidateNotificationDTO>
     {
         Task<DTResult<CandidateNotification>> DTPaging(CandidateNotificationParameter parameters, long candidateId);
-        Task<DionResponse> MakeAsRead(long id);
+        Task<BestCVResponse> MakeAsRead(long id);
        
-        Task<DionResponse> CountUnreadByCandidateId(long id);
-        Task<DionResponse> ListRecented(long id);
+        Task<BestCVResponse> CountUnreadByCandidateId(long id);
+        Task<BestCVResponse> ListRecented(long id);
     }
 }

@@ -53,16 +53,8 @@ namespace BestCV.Application.Services.Implement
             _refreshJobRepository = refreshJobRepository;
             _jobRepository = jobRepository;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 18/09/2023
-        /// Description: Add serrvice package to employer
-        /// </summary>
-        /// <param name="model"></param>
-        /// <exception cref="Exception">employer id is null</exception>
-        /// <exception cref="Exception">Failed to privacy job</exception>
-        /// <returns></returns>
-        public async Task<DionResponse> AddServiceToJob(InsertJobServicePackageDTO model)
+
+        public async Task<BestCVResponse> AddServiceToJob(InsertJobServicePackageDTO model)
         {
             #region Privacy Job
             if (model.EmployerId == null)
@@ -435,7 +427,7 @@ namespace BestCV.Application.Services.Implement
                     }
                     #endregion
                     await trans.CommitAsync();
-                    return DionResponse.Success();
+                    return BestCVResponse.Success();
                     #endregion
                 }
                 #endregion
@@ -444,54 +436,48 @@ namespace BestCV.Application.Services.Implement
             throw new Exception("Failed to add service pack to job");
         }
 
-        public Task<DionResponse> CreateAsync(InsertJobServicePackageDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertJobServicePackageDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertJobServicePackageDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertJobServicePackageDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetByIdAsync(JobServicePackage id)
+        public Task<BestCVResponse> GetByIdAsync(JobServicePackage id)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Creatd: 18/09/2023
-        /// Description: Get list job service package by job id
-        /// </summary>
-        /// <param name="id">job id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> ListAggregate(long id)
+
+        public async Task<BestCVResponse> ListAggregate(long id)
         {
             var result = await _jobServicePackageRepository.ListAggregate(id);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(JobServicePackage id)
+        public Task<BestCVResponse> SoftDeleteAsync(JobServicePackage id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<JobServicePackage> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<JobServicePackage> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateJobServicePackageDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateJobServicePackageDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateJobServicePackageDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateJobServicePackageDTO> obj)
         {
             throw new NotImplementedException();
         }

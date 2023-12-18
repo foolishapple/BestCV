@@ -37,20 +37,14 @@ namespace BestCV.Application.Services.Implement
             _config = config;
             _adminAccountMetaRepository = adminAccountMetaRepository;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 25/07/2023
-        /// Description: Insert admin account
-        /// </summary>
-        /// <param name="obj">DTO admin account</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertAdminAccountDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertAdminAccountDTO obj)
         {
             var adminAccount = MappingInsertAccount(obj);
             List<string> errors = await Validate(adminAccount);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             using (var trans = await _adminAccountRepository.BeginTransactionAsync())
             {
@@ -75,16 +69,10 @@ namespace BestCV.Application.Services.Implement
                     throw new Exception();
                 }
             }
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 25/07/2023
-        /// Description: Insert list admin account
-        /// </summary>
-        /// <param name="objs">list DTO admin account</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertAdminAccountDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertAdminAccountDTO> objs)
         {
             List<string> errors = new List<string>();
             var adminAccounts = objs.Select(c => MappingInsertAccount(c));
@@ -94,84 +82,55 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _adminAccountRepository.CreateListAsync(adminAccounts);
             await _adminAccountRepository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 26/07/2023
-        /// Description: Get list all admin account
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _adminAccountRepository.ListAllAggregate();
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 25/07/2023
-        /// Description: Get admin account by id
-        /// </summary>
-        /// <param name="id">admin account id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetByIdAsync(long id)
+      
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var adminAccount = await _adminAccountRepository.DetailAggregate(id);
-            return DionResponse.Success(adminAccount);
+            return BestCVResponse.Success(adminAccount);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 25/07/2023
-        /// Description: Soft delete admin account by id
-        /// </summary>
-        /// <param name="id">admin account id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+       
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var data = await _adminAccountRepository.SoftDeleteAsync(id);
             if (data)
             {
                 if (await _adminAccountRepository.SaveChangesAsync() > 0)
                 {
-                    return DionResponse.Success();
+                    return BestCVResponse.Success();
                 }
             }
-            return DionResponse.Error();
+            return BestCVResponse.Error();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 25/07/2023
-        /// Description: Soft delete list admin account by list admin account id
-        /// </summary>
-        /// <param name="objs">list adin acount id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+     
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             foreach (var id in objs)
             {
                 await _adminAccountRepository.SoftDeleteAsync(id);
             }
             await _adminAccountRepository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Create: 25/07/2023
-        /// Description: Update admin account by update admin account DTO
-        /// </summary>
-        /// <param name="obj">Update account DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateAdminAccountDTO obj)
+        
+        public async Task<BestCVResponse> UpdateAsync(UpdateAdminAccountDTO obj)
         {
             AdminAccount updateAccount = await MappingUpdateAccount(obj);
             List<string> errors = await Validate(updateAccount);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             using (var trans = await _adminAccountRepository.BeginTransactionAsync())
             {
@@ -206,16 +165,10 @@ namespace BestCV.Application.Services.Implement
                 }
             }
 
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 25/07/2023
-        /// Description: Update list admin account by list admin account DTO
-        /// </summary>
-        /// <param name="obj">List admin account DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateAdminAccountDTO> obj)
+      
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateAdminAccountDTO> obj)
         {
             List<AdminAccount> updateAdminAccounts = new List<AdminAccount>();
             List<string> errors = new List<string>();
@@ -227,19 +180,13 @@ namespace BestCV.Application.Services.Implement
             };
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _adminAccountRepository.UpdateListAsync(updateAdminAccounts);
             await _adminAccountRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Createad: 26/07/2023
-        /// Description: Get search string to fulltext search
-        /// </summary>
-        /// <param name="account">admin account</param>
-        /// <returns></returns>
+     
         public string ToSearchString(AdminAccount account)
         {
             return $"{account.Email.ToLower()}\n" +
@@ -248,13 +195,7 @@ namespace BestCV.Application.Services.Implement
                 $"{account.Phone.RemoveVietnamese().ToLower()}\n" +
                 $"{account.UserName.RemoveVietnamese().ToLower()}\n";
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 26/07/2023
-        /// Description: Mapping DTO to admin account
-        /// </summary>
-        /// <param name="obj">DTO object</param>
-        /// <returns></returns>
+      
         public AdminAccount MappingInsertAccount(InsertAdminAccountDTO obj)
         {
             var adminAccount = _mapper.Map<AdminAccount>(obj);
@@ -269,14 +210,7 @@ namespace BestCV.Application.Services.Implement
             adminAccount.Search = ToSearchString(adminAccount);
             return adminAccount;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 26/07/2023
-        /// Description: Mapping update account
-        /// </summary>
-        /// <param name="account">admin account object</param>
-        /// <param name="obj">Update admin account object</param>
-        /// <returns></returns>
+       
         public async Task<AdminAccount> MappingUpdateAccount(UpdateAdminAccountDTO obj)
         {
             var account = await _adminAccountRepository.GetByIdAsync(obj.Id);
@@ -301,13 +235,7 @@ namespace BestCV.Application.Services.Implement
             updateAccount.Search = ToSearchString(updateAccount);
             return updateAccount;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 26/07/2023
-        /// Description: Validation for admin account
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+       
         public async Task<List<string>> Validate(AdminAccount obj)
         {
             List<string> errors = new List<string>() { };
@@ -325,14 +253,8 @@ namespace BestCV.Application.Services.Implement
             }
             return errors;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 26/07/2023
-        /// Description: Sign in
-        /// </summary>
-        /// <param name="obj">Sign in admin account DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SignIn(SignInAdminAccountDTO obj)
+       
+        public async Task<BestCVResponse> SignIn(SignInAdminAccountDTO obj)
         {
             List<string> errors = new List<string>();
             AdminAccount? adminAccount = await _adminAccountRepository.FindByUserName(obj.UserName);
@@ -342,7 +264,7 @@ namespace BestCV.Application.Services.Implement
                 if (adminAccount == null)
                 {
                     errors.Add("Tên đăng nhập không đúng xin vui lòng thử lại sau.");
-                    return DionResponse.BadRequest(errors);
+                    return BestCVResponse.BadRequest(errors);
                 }
             }
             if (adminAccount.Password == obj.Password.ToHash256())
@@ -353,7 +275,7 @@ namespace BestCV.Application.Services.Implement
                     Id = adminAccount.Id,
                     Username = adminAccount.UserName
                 }, DateTime.Now.AddMinutes(int.Parse(_config["Jwt:AdminExpireMinutes"]))); 
-                return DionResponse.Success(new SignInResponse()//Change resources
+                return BestCVResponse.Success(new SignInResponse()//Change resources
                 {
                     AccessToken = accessToken
                 });
@@ -361,53 +283,35 @@ namespace BestCV.Application.Services.Implement
             else
             {
                 errors.Add("Mật khẩu không đúng xin vui lòng thử lại sau.");
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: Update password to admin account
-        /// </summary>
-        /// <param name="obj">change password admin account object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdatePassword(ChangePasswordAdminAccountDTO obj)
+      
+        public async Task<BestCVResponse> UpdatePassword(ChangePasswordAdminAccountDTO obj)
         {
             var adminAccount = await _adminAccountRepository.GetByIdAsync(obj.Id);
 
             if (adminAccount == null)
             {
-                return DionResponse.NotFound($"Not found admin account id:{obj.Id}", obj);
+                return BestCVResponse.NotFound($"Not found admin account id:{obj.Id}", obj);
             }
             if (adminAccount.Password != obj.OldPassword.ToHash256())
             {
-                return DionResponse.BadRequest(new List<string>() { "Mật khẩu cũ không chính xác." });
+                return BestCVResponse.BadRequest(new List<string>() { "Mật khẩu cũ không chính xác." });
             }
             adminAccount.Password = obj.NewPassword.ToHash256();
             await _adminAccountRepository.UpdatePassWord(adminAccount);
-            return DionResponse.Success(adminAccount);
+            return BestCVResponse.Success(adminAccount);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 09/08/2023
-        /// Description: Detail SignIn
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+       
         public async Task<AdminAccount?> DetailSignIn(SignInAdminAccountDTO obj)
         {
             obj.Password = obj.Password.ToHash256();
             var data = await _adminAccountRepository.DetailSignIn(obj.UserName, obj.Password);
             return data;
         }
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedDate: 11/8/2023
-        /// Description: tạo AdminAccountMeta để tạo actionLink trong email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        public async Task<(DionResponse, EmailMessage<ForgotPasswordEmailBody>?)> ForgotPassword(string email)
+       
+        public async Task<(BestCVResponse, EmailMessage<ForgotPasswordEmailBody>?)> ForgotPassword(string email)
         {
             var acc = await _adminAccountRepository.FindByEmail(email);
             var database = await _adminAccountMetaRepository.BeginTransactionAsync();
@@ -440,36 +344,29 @@ namespace BestCV.Application.Services.Implement
                             var message = SendEmailForgotPasswordAsync(acc, adminAccountMeta);
                             // hoàn thành transaction
                             await _adminAccountMetaRepository.EndTransactionAsync();
-                            return (DionResponse.Success(), message);
+                            return (BestCVResponse.Success(), message);
                         }
                         else
                         {
                             await _adminAccountMetaRepository.RollbackTransactionAsync();
-                            return (DionResponse.Error("Email chưa kích hoạt. "), null);
+                            return (BestCVResponse.Error("Email chưa kích hoạt. "), null);
                         }
                     }
                     else
                     {
                         await _adminAccountMetaRepository.RollbackTransactionAsync();
-                        return (DionResponse.Error("Email chưa kích hoạt."), null);
+                        return (BestCVResponse.Error("Email chưa kích hoạt."), null);
                     }
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, $"Có lỗi khi gửi email");
-                    return (DionResponse.Error(), null);
+                    return (BestCVResponse.Error(), null);
                 }
             }
 
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 11/8/2023
-        /// Description: Send email quên mật khẩu cho Admin
-        /// </summary>
-        /// <param name="acc"></param>
-        /// <param name="accMeta"></param>
-        /// <returns></returns>
+       
         public EmailMessage<ForgotPasswordEmailBody> SendEmailForgotPasswordAsync(AdminAccount acc, AdminAccountMeta accMeta)
         {
             var host = _config["SectionUrls:AdminVerifiedForgotPasswordNotificationPage"];
@@ -491,49 +388,23 @@ namespace BestCV.Application.Services.Implement
             };
             return message;
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 11/8/2023
-        /// Description: đếm số lần email đã gửi trong 1 h
-        /// </summary>
-        /// <param name="AdminAccountId"></param>
-        /// <returns></returns>
-        /// 
+       
 
         public async Task<int> CountResetPassword(long AdminAccountId)
         {
             return await _adminAccountMetaRepository.CountResetPassword(AdminAccountId);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 11/8/2023
-        /// Description: Check email đã active chưa
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+      
         public async Task<bool> CheckEmailIsActive(string email)
         {
             return await _adminAccountRepository.CheckEmailIsActive(email);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 11/8/2023
-        /// Description: lấy AdminAccount qua email 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+      
         public async Task<AdminAccount?> GetByEmailAsync(string email)
         {
             return await _adminAccountRepository.FindByEmail(email);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 11/8/2023
-        /// Description: CheckKeyValid kiểm tra thời gian của tồn tại của links reset password
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="hash"></param>
-        /// <returns></returns>
+       
         public async Task<bool> CheckKeyValid(string code, string hash)
         {
             var result = false;
@@ -548,16 +419,8 @@ namespace BestCV.Application.Services.Implement
             }
             return result;
         }
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedDate: 11/8/2023
-        /// Description: thay đổi mật khẩu Admin và cập nhật active employerMeta 
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="hash"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> ResetNewPassword(string code, string hash, string password)
+      
+        public async Task<BestCVResponse> ResetNewPassword(string code, string hash, string password)
         {
             var dataMeta = await _adminAccountMetaRepository.CheckVerifyCode(code, hash);
             var adminAccount = await _adminAccountRepository.GetByIdAsync(dataMeta.AdminAccountId);
@@ -567,7 +430,7 @@ namespace BestCV.Application.Services.Implement
             dataMeta.Active = false;
             await _adminAccountMetaRepository.UpdateAsync(dataMeta);
             await _adminAccountMetaRepository.SaveChangesAsync();
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
         public async Task<bool> IsAdminRole (long id)
         {

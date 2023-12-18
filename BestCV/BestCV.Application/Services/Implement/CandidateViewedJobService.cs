@@ -29,58 +29,58 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        public Task<DionResponse> CreateAsync(InsertCandidateViewedJobDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertCandidateViewedJobDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateViewedJobDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateViewedJobDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetByIdAsync(long id)
+        public Task<BestCVResponse> GetByIdAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetListViewedJobByCanddiateId(long candidateId)
+        public async Task<BestCVResponse> GetListViewedJobByCanddiateId(long candidateId)
         {
             var dataCandidate = await repository.ListCandidateViewedJobByCandidateId(candidateId);
 
-            return DionResponse.Success(dataCandidate);
+            return BestCVResponse.Success(dataCandidate);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var res = await repository.SoftDeleteAsync(id);
             await repository.SaveChangesAsync();
             if (res)
             {
-                return DionResponse.Success();
+                return BestCVResponse.Success();
             }
             else
             {
-                return DionResponse.Error();
+                return BestCVResponse.Error();
             }
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateCandidateViewedJobDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateCandidateViewedJobDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateViewedJobDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateViewedJobDTO> obj)
         {
             throw new NotImplementedException();
         }
@@ -89,13 +89,7 @@ namespace BestCV.Application.Services.Implement
         {
             return repository.PagingByCandidateId(parameters);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 13/09/2023
-        /// Description: datatable paging candidate viewed job parameter
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+        
         public async Task<DTResult<CandidateViewedJobAggreagate>> DTPaging(DTCandidateViewedJobParameters parameters)
         {
             return await repository.DTPaging(parameters);

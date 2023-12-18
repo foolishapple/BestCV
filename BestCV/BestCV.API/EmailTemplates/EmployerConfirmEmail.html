@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset='utf-8'>
+    <meta http-equiv='x-ua-compatible' content='ie=edge'>
+    <title>Kích hoạt tài khoản</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap' rel='stylesheet'>
+
+
+    <style type='text/css'>
+        /**
+                   * Google webfonts. Recommended to include the .woff version for cross-client compatibility.
+                   */
+
+
+        /**
+                   * Avoid browser level font resizing.
+                   * 1. Windows Mobile
+                   * 2. iOS / OSX
+                   */
+        body,
+        table,
+        td,
+        a {
+            -ms-text-size-adjust: 100%; /* 1 */
+            -webkit-text-size-adjust: 100%; /* 2 */
+        }
+
+        /**
+                   * Remove extra space added to tables and cells in Outlook.
+                   */
+        table,
+        td {
+            mso-table-rspace: 0pt;
+            mso-table-lspace: 0pt;
+        }
+
+        /**
+                   * Better fluid images in Internet Explorer.
+                   */
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        /**
+                   * Remove blue links for iOS devices.
+                   */
+        a[x-apple-data-detectors] {
+            font-family: inherit !important;
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+
+        /**
+                   * Fix centering issues in Android 4.4.
+                   */
+        div[style*='margin: 16px 0;'] {
+            margin: 0 !important;
+        }
+
+        body {
+            width: 100% !important;
+            height: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /**
+                   * Collapse table borders to avoid space between cells.
+                   */
+        table {
+            border-collapse: collapse !important;
+        }
+
+        a {
+            color: #8FC64B;
+        }
+
+        img {
+            height: auto;
+            line-height: 100%;
+            text-decoration: none;
+            border: 0;
+            outline: none;
+        }
+
+        .passwordValue {
+            display: none;
+        }
+
+        .showEmailButton:active {
+            background: green !important;
+        }
+
+            .showEmailButton:active .passwordValue {
+                display: block !important;
+            }
+
+            .showEmailButton:active .passwordDummy {
+                display: none !important;
+            }
+    </style>
+</head>
+<body style='background-color: #e9ecef;'>
+
+    <!-- start preheader -->
+    <div class='preheader' style='display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;'>
+
+    </div>
+    <!-- end preheader -->
+    <!-- start body -->
+    <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+
+        <!-- start logo -->
+        <tr>
+            <td align='center' bgcolor='#e9ecef'>
+                <!--[if (gte mso 9)|(IE)]>
+                <table align='center' border='0' cellpadding='0' cellspacing='0' width='600'>
+                <tr>
+                <td align='center' valign='top' width='600'>
+                <![endif]-->
+                <table border='0' cellpadding='0' cellspacing='0' width='90%' style='margin: 0 5%'>
+                    <tr>
+                        <td align='center' valign='top' style='padding: 36px 24px;'>
+                            <a href='" + currentUrl + @"' target='_blank' style='display: inline-block; color: rgb(47, 87, 239);'>
+                                <img src='https://honghanh.dion.asia/images/Dion%20logo_wo_bg.png' alt='Logo' border='0' style='display: block; min-width: 48px; width: 150px; height: auto;'>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+        <!-- end logo -->
+        <!-- start hero -->
+        <tr>
+            <td align='center' bgcolor='#e9ecef'>
+                <!--[if (gte mso 9)|(IE)]>
+                <table align='center' border='0' cellpadding='0' cellspacing='0' width='600'>
+                <tr>
+                <td align='center' valign='top' width='600'>
+                <![endif]-->
+                <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px;'>
+                    <tr>
+                        <td align='left' bgcolor='#ffffff' style='padding: 36px 24px 0; font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; border-top: 3px solid #d4dadf;'>
+                            <h1 style='margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;'>Đăng ký tài khoản thành công</h1>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+        <!-- end hero -->
+        <!-- start copy block -->
+        <tr>
+            <td align='center' bgcolor='#e9ecef'>
+                <!--[if (gte mso 9)|(IE)]>
+                <table align='center' border='0' cellpadding='0' cellspacing='0' width='600'>
+                <tr>
+                <td align='center' valign='top' width='600'>
+                <![endif]-->
+                <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px;' class='showEmailButton'>
+
+                    <!-- start copy -->
+                    <tr>
+                        <td align='left' bgcolor='#ffffff' style='padding: 24px; font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 16px; line-height: 24px;'>
+                            <p style='margin: 0; padding-bottom: 10px;font-size: 18px!important;'>Thân chào <b>{{fullname}}</b>, cảm ơn bạn đã đăng ký tài khoản nhà tuyển dụng tại BestCV!</p>
+                            <!-- <p style='margin: 0; padding-bottom: 10px;font-size: 18px!important;'>Mầmm tiến sĩ là Kênh thông tin chính thức từ Cục Phát triển Doanh nghiệp hỗ trợ Doanh nghiệp Nhỏ và Vừa của Việt Nam nâng cao khả năng tiếp cận các nguồn tài chính.</p> -->
+                            <!--<h4>Để kích hoạt tài khoản bạn vui lòng nhập mã OTP phía bên dưới: </h4>-->
+                        </td>
+                    </tr>
+                    <!-- end copy -->
+                    <!-- start button -->
+                    <!--<tr>
+                        <td align='left' bgcolor='#ffffff'>
+                            <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                <tr>
+                                    <td align='center' bgcolor='#ffffff' style='padding: 12px;'>
+                                        <table border='0' cellpadding='0' cellspacing='0'>
+                                            <tr>
+                                                <td align='center' bgcolor='#8FC64B' style='border-radius: 6px; background-color: rgb(47, 87, 239);'>
+                                                    <p style='display: inline-block; padding: 16px 36px; font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;'>{{otp}}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>-->
+                    <!-- end button -->
+                    <!-- start copy -->
+                    <tr>
+                        <td align='left' bgcolor='#ffffff' style='padding: 24px; font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf'>
+                            <p style='margin: 0;'>
+                                Nhấn vào liên kết này để kích hoạt tài khoản:
+                                <a href='{{activeLink}}' style="color: rgb(47, 87, 239);" /> Xác nhận tài khoản</a> <br />
+                                Trân trọng!<br> <strong>BestCV</strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <!-- end copy -->
+
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+        <!-- end copy block -->
+        <!-- start footer -->
+        <tr>
+            <td align='center' bgcolor='#e9ecef' style='padding: 24px;'>
+                <!--[if (gte mso 9)|(IE)]>
+                <table align='center' border='0' cellpadding='0' cellspacing='0' width='600'>
+                <tr>
+                <td align='center' valign='top' width='600'>
+                <![endif]-->
+                <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px;'>
+
+                    <!-- start permission -->
+                    <tr>
+                        <td align='center' bgcolor='#e9ecef' style='padding: 12px 24px; font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14px; line-height: 20px; color: #666;'>
+                            <p style='margin: 0;'>Bạn nhận được email này vì chúng tôi đã nhận được yêu cầu từ tài khoản của bạn.</p>
+                        </td>
+                    </tr>
+                    <!-- end permission -->
+                    <!-- start unsubscribe -->
+                    <tr>
+                        <td align='center' bgcolor='#e9ecef' style='padding: 12px 24px; font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14px; line-height: 20px; color: #666;'>
+                            <p style='margin: 0;'>Copyright {{time}} <a href='https://tiensigado.com.vn/' target='_blank' style="color: rgb(47, 87, 239);">BestCV</a></p>
+                            <p style='margin: 0;'>All rights reserved.</p>
+                        </td>
+                    </tr>
+                    <!-- end unsubscribe -->
+
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                </td>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+        <!-- end footer -->
+
+    </table>
+    <!-- end body -->
+
+</body>
+</html>

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobi.Core.Services
+namespace BestCV.Core.Services
 {
     public interface IScheduledJobService
     {

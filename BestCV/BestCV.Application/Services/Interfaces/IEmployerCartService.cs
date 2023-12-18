@@ -13,7 +13,7 @@ namespace BestCV.Application.Services.Interfaces
     public interface IEmployerCartService : IServiceQueryBase<long, InsertEmployerCartDTO, UpdateEmployerCartDTO, EmployerCartDTO>
     {
         Task<int> CountServicePackageInCart(long employerId);
-        Task<DionResponse> ListByEmployerId(long employerId);
-        Task<DionResponse> AddToCart(int servicePackageId, long employerId);
+        Task<BestCVResponse> ListByEmployerId(long employerId);
+        Task<BestCVResponse> AddToCart(int servicePackageId, long employerId);
     }
 }

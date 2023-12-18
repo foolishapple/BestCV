@@ -26,15 +26,8 @@ namespace BestCV.Application.Services.Implement
 			logger = loggerFactory.CreateLogger<ICouponService>();
 			mapper = _mapper;
 		}
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">InsertCouponDTO</param>
-		/// <returns>DionResponse.Error("Mã coupon đã tồn tại")</returns>
-		/// <returns>DionResponse.Success(obj)</returns>
-		/// <returns>DionResponse.Error("Thêm mới coupon không thành công")</returns>
-		public async Task<DionResponse> CreateAsync(InsertCouponDTO obj)
+
+		public async Task<BestCVResponse> CreateAsync(InsertCouponDTO obj)
 		{
 			var coupon = mapper.Map<Coupon>(obj);
 			coupon.Active = true;
@@ -48,14 +41,14 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await couponRepository.CreateAsync(coupon);
 			await couponRepository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
 
-		public Task<DionResponse> CreateListAsync(IEnumerable<InsertCouponDTO> objs)
+		public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCouponDTO> objs)
 		{
 			throw new NotImplementedException();
 		}
@@ -63,16 +56,16 @@ namespace BestCV.Application.Services.Implement
 		/// Author : ThanhNd
 		/// CreatedTime : 26/07/2023
 		/// </summary>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetAllAsync()
+		/// <returns>BestCVResponse</returns>
+		public async Task<BestCVResponse> GetAllAsync()
 		{
 			var data = await couponRepository.FindByConditionAsync(x => x.Active && x.CouponType.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<CouponDTO>>(data);
-			return DionResponse.Success(result);
+			return BestCVResponse.Success(result);
 		}
 
 		/// <summary>
@@ -80,27 +73,27 @@ namespace BestCV.Application.Services.Implement
 		/// CreatedTime : 26/07/2023
 		/// </summary>
 		/// <param name="id">couponId</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetByIdAsync(int id)
+		/// <returns>BestCVResponse</returns>
+		public async Task<BestCVResponse> GetByIdAsync(int id)
 		{
 			var data = await couponRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<CouponDTO>(data);
 
-            return DionResponse.Success(result);	
+            return BestCVResponse.Success(result);	
 		}
 
-        public async Task<DionResponse> ListAggregatesAsync()
+        public async Task<BestCVResponse> ListAggregatesAsync()
         {
 			var result = await couponRepository.ListAggregatesAsync();
             if (result == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", result);
+                return BestCVResponse.NotFound("Không có dữ liệu", result);
             }
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
         /// <summary>
@@ -108,22 +101,22 @@ namespace BestCV.Application.Services.Implement
         /// CreatedTime : 26/07/2023
         /// </summary>
         /// <param name="id">couponId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        /// <returns>BestCVResponse</returns>
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
 		{
 			var data = await couponRepository.SoftDeleteAsync(id);
 			if (data)
 			{
 				await couponRepository.SaveChangesAsync();
-                return DionResponse.Success();
+                return BestCVResponse.Success();
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
 
 
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
 		{
 			throw new NotImplementedException();
 		}
@@ -132,13 +125,13 @@ namespace BestCV.Application.Services.Implement
 		/// CreatedTime : 26/07/2023
 		/// </summary>
 		/// <param name="obj">UpdateCouponDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> UpdateAsync(UpdateCouponDTO obj)
+		/// <returns>BestCVResponse</returns>
+		public async Task<BestCVResponse> UpdateAsync(UpdateCouponDTO obj)
 		{
 			var coupon = await couponRepository.GetByIdAsync(obj.Id);
 			if (coupon == null)
 			{
-				return DionResponse.NotFound("Không có dữ liệu", obj);
+				return BestCVResponse.NotFound("Không có dữ liệu", obj);
 			}
 			var updateCoupon = mapper.Map(obj, coupon);
 
@@ -151,14 +144,14 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await couponRepository.UpdateAsync(updateCoupon);
 			await couponRepository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
 
-		public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCouponDTO> obj)
+		public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCouponDTO> obj)
 		{
 			throw new NotImplementedException();
 		}

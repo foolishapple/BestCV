@@ -28,17 +28,17 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        public Task<DionResponse> CreateAsync(InsertCandidateFollowCompanyDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertCandidateFollowCompanyDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateFollowCompanyDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateFollowCompanyDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
@@ -48,19 +48,19 @@ namespace BestCV.Application.Services.Implement
             return await repository.GetAsyncByCandidateIdAndCompanyI(candidateId, companyId);
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await repository.GetByIdAsync(id);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> GetListCompanyByCandidateId(long candidateId)
+        public async Task<BestCVResponse> GetListCompanyByCandidateId(long candidateId)
         {
             var dataCandidate = await repository.ListCandidateFollowCompanyByCandidateId(candidateId);
-            return DionResponse.Success(dataCandidate);
+            return BestCVResponse.Success(dataCandidate);
         }
 
-        public async Task<DionResponse> HardDeleteAsync(long id)
+        public async Task<BestCVResponse> HardDeleteAsync(long id)
         {
             var item = await repository.GetByIdAsync(id);
             if(item == null)
@@ -70,10 +70,10 @@ namespace BestCV.Application.Services.Implement
 
             await repository.HardDeleteAsync(id);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(id);
+            return BestCVResponse.Success(id);
         }
 
-        public async Task<DionResponse> InsertCandidateWithViewModel(InsertCandidateFollowCompanyDTO candidateDTO, long candidateID)
+        public async Task<BestCVResponse> InsertCandidateWithViewModel(InsertCandidateFollowCompanyDTO candidateDTO, long candidateID)
         {
             if(await repository.IsCompanyIdExist(candidateID, candidateDTO.companyId))
             {
@@ -82,9 +82,9 @@ namespace BestCV.Application.Services.Implement
                 {
                     await repository.HardDeleteAsync(candidateFollowCompany.Id);
                     await repository.SaveChangesAsync();
-                    return DionResponse.Success(candidateFollowCompany, "Delete");
+                    return BestCVResponse.Success(candidateFollowCompany, "Delete");
                 }
-                return DionResponse.BadRequest("");
+                return BestCVResponse.BadRequest("");
             }
             else
             {
@@ -95,7 +95,7 @@ namespace BestCV.Application.Services.Implement
 
                 await repository.CreateAsync(candidateFollowCompanyMap);
                 await repository.SaveChangesAsync();
-                return DionResponse.Success(candidateFollowCompanyMap, "Success");
+                return BestCVResponse.Success(candidateFollowCompanyMap, "Success");
             }
         }
 
@@ -111,22 +111,22 @@ namespace BestCV.Application.Services.Implement
             return repository.PagingByCandidateId(parameters);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateCandidateFollowCompanyDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateCandidateFollowCompanyDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateFollowCompanyDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateFollowCompanyDTO> obj)
         {
             throw new NotImplementedException();
         }

@@ -22,14 +22,8 @@ namespace BestCV.Application.Services.Implement
             jobTypeRepository = _jobTypeRepository;
             mapper = _mapper;
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : Insert JobType
-        /// </summary>
-        /// <param name="obj"> DTO JobType</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertJobTypeDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertJobTypeDTO obj)
         {
             List<string> listErrors = new List<string>();
             var checkName = await jobTypeRepository.IsNameExistAsync(obj.Name, 0);
@@ -39,7 +33,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var model = mapper.Map<JobType>(obj);
             model.Id = 0;
@@ -48,78 +42,55 @@ namespace BestCV.Application.Services.Implement
             model.Description = !string.IsNullOrEmpty(model.Description) ? model.Description.ToEscape() : null;
             await jobTypeRepository.CreateAsync(model);
             await jobTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertJobTypeDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertJobTypeDTO> objs)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : Get list JobType 
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await jobTypeRepository.FindByConditionAsync(s => s.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", data);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", data);
             }
             var model = mapper.Map<List<JobTypeDTO>>(data);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : Get JobType by Id
-        /// </summary>
-        /// <param name="id"> JobType Id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
 
             var data = await jobTypeRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", data);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", data);
             }
             var model = mapper.Map<JobTypeDTO>(data);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : Soft delete obType by Id
-        /// </summary>
-        /// <param name="id">JobType Id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await jobTypeRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await jobTypeRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
             }
             
-            return DionResponse.NotFound("Không có dữ liệu. ", id);
+            return BestCVResponse.NotFound("Không có dữ liệu. ", id);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedTime : 27/07/2023
-        /// Description : Update JobType by update JobTypeDTO
-        /// </summary>
-        /// <param name="obj">UpdateJobTypeDTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateJobTypeDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateJobTypeDTO obj)
         {
             List<string> listErrors = new List<string>();
             var checkName = await jobTypeRepository.IsNameExistAsync(obj.Name, obj.Id);
@@ -129,21 +100,21 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var jobType = await jobTypeRepository.GetByIdAsync(obj.Id);
             if (jobType == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", obj);
             }
             var model = mapper.Map(obj, jobType);
             model.Description = !string.IsNullOrEmpty(model.Description) ? model.Description.ToEscape() : null;
             await jobTypeRepository.UpdateAsync(model);
             await jobTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateJobTypeDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateJobTypeDTO> obj)
         {
             throw new NotImplementedException();
         }

@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "Jobi.Storage": {
+    "BestCV.Storage": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

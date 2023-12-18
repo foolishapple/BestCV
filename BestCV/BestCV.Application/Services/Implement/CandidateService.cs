@@ -86,24 +86,16 @@ namespace BestCV.Application.Services.Implement
             candidateProjectsRepository = _candidateProjectsRepository;
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 26/07/2023
-        /// Description : Đăng ký tài khoản ứng viên
-        /// </summary>
-        /// <param name="signupCandidateDTO"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<(DionResponse, EmailMessage<CandidateConfirmEmailBody>?)> CandidateSignup(SignupCandidateDTO signupCandidateDTO)
+        public async Task<(BestCVResponse, EmailMessage<CandidateConfirmEmailBody>?)> CandidateSignup(SignupCandidateDTO signupCandidateDTO)
         {
             var checkEmail = await repository.IsEmailExist(signupCandidateDTO.Email);
             var checkPhone = await repository.IsPhoneExist(signupCandidateDTO.Phone);
             if (checkEmail)
             {
-                return (DionResponse.Error("Email đã được sử dụng."), null);
+                return (BestCVResponse.Error("Email đã được sử dụng."), null);
             } else if (checkPhone)
             {
-                return (DionResponse.Error("Số điện thoại đã được sử dụng."), null);
+                return (BestCVResponse.Error("Số điện thoại đã được sử dụng."), null);
             }
             else
             {
@@ -132,7 +124,7 @@ namespace BestCV.Application.Services.Implement
                 user.IsSubcribeEmailServiceIntro = true;
                 user.IsSubcribeEmailProgramEventIntro = true;
                 user.IsSubcribeEmailGiftCoupon = true;
-
+                user.IsActivated = true;
                 var database = await metaRepository.BeginTransactionAsync();
                 using (database)
                 {
@@ -166,18 +158,18 @@ namespace BestCV.Application.Services.Implement
 
                                 //hoàn thành transaction
                                 await metaRepository.EndTransactionAsync();
-                                return (DionResponse.Success(signupCandidateDTO), message);
+                                return (BestCVResponse.Success(signupCandidateDTO), message);
                             }
                             else
                             {
                                 await metaRepository.RollbackTransactionAsync();
-                                return (DionResponse.Error("Tạo tài khoản ứng viên không thành công"), null);
+                                return (BestCVResponse.Error("Tạo tài khoản ứng viên không thành công"), null);
                             }
                         }
                         else
                         {
                             await metaRepository.RollbackTransactionAsync();
-                            return (DionResponse.Error("Tạo tài khoản ứng viên không thành công"), null);
+                            return (BestCVResponse.Error("Tạo tài khoản ứng viên không thành công"), null);
                         }
 
                     }
@@ -185,7 +177,7 @@ namespace BestCV.Application.Services.Implement
                     {
 
                         logger.LogError(ex, $"Có lỗi khi tạo tài khoản ứng viên{user.Email}");
-                        return (DionResponse.Error(), null);
+                        return (BestCVResponse.Error(), null);
                     }
                 }
             } 
@@ -195,33 +187,28 @@ namespace BestCV.Application.Services.Implement
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateAsync(SignupCandidateDTO obj)
+        public Task<BestCVResponse> CreateAsync(SignupCandidateDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<SignupCandidateDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<SignupCandidateDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author : Thoai Anh
-        /// Created : 31/07/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetByIdAsync(long id)
+
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
 
             var candidateAccount = await repository.GetByIdAsync(id);
             if (candidateAccount == null)
             {
-                return DionResponse.NotFound("Not found", id);
+                return BestCVResponse.NotFound("Not found", id);
             }
             var candidateDTO = mapper.Map<CandidateDTO>(candidateAccount);
             var mappingWE = await candidateWorkExperienceRepository.ListCandidateWorkExperienceByCandidateId(id);
@@ -237,24 +224,17 @@ namespace BestCV.Application.Services.Implement
             candidateDTO.ListCandidateSuggestionJobPosition = mapper.Map<List<CandidateSuggestionJobPositionDTO>>(await candidateSuggestionJobPositionRepository.ListByCandidateIdAsync(id));
             candidateDTO.ListCandidateSuggestionJobSkill = mapper.Map<List<CandidateSuggestionJobSkillDTO>>(await candidateSuggestionJobSkillRepository.ListByCandidateIdAsync(id));
             candidateDTO.candidateSuggestionWorkPlaces = mapper.Map<List<CandidateSuggestionWorkPlaceDTO>>(await candidateSuggestionWorkPlaceRepository.ListByCandidateIdAsync(id));
-            return DionResponse.Success(candidateDTO);
+            return BestCVResponse.Success(candidateDTO);
         }
 
-
-        /// <summary>
-        /// Author: Thoai Anh
-        /// Created : 02/08/2023
-        /// Description : Lấy ra chi tiết thông tin ứng viên 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>        
-        public async Task<DionResponse> ListCandidateDetailById(long id)
+      
+        public async Task<BestCVResponse> ListCandidateDetailById(long id)
         {
 
             var candidateAccount = await repository.GetByIdAsync(id);
             if (candidateAccount == null)
             {
-                return DionResponse.NotFound("Not found", id);
+                return BestCVResponse.NotFound("Not found", id);
             }
             var candidateDTO = mapper.Map<CandidateDTO>(candidateAccount);
             candidateDTO.ListCandidateWorkExperiences = mapper.Map<List<CandidateWorkExperienceDTO>>(await candidateWorkExperienceRepository.ListCandidateWorkExperienceByCandidateId(id));
@@ -265,93 +245,80 @@ namespace BestCV.Application.Services.Implement
             candidateDTO.ListCandidateCertificates = mapper.Map<List<CandidateCertificateDTO>>(await candidateCertificateRepository.ListCandidateCetificateByCandidateId(id));
             candidateDTO.ListCandidateHonorAwards = mapper.Map<List<CandidateHonorAwardDTO>>(await candidateHonorAwardRepository.ListCandidateHonorAwardByCandidateId(id));
             candidateDTO.ListCandidateProjects = mapper.Map<List<CandidateProjectsDTO>>(await candidateProjectsRepository.ListCandidateProjectsByCandidateId(id));
-            return DionResponse.Success(candidateDTO);
+            return BestCVResponse.Success(candidateDTO);
 
 
         }
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(SigninCandidateDTO obj)
+        public Task<BestCVResponse> UpdateAsync(SigninCandidateDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateProfileCandidateDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateProfileCandidateDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<SigninCandidateDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<SigninCandidateDTO> obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateProfileCandidateDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateProfileCandidateDTO> obj)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateNotiEmailCandidate(SettingNotiEmailDTO obj)
+        public async Task<BestCVResponse> UpdateNotiEmailCandidate(SettingNotiEmailDTO obj)
         {
             var candidateAccount = await repository.GetByIdAsync(obj.Id);
             if (candidateAccount == null)
             {
-                return DionResponse.NotFound("Not found", obj);
+                return BestCVResponse.NotFound("Not found", obj);
             }
             var updateAccount = mapper.Map(obj, candidateAccount);
             await repository.UpdateAsync(updateAccount);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(updateAccount);
+            return BestCVResponse.Success(updateAccount);
         }
 
-        /// <summary>
-        /// Author : Chung
-        /// Date : 27/07/2023
-        /// Description : Update password Candidate by ID
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdatePasswordCandidate(ChangePasswordDTO obj, long userId)
+
+        public async Task<BestCVResponse> UpdatePasswordCandidate(ChangePasswordDTO obj, long userId)
         {
             var candidateAccount = await repository.GetByIdAsync(userId);
             if (candidateAccount == null)
             {
-                return DionResponse.NotFound($"Không tìm thấy ID tài khoản ứng viên: {userId}", obj);
+                return BestCVResponse.NotFound($"Không tìm thấy ID tài khoản ứng viên: {userId}", obj);
             }
             if (candidateAccount.Password != obj.OldPassword.ToHash256())
             {
-                return DionResponse.BadRequest(new List<string>() { "Mật khẩu cũ không chính xác." });
+                return BestCVResponse.BadRequest(new List<string>() { "Mật khẩu cũ không chính xác." });
             }
             candidateAccount.Password = obj.NewPassword.ToHash256();
             await repository.UpdateAsync(candidateAccount);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(candidateAccount);
+            return BestCVResponse.Success(candidateAccount);
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 01/08/2023
-        /// Description : Check veri Code
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="hashCode"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CheckVerifyCode(string value, string hashCode)
+
+        public async Task<BestCVResponse> CheckVerifyCode(string value, string hashCode)
         {
             var dataMeta = await metaRepository.CheckVerifyCode(value, hashCode);
             if (dataMeta != null)
             {
                 if (DateTime.Now > dataMeta.CreatedTime.AddHours(CandidateConstants.PASSSWORD_SENT_EMAIL_TIME_LIMIT))
                 {
-                    return DionResponse.Error();
+                    return BestCVResponse.Error();
                 }
                 else
                 {
@@ -359,19 +326,13 @@ namespace BestCV.Application.Services.Implement
 
                     await metaRepository.UpdateAsync(dataMeta);
                     await metaRepository.SaveChangesAsync();
-                    return DionResponse.Success(dataMeta);
+                    return BestCVResponse.Success(dataMeta);
                 }
             }
-            return DionResponse.NotFound("", dataMeta);
+            return BestCVResponse.NotFound("", dataMeta);
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 01/08/2023
-        /// Description : IsActived = true
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+ 
         public async Task ActivateAccount(string email)
         {
             var data = await repository.FindByEmail(email);
@@ -385,20 +346,14 @@ namespace BestCV.Application.Services.Implement
             return await metaRepository.CountSendingEmail(id);
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/07/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+
         public async Task<CandidateMeta> GetEmailByVerifyCode(ConfirmEmailCandidateDTO obj)
         {
             var data = (await metaRepository.FindByConditionAsync(x => x.Value == obj.Value && x.Description == obj.Hash)).FirstOrDefault();
             return data;
         }
 
-        public async Task<(DionResponse, EmailMessage<CandidateConfirmEmailBody>?)> ReSendEmail(string email)
+        public async Task<(BestCVResponse, EmailMessage<CandidateConfirmEmailBody>?)> ReSendEmail(string email)
         {
             var candidateMeta = (await metaRepository.FindByConditionAsync(x => x.Name == email));
 
@@ -429,28 +384,20 @@ namespace BestCV.Application.Services.Implement
                 var mes = SendEmailAsync(candidate, candidateMeta[0]);
                 if (countSent >= CandidateConstants.PASSSWORD_SENT_EMAIL_LIMIT)
                 {
-                    return (DionResponse.Error(), mes);
+                    return (BestCVResponse.Error(), mes);
                 }
                 else
                 {
-                    return (DionResponse.Success(), mes);
+                    return (BestCVResponse.Success(), mes);
                 }
             }
             else
             {
-                return (DionResponse.NotFound("", email), null);
+                return (BestCVResponse.NotFound("", email), null);
             }
         }
 
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 01/08/2023
-        /// Description : SendEmail 
-        /// </summary>
-        /// <param name="can"></param>
-        /// <param name="canMeta"></param>
-        /// <returns></returns>
         public EmailMessage<CandidateConfirmEmailBody> SendEmailAsync(Candidate can, CandidateMeta canMeta)
         {
             var host = configuration["SectionUrls:CandidateVerifiedNotificationPage"];
@@ -460,7 +407,7 @@ namespace BestCV.Application.Services.Implement
                 ToEmails = new List<string> { can.Email },
                 CcEmails = new List<String> { },
                 BccEmails = new List<string> { },
-                Subject = "Xác thực đăng ký tài khoản ứng viên hệ thống Jobi",
+                Subject = "Xác thực đăng ký tài khoản ứng viên hệ thống BestCV",
                 Model = new CandidateConfirmEmailBody()
                 {
                     Fullname = can.FullName,
@@ -474,20 +421,13 @@ namespace BestCV.Application.Services.Implement
         }
 
 
-        /// <summary>
-        /// Author :Chung
-        /// Created time : 02/08/2023
-        /// Description: update profile Candidate
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> UpdateProfileCandidate(UpdateProfileCandidateDTO obj)
+
+        public async Task<BestCVResponse> UpdateProfileCandidate(UpdateProfileCandidateDTO obj)
         {
             var candidateAccount = await repository.GetByIdAsync(obj.Id);
             if (candidateAccount == null)
             {
-                return DionResponse.NotFound("Not found", obj);
+                return BestCVResponse.NotFound("Not found", obj);
             }
             var updateAccount = mapper.Map(obj, candidateAccount);
             using (var database = await repository.BeginTransactionAsync())
@@ -773,13 +713,13 @@ namespace BestCV.Application.Services.Implement
                         }                     
                         #endregion
                         await repository.EndTransactionAsync();
-                        return DionResponse.Success("Cập nhật thông tin thành công");
+                        return BestCVResponse.Success("Cập nhật thông tin thành công");
                     }
 
                     else
                     {
                         await repository.RollbackTransactionAsync();
-                        return (DionResponse.Error("Cập nhật ứng viên không thành công"));
+                        return (BestCVResponse.Error("Cập nhật ứng viên không thành công"));
                     }
                 }
                 catch (Exception ex)
@@ -787,25 +727,18 @@ namespace BestCV.Application.Services.Implement
 
                     logger.LogError(ex, $"Có lỗi khi cập nhật thông tin ứng viên{obj.Id}");
                     await repository.RollbackTransactionAsync();
-                    return (DionResponse.Error());
+                    return (BestCVResponse.Error());
                 }
             }
         }
         
-        /// <summary>
-        /// Author :Nam Anh
-        /// Created time : 01/08/2023
-        /// Description: update job suggetion setting Candidate
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> UpdateCandidateJobSuggestionSetting(UpdateCandidateJobSuggetionSettingDTO obj)
+
+        public async Task<BestCVResponse> UpdateCandidateJobSuggestionSetting(UpdateCandidateJobSuggetionSettingDTO obj)
         {
             var candidateJobSuggestion = await repository.GetByIdAsync(obj.Id);
             if (candidateJobSuggestion == null)
             {
-                return DionResponse.NotFound("Not found", obj);
+                return BestCVResponse.NotFound("Not found", obj);
             }
             candidateJobSuggestion.SuggestionSalaryRangeId = obj.salaryRangeId;
             candidateJobSuggestion.SuggestionExperienceRangeId = obj.experienceRangeId;
@@ -906,26 +839,19 @@ namespace BestCV.Application.Services.Implement
                     }
 
                     await repository.EndTransactionAsync();
-                    return DionResponse.Success("Cập nhật gợi ý việc làm thành công");
+                    return BestCVResponse.Success("Cập nhật gợi ý việc làm thành công");
                 }
                 catch (Exception e)
                 {
                     logger.LogError(e, $"Failed to update: {obj}");
                     await repository.RollbackTransactionAsync();
-                    return DionResponse.Error("Cập nhật gợi ý việc làm không thành công.");
+                    return BestCVResponse.Error("Cập nhật gợi ý việc làm không thành công.");
                 }
             }
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 26/7/2023
-        /// Description: Đăng nhập cho ứng viên
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception></exception>
-        public async Task<DionResponse> SignIn(SigninCandidateDTO obj)
+
+        public async Task<BestCVResponse> SignIn(SigninCandidateDTO obj)
         {
             List<string> errors = new();
             Candidate? candidate = null;
@@ -958,31 +884,24 @@ namespace BestCV.Application.Services.Implement
                         Photo = candidate.Photo,
                         Token = token,
                     };
-                    return DionResponse.Success(loginModel);
+                    return BestCVResponse.Success(loginModel);
                 }
                 errors.Add("Tài khoản của bạn chưa được kích hoạt.");
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             errors.Add("Sai thông tin tài khoản hoặc mật khẩu.");
-            return DionResponse.BadRequest(errors);
+            return BestCVResponse.BadRequest(errors);
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 02/08/2023
-        /// Description : Login with facebook
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> SignInWithFacebook(SignInWithSocialNetworkDTO obj)
+
+        public async Task<BestCVResponse> SignInWithFacebook(SignInWithSocialNetworkDTO obj)
         {
             var candidate = new Candidate();
             if (obj.Email.Contains("@"))
             {
                 if (!EmailValidate(obj.Email))
                 {
-                    return DionResponse.Error(CandidateConstants.ERROR_EMAIL_INVALID);
+                    return BestCVResponse.Error(CandidateConstants.ERROR_EMAIL_INVALID);
                 }
 
                 candidate = await repository.GetByEmailAsync(obj.Email);
@@ -1035,19 +954,19 @@ namespace BestCV.Application.Services.Implement
                         Photo = candidate.Photo,
                         Token = token,
                     };
-                    return DionResponse.Success(loginCandidate);
-                    //return DionResponse.Success(newCandidate);
+                    return BestCVResponse.Success(loginCandidate);
+                    //return BestCVResponse.Success(newCandidate);
                 }
                 else
                 {
-                    return DionResponse.Error(CandidateConstants.ERROR_WHEN_SIGN_IN_SNSID);
+                    return BestCVResponse.Error(CandidateConstants.ERROR_WHEN_SIGN_IN_SNSID);
                 }
             }
             else
             {
                 if (!candidate.Active)
                 {
-                    return DionResponse.Error(CandidateConstants.ERROR_NOT_ACTIVATED);
+                    return BestCVResponse.Error(CandidateConstants.ERROR_NOT_ACTIVATED);
                 }
                 else
                 {
@@ -1073,7 +992,7 @@ namespace BestCV.Application.Services.Implement
                         Token = token,
                     };
 
-                    return DionResponse.Success(loginCandidate);
+                    return BestCVResponse.Success(loginCandidate);
                 }
             }
         }
@@ -1091,18 +1010,12 @@ namespace BestCV.Application.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 02/08/2023
-        /// Description : Login Google
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> SignInWithGoole(SignInWithSocialNetworkDTO obj)
+
+        public async Task<BestCVResponse> SignInWithGoole(SignInWithSocialNetworkDTO obj)
         {
             if (!EmailValidate(obj.Email))
             {
-                return DionResponse.Error(CandidateConstants.ERROR_EMAIL_INVALID);
+                return BestCVResponse.Error(CandidateConstants.ERROR_EMAIL_INVALID);
             }
             var candidate = await repository.GetByEmailAsync(obj.Email);
             if (candidate == null)
@@ -1144,14 +1057,14 @@ namespace BestCV.Application.Services.Implement
                     Token = token,
                 };
                
-                return DionResponse.Success(loginCandidate);
+                return BestCVResponse.Success(loginCandidate);
 
             }
             else
             {
                 if (!candidate.Active)
                 {
-                    return DionResponse.Error(CandidateConstants.ERROR_NOT_ACTIVATED);
+                    return BestCVResponse.Error(CandidateConstants.ERROR_NOT_ACTIVATED);
                 }
                 else
                 {
@@ -1176,20 +1089,20 @@ namespace BestCV.Application.Services.Implement
                         Token = token,
                     };
 
-                    return DionResponse.Success(loginCandidate);
+                    return BestCVResponse.Success(loginCandidate);
 
                 }
             }
         }
 
-        public async Task<DionResponse> SignInWithLinkedIn(SignInWithSocialNetworkDTO obj)
+        public async Task<BestCVResponse> SignInWithLinkedIn(SignInWithSocialNetworkDTO obj)
         {
             var candidate = new Candidate();
             if (obj.Email.Contains("@"))
             {
                 if (!EmailValidate(obj.Email))
                 {
-                    return DionResponse.Error(CandidateConstants.ERROR_EMAIL_INVALID);
+                    return BestCVResponse.Error(CandidateConstants.ERROR_EMAIL_INVALID);
                 }
 
                 candidate = await repository.GetByEmailAsync(obj.Email);
@@ -1242,19 +1155,19 @@ namespace BestCV.Application.Services.Implement
                         Photo = candidate.Photo,
                         Token = token,
                     };
-                    return DionResponse.Success(loginCandidate);
-                    //return DionResponse.Success(newCandidate);
+                    return BestCVResponse.Success(loginCandidate);
+                    //return BestCVResponse.Success(newCandidate);
                 }
                 else
                 {
-                    return DionResponse.Error(CandidateConstants.ERROR_WHEN_SIGN_IN_SNSID);
+                    return BestCVResponse.Error(CandidateConstants.ERROR_WHEN_SIGN_IN_SNSID);
                 }
             }
             else
             {
                 if (!candidate.Active)
                 {
-                    return DionResponse.Error(CandidateConstants.ERROR_NOT_ACTIVATED);
+                    return BestCVResponse.Error(CandidateConstants.ERROR_NOT_ACTIVATED);
                 }
                 else
                 {
@@ -1278,55 +1191,37 @@ namespace BestCV.Application.Services.Implement
                         Token = token,
                     };
 
-                    return DionResponse.Success(candidate);
+                    return BestCVResponse.Success(candidate);
                 }
             }
         }
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 01/08/2023
-        /// Description : Get list data for admin page
-        /// </summary>
-        /// <param name="parameters">DTParameters</param>
-        /// <returns></returns>
+
         public async Task<object> ListCandidateAggregates(CandidateDTParameters parameters)
         {
             return await repository.ListCandidateAggregates(parameters);
         }
-        /// <summary>
-        /// Author ThanhNd
-        /// CreatedTime : 03/08/2023
-        /// Description : Quick activated candidate for admin page
-        /// </summary>
-        /// <param name="id">candidate Id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> QuickActivatedAsync(long id)
+
+        public async Task<BestCVResponse> QuickActivatedAsync(long id)
         {
             var isUpdated = await repository.QuickActivatedAsync(id);
             if (isUpdated)
             {
                 await repository.SaveChangesAsync();
-                return DionResponse.Success(isUpdated);
+                return BestCVResponse.Success(isUpdated);
             }
-            return DionResponse.BadRequest("Kích hoạt ứng viên không thành công");
+            return BestCVResponse.BadRequest("Kích hoạt ứng viên không thành công");
         }
-        /// <summary>
-        /// Author ThanhNd
-        /// CreatedTime : 03/08/2023
-        /// Description : Change password candidate for admin page
-        /// </summary>
-        /// <param name="obj">ChangePasswordDTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> ChangePasswordAdminAsync(ChangePasswordDTO obj)
+
+        public async Task<BestCVResponse> ChangePasswordAdminAsync(ChangePasswordDTO obj)
         {
             var newCandidate = await repository.GetByIdAsync(obj.Id);
             if (newCandidate == null)
             {
-                return DionResponse.NotFound("Không tìm thấy ứng viên", newCandidate);
+                return BestCVResponse.NotFound("Không tìm thấy ứng viên", newCandidate);
             }
             if (newCandidate.Password == obj.NewPassword.ToHash256())
             {
-                return DionResponse.Error("Mật khẩu mới không được trùng với mật khẩu đã đặt");
+                return BestCVResponse.Error("Mật khẩu mới không được trùng với mật khẩu đã đặt");
 
             }
             newCandidate.Password = obj.NewPassword.ToHash256();
@@ -1335,12 +1230,12 @@ namespace BestCV.Application.Services.Implement
             if (isUpdated)
             {
                 await repository.SaveChangesAsync();
-                return DionResponse.Success(isUpdated);
+                return BestCVResponse.Success(isUpdated);
             }
-            return DionResponse.Error("Thay đổi mật khẩu không thành công");
+            return BestCVResponse.Error("Thay đổi mật khẩu không thành công");
         }
 
-        public async Task<DionResponse> ExportExcel(List<CandidateAggregates> data)
+        public async Task<BestCVResponse> ExportExcel(List<CandidateAggregates> data)
         {
             if (data.Count > 0)
             {
@@ -1495,11 +1390,11 @@ namespace BestCV.Application.Services.Implement
                     FileGuid = handle,
                     FileName = fileName,
                 };
-                return DionResponse.Success(obj);
+                return BestCVResponse.Success(obj);
             }
             else
             {
-                return DionResponse.BadRequest("Failed to export Excel");
+                return BestCVResponse.BadRequest("Failed to export Excel");
             }
         }
 
@@ -1517,14 +1412,8 @@ namespace BestCV.Application.Services.Implement
             }
         }
 
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: tạo candidateMeta để tạo actionLink trong email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        public async Task<(DionResponse, EmailMessage<ForgotPasswordEmailBody>?)> ForgotPassword(string email)
+
+        public async Task<(BestCVResponse, EmailMessage<ForgotPasswordEmailBody>?)> ForgotPassword(string email)
         {
             var candidate = await repository.FindByEmail(email);
             var database = await metaRepository.BeginTransactionAsync();
@@ -1557,36 +1446,29 @@ namespace BestCV.Application.Services.Implement
                             var message = SendEmailForgotPasswordAsync(candidate, candidateMeta);
                             // hoàn thành transaction
                             await metaRepository.EndTransactionAsync();
-                            return (DionResponse.Success(), message);
+                            return (BestCVResponse.Success(), message);
                         }
                         else
                         {
                             await metaRepository.RollbackTransactionAsync();
-                            return (DionResponse.Error("Email chưa kích hoạt. "), null);
+                            return (BestCVResponse.Error("Email chưa kích hoạt. "), null);
                         }
                     }
                     else
                     {
                         await metaRepository.RollbackTransactionAsync();
-                        return (DionResponse.Error("Email chưa kích hoạt."), null);
+                        return (BestCVResponse.Error("Email chưa kích hoạt."), null);
                     }
                 }
                 catch (Exception ex)
                 {
                     logger.LogError(ex, $"Có lỗi khi gửi email");
-                    return (DionResponse.Error(), null);
+                    return (BestCVResponse.Error(), null);
                 }
             }
 
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: Send email quên mật khẩu cho ứng viên
-        /// </summary>
-        /// <param name="emp"></param>
-        /// <param name="empMeta"></param>
-        /// <returns></returns>
+
         public EmailMessage<ForgotPasswordEmailBody> SendEmailForgotPasswordAsync(Candidate candidate, CandidateMeta candidateMeta)
         {
             var host = configuration["SectionUrls:CandidateVerifiedForgotPasswordNotificationPage"];
@@ -1613,36 +1495,17 @@ namespace BestCV.Application.Services.Implement
         {
             return await metaRepository.CountResetPassword(candidateMeta);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: Check email đã active chưa
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+
         public async Task<bool> CheckEmailIsActive(string email)
         {
             return await repository.CheckEmailIsActive(email);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: lấy candidate qua email 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+
         public async Task<Candidate?> GetByEmailAsync(string email)
         {
             return await repository.GetByEmailAsync(email);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: CheckKeyValid kiểm tra thời gian của tồn tại của links reset password
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="hash"></param>
-        /// <returns></returns>
+
         public async Task<bool> CheckKeyValid(string code, string hash)
         {
             var result = false;
@@ -1657,16 +1520,8 @@ namespace BestCV.Application.Services.Implement
             }
             return result;
         }
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: thay đổi mật khẩu của ứng viên và cập nhật active candidateMeta 
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="hash"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> ResetNewPassword(string code, string hash, string password)
+
+        public async Task<BestCVResponse> ResetNewPassword(string code, string hash, string password)
         {
             var dataMeta = await metaRepository.CheckVerifyCode(code, hash);
             var candidate = await repository.GetByIdAsync(dataMeta.CandidateId);
@@ -1676,15 +1531,9 @@ namespace BestCV.Application.Services.Implement
             dataMeta.Active = false;
             await metaRepository.UpdateAsync(dataMeta);
             await metaRepository.SaveChangesAsync();
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 23/09/2023
-        /// Description: Check Candidate is active
-        /// </summary>
-        /// <param name="id">candidate Id</param>
-        /// <returns></returns>
+
         public async Task<bool> IsActive(long id)
         {
             var candidate = await repository.GetByIdAsync(id);

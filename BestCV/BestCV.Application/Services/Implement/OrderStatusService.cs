@@ -28,14 +28,8 @@ namespace BestCV.Application.Services.Implement
             this.orderStatusRepository = orderStatusRepository;
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: add order status 
-        /// </summary>
-        /// <param name="obj">InsertOrderStatusDTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertOrderStatusDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertOrderStatusDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await orderStatusRepository.IsNameExistAsync(0, obj.Name.Trim());
@@ -55,7 +49,7 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var newObj = mapper.Map<OrderStatus>(obj);
@@ -66,81 +60,58 @@ namespace BestCV.Application.Services.Implement
 
             await orderStatusRepository.CreateAsync(newObj);
             await orderStatusRepository.SaveChangesAsync();
-            return DionResponse.Success(newObj);
+            return BestCVResponse.Success(newObj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertOrderStatusDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertOrderStatusDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get list order status 
-        /// </summary>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await orderStatusRepository.FindByConditionAsync(c => c.Active);
             if (data==null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var temp = mapper.Map<List<OrderStatusDTO>>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get order status by id
-        /// </summary>
-        /// <param name="id">OrderStatusId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await orderStatusRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", id);
+                return BestCVResponse.NotFound("Không có dữ liệu", id);
             }
             var temp = mapper.Map<OrderStatusDTO>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: soft delete order status by id
-        /// </summary>
-        /// <param name="id">OrderStatusId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await orderStatusRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await orderStatusRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu.", id);
+            return BestCVResponse.NotFound("Không có dữ liệu.", id);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: update order status
-        /// </summary>
-        /// <param name="obj">UpdateOrderStatusDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> UpdateAsync(UpdateOrderStatusDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateOrderStatusDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await orderStatusRepository.IsNameExistAsync(obj.Id, obj.Name.Trim());
@@ -156,24 +127,24 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var data = await orderStatusRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var updateObj = mapper.Map(obj, data);
             updateObj.Description = !string.IsNullOrEmpty(updateObj.Description) ? updateObj.Description.ToEscape() : null;
 
             await orderStatusRepository.UpdateAsync(updateObj);
             await orderStatusRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateOrderStatusDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateOrderStatusDTO> obj)
         {
             throw new NotImplementedException();
         }

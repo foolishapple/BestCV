@@ -14,9 +14,9 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ITopJobUrgentService : IServiceQueryBase<long, InsertTopJobUrgentDTO, UpdateTopJobUrgentDTO, TopJobUrgentDTO>
     {
-        Task<DionResponse> ListTopJobUrgent();
-        Task<DionResponse> ChangeOrderSort(ChangeOrderSortTopJobUrgentDTO model);
-        Task<DionResponse> ListTopJobUrgentShowOnHomePageAsync();
-        Task<DionResponse> SearchingUrgentJob(SearchJobWithServiceParameters parameter);
+        Task<BestCVResponse> ListTopJobUrgent();
+        Task<BestCVResponse> ChangeOrderSort(ChangeOrderSortTopJobUrgentDTO model);
+        Task<BestCVResponse> ListTopJobUrgentShowOnHomePageAsync();
+        Task<BestCVResponse> SearchingUrgentJob(SearchJobWithServiceParameters parameter);
     }
 }

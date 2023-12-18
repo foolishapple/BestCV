@@ -13,10 +13,10 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IMenuService : IServiceQueryBase<int, InsertMenuDTO, UpdateMenuDTO, MenuDTO>
     {
-        Task<DionResponse> GetListMenuHomepage();
-        Task<DionResponse> GetAllMenuAdmin();
-        Task<DionResponse> GetAllMenuDashboardEmployer();
-        Task<DionResponse> GetAllMenuDashboardCandidate();
-        Task<DionResponse> GetAllMenuHeaderCandidate();
+        Task<BestCVResponse> GetListMenuHomepage();
+        Task<BestCVResponse> GetAllMenuAdmin();
+        Task<BestCVResponse> GetAllMenuDashboardEmployer();
+        Task<BestCVResponse> GetAllMenuDashboardCandidate();
+        Task<BestCVResponse> GetAllMenuHeaderCandidate();
     }
 }

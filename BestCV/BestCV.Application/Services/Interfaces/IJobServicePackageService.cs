@@ -13,21 +13,9 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IJobServicePackageService : IServiceQueryBase<JobServicePackage,InsertJobServicePackageDTO,UpdateJobServicePackageDTO,JobServicePackageDTO>
     {
-        /// <summary>
-        /// Author: TUNGTD
-        /// Creatd: 18/09/2023
-        /// Description: Get list job service package by job id
-        /// </summary>
-        /// <param name="id">job id</param>
-        /// <returns></returns>
-        Task<DionResponse> ListAggregate(long id);
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 18/09/2023
-        /// Descript
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        Task<DionResponse> AddServiceToJob(InsertJobServicePackageDTO model);
+
+        Task<BestCVResponse> ListAggregate(long id);
+
+        Task<BestCVResponse> AddServiceToJob(InsertJobServicePackageDTO model);
     }
 }

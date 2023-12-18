@@ -12,6 +12,6 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IEmployerWalletService : IServiceQueryBase<long, InsertEmployerWalletDTO, UpdateEmployerWalletDTO, EmployerWalletDTO>
     {
-        Task<DionResponse> GetCreditWalletByEmployerId(long employerId);
+        Task<BestCVResponse> GetCreditWalletByEmployerId(long employerId);
     }
 }

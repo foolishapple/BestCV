@@ -13,8 +13,8 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IJobReferenceService : IServiceQueryBase<long, InsertJobReferenceDTO, UpdateJobReferenceDTO, JobReferenceDTO>
     {
-        Task<DionResponse> ListAggregatesAsync();
+        Task<BestCVResponse> ListAggregatesAsync();
         Task<List<SelectListItem>> ListJobSelected();
-        Task<DionResponse> ListJobReferenceOnDetailJob(long jobId);
+        Task<BestCVResponse> ListJobReferenceOnDetailJob(long jobId);
     }
 }

@@ -27,7 +27,7 @@ namespace BestCV.Application.Services.Implement
             logger = loggerFactory.CreateLogger<CompanySizeService>();
             mapper = _mapper;
         }
-        public async Task<DionResponse> CreateAsync(InsertCompanySizeDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertCompanySizeDTO obj)
         {
             var data = mapper.Map<CompanySize>(obj);
             data.Active = true;
@@ -41,65 +41,65 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await companySizeRepository.CreateAsync(data);
             await companySizeRepository.SaveChangesAsync();
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCompanySizeDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCompanySizeDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await companySizeRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<CompanySizeDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await companySizeRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<CompanySizeDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await companySizeRepository.SoftDeleteAsync(id);
             if (data)
             {
-                //return DionResponse.Success();
+                //return BestCVResponse.Success();
                 await companySizeRepository.SaveChangesAsync();
-                return DionResponse.Success();
+                return BestCVResponse.Success();
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateCompanySizeDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateCompanySizeDTO obj)
         {
             var data = await companySizeRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var result = mapper.Map(obj, data);
             result.Description = !string.IsNullOrEmpty(result.Description) ? result.Description.ToEscape() : null;
@@ -113,14 +113,14 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await companySizeRepository.UpdateAsync(result);
             await companySizeRepository.SaveChangesAsync();
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCompanySizeDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCompanySizeDTO> obj)
         {
             throw new NotImplementedException();
         }
@@ -132,14 +132,14 @@ namespace BestCV.Application.Services.Implement
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        public async Task<DionResponse> LoadDataFilterCompanySizeHomePageAsync()
+        public async Task<BestCVResponse> LoadDataFilterCompanySizeHomePageAsync()
         {
             var data = await companySizeRepository.LoadDataFilterCompanySizeHomePageAsync();
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

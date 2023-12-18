@@ -61,40 +61,27 @@ namespace BestCV.Application.Services.Implement
             tokenService = _tokenService;
             configuration = _configuration;
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedTime : 28/07/2023
-        /// Description : update password
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> ChangePassword(long id, ChangePasswordEmployerDTO obj)
+
+        public async Task<BestCVResponse> ChangePassword(long id, ChangePasswordEmployerDTO obj)
         {
             var employer = await employerRepository.GetByIdAsync(id);
             if (employer == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", id);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", id);
             }
             if (employer.Password != obj.OldPassword.ToHash256())
             {
-                return DionResponse.BadRequest(new List<string>() { "Mật khẩu cũ không chính xác." });
+                return BestCVResponse.BadRequest(new List<string>() { "Mật khẩu cũ không chính xác." });
             }
             employer.Password = obj.NewPassword.ToHash256();
             await employerRepository.UpdateAsync(employer);
             await employerRepository.SaveChangesAsync();
-            return DionResponse.Success(employer);
+            return BestCVResponse.Success(employer);
         }
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 30.07.2023
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="hashCode"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CheckVerifyCode(string value, string hashCode)
+
+        public async Task<BestCVResponse> CheckVerifyCode(string value, string hashCode)
         {
             var dataMeta = await employerMetaRepository.CheckVerifyCode(value, hashCode);
             if (dataMeta != null)
@@ -102,7 +89,7 @@ namespace BestCV.Application.Services.Implement
                 //check expiry time
                 if (DateTime.Now > dataMeta.CreatedTime.AddHours(EmployerMetaConstants.CONFIRM_EMAIL_EXPIRY_TIME))
                 {
-                    return DionResponse.Error();
+                    return BestCVResponse.Error();
                 }
                 else
                 {
@@ -110,59 +97,54 @@ namespace BestCV.Application.Services.Implement
                     // deactive meta
                     await employerMetaRepository.UpdateAsync(dataMeta);
                     await employerMetaRepository.SaveChangesAsync();
-                    return DionResponse.Success(dataMeta);
+                    return BestCVResponse.Success(dataMeta);
                 }
             }
             else
             {
-                return DionResponse.NotFound("", dataMeta);
+                return BestCVResponse.NotFound("", dataMeta);
             }
         }
 
-        public Task<DionResponse> CreateAsync(EmployerSignUpDTO obj)
+        public Task<BestCVResponse> CreateAsync(EmployerSignUpDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<EmployerSignUpDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<EmployerSignUpDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await employerRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", data);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", data);
             }
             var model = mapper.Map<EmployerDTO>(data);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 26-07-2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<(DionResponse, EmailMessage<EmployerConfirmEmailBody>?)> SignUp(EmployerSignUpDTO obj)
+
+        public async Task<(BestCVResponse, EmailMessage<EmployerConfirmEmailBody>?)> SignUp(EmployerSignUpDTO obj)
         {
             var checkEmail = await employerRepository.EmailExisted(obj.Email);
             var checkPhone = await employerRepository.PhonedExisted(obj.Phone);
 
             if (checkEmail)
             {
-                return (DionResponse.Error("Email đã được sử dụng."), null);
+                return (BestCVResponse.Error("Email đã được sử dụng."), null);
             }
             else if (checkPhone)
             {
-                return (DionResponse.Error("Số điện thoại đã được sử dụng."), null);
+                return (BestCVResponse.Error("Số điện thoại đã được sử dụng."), null);
             }
             else
             {
@@ -237,26 +219,26 @@ namespace BestCV.Application.Services.Implement
 
                                 // hoàn thành transaction
                                 await employerMetaRepository.EndTransactionAsync();
-                                return (DionResponse.Success(obj), message);
+                                return (BestCVResponse.Success(obj), message);
                             }
                             else
                             {
                                 await employerMetaRepository.RollbackTransactionAsync();
                                 await employerWalletRepository.RollbackTransactionAsync();
-                                return (DionResponse.Error("Đăng ký tài khoản nhà tuyển dụng không thành công"), null);
+                                return (BestCVResponse.Error("Đăng ký tài khoản nhà tuyển dụng không thành công"), null);
                             }
                         }
                         else
                         {
                             await employerMetaRepository.RollbackTransactionAsync();
                             await employerWalletRepository.RollbackTransactionAsync();
-                            return (DionResponse.Error("Đăng ký tài khoản nhà tuyển dụng không thành công"), null);
+                            return (BestCVResponse.Error("Đăng ký tài khoản nhà tuyển dụng không thành công"), null);
                         }
                     }
                     catch (Exception ex)
                     {
                         logger.LogError(ex, $"Có lỗi khi tạo tài khoản nhà tuyển dụng{emp.Username}");
-                        return (DionResponse.Error(), null);
+                        return (BestCVResponse.Error(), null);
                     }
                 }
 
@@ -265,14 +247,8 @@ namespace BestCV.Application.Services.Implement
 
         }
 
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: tạo employerMeta để tạo actionLink trong email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        public async Task<(DionResponse, EmailMessage<ForgotPasswordEmailBody>?)> ForgotPassword(string email)
+
+        public async Task<(BestCVResponse, EmailMessage<ForgotPasswordEmailBody>?)> ForgotPassword(string email)
         {
             var emp = await employerRepository.FindByEmail(email);
             var database = await employerMetaRepository.BeginTransactionAsync();
@@ -305,47 +281,41 @@ namespace BestCV.Application.Services.Implement
                             var message = SendEmailForgotPasswordAsync(emp, employerMeta);
                             // hoàn thành transaction
                             await employerMetaRepository.EndTransactionAsync();
-                            return (DionResponse.Success(), message);
+                            return (BestCVResponse.Success(), message);
                         }
                         else
                         {
                             await employerMetaRepository.RollbackTransactionAsync();
-                            return (DionResponse.Error("Email chưa kích hoạt. "), null);
+                            return (BestCVResponse.Error("Email chưa kích hoạt. "), null);
                         }
                     }
                     else
                     {
                         await employerMetaRepository.RollbackTransactionAsync();
-                        return (DionResponse.Error("Email chưa kích hoạt."), null);
+                        return (BestCVResponse.Error("Email chưa kích hoạt."), null);
                     }
                 }
                 catch (Exception ex)
                 {
                     logger.LogError(ex, $"Có lỗi khi gửi email");
-                    return (DionResponse.Error(), null);
+                    return (BestCVResponse.Error(), null);
                 }
             }
 
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// Create: 28/07/2023
-        /// Description: Update employer ìnormation by updateEmployerDTO
-        /// </summary>
-        /// <param name="obj">Update employer DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateEmployerDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateEmployerDTO obj)
         {
             List<string> listErrors = new List<string>();
             var skypeAccount = await employerRepository.SkypeAccountExisted(obj.SkypeAccount);
@@ -359,32 +329,26 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var employer = await employerRepository.GetByIdAsync(obj.Id);
             if (employer == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", obj);
             }
             var model = mapper.Map(obj, employer);
             await employerRepository.UpdateAsync(model);
             await employerRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateEmployerDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateEmployerDTO> obj)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 28/07/2023
-        /// Description: Kiểm tra đăng nhập có thành công hay không
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> SignInAsync(SignInEmployerDTO obj)
+
+        public async Task<BestCVResponse> SignInAsync(SignInEmployerDTO obj)
         {
             List<string> errors = new();
             Employer? employer = null;
@@ -423,22 +387,17 @@ namespace BestCV.Application.Services.Implement
                         //Username = employer.Username,
                         //Email = employer.Email
                     };
-                    return DionResponse.Success(loginModel);
+                    return BestCVResponse.Success(loginModel);
                 }
                 errors.Add("Tài khoản của bạn chưa được kích hoạt.");
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             errors.Add("Sai thông tin tài khoản hoặc mật khẩu.");
-            return DionResponse.BadRequest(errors);
+            return BestCVResponse.BadRequest(errors);
         }
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 29.07.2023
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+
         public async Task ActivateAccount(string email)
         {
             var emp = await employerRepository.FindByEmail(email);
@@ -448,13 +407,7 @@ namespace BestCV.Application.Services.Implement
         }
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 31.07.2023
-        /// </summary>
-        /// <param name="emp"></param>
-        /// <param name="empMeta"></param>
-        /// <returns></returns>
+
         public EmailMessage<EmployerConfirmEmailBody> SendEmailAsync(Employer emp, EmployerMeta empMeta)
         {
             var host = configuration["SectionUrls:EmployerVerifiedNotificationPage"];
@@ -475,14 +428,7 @@ namespace BestCV.Application.Services.Implement
             };
             return message;
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: Send email quên mật khẩu cho nhà tuyển dụng
-        /// </summary>
-        /// <param name="emp"></param>
-        /// <param name="empMeta"></param>
-        /// <returns></returns>
+
         public EmailMessage<ForgotPasswordEmailBody> SendEmailForgotPasswordAsync(Employer emp, EmployerMeta empMeta)
         {
             var host = configuration["SectionUrls:EmployerVerifiedForgotPasswordNotificationPage"];
@@ -506,13 +452,7 @@ namespace BestCV.Application.Services.Implement
         }
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 31.07.2023
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="hashCode"></param>
-        /// <returns></returns>
+
         public async Task<EmployerMeta> GetEmailByVerifyCode(ConfirmEmailEmployerDTO obj)
         {
             var data = (await employerMetaRepository.FindByConditionAsync(x => x.Value == obj.Value && x.Description == obj.Hash)).FirstOrDefault();
@@ -520,13 +460,8 @@ namespace BestCV.Application.Services.Implement
         }
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 31.07.2023 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns>gửi lại email</returns>
-        public async Task<(DionResponse, EmailMessage<EmployerConfirmEmailBody>?)> ReSendEmail(string email)
+
+        public async Task<(BestCVResponse, EmailMessage<EmployerConfirmEmailBody>?)> ReSendEmail(string email)
         {
             // list employer meta data
             var dataMeta = (await employerMetaRepository.FindByConditionAsync(x => x.Name == email));
@@ -563,61 +498,35 @@ namespace BestCV.Application.Services.Implement
                 var message = SendEmailAsync(employer, dataMeta[0]);
                 if (countSent >= EmployerMetaConstants.MAXIMUM_SEND_CONFIRM_EMAIL_PER_DAY)
                 {
-                    return (DionResponse.Error(), message);
+                    return (BestCVResponse.Error(), message);
                 }
                 else
                 {
-                    return (DionResponse.Success(), message);
+                    return (BestCVResponse.Success(), message);
                 }
             }
             else
             {
-                return (DionResponse.NotFound("", email), null);
+                return (BestCVResponse.NotFound("", email), null);
             }
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/08/2023
-        /// Description: đếm số lần email đã gửi trong 1 h
-        /// </summary>
-        /// <param name="employerId"></param>
-        /// <returns></returns>
-        /// 
+ 
 
         public async Task<int> CountResetPassword(long employerId)
         {
             return await employerMetaRepository.CountResetPassword(employerId);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: Check email đã active chưa
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+
         public async Task<bool> CheckEmailIsActive(string email)
         {
             return await employerRepository.CheckEmailIsActive(email);
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: lấy employer qua email 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
+
         public async Task<Employer?> GetByEmailAsync(string email)
         {
             return  await employerRepository.GetByEmailAsync(email);          
         }
-        /// <summary>
-        /// Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: CheckKeyValid kiểm tra thời gian của tồn tại của links reset password
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="hash"></param>
-        /// <returns></returns>
+
         public async Task<bool> CheckKeyValid (string code , string hash)
         {
             var result = false;
@@ -632,16 +541,8 @@ namespace BestCV.Application.Services.Implement
             }
             return result;
         }
-        /// <summary>
-        ///  Author: DucNN
-        /// CreatedDate: 8/8/2023
-        /// Description: thay đổi mật khẩu NTD và cập nhật active employerMeta 
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="hash"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> ResetNewPassword(string code, string hash,string password)
+
+        public async Task<BestCVResponse> ResetNewPassword(string code, string hash,string password)
         {
             var dataMeta = await employerMetaRepository.CheckVerifyCode(code, hash);
             var employer = await employerRepository.GetByIdAsync(dataMeta.EmployerId);
@@ -651,7 +552,7 @@ namespace BestCV.Application.Services.Implement
             dataMeta.Active = false;
             await employerMetaRepository.UpdateAsync(dataMeta);
             await employerMetaRepository.SaveChangesAsync();
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
 
         public async Task<object> ListEmployerAggregates(DTParameters parameter)
@@ -659,27 +560,27 @@ namespace BestCV.Application.Services.Implement
             return await employerRepository.ListEmployerAggregates(parameter);
         }
 
-        public async Task<DionResponse> AdminDetailAsync(long id)
+        public async Task<BestCVResponse> AdminDetailAsync(long id)
         {
             var data = await employerRepository.GetByIdAsync(id);
             if (data != null)
             {
                 var model = mapper.Map<EmployerDetailDTO>(data);
-                return DionResponse.Success(model);
+                return BestCVResponse.Success(model);
             }
-            return DionResponse.NotFound("Không tìm thấy nhà tuyển dụng",data);
+            return BestCVResponse.NotFound("Không tìm thấy nhà tuyển dụng",data);
         }
 
-        public async Task<DionResponse> ChangePasswordAdminAsync(ChangePasswordDTO obj)
+        public async Task<BestCVResponse> ChangePasswordAdminAsync(ChangePasswordDTO obj)
         {
             var newEmployer = await employerRepository.GetByIdAsync(obj.Id);
             if (newEmployer == null)
             {
-                return DionResponse.NotFound("Không tìm thấy nhà tuyển dụng", newEmployer);
+                return BestCVResponse.NotFound("Không tìm thấy nhà tuyển dụng", newEmployer);
             }
             if (newEmployer.Password == obj.NewPassword.ToHash256())
             {
-                return DionResponse.Error("Mật khẩu mới không được trùng với mật khẩu đã đặt");
+                return BestCVResponse.Error("Mật khẩu mới không được trùng với mật khẩu đã đặt");
 
             }
             newEmployer.Password = obj.NewPassword.ToHash256();
@@ -688,20 +589,20 @@ namespace BestCV.Application.Services.Implement
             if (isUpdated)
             {
                 await employerRepository.SaveChangesAsync();
-                return DionResponse.Success(isUpdated);
+                return BestCVResponse.Success(isUpdated);
             }
-            return DionResponse.Error("Thay đổi mật khẩu không thành công");
+            return BestCVResponse.Error("Thay đổi mật khẩu không thành công");
         }
 
-        public async Task<DionResponse> QuickActivatedAsync(long id)
+        public async Task<BestCVResponse> QuickActivatedAsync(long id)
         {
             var isUpdated = await employerRepository.QuickActivatedAsync(id);
             if (isUpdated)
             {
                 await employerRepository.SaveChangesAsync();
-                return DionResponse.Success(isUpdated);
+                return BestCVResponse.Success(isUpdated);
             }
-            return DionResponse.BadRequest("Kích hoạt nhà tuyển dụng không thành công");
+            return BestCVResponse.BadRequest("Kích hoạt nhà tuyển dụng không thành công");
         }
     }
 }

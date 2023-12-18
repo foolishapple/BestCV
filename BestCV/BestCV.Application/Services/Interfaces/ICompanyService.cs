@@ -16,34 +16,16 @@ namespace BestCV.Application.Services.Interfaces
     {
         public Task<bool> IsNameExist(string name);
 
-        public Task<DionResponse> GetDetailByEmnployerId(long employerId);
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 07/08/2023
-        /// Description : Lấy danh sách tổ chức tuyển dụng (Server Side)
-        /// </summary>
-        /// <param name="parameters">DTParameters</param>
-        /// <returns></returns>
+        public Task<BestCVResponse> GetDetailByEmnployerId(long employerId);
+
         public Task<object> ListCompanyAggregate(DTParameters parameters);
-        Task<DionResponse> DetailAdmin(int id);
-        Task<DionResponse> ExportExcel(List<CompanyAggregates> data);
-        /// <summary>
-        /// Author : HuyDQ
-        /// CreatedTime : 09/08/2023
-        /// Description : Lấy chi tiết tổ chức tuyển dụng
-        /// </summary>
-        /// <param name="companyId"></param>
-        /// <returns></returns>
-        Task<DionResponse> GetCompanyAggregatesById(int companyId);
+        Task<BestCVResponse> DetailAdmin(int id);
+        Task<BestCVResponse> ExportExcel(List<CompanyAggregates> data);
+
+        Task<BestCVResponse> GetCompanyAggregatesById(int companyId);
         byte[] DownloadExcel(string fileGuid, string fileName);
 
-        /// <summary>
-        /// Author : HuyDQ
-        /// CreatedTime : 17/08/2023
-        /// Description : Tìm kiếm công ty trang chủ (server side)
-        /// </summary>
-        /// <param name="parameter">SearchingCompanyParameters</param>
-        /// <returns></returns>
-        public Task<DionResponse> SearchCompanyHomePageAsync(SearchingCompanyParameters parameter);
+ 
+        public Task<BestCVResponse> SearchCompanyHomePageAsync(SearchingCompanyParameters parameter);
     }
 }

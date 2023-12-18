@@ -7,7 +7,7 @@ namespace BestCV.ScheduledJob.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            return ;
+            return Ok();
         }
     }
 }

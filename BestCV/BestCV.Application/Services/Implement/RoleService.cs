@@ -24,34 +24,22 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
             _logger = loggerFactory.CreateLogger<RoleService>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: create new role
-        /// </summary>
-        /// <param name="obj">insert role DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertRoleDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertRoleDTO obj)
         {
             List<string> errors = new();
             var model = MappingInsertDTO(obj);
             errors = await Validate(model);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _roleRepository.CreateAsync(model);
             await _roleRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: insert list role
-        /// </summary>
-        /// <param name="objs">list role DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertRoleDTO> objs)
+  
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertRoleDTO> objs)
         {
             List<string> errors = new List<string>();
             var models = objs.Select(c => MappingInsertDTO(c));
@@ -61,96 +49,61 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count>0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _roleRepository.CreateListAsync(models);
             await _roleRepository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Descripton: Get list all role
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _roleRepository.FindByConditionAsync(c=>c.Active);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: Get role by id
-        /// </summary>
-        /// <param name="id">role id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await _roleRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound($"Not found role with id: {id}", id);
+                return BestCVResponse.NotFound($"Not found role with id: {id}", id);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: soft delete role by id
-        /// </summary>
-        /// <param name="id">role id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             await _roleRepository.SoftDeleteAsync(id);
             await _roleRepository.SaveChangesAsync();
-            return DionResponse.Success(id);
+            return BestCVResponse.Success(id);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: Soft delete list role
-        /// </summary>
-        /// <param name="objs">list role id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             foreach(var item in objs)
             {
                 await _roleRepository.SoftDeleteAsync(item);
             }
             await _roleRepository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: update role
-        /// </summary>
-        /// <param name="obj">update role DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateRoleDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateRoleDTO obj)
         {
             List<string> errors = new();
             var model = await MappingUpdateRoleDTO(obj);
             errors = await Validate(model);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _roleRepository.UpdateAsync(model);
             await _roleRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: update list role
-        /// </summary>
-        /// <param name="obj">list role DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateRoleDTO> obj)
+
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateRoleDTO> obj)
         {
             List<string> errors = new List<string>();
             List<Role> updateRoles = new List<Role>();
@@ -162,19 +115,13 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _roleRepository.UpdateListAsync(updateRoles);
             await _roleRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Auhthor: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: Maaping insert role DTO to role
-        /// </summary>
-        /// <param name="obj">role DTO object</param>
-        /// <returns></returns>
+
         public Role MappingInsertDTO(InsertRoleDTO obj)
         {
             Role role = _mapper.Map<Role>(obj);
@@ -183,13 +130,7 @@ namespace BestCV.Application.Services.Implement
             role.CreatedTime = DateTime.Now;
             return role;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// </summary>
-        /// <param name="dto">update role DTO object</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found role id</exception>
+
         public async Task<Role> MappingUpdateRoleDTO(UpdateRoleDTO dto)
         {
             var role = await _roleRepository.GetByIdAsync(dto.Id);
@@ -200,13 +141,7 @@ namespace BestCV.Application.Services.Implement
             role = _mapper.Map(dto, role);
             return role;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Creatd: 27/07/2023
-        /// Description: Validate to role
-        /// </summary>
-        /// <param name="obj">role object</param>
-        /// <returns></returns>
+
         public async Task<List<string>> Validate(Role obj)
         {
             List<string> errors = new List<string>();

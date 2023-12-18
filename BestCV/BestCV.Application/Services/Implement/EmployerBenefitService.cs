@@ -27,7 +27,7 @@ namespace BestCV.Application.Services.Implement
             logger = loggerFactory.CreateLogger<IEmployerBenefitService>();
             mapper = _mapper;
         }
-        public async Task<DionResponse> CreateAsync(InsertEmployerBenefitDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertEmployerBenefitDTO obj)
         {
             var data = mapper.Map<EmployerBenefit>(obj);
             data.Active = true;
@@ -42,80 +42,80 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await employerBenefitRepository.CreateAsync(data);
             var result = await employerBenefitRepository.SaveChangesAsync();
             if (result > 0)
             {
-                return DionResponse.Success(obj);
+                return BestCVResponse.Success(obj);
             }
-            return DionResponse.Error("Thêm mới quyền lợi không thành công");
+            return BestCVResponse.Error("Thêm mới quyền lợi không thành công");
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertEmployerBenefitDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertEmployerBenefitDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await employerBenefitRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<EmployerBenefitDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await employerBenefitRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<EmployerBenefitDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetListBenefitExept(List<int> listData)
+        public async Task<BestCVResponse> GetListBenefitExept(List<int> listData)
         {
             var data = await employerBenefitRepository.FindByConditionAsync(x => x.Active && !listData.Contains(x.Id));
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<EmployerBenefitDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await employerBenefitRepository.SoftDeleteAsync(id);
             if (data)
             {
-                //return DionResponse.Success();
+                //return BestCVResponse.Success();
                 await employerBenefitRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateEmployerBenefitDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateEmployerBenefitDTO obj)
         {
             var data = await employerBenefitRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var result = mapper.Map(obj, data);
             result.Description = !string.IsNullOrEmpty(result.Description) ? result.Description.ToEscape() : null;
@@ -129,14 +129,14 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await employerBenefitRepository.UpdateAsync(result);
             await employerBenefitRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateEmployerBenefitDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateEmployerBenefitDTO> obj)
         {
             throw new NotImplementedException();
         }

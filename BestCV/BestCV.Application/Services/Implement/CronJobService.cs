@@ -30,12 +30,7 @@ namespace BestCV.Application.Services.Implement
             _topAreaJobRepository = topAreaJobRepository;
             _refreshJobRepository = refreshJobRepository;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 02/10/2023
-        /// Description: Add refresh job daily
-        /// </summary>
-        /// <returns></returns>
+
         public async Task AddRefreshDaily()
         {
             try
@@ -67,12 +62,7 @@ namespace BestCV.Application.Services.Implement
             _scheduledJobService.DeleteRecurringJob(key);
         }
 
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 24/09/2023
-        /// Description: Auto Update Highest Priority Position
-        /// </summary>
-        /// <returns></returns>
+
         [Obsolete]
         public async Task<int> UpdateHighestPriorityPosition()
         {
@@ -109,11 +99,7 @@ namespace BestCV.Application.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/09/2023
-        /// Description: Auto update top area job
-        /// </summary>
+
         [Obsolete]
         public async Task UpdateTopArea()
         {

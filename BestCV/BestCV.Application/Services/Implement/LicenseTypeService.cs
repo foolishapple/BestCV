@@ -23,29 +23,19 @@ namespace BestCV.Application.Services.Implement
             licenseTypeRepository = _licenseTypeRepository;
             mapper = _mapper;
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:07/08/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async  Task<DionResponse> GetByIdAsync(int id)
+
+        public async  Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await licenseTypeRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var model = mapper.Map<LicenseTypeDTO>(data);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:07/08/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertLicenseTypeDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertLicenseTypeDTO obj)
         {
             List<string> listError = new List<string>();
             var isNameExist = await licenseTypeRepository.IsNameExisAsync(obj.Name, 0);
@@ -55,7 +45,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listError.Count > 0)
             {
-                return DionResponse.BadRequest(listError);
+                return BestCVResponse.BadRequest(listError);
             }
 
             var model = mapper.Map<LicenseType>(obj);
@@ -66,16 +56,10 @@ namespace BestCV.Application.Services.Implement
             await licenseTypeRepository.CreateAsync(model);
 
             await licenseTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:07/08/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateLicenseTypeDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateLicenseTypeDTO obj)
         {
             List<string> listErrors = new List<string>();
             var checkName = await licenseTypeRepository.IsNameExisAsync(obj.Name, obj.Id);
@@ -85,62 +69,52 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var licenseType = await licenseTypeRepository.GetByIdAsync(obj.Id);
             if (licenseType == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var model = mapper.Map(obj, licenseType);
             model.Description = !string.IsNullOrEmpty(model.Description) ? model.Description.ToEscape() : null;
             await licenseTypeRepository.UpdateAsync(model);
             await licenseTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:07/08/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var result = await licenseTypeRepository.SoftDeleteAsync(id);
             if (!result)
             {
-                return DionResponse.NotFound("Không có dữ liệu", id);
+                return BestCVResponse.NotFound("Không có dữ liệu", id);
             }
             await licenseTypeRepository.SaveChangesAsync();
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
 
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:07/08/2023
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await licenseTypeRepository.FindByConditionAsync(c => c.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var model = data.Select(c => mapper.Map<LicenseTypeDTO>(c));
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateLicenseTypeDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateLicenseTypeDTO> obj)
         {
             throw new NotImplementedException();
         }
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertLicenseTypeDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertLicenseTypeDTO> objs)
         {
             throw new NotImplementedException();
         }

@@ -35,55 +35,55 @@ namespace BestCV.Application.Services.Implement
             return data;
         }
 
-        public async Task<DionResponse> GetListJobCategoryShowonHomepage()
+        public async Task<BestCVResponse> GetListJobCategoryShowonHomepage()
         {
             var data = await _jobCategoryRepository.ListCategoryOnHomepage();
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
 
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        //public async Task<DionResponse> GetDetailJobAsync(long jobId)
+        //public async Task<BestCVResponse> GetDetailJobAsync(long jobId)
         //{
         //    var data = await _jobRepository.GetDetailJobAsync(jobId);
         //    if (data == null)
         //    {
-        //        return DionResponse.NotFound("Không có dữ liệu", data);
+        //        return BestCVResponse.NotFound("Không có dữ liệu", data);
         //    }
-        //    return DionResponse.Success(data);
+        //    return BestCVResponse.Success(data);
         //}
 
-        public async Task<DionResponse> GetListTopCompanyShowonHomepage()
+        public async Task<BestCVResponse> GetListTopCompanyShowonHomepage()
         {
             var data = await _topCompanyRepository.ListTopCompanyShowOnHomePageAsync();
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> GetListTopJobShowonHomepage()
+        public async Task<BestCVResponse> GetListTopJobShowonHomepage()
         {
             var data = await _topJobRepository.ListTopFeatureJobShowOnHomePageAsync();
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> GetListTopPostShowonHomepage()
+        public async Task<BestCVResponse> GetListTopPostShowonHomepage()
         {
             var data = await _postRepository.ListPostShowonHomepage();
             if( data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
         /// <summary>
         /// Author: TUNGTD

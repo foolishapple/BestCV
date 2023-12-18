@@ -15,57 +15,22 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ITagService : IServiceQueryBase<int, InsertTagDTO, UpdateTagDTO, TagDTO>
     {
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: add tag for post
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-		Task<DionResponse> AddTagForPostAsync(InsertTagDTO obj);
 
-        /// <summary>
-        /// Author: truongthieuhuyen
-        /// CreatedAt: 18/08/2023
-        /// Description: add tag for job
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-		Task<DionResponse> AddTagForJobAsync(InsertTagDTO obj);
+		Task<BestCVResponse> AddTagForPostAsync(InsertTagDTO obj);
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 01/08/2023
-        /// Description: list tag
-        /// </summary>
-        /// <param name="obj">TagForSelect2Aggregates</param>
-        /// <returns>object</returns>
+
+		Task<BestCVResponse> AddTagForJobAsync(InsertTagDTO obj);
+
+
         Task<Object> ListSelectTagAsync(TagForSelect2Aggregates obj);
 
 
-        /// <summary>
-        /// author: truongthieuhuyen
-        /// created: 18.08.2023
-        /// description: list tag type job
-        /// </summary>
-        /// <returns></returns>
-        Task<DionResponse> ListTagTypeJob();
 
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// created: 30.08.2023
-        /// description: list tag type post
-        /// </summary>
-        /// <returns></returns>
-        Task<DionResponse> ListTagTypePost();
+        Task<BestCVResponse> ListTagTypeJob();
 
-        /// <summary>
-        /// Authoor: TrungHieuTr
-        /// created: 13/09/2023
-        /// description: get list TagAggregates
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+        Task<BestCVResponse> ListTagTypePost();
+
+
         Task<Object> ListTagAggregatesAsync(DTParameters parameters);
     }
 }

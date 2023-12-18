@@ -12,6 +12,6 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IEmployerBenefitService : IServiceQueryBase<int, InsertEmployerBenefitDTO, UpdateEmployerBenefitDTO, EmployerBenefitDTO>
     {
-        Task<DionResponse> GetListBenefitExept(List<int> listData);
+        Task<BestCVResponse> GetListBenefitExept(List<int> listData);
     }
 }

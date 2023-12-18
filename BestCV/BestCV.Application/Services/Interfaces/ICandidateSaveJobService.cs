@@ -14,8 +14,8 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ICandidateSaveJobService : IServiceQueryBase<long, InsertCandidateSaveJobDTO, UpdateCandidateSaveJobDTO, CandidateSaveJobDTO>
     {
-        Task<DionResponse> QuickSaveJob(long id, long accountId);
-        Task<DionResponse> GetListJobByCandidateId(long candidateId);
+        Task<BestCVResponse> QuickSaveJob(long id, long accountId);
+        Task<BestCVResponse> GetListJobByCandidateId(long candidateId);
         Task<DTResult<CandidateSaveJobAggregates>> PagingByCandidateId(DTPagingCandidateSaveJobParameters parameters);
     }
 }

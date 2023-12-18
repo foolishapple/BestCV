@@ -91,7 +91,7 @@ function signIn() {
             }
             // Nếu đăng nhập thành công
             else if (response.status === 200) {
-                localStorage.setItem("currentLoggedInUserJobi", JSON.stringify(response.resources));
+                localStorage.setItem("currentLoggedInUserBestCV", JSON.stringify(response.resources));
                 localStorage.setItem("token", response.resources.token);
                 Swal.fire({
                     icon: 'success',

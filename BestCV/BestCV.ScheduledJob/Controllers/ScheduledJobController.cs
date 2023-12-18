@@ -40,7 +40,6 @@ namespace BestCV.ScheduledJob.Controllers
                     Subject = "Xác thực tài khoản đăng ký hệ thống ELearning",
                     TemplatePath = "D:\\Dion\\Project\\Jobi\\Jobi.Web\\Utilities\\EmailTemplates\\Register.html",
                     Model = new EmployerConfirmEmailBody() { Fullname = "MinhTL", Otp = "123456", ActiveLink = $"test", Time = DateTime.Now.Year }
-Jobi
                 };
                 var jobId = scheduledJobService.Enqueue(() => emailService.SendEmail(message));
                 logger.LogInformation($"Sent email to {string.Join(", ", message.ToEmails)} with subject {message.Subject} - Job Id: {jobId}");
@@ -71,12 +70,7 @@ Jobi
             }
         }
 
-        /// <summary>
-        /// author: HoanNK
-        /// created: 28.07.2023
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns>Gửi email với tham số là emailMessage, trả về scheduledJobId</returns>
+
         [HttpPost("send-confirm-email-candidate")]
         public IActionResult SendEmailCandidateSignUp([FromBody] EmailMessage<CandidateConfirmEmailBody> message)
         {
@@ -92,12 +86,7 @@ Jobi
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author : DucNN
-        /// Created : 7/8/2023
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns></returns>
+
         [HttpPost("send-forgot-password-email-employer")]
         public IActionResult SendEmailEmployerForgotPassword([FromBody] EmailMessage<ForgotPasswordEmailBody> message)
         {
@@ -114,12 +103,7 @@ Jobi
             }
         }
 
-        /// <summary>
-        /// Author : DucNN
-        /// Created : 7/8/2023
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns></returns>
+
         [HttpPost("send-forgot-password-email-candidate")]
         public IActionResult SendEmailCandidateForgotPassword([FromBody] EmailMessage<ForgotPasswordEmailBody> message)
         {
@@ -135,12 +119,7 @@ Jobi
                 return BadRequest();
             }
         }
-        /// <summary>
-        /// Author : DucNN
-        /// Created : 11/8/2023
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns></returns>
+
         [HttpPost("send-forgot-password-email-admin")]
         public IActionResult SendEmailAdminForgotPassword([FromBody] EmailMessage<ForgotPasswordEmailBody> message)
         {

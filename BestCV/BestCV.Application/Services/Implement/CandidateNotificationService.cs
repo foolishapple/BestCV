@@ -33,30 +33,18 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
         }
 
-        public Task<DionResponse> CreateAsync(InsertCandidateNotificationDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertCandidateNotificationDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author :Thoai Anh
-        /// CreatedDate : 27/07/2023
-        /// Description : Lấy thông báo theo từng ứng viên
-        /// </summary>
-        /// <param name="searchQuery"></param>
-        /// <param name="candidateId">Mã ứng viên</param>
-        /// <returns></returns>
+      
         public Task<DTResult<CandidateNotification>> DTPaging(CandidateNotificationParameter parameters, long candidateId)
         {
             return _candidateNotificationRepository.ListCandidateNotificationByIdAsync(parameters, candidateId);
         }
-        /// <summary>
-        /// Author : Thoai Anh 
-        /// CreatedDate : 14/08/2023 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> MakeAsRead(long id)
+       
+        public async Task<BestCVResponse> MakeAsRead(long id)
         {
             var obj = new CandidateNotification()
             {
@@ -64,59 +52,59 @@ namespace BestCV.Application.Services.Implement
                 NotificationStatusId = NotificationConfig.Status.Read
             };
             await _candidateNotificationRepository.MakeAsRead(obj);
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
-        public async Task<DionResponse> CountUnreadByCandidateId(long id)
+        public async Task<BestCVResponse> CountUnreadByCandidateId(long id)
         {
             var data = await _candidateNotificationRepository.CountByCandidateId(id , NotificationConfig.Status.Unread);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateNotificationDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateNotificationDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
-        public async Task<DionResponse> ListRecented(long id)
+        public async Task<BestCVResponse> ListRecented(long id)
         {
             var data = await _candidateNotificationRepository.ListRecented(id);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await _candidateNotificationRepository.GetByIdAsync(id);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var res = await _candidateNotificationRepository.SoftDeleteAsync(id);
             await _candidateNotificationRepository.SaveChangesAsync();
             if (res)
             {
-                return DionResponse.Success();
+                return BestCVResponse.Success();
             }
             else
             {
-                return DionResponse.Error();
+                return BestCVResponse.Error();
             }
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateCandidateNotificationDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateCandidateNotificationDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateNotificationDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateNotificationDTO> obj)
         {
             throw new NotImplementedException();
         }

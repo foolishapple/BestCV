@@ -24,67 +24,57 @@ namespace BestCV.Application.Services.Implement
             _logger = loggerFactory.CreateLogger<EmployerServicePackageEmployer>();
         }
 
-        public Task<DionResponse> CreateAsync(InsertEmployerServicePackageEmployerDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertEmployerServicePackageEmployerDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertEmployerServicePackageEmployerDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertEmployerServicePackageEmployerDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetByIdAsync(long id)
+        public Task<BestCVResponse> GetByIdAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateEmployerServicePackageEmployerDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateEmployerServicePackageEmployerDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateEmployerServicePackageEmployerDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateEmployerServicePackageEmployerDTO> obj)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 17/09/2023
-        /// Description: Get list employer service package
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GroupEmployerService(DTEmployerServicePackageEmployerParameters parameters)
+
+        public async Task<BestCVResponse> GroupEmployerService(DTEmployerServicePackageEmployerParameters parameters)
         {
             var res = await _employerServicePackageEmployerRepository.GroupByParameters(parameters);
-            return DionResponse.Success(res);
+            return BestCVResponse.Success(res);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 17/09/2023
-        /// Description: Get list employer service package add on
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GroupEmployerServiceAddOn(DTEmployerServicePackageEmployerParameters parameters)
+
+        public async Task<BestCVResponse> GroupEmployerServiceAddOn(DTEmployerServicePackageEmployerParameters parameters)
         {
             parameters.EmployerServicePackageTypeId = new int[] { ServicePackageTypeId.ADD_ON, ServicePackageTypeId.PREMIUM };
             var res = await _employerServicePackageEmployerRepository.GroupByParameters(parameters);
-            return DionResponse.Success(res);
+            return BestCVResponse.Success(res);
         }
     }
 }

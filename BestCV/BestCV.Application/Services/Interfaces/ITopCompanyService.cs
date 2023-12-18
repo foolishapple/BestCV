@@ -12,9 +12,9 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ITopCompanyService : IServiceQueryBase<int, InsertTopCompanyDTO, UpdateTopCompanyDTO, TopCompanyDTO>
     {
-        Task<DionResponse> ListTopCompanyShowOnHomePageAsync();
+        Task<BestCVResponse> ListTopCompanyShowOnHomePageAsync();
         Task<List<SelectListItem>> ListCompanySelected();
-        Task<DionResponse> ListCompany();
-        Task<DionResponse> ChangeOrderSort(ChangeTopCompanyDTO model);
+        Task<BestCVResponse> ListCompany();
+        Task<BestCVResponse> ChangeOrderSort(ChangeTopCompanyDTO model);
     }
 }

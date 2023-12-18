@@ -14,8 +14,8 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ITopJobManagementService : IServiceQueryBase<long, InsertTopJobManagementDTO, UpdateTopJobManagementDTO, TopJobManagementDTO>
     {
-        Task<DionResponse> ListAggregatesAsync();
+        Task<BestCVResponse> ListAggregatesAsync();
         Task<List<SelectListItem>> ListJobSelected();
-        Task<DionResponse> SearchingManagementJob(SearchJobWithServiceParameters parameter);
+        Task<BestCVResponse> SearchingManagementJob(SearchJobWithServiceParameters parameter);
     }
 }

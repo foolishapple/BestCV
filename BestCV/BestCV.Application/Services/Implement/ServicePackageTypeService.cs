@@ -27,7 +27,7 @@ namespace BestCV.Application.Services.Implement
             logger = loggerFactory.CreateLogger<IServicePackageTypeService>();
             mapper = _mapper;
         }
-        public async Task<DionResponse> CreateAsync(InsertServicePackageTypeDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertServicePackageTypeDTO obj)
         {
             var data = mapper.Map<ServicePackageType>(obj);
             data.Active = true;
@@ -42,62 +42,62 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await servicePackageTypeRepository.CreateAsync(data);
             await servicePackageTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertServicePackageTypeDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertServicePackageTypeDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await servicePackageTypeRepository.FindByConditionAsync(x=>x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<ServicePackageTypeDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await servicePackageTypeRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<ServicePackageTypeDTO>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await servicePackageTypeRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await servicePackageTypeRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateServicePackageTypeDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateServicePackageTypeDTO obj)
         {
             var data = await servicePackageTypeRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var update = mapper.Map(obj, data);
             data.Description = !string.IsNullOrEmpty(data.Description) ? data.Description.ToEscape() : null;
@@ -109,15 +109,15 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await servicePackageTypeRepository.UpdateAsync(update);
 
             await servicePackageTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateServicePackageTypeDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateServicePackageTypeDTO> obj)
         {
             throw new NotImplementedException();
         }

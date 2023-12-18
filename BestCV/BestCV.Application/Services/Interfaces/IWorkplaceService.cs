@@ -15,8 +15,8 @@ namespace BestCV.Application.Services.Interfaces
     {
         Task<bool> GetProvinceDataAsync();
 
-        Task<DionResponse> GetListDistrictByCityIdAsync(int cityId);
+        Task<BestCVResponse> GetListDistrictByCityIdAsync(int cityId);
 
-        Task<DionResponse> GetListCityAsync();
+        Task<BestCVResponse> GetListCityAsync();
     }
 }

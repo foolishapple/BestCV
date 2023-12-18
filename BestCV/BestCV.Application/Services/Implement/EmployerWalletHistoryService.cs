@@ -32,7 +32,7 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
             this.walletRepository = walletRepository;
         }
-        public async Task<DionResponse> CreateAsync(InsertEmployerWalletHistoryDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertEmployerWalletHistoryDTO obj)
         {
             using (var trans = await repository.BeginTransactionAsync())
             {
@@ -51,7 +51,7 @@ namespace BestCV.Application.Services.Implement
                         await walletRepository.SaveChangesAsync();
 
                         await trans.CommitAsync();
-                        return DionResponse.Success();
+                        return BestCVResponse.Success();
                     }
                 }
                 throw new Exception("Failed to use service find cv");
@@ -61,39 +61,39 @@ namespace BestCV.Application.Services.Implement
         {
             return await repository.ListEmployerWalletHistories(parameters);
         }
-        public async Task<DionResponse> QuickIsApprovedAsync(long id)
+        public async Task<BestCVResponse> QuickIsApprovedAsync(long id)
         {
             var isUpdated = await repository.QuickIsApprovedAsync(id);
             if (isUpdated)
             {
                 await repository.SaveChangesAsync();
-                return DionResponse.Success(isUpdated);
+                return BestCVResponse.Success(isUpdated);
             }
-            return DionResponse.BadRequest("Duyệt không thành công");
+            return BestCVResponse.BadRequest("Duyệt không thành công");
         }
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertEmployerWalletHistoryDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertEmployerWalletHistoryDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await repository.GetByidAggregateAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             
 
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> ReportCVCandidate(ReportCandidateDTO model)
+        public async Task<BestCVResponse> ReportCVCandidate(ReportCandidateDTO model)
         {
             //lấy thông tin ví
             var wallet = await walletRepository.FindByCondition(x=>x.Active && x.EmployerId == model.EmployerId && x.WalletTypeId == EmployerWalletConstants.CREDIT_TYPE).FirstOrDefaultAsync();
@@ -117,25 +117,25 @@ namespace BestCV.Application.Services.Implement
             await repository.UpdateAsync(walletHistory);
             await repository.SaveChangesAsync();
 
-            return DionResponse.Success(walletHistory);
+            return BestCVResponse.Success(walletHistory);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateEmployerWalletHistoryDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateEmployerWalletHistoryDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateEmployerWalletHistoryDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateEmployerWalletHistoryDTO> obj)
         {
             throw new NotImplementedException();
         }

@@ -27,7 +27,7 @@ namespace BestCV.Application.Services.Implement
             logger = loggerFactory.CreateLogger<TagTypeService>();
             mapper = _mapper;
         }
-        public async Task<DionResponse> CreateAsync(InsertTagTypeDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertTagTypeDTO obj)
         {
             var data = mapper.Map<TagType>(obj);
             data.Active = true;
@@ -41,65 +41,65 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await tagtypeRepository.CreateAsync(data);
             await tagtypeRepository.SaveChangesAsync();
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertTagTypeDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertTagTypeDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await tagtypeRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<TagType>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await tagtypeRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<TagTypeDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await tagtypeRepository.SoftDeleteAsync(id);
             if (data)
             {
-                //return DionResponse.Success();
+                //return BestCVResponse.Success();
                 await tagtypeRepository.SaveChangesAsync();
-                return DionResponse.Success();
+                return BestCVResponse.Success();
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateTagTypeDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateTagTypeDTO obj)
         {
             var data = await tagtypeRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var result = mapper.Map(obj, data);
             result.Description = !string.IsNullOrEmpty(result.Description) ? result.Description.ToEscape() : null;
@@ -113,14 +113,14 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await tagtypeRepository.UpdateAsync(result);
             await tagtypeRepository.SaveChangesAsync();
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateTagTypeDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateTagTypeDTO> obj)
         {
             throw new NotImplementedException();
         }

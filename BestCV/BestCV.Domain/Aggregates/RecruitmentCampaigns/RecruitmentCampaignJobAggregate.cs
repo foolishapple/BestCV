@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jobi.Domain.Aggregates.RecruitmentCampaigns
+namespace BestCV.Domain.Aggregates.RecruitmentCampaigns
 {
     public class RecruitmentCampaignJobAggregate
     {

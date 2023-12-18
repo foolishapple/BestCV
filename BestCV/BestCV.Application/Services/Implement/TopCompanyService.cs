@@ -29,14 +29,8 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> CreateAsync(InsertTopCompanyDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertTopCompanyDTO obj)
         {
             var data = mapper.Map<TopCompany>(obj);
             var res = await topCompanyRepository.CheckOrderSort(0, obj.OrderSort);
@@ -50,123 +44,89 @@ namespace BestCV.Application.Services.Implement
             var error = await Validate(data);
             if (error.Count > 0)
             {
-                return DionResponse.BadRequest(error);
+                return BestCVResponse.BadRequest(error);
             }
             await topCompanyRepository.CreateAsync(data);
             await topCompanyRepository.SaveChangesAsync();
 
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertTopCompanyDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertTopCompanyDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await topCompanyRepository.FindByConditionAsync(c => c.Active && c.Company.Active);
             if(data == null || data.Count == 0)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<TopCompanyDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await topCompanyRepository.GetByIdAsync(id);
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<TopCompanyDTO>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+
         public async Task<List<SelectListItem>> ListCompanySelected()
         {
             return await topCompanyRepository.ListCompanySelected();
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> ListTopCompanyShowOnHomePageAsync()
+
+        public async Task<BestCVResponse> ListTopCompanyShowOnHomePageAsync()
         {
             var result = await topCompanyRepository.ListTopCompanyShowOnHomePageAsync();
             if(result == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", result);
+                return BestCVResponse.NotFound("Không có dữ liệu", result);
             }
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> ListCompany()
+        public async Task<BestCVResponse> ListCompany()
         {
             var data = await topCompanyRepository.ListTopCompany();
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await topCompanyRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await topCompanyRepository.SaveChangesAsync();
-                return DionResponse.Success();
+                return BestCVResponse.Success();
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Updated : Thoại Anh
-        /// Created: 14/8/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> UpdateAsync(UpdateTopCompanyDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateTopCompanyDTO obj)
         {
             var topCompany = await topCompanyRepository.GetByIdAsync(obj.Id);
             if (topCompany.OrderSort != obj.OrderSort)
@@ -176,7 +136,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (topCompany == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             
 
@@ -184,11 +144,11 @@ namespace BestCV.Application.Services.Implement
             var error = await Validate(topCompany);
             if (error.Count > 0)
             {
-                return DionResponse.BadRequest(error);
+                return BestCVResponse.BadRequest(error);
             }
             await topCompanyRepository.UpdateAsync(topCompany);
             await topCompanyRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
         private async Task<List<string>> Validate(TopCompany obj)
@@ -200,17 +160,12 @@ namespace BestCV.Application.Services.Implement
             }
             return errors;
         }
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateTopCompanyDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateTopCompanyDTO> obj)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author : Thoại Anh
-        /// CreatedTime : 09/10/2023
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> ChangeOrderSort(ChangeTopCompanyDTO model)
+
+        public async Task<BestCVResponse> ChangeOrderSort(ChangeTopCompanyDTO model)
         {
             var orderSortUp = mapper.Map<TopCompany>(model.SlideUp);
             var orderSortDown = mapper.Map<TopCompany>(model.SlideDown);
@@ -225,7 +180,7 @@ namespace BestCV.Application.Services.Implement
             listUpdate.Add(orderSortDown);
             await topCompanyRepository.ChangeOrderSort(listUpdate);
             await topCompanyRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
     }
 }

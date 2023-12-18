@@ -31,14 +31,8 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
             _employerNotificationRepository = employerNotificationRepository;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 22/08/2023
-        /// Description: created new recruit
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertRecruitmentCampaignDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertRecruitmentCampaignDTO obj)
         {
             List<string> errors = new(); 
             var model = _mapper.Map<RecruitmentCampaign>(obj);
@@ -48,75 +42,55 @@ namespace BestCV.Application.Services.Implement
             errors = await Validate(model);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _recruitmentCampaignRepository.CreateAsync(model);
             await _recruitmentCampaignRepository.SaveChangesAsync();
             
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertRecruitmentCampaignDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertRecruitmentCampaignDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 22/008/2023
-        /// Description: Get recruitment campaign by id
-        /// </summary>
-        /// <param name="id">recruitment campaign id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found exception</exception>
-        public async Task<DionResponse> GetByIdAsync(long id)
+
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await _recruitmentCampaignRepository.GetByIdAsync(id);
             if (data != null)
             {
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
             }
             else
             {
                 throw new Exception($"Not founde recruitment campaign by id: {id}");
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 16/08/2023
-        /// Description: List Recruitment Campaign to employer
-        /// </summary>
-        /// <param name="id">employer id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> ListToEmployer(long id)
+
+        public async Task<BestCVResponse> ListToEmployer(long id)
         {
             var data = await _recruitmentCampaignRepository.FindByConditionAsync(c => c.EmployerId == id && c.Active);
             data = data.OrderByDescending(c => c.CreatedTime).ToList();
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Creaed: 22/08/2023
-        /// Description: update recruitment campain
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateAsync(UpdateRecruitmentCampaignDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateRecruitmentCampaignDTO obj)
         {
             List<string> errors = new();
             var model = await _recruitmentCampaignRepository.GetByIdAsync(obj.Id);
@@ -128,37 +102,24 @@ namespace BestCV.Application.Services.Implement
             errors = await Validate(model);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _recruitmentCampaignRepository.UpdateAsync(model);
             await _recruitmentCampaignRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateRecruitmentCampaignDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateRecruitmentCampaignDTO> obj)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 21/08/2023
-        /// Description: list Recruitment Campaign aggregate datatables paging
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         public async Task<DTResult<RecruitmentCampaignAggregate>> ListDTPaging(DTRecruitmentCampaignParameter parameters)
         {
             return await _recruitmentCampaignRepository.ListDTPaging(parameters);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Creaed: 22/08/2023
-        /// Description: change approved to recruitment campain
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> ChangeApproved(ChangeApproveRecruitmentCampaignDTO obj)
+
+        public async Task<BestCVResponse> ChangeApproved(ChangeApproveRecruitmentCampaignDTO obj)
         {
             var model = await _recruitmentCampaignRepository.GetByIdAsync(obj.Id);
             if(model== null)
@@ -168,15 +129,9 @@ namespace BestCV.Application.Services.Implement
             model.IsAprroved = obj.IsApproved;
              await _recruitmentCampaignRepository.UpdateAsync(model);
             await _recruitmentCampaignRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 22/08/2023
-        /// Description: validation for recruitment campagin
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         public async Task<List<string>> Validate(RecruitmentCampaign obj)
         {
             List<string> errors = new();
@@ -186,17 +141,11 @@ namespace BestCV.Application.Services.Implement
             }
             return errors;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 13/09/2023
-        /// Description: List recruitment campaign opened to employer
-        /// </summary>
-        /// <param name="id">employer id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> ListOpenedByEmployer(long id)
+
+        public async Task<BestCVResponse> ListOpenedByEmployer(long id)
         {
             var data = await _recruitmentCampaignRepository.FindByConditionAsync(c => c.Active && c.IsAprroved && c.EmployerId == id);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

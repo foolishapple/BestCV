@@ -27,13 +27,8 @@ namespace BestCV.Application.Services.Implement
 			logger = loggerFactory.CreateLogger<IJobPositionService>();
 			mapper = _mapper;
 		}
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">InsertJobPositionDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> CreateAsync(InsertJobPositionDTO obj)
+
+		public async Task<BestCVResponse> CreateAsync(InsertJobPositionDTO obj)
 		{
 			var jobPosition = mapper.Map<JobPosition>(obj);
 			jobPosition.Active = true;
@@ -47,87 +42,66 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await jobPositionRepository.CreateAsync(jobPosition);
 			await jobPositionRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
 		}
 
-		public Task<DionResponse> CreateListAsync(IEnumerable<InsertJobPositionDTO> objs)
+		public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertJobPositionDTO> objs)
 		{
 			throw new NotImplementedException();
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetAllAsync()
+
+		public async Task<BestCVResponse> GetAllAsync()
 		{
 			var data = await jobPositionRepository.FindByConditionAsync(x => x.Active);
 			if(data == null)
 			{
-				return DionResponse.NotFound("Không có dữ liệu", data);
+				return BestCVResponse.NotFound("Không có dữ liệu", data);
 			}
 			var result = mapper.Map<List<JobPosition>>(data);
-			return DionResponse.Success(result);
+			return BestCVResponse.Success(result);
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">JobPositionId</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetByIdAsync(int id)
+		public async Task<BestCVResponse> GetByIdAsync(int id)
 		{
 			var data = await jobPositionRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<JobPosition>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">jobPositionId</param>
-		/// <returns></returns>
-		public async Task<DionResponse> SoftDeleteAsync(int id)
+		public async Task<BestCVResponse> SoftDeleteAsync(int id)
 		{
 			var data = await jobPositionRepository.SoftDeleteAsync(id);
 			if (data)
 			{
 				await jobPositionRepository.SaveChangesAsync();
 
-				return DionResponse.Success(data);
+				return BestCVResponse.Success(data);
 			}
-			return DionResponse.NotFound("Không có dữ liệu", data);
+			return BestCVResponse.NotFound("Không có dữ liệu", data);
 		}
 
-		public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+		public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
 		{
 			throw new NotImplementedException();
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">UpdateJobPositionDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> UpdateAsync(UpdateJobPositionDTO obj)
+
+		public async Task<BestCVResponse> UpdateAsync(UpdateJobPositionDTO obj)
 		{
 			var jobPosition = await jobPositionRepository.GetByIdAsync(obj.Id);
 			if (jobPosition == null)
 			{
-				return DionResponse.NotFound("Không có dữ liệu", obj);
+				return BestCVResponse.NotFound("Không có dữ liệu", obj);
 			}
 			var updateJobPosition = mapper.Map(obj, jobPosition);
 
@@ -140,16 +114,16 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
 			await jobPositionRepository.UpdateAsync(updateJobPosition);
 			await jobPositionRepository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 
 		}
 
-		public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateJobPositionDTO> obj)
+		public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateJobPositionDTO> obj)
 		{
 			throw new NotImplementedException();
 		}

@@ -28,13 +28,8 @@ namespace BestCV.Application.Services.Implement
 			logger = loggerFactory.CreateLogger<IExperienceRangeService>();
 			mapper = _mapper;
 		}
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">InsertExperienceRangeDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> CreateAsync(InsertExperienceRangeDTO obj)
+
+		public async Task<BestCVResponse> CreateAsync(InsertExperienceRangeDTO obj)
 		{
 			var experienceRange = mapper.Map<ExperienceRange>(obj);
 			experienceRange.Active = true;
@@ -49,92 +44,73 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await experienceRangeRepository.CreateAsync(experienceRange);
 			var result = await experienceRangeRepository.SaveChangesAsync();
 			if (result > 0)
 			{
-				return DionResponse.Success(obj);
+				return BestCVResponse.Success(obj);
 			}
-			return DionResponse.Error("Thêm mới khoảng kinh nghiệm không thành công");
+			return BestCVResponse.Error("Thêm mới khoảng kinh nghiệm không thành công");
 		}
 
-		public Task<DionResponse> CreateListAsync(IEnumerable<InsertExperienceRangeDTO> objs)
+		public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertExperienceRangeDTO> objs)
 		{
 			throw new NotImplementedException();
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetAllAsync()
+
+		public async Task<BestCVResponse> GetAllAsync()
 		{
 			var data = await experienceRangeRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<ExperienceRangeDTO>>(data);
-			return DionResponse.Success(result);
+			return BestCVResponse.Success(result);
 
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">ExperenceRangeId</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetByIdAsync(int id)
+
+		public async Task<BestCVResponse> GetByIdAsync(int id)
 		{
 			var data = await experienceRangeRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<ExperienceRangeDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
 		}
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">ExperenceRangeId</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> SoftDeleteAsync(int id)
+
+		public async Task<BestCVResponse> SoftDeleteAsync(int id)
 		{
 			var data = await experienceRangeRepository.SoftDeleteAsync(id);
 			if (data)
 			{
-				//return DionResponse.Success();
+				//return BestCVResponse.Success();
 				await experienceRangeRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
 
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
 		{
 			throw new NotImplementedException();
 		}
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">UpdateExperienceRangeDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> UpdateAsync(UpdateExperienceRangeDTO obj)
+
+		public async Task<BestCVResponse> UpdateAsync(UpdateExperienceRangeDTO obj)
 		{
 			var experienceRange = await experienceRangeRepository.GetByIdAsync(obj.Id);
 			if (experienceRange == null)
 			{
-				return DionResponse.NotFound("Không có dữ liệu", obj);
+				return BestCVResponse.NotFound("Không có dữ liệu", obj);
 			}
 			var updateExperienceRange = mapper.Map(obj, experienceRange);
             updateExperienceRange.Description = !string.IsNullOrEmpty(updateExperienceRange.Description) ? updateExperienceRange.Description.ToEscape() : null;
@@ -148,14 +124,14 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await experienceRangeRepository.UpdateAsync(updateExperienceRange);
 			await experienceRangeRepository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
 
-		public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateExperienceRangeDTO> obj)
+		public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateExperienceRangeDTO> obj)
 		{
 			throw new NotImplementedException();
 		}

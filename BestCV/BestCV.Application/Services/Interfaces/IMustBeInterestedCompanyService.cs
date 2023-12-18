@@ -13,8 +13,8 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IMustBeInterestedCompanyService : IServiceQueryBase<long, InsertMustBeInterestedCompanyDTO, UpdateMustBeInterestedCompanyDTO, MustBeInterestedCompanyDTO>
     {
-        Task<DionResponse> ListAggregatesAsync();
+        Task<BestCVResponse> ListAggregatesAsync();
         Task<List<SelectListItem>> ListCompanySelected();
-        Task<DionResponse> ListCompanyInterestedOnDetailJob();
+        Task<BestCVResponse> ListCompanyInterestedOnDetailJob();
     }
 }

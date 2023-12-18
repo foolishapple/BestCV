@@ -13,6 +13,6 @@ namespace BestCV.Application.Services.Interfaces
     public interface ISlideService: IServiceQueryBase<int, InsertSlideDTO, UpdateSlideDTO, SlideDTO>
     {
         Task<bool> ChangeOrderSlide(ChangeSlideDTO model);
-        Task<DionResponse> ListSlideShowonHomepage();
+        Task<BestCVResponse> ListSlideShowonHomepage();
     }
 }

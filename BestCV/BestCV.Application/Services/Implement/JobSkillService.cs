@@ -27,13 +27,8 @@ namespace BestCV.Application.Services.Implement
 			logger = loggerFactory.CreateLogger<IJobSkillService>();
 			mapper = _mapper;
 		}
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">InsertJobSkillDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> CreateAsync(InsertJobSkillDTO obj)
+
+		public async Task<BestCVResponse> CreateAsync(InsertJobSkillDTO obj)
 		{
 			var jobSkill = mapper.Map<JobSkill>(obj);
 			jobSkill.Active = true;
@@ -49,88 +44,68 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await jobSkillRepository.CreateAsync(jobSkill);
 			await jobSkillRepository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
 
-		public Task<DionResponse> CreateListAsync(IEnumerable<InsertJobSkillDTO> objs)
+		public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertJobSkillDTO> objs)
 		{
 			throw new NotImplementedException();
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetAllAsync()
+
+		public async Task<BestCVResponse> GetAllAsync()
 		{
 			var data = await jobSkillRepository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<JobSkillDTO>>(data);
-			return DionResponse.Success(result);
+			return BestCVResponse.Success(result);
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">jobSkillId</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetByIdAsync(int id)
+		public async Task<BestCVResponse> GetByIdAsync(int id)
 		{
 			var data = await jobSkillRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<JobSkillDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">jobSkillId</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> SoftDeleteAsync(int id)
+
+		public async Task<BestCVResponse> SoftDeleteAsync(int id)
 		{
 			var data = await jobSkillRepository.SoftDeleteAsync(id);
 			if (data)
 			{
 				await jobSkillRepository.SaveChangesAsync();
-				return DionResponse.Success();
+				return BestCVResponse.Success();
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
 
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
 		{
 			throw new NotImplementedException();
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">UpdateJobSkillDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> UpdateAsync(UpdateJobSkillDTO obj)
+
+		public async Task<BestCVResponse> UpdateAsync(UpdateJobSkillDTO obj)
 		{
 			var jobSkill = await jobSkillRepository.GetByIdAsync(obj.Id);
 			if (jobSkill == null)
 			{
-				return DionResponse.NotFound("Không có dữ liệu", obj);
+				return BestCVResponse.NotFound("Không có dữ liệu", obj);
 			}
 			var updateJobSkill = mapper.Map(obj, jobSkill);
             updateJobSkill.Description = !string.IsNullOrEmpty(updateJobSkill.Description) ? updateJobSkill.Description.ToEscape() : null;
@@ -145,17 +120,17 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             await jobSkillRepository.UpdateAsync(updateJobSkill);
 
 			await jobSkillRepository.SaveChangesAsync();
 			
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
 
-		public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateJobSkillDTO> obj)
+		public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateJobSkillDTO> obj)
 		{
 			throw new NotImplementedException();
 		}

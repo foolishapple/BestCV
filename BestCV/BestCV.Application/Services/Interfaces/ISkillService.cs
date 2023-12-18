@@ -12,7 +12,7 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ISkillService : IServiceQueryBase<int, InsertSkillDTO, SkillDTO, UpdateSkillDTO>
     {
-        Task<DionResponse> UpdateAsync(UpdateSkillDTO obj);
-        Task<DionResponse> searchSkills(Select2Aggregates select2Aggregates);
+        Task<BestCVResponse> UpdateAsync(UpdateSkillDTO obj);
+        Task<BestCVResponse> searchSkills(Select2Aggregates select2Aggregates);
     }
 }

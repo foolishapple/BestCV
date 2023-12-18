@@ -14,19 +14,9 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IEmployerServicePackageEmployerService : IServiceQueryBase<long, InsertEmployerServicePackageEmployerDTO, UpdateEmployerServicePackageEmployerDTO, EmployerServicePackageEmployerDTO>
     {
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 17/09/2023
-        /// Description: Get list employer service package 
-        /// </summary>
-        /// <returns></returns>
-        Task<DionResponse> GroupEmployerService(DTEmployerServicePackageEmployerParameters parameters);
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 17/09/2023
-        /// Description: Get list employer service package add on
-        /// </summary>
-        /// <returns></returns>
-        Task<DionResponse> GroupEmployerServiceAddOn(DTEmployerServicePackageEmployerParameters parameters);
+
+        Task<BestCVResponse> GroupEmployerService(DTEmployerServicePackageEmployerParameters parameters);
+
+        Task<BestCVResponse> GroupEmployerServiceAddOn(DTEmployerServicePackageEmployerParameters parameters);
     }
 }

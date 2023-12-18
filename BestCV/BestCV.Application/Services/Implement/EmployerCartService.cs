@@ -27,7 +27,7 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        public async Task<DionResponse> AddToCart(int servicePackageId, long employerId)
+        public async Task<BestCVResponse> AddToCart(int servicePackageId, long employerId)
         {
             var newCart = new EmployerCart()
             {
@@ -49,7 +49,7 @@ namespace BestCV.Application.Services.Implement
                 await repository.CreateAsync(newCart);
             }
             await repository.SaveChangesAsync();
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
         public async Task<int> CountServicePackageInCart(long employerId)
@@ -58,7 +58,7 @@ namespace BestCV.Application.Services.Implement
             return data;
         }
 
-        public async Task<DionResponse> CreateAsync(InsertEmployerCartDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertEmployerCartDTO obj)
         {
             var data = mapper.Map<EmployerCart>(obj);
             data.Active = true;
@@ -66,68 +66,68 @@ namespace BestCV.Application.Services.Implement
             data.Description = !string.IsNullOrEmpty(data.Description) ? data.Description.ToEscape() : null;
             await repository.CreateAsync(data);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertEmployerCartDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertEmployerCartDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await repository.FindByConditionAsync(x=>x.Active);
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<EmployerCartDTO>>(data);
-            return DionResponse.Success(result);    
+            return BestCVResponse.Success(result);    
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await repository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<EmployerCartDTO>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> ListByEmployerId(long employerId)
+        public async Task<BestCVResponse> ListByEmployerId(long employerId)
         {
             var data = await repository.ListByEmployerId(employerId);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var result = await repository.SoftDeleteAsync(id);
             if (result)
             {
                 await repository.SaveChangesAsync();
-                return DionResponse.Success(id);
+                return BestCVResponse.Success(id);
             }
-            return DionResponse.BadRequest(id);
+            return BestCVResponse.BadRequest(id);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateEmployerCartDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateEmployerCartDTO obj)
         {
             var data = await repository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var update = mapper.Map(obj, data);
             data.Description = !string.IsNullOrEmpty(data.Description) ? data.Description.ToEscape() : null;
@@ -135,10 +135,10 @@ namespace BestCV.Application.Services.Implement
             await repository.UpdateAsync(update);
 
             await repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateEmployerCartDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateEmployerCartDTO> obj)
         {
             throw new NotImplementedException();
         }

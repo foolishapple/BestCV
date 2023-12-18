@@ -27,14 +27,8 @@ namespace BestCV.Application.Services.Implement
             _logger = loggerFactory.CreateLogger<PermissionService>();
             _rolePermissionRepository = rolePermissionRepository;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: create new Permission
-        /// </summary>
-        /// <param name="obj">insert Permission DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertPermissionDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertPermissionDTO obj)
         {
             List<string> errors = new();
             var model = MappingInsertDTO(obj);
@@ -43,7 +37,7 @@ namespace BestCV.Application.Services.Implement
             errors = await Validate(model);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             using (var trans = await _permissionRepository.BeginTransactionAsync())
             {
@@ -71,16 +65,10 @@ namespace BestCV.Application.Services.Implement
                     throw new Exception("Failed to create new permission");
                 }
             }
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: insert list Permission
-        /// </summary>
-        /// <param name="objs">list Permission DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertPermissionDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertPermissionDTO> objs)
         {
             List<string> errors = new List<string>();
             var models = objs.Select(c => MappingInsertDTO(c));
@@ -90,83 +78,54 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _permissionRepository.CreateListAsync(models);
             await _permissionRepository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Descripton: Get list all Permission
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _permissionRepository.FindByConditionAsync(c=>c.Active);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: Get Permission by id
-        /// </summary>
-        /// <param name="id">Permission id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+  
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await _permissionRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound($"Not found Permission with id: {id}", id);
+                return BestCVResponse.NotFound($"Not found Permission with id: {id}", id);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: soft delete Permission by id
-        /// </summary>
-        /// <param name="id">Permission id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             await _permissionRepository.SoftDeleteAsync(id);
             await _permissionRepository.SaveChangesAsync();
-            return DionResponse.Success(id);
+            return BestCVResponse.Success(id);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: Soft delete list Permission
-        /// </summary>
-        /// <param name="objs">list Permission id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             foreach (var item in objs)
             {
                 await _permissionRepository.SoftDeleteAsync(item);
             }
             await _permissionRepository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: update Permission
-        /// </summary>
-        /// <param name="obj">update Permission DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdatePermissionDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdatePermissionDTO obj)
         {
             List<string> errors = new();
             var model = await MappingUpdatePermissionDTO(obj);
             errors = await Validate(model);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             using (var trans = await _rolePermissionRepository.BeginTransactionAsync())
             {
@@ -201,16 +160,10 @@ namespace BestCV.Application.Services.Implement
                 }
             }
             
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: update list Permission
-        /// </summary>
-        /// <param name="obj">list Permission DTO object</param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdatePermissionDTO> obj)
+
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdatePermissionDTO> obj)
         {
             List<string> errors = new List<string>();
             List<Permission> updatePermissions = new List<Permission>();
@@ -222,19 +175,13 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _permissionRepository.UpdateListAsync(updatePermissions);
             await _permissionRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Auhthor: TUNGTD
-        /// Created: 27/07/2023
-        /// Description: Maaping insert Permission DTO to Permission
-        /// </summary>
-        /// <param name="obj">Permission DTO object</param>
-        /// <returns></returns>
+
         public Permission MappingInsertDTO(InsertPermissionDTO obj)
         {
             Permission Permission = _mapper.Map<Permission>(obj);
@@ -243,13 +190,7 @@ namespace BestCV.Application.Services.Implement
             Permission.CreatedTime = DateTime.Now;
             return Permission;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 27/07/2023
-        /// </summary>
-        /// <param name="dto">update Permission DTO object</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found Permission id</exception>
+
         public async Task<Permission> MappingUpdatePermissionDTO(UpdatePermissionDTO dto)
         {
             var Permission = await _permissionRepository.GetByIdAsync(dto.Id);
@@ -260,13 +201,7 @@ namespace BestCV.Application.Services.Implement
             Permission = _mapper.Map(dto, Permission);
             return Permission;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Creatd: 27/07/2023
-        /// Description: Validate to Permission
-        /// </summary>
-        /// <param name="obj">Permission object</param>
-        /// <returns></returns>
+
         public async Task<List<string>> Validate(Permission obj)
         {
             List<string> errors = new List<string>();
@@ -280,17 +215,11 @@ namespace BestCV.Application.Services.Implement
             }
             return errors;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 07/08/2023
-        /// Description: Get permission detail by id
-        /// </summary>
-        /// <param name="id">permission id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> Detail(int id)
+
+        public async Task<BestCVResponse> Detail(int id)
         {
             var data = await _permissionRepository.Detail(id);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

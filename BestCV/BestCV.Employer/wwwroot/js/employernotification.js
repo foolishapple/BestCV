@@ -4,7 +4,7 @@ const targetElement = document.querySelector('[data-kt-docs-toast="stack"]'); //
 // Remove base element markup
 targetElement.parentNode.removeChild(targetElement);
 var NOTI_CONNECTION = new signalR.HubConnectionBuilder().withUrl(systemConfig.defaultAPI_URL + "EmployerNotificationHub", {
-    accessTokenFactory: () => JSON.parse(localStorage.currentLoggedInUserJobi).token
+    accessTokenFactory: () => JSON.parse(localStorage.currentLoggedInUserBestCV).token
 }).build();
 
 NOTI_CONNECTION.start().then(function () {

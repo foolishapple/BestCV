@@ -23,14 +23,8 @@ namespace BestCV.Application.Services.Implement
             skillLevelRepository = _skilllevelRepository;
             mapper = _mapper;
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:02/08/2023
-        /// Description: insert skill level
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertSkillLevelDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertSkillLevelDTO obj)
         {
             List<string> listError = new List<string>();
             var isNameExist = await skillLevelRepository.IsNameExisAsync(obj.Name, 0);
@@ -40,7 +34,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listError.Count > 0)
             {
-                return DionResponse.BadRequest(listError);
+                return BestCVResponse.BadRequest(listError);
             }
 
             var model = mapper.Map<SkillLevel>(obj);
@@ -51,66 +45,43 @@ namespace BestCV.Application.Services.Implement
             await skillLevelRepository.CreateAsync(model);
 
             await skillLevelRepository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:02/08/2023
-        /// Description: get all skill level
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+  
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await skillLevelRepository.FindByConditionAsync(c => c.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var model = data.Select(c => mapper.Map<SkillLevelDTO>(c));
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:02/08/2023
-        /// Description: get skill level by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await skillLevelRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var model = mapper.Map<SkillLevelDTO>(data);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:02/08/2023
-        /// Description: delete skill level
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var result = await skillLevelRepository.SoftDeleteAsync(id);
             if (!result)
             {
-                return DionResponse.NotFound("Không có dữ liệu", id);
+                return BestCVResponse.NotFound("Không có dữ liệu", id);
             }
             await skillLevelRepository.SaveChangesAsync();
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedTime:02/08/2023
-        /// Description: update skill level
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateSkillLevelDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateSkillLevelDTO obj)
         {
             List<string> listErrors = new List<string>();
             var checkName = await skillLevelRepository.IsNameExisAsync(obj.Name, obj.Id);
@@ -120,29 +91,29 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var skillLevel = await skillLevelRepository.GetByIdAsync(obj.Id);
             if (skillLevel == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var model = mapper.Map(obj, skillLevel);
             model.Description = !string.IsNullOrEmpty(model.Description) ? model.Description.ToEscape() : null;
             await skillLevelRepository.UpdateAsync(model);
             await skillLevelRepository.SaveChangesAsync();
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateSkillLevelDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateSkillLevelDTO> obj)
         {
             throw new NotImplementedException();
         }
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertSkillLevelDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertSkillLevelDTO> objs)
         {
             throw new NotImplementedException();
         }

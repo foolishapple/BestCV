@@ -26,7 +26,7 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        public async Task<DionResponse> CreateAsync(InsertMustBeInterestedCompanyDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertMustBeInterestedCompanyDTO obj)
         {
             // Kiểm tra xem JobId đã tồn tại trong JobSuitable hay chưa
             var isJobIdExist = await repository.IsJobIdExistAsync(obj.CompanyId);
@@ -36,7 +36,7 @@ namespace BestCV.Application.Services.Implement
             {
                 "Tên công việc đã tồn tại."
             };
-                return DionResponse.BadRequest(errorList);
+                return BestCVResponse.BadRequest(errorList);
             }
             var mustBeInterestedCompany = mapper.Map<MustBeInterestedCompany>(obj);
             mustBeInterestedCompany.Active = true;
@@ -44,58 +44,58 @@ namespace BestCV.Application.Services.Implement
             var listErrors = new List<string>();
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await repository.CreateAsync(mustBeInterestedCompany);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertMustBeInterestedCompanyDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertMustBeInterestedCompanyDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await repository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<MustBeInterestedCompanyDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await repository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<MustBeInterestedCompanyDTO>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> ListAggregatesAsync()
+        public async Task<BestCVResponse> ListAggregatesAsync()
         {
             var result = await repository.ListAggregatesAsync();
             if (result == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", result);
+                return BestCVResponse.NotFound("Không có dữ liệu", result);
             }
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> ListCompanyInterestedOnDetailJob()
+        public async Task<BestCVResponse> ListCompanyInterestedOnDetailJob()
         {
             var data = await repository.ListCompanyInterestedOnDetailJob();
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
         public async Task<List<SelectListItem>> ListCompanySelected()
@@ -103,28 +103,28 @@ namespace BestCV.Application.Services.Implement
             return await repository.ListCompanySelected();
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var data = await repository.SoftDeleteAsync(id);
             if (data)
             {
                 await repository.SaveChangesAsync();
-                return DionResponse.Success();
+                return BestCVResponse.Success();
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateMustBeInterestedCompanyDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateMustBeInterestedCompanyDTO obj)
         {
             var mustBeInterestedCompany = await repository.GetByIdAsync(obj.Id);
             if (mustBeInterestedCompany == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             // Kiểm tra chỉ khi JobId thay đổi
             if (obj.CompanyId != mustBeInterestedCompany.CompanyId)
@@ -136,21 +136,21 @@ namespace BestCV.Application.Services.Implement
                     {
                         "Tên công việc đã tồn tại."
                     };
-                    return DionResponse.BadRequest(errorList);
+                    return BestCVResponse.BadRequest(errorList);
                 }
             }
             var updateMustBeInterestedCompany = mapper.Map(obj, mustBeInterestedCompany);
             var listErrors = new List<string>();
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await repository.UpdateAsync(updateMustBeInterestedCompany);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateMustBeInterestedCompanyDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateMustBeInterestedCompanyDTO> obj)
         {
             throw new NotImplementedException();
         }

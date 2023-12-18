@@ -12,7 +12,7 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ICandidateCVPDFService : IServiceQueryBase<long, InsertCandidateCVPDFDTO, UpdateCandidateCVPDFDTO, CandidateCVPDFDTO>
     {
-        Task<DionResponse> GetByCandidateId(long candidateId);
-        Task<DionResponse> UploadCV(UploadCandidateCVPDFDTO model);
+        Task<BestCVResponse> GetByCandidateId(long candidateId);
+        Task<BestCVResponse> UploadCV(UploadCandidateCVPDFDTO model);
     }
 }

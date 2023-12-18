@@ -11,6 +11,6 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ICVTemplateService : IServiceQueryBase<long, CVTemplate, CVTemplate, CVTemplate>
     {
-        Task<DionResponse> GetAllPublishAsync();
+        Task<BestCVResponse> GetAllPublishAsync();
     }
 }

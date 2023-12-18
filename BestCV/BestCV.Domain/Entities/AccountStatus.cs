@@ -1,4 +1,4 @@
-﻿using Jobi.Core.Entities;
+﻿using BestCV.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

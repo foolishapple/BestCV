@@ -26,14 +26,8 @@ namespace BestCV.Application.Services.Implement
             _logger = loggerFactory.CreateLogger<SystemConfigService>();
             _mapper = mapper;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Create new system config
-        /// </summary>
-        /// <param name="obj">system config DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertSystemConfigDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertSystemConfigDTO obj)
         {
             var item = _mapper.Map<SystemConfig>(obj);
             item.Active = true;
@@ -42,20 +36,14 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Create new list system config
-        /// </summary>
-        /// <param name="objs">list system config DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertSystemConfigDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertSystemConfigDTO> objs)
         {
             List<string> errors = new();
             var items = objs.Select(c => _mapper.Map<SystemConfig>(c));
@@ -67,85 +55,52 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateListAsync(items);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get list all system config
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+ 
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _repository.FindByConditionAsync(c => c.Active);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get system config by id
-        /// </summary>
-        /// <param name="id">system config id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var item = await _repository.GetByIdAsync(id);
             if (item == null)
             {
                 throw new Exception($"Not found system config by id: {id}");
             }
-            return DionResponse.Success(item);
+            return BestCVResponse.Success(item);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Soft delete system config by id
-        /// </summary>
-        /// <param name="id">system config by id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var result =  await _repository.SoftDeleteAsync(id);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(id);
+                return BestCVResponse.Success(id);
             }
             throw new Exception($"Not found system config by id: {id}");
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Soft delete list system config by list system config id
-        /// </summary>
-        /// <param name="objs">list system config id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Failed delete</exception>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             var result = await _repository.SoftDeleteListAsync(objs);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(objs);
+                return BestCVResponse.Success(objs);
             }
             throw new Exception($"Failed to soft delete list system config by list system config id");
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Update system config
-        /// </summary>
-        /// <param name="obj">update system config DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateAsync(UpdateSystemConfigDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateSystemConfigDTO obj)
         {
             var item = await _repository.GetByIdAsync(obj.Id);
             if (item == null)
@@ -157,21 +112,14 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: update list system config
-        /// </summary>
-        /// <param name="obj">list system config DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateSystemConfigDTO> obj)
+
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateSystemConfigDTO> obj)
         {
             List<SystemConfig> updateItems = new();
             List<string> errors = new();
@@ -188,19 +136,13 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateListAsync(updateItems);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Validate to system config
-        /// </summary>
-        /// <param name="obj">system config object</param>
-        /// <returns></returns>
+
         private async Task<List<string>> Validate(SystemConfig obj)
         {
             List<string> errors = new();

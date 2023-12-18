@@ -43,12 +43,12 @@ namespace BestCV.Application.Services.Implement
             this.tagRepository = tagRepository;
         }
 
-        public async Task<DionResponse> UpdateApproveStatusPostAsync(ApprovePostDTO obj)
+        public async Task<BestCVResponse> UpdateApproveStatusPostAsync(ApprovePostDTO obj)
         {
             var data = await postRepository.GetByIdAsync(obj.Id);
             if (data==null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", data);
+                return BestCVResponse.NotFound("Không có dữ liệu.", data);
             }
 
             var updateObj = mapper.Map(obj, data);
@@ -61,24 +61,18 @@ namespace BestCV.Application.Services.Implement
             if (await postRepository.UpdateApproveStatusPostAsync(updateObj))
             {
 
-                return DionResponse.Success("Duyệt bài viết thành công.");
+                return BestCVResponse.Success("Duyệt bài viết thành công.");
             }
             else
             {
-                return DionResponse.Error("Duyệt bài viết không thành công.");
+                return BestCVResponse.Error("Duyệt bài viết không thành công.");
 
             }
 
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 28/07/2023
-        /// Description: create post 
-        /// </summary>
-        /// <param name="obj">InsertPostDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> CreateAsync(InsertPostDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertPostDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await postRepository.IsNameExistInSameCategoryAsync(0, obj.PostCategoryId, obj.Name.Trim());
@@ -89,7 +83,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var newObj = mapper.Map<Post>(obj);
@@ -144,12 +138,12 @@ namespace BestCV.Application.Services.Implement
                         }
 
                         await postRepository.EndTransactionAsync();
-                        return DionResponse.Success("Thêm mới bài viết thành công.");
+                        return BestCVResponse.Success("Thêm mới bài viết thành công.");
                     }
                     else
                     {
                         await postRepository.RollbackTransactionAsync();
-                        return DionResponse.Error("Thêm mới bài viết không thành công.");
+                        return BestCVResponse.Error("Thêm mới bài viết không thành công.");
                     }
                 }
 				catch (Exception e)
@@ -157,62 +151,56 @@ namespace BestCV.Application.Services.Implement
 
                     logger.LogError(e, $"Failed to insert post: {obj}");
 					await postRepository.RollbackTransactionAsync();
-					return DionResponse.Error("Thêm mới bài viết không thành công.");
+					return BestCVResponse.Error("Thêm mới bài viết không thành công.");
                 }
             }
 
 		}
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertPostDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertPostDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
 			var data = await postRepository.DetailPostByIdAsync(id);
 			if (data == null)
 			{
-				return DionResponse.NotFound("Không có dữ liệu.", id);
+				return BestCVResponse.NotFound("Không có dữ liệu.", id);
 			}
-			return DionResponse.Success(data);
+			return BestCVResponse.Success(data);
 		}
 
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 28/07/2023
-        /// Description: get list PostAggregates
-        /// </summary>
-        /// <param name="parameters">DataTableModel DTParamenters</param>
-        /// <returns>DionResponse</returns>
+ 
         public async Task<object> ListPostAggregatesAsync(DTParameters parameters)
         {
             return await postRepository.ListPostAggregatesAsync(parameters);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
 			var data = await postRepository.SoftDeleteAsync(id);
 			if (data)
 			{
 				await postRepository.SaveChangesAsync();
-				return DionResponse.Success(data);
+				return BestCVResponse.Success(data);
 			}
-			return DionResponse.NotFound("Không có dữ liệu.", id);
+			return BestCVResponse.NotFound("Không có dữ liệu.", id);
 		}
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdatePostDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdatePostDTO obj)
         {
 			var listErrors = new List<string>();
 			var isNameExist = await postRepository.IsNameExistInSameCategoryAsync(obj.Id, obj.PostCategoryId,obj.Name.Trim());
@@ -222,13 +210,13 @@ namespace BestCV.Application.Services.Implement
 			}
 			if (listErrors.Count > 0)
 			{
-				return DionResponse.BadRequest(listErrors);
+				return BestCVResponse.BadRequest(listErrors);
 			}
 
             var data = await postRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
 
             if (obj.IsPublish && obj.IsPublish != data.IsPublish)
@@ -292,7 +280,7 @@ namespace BestCV.Application.Services.Implement
                         await postTagRepository.SaveChangesAsync();
 
                         await postRepository.EndTransactionAsync();
-                        return DionResponse.Success("Cập nhật bài viết thành công.");
+                        return BestCVResponse.Success("Cập nhật bài viết thành công.");
                     }
                     else
                     {
@@ -308,7 +296,7 @@ namespace BestCV.Application.Services.Implement
                         }
 
                         await postRepository.EndTransactionAsync();
-                        return DionResponse.Success("Cập nhật bài viết thành công.");
+                        return BestCVResponse.Success("Cập nhật bài viết thành công.");
                     }
 
                 }
@@ -316,51 +304,37 @@ namespace BestCV.Application.Services.Implement
                 {
 					logger.LogError(e, $"Failed to update post: {obj}");
 					await postRepository.RollbackTransactionAsync();
-                    return DionResponse.Error("Cập nhật bài viết không thành công.");
+                    return BestCVResponse.Error("Cập nhật bài viết không thành công.");
                 }
             }
 
 		}
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdatePostDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdatePostDTO> obj)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedAt: 21/08/2023
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> ListPostHomePageAsync(PostParameters parameter)
+
+        public async Task<BestCVResponse> ListPostHomePageAsync(PostParameters parameter)
         {
             var data = await postRepository.ListPostHomePageAsync(parameter);
             if (data.DataSource == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedAt: 21/08/2023
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> LoadDataFilterPostHomePageAsync()
+
+        public async Task<BestCVResponse> LoadDataFilterPostHomePageAsync()
         {
             var data = await postRepository.LoadDataFilterPostHomePageAsync();
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TrungHieuTr
-        /// CreatedAt: 11/09/2023
-        /// </summary>
-        /// <param name="categoryId"></param>
-        /// <returns></returns>
+ 
         public async Task<PostCategoryDTO> GetCategoryAsync(int categoryId)
         {
             var data = await postCategoryRepository.GetByIdAsync(categoryId);

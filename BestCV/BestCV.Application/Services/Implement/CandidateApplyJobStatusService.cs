@@ -25,14 +25,8 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
             _logger = loggerFactory.CreateLogger<CandidateApplyJobStatusService>();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: create new candidate apply job status
-        /// </summary>
-        /// <param name="obj">insert candidate apply job status DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertCandidateApplyJobStatusDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertCandidateApplyJobStatusDTO obj)
         {
             List<string> errors = new();
             var model = _mapper.Map<CandidateApplyJobStatus>(obj);
@@ -42,20 +36,14 @@ namespace BestCV.Application.Services.Implement
             errors = await Validate(model);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateAsync(model);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: create new list candidate apply job status
-        /// </summary>
-        /// <param name="objs">list candidate apply job status DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertCandidateApplyJobStatusDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertCandidateApplyJobStatusDTO> objs)
         {
             List<string> errors = new();
             var models = objs.Select(c => _mapper.Map<CandidateApplyJobStatus>(c));
@@ -68,68 +56,42 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateListAsync(models);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success();
+            return BestCVResponse.Success();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: get list all candidate apply job status
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _repository.FindByConditionAsync(c => c.Active);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: get candidate apply job status by id
-        /// </summary>
-        /// <param name="id">candidate apply job status id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found candidate apply job status</exception>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await _repository.GetByIdAsync(id);
             if (data == null)
             {
                 throw new Exception($"Not found candidate job apply status with id:{id}");
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: Soft delete candidate apply job status by id
-        /// </summary>
-        /// <param name="id">candidate apply job status id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Failed to soft delete</exception>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await _repository.SoftDeleteAsync(id);
             if (data)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success();
+                return BestCVResponse.Success();
 
             }
-            return DionResponse.NotFound("Không có dữ liệu. ", id);
+            return BestCVResponse.NotFound("Không có dữ liệu. ", id);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: Soft delet list candidate apply job status by list id
-        /// </summary>
-        /// <param name="objs"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             using(var trans = await _repository.BeginTransactionAsync())
             {
@@ -140,18 +102,11 @@ namespace BestCV.Application.Services.Implement
                     throw new Exception("Failed to soft delete list candidate job apply status");
                 }
                 await trans.CommitAsync();
-                return DionResponse.Success(objs);
+                return BestCVResponse.Success(objs);
             }
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: update candidate apply job status
-        /// </summary>
-        /// <param name="obj">candidate apply job status DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateAsync(UpdateCandidateApplyJobStatusDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateCandidateApplyJobStatusDTO obj)
         {
             List<string> errors = new();
             var data = await _repository.GetByIdAsync(obj.Id);
@@ -163,21 +118,14 @@ namespace BestCV.Application.Services.Implement
             errors = await Validate(model);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateAsync(model);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: update list candidate apply job status
-        /// </summary>
-        /// <param name="objs">List candidate apply job status DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateCandidateApplyJobStatusDTO> objs)
+
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateCandidateApplyJobStatusDTO> objs)
         {
             List<CandidateApplyJobStatus> updates = new();
             foreach(var item in objs)
@@ -192,15 +140,9 @@ namespace BestCV.Application.Services.Implement
             }
             await _repository.UpdateListAsync(updates);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 04/08/2023
-        /// Description: validate to candidate apply job status
-        /// </summary>
-        /// <param name="obj">candidate apply job status object</param>
-        /// <returns></returns>
+
         private async Task<List<string>> Validate(CandidateApplyJobStatus obj)
         {
             List<string> errors = new();

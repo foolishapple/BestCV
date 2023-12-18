@@ -29,89 +29,58 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Tạo mới địa điểm làm việc
-        /// </summary>
-        /// <param name="obj">InsertWorkplaceDTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertWorkplaceDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertWorkplaceDTO obj)
         {
             var workplace = _mapper.Map<WorkPlace>(obj);
             await _workplaceRepository.CreateAsync(workplace);
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Tạo mới danh sách địa điểm làm việc
-        /// </summary>
-        /// <param name="objs">IEnumerable<InsertWorkplaceDTO></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertWorkplaceDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertWorkplaceDTO> objs)
         {
             var workplaces = objs.Select(c => _mapper.Map<WorkPlace>(c));
             await _workplaceRepository.CreateListAsync(workplaces);
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Lấy tất cả dữ tỉnh thành quận huyện Việt Nam
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+ 
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var listWorkplace = await _workplaceRepository.GetAllAsync();
             var listWorkplaceDTO = _mapper.Map<List<WorkplaceDTO>>(listWorkplace);
-            return DionResponse.Success(listWorkplaceDTO);
+            return BestCVResponse.Success(listWorkplaceDTO);
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// Description: Lấy thông tin chi tiết địa chỉ làm việc
-        /// </summary>
-        /// <param name="id">ID địa chỉ làm việc</param>
-        /// <returns>WorkPlace</returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var workplace = await _workplaceRepository.GetByIdAsync(id);
             var workplaceDTO = _mapper.Map<WorkplaceDTO>(workplace);
-            return DionResponse.Success(workplaceDTO);
+            return BestCVResponse.Success(workplaceDTO);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(int id)
+        public Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateWorkplaceDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateWorkplaceDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateWorkplaceDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateWorkplaceDTO> obj)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Lấy dữ liệu hành chính VN đưa vào DB
-        /// Updater: Daniel
-        /// UpdatedDate: 31/07/2023
-        /// Description: Sửa Description Workplace khi thêm dữ liệu vào DB
-        /// </summary>
-        /// <returns>Lấy dữ liệu thành công hay thất bại</returns>
+
         public async Task<bool> GetProvinceDataAsync()
         {
             var listWorkplaceOld = await _workplaceRepository.GetAllAsync();
@@ -172,31 +141,20 @@ namespace BestCV.Application.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Lấy dánh sách quận huyện theo ID tỉnh thành
-        /// </summary>
-        /// <param name="cityId">ID tỉnh thành</param>
-        /// <returns>Danh sách quận huyện</returns>
-        public async Task<DionResponse> GetListDistrictByCityIdAsync(int cityId)
+ 
+        public async Task<BestCVResponse> GetListDistrictByCityIdAsync(int cityId)
         {
             var listWorkplace = await _workplaceRepository.GetListDistrictByCityIdAsync(cityId);
             var listWorkplaceDTO = _mapper.Map<List<WorkplaceDTO>>(listWorkplace);
-            return DionResponse.Success(listWorkplaceDTO);
+            return BestCVResponse.Success(listWorkplaceDTO);
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 27/07/2023
-        /// Description: Lấy danh sách tất cả tỉnh thành
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetListCityAsync()
+
+        public async Task<BestCVResponse> GetListCityAsync()
         {
             var listWorkplace = await _workplaceRepository.GetListCityAsync();
             var listWorkplaceDTO = _mapper.Map<List<WorkplaceDTO>>(listWorkplace);
-            return DionResponse.Success(listWorkplaceDTO);
+            return BestCVResponse.Success(listWorkplaceDTO);
         }
     }
 }

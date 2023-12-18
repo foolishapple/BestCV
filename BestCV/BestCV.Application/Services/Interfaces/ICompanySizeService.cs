@@ -12,13 +12,6 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ICompanySizeService : IServiceQueryBase<int, InsertCompanySizeDTO, UpdateCompanySizeDTO, CompanySizeDTO>
     {
-        /// <summary>
-        /// Author : HuyDQ
-        /// CreatedTime : 17/08/2023
-        /// Description : lấy ra thông tin của quy mô công ty và số lượng công ty thuộc quy mô này
-        /// </summary>
-        /// <param></param>
-        /// <returns></returns>
-        public Task<DionResponse> LoadDataFilterCompanySizeHomePageAsync();
+        public Task<BestCVResponse> LoadDataFilterCompanySizeHomePageAsync();
     }
 }

@@ -26,13 +26,8 @@ namespace BestCV.Application.Services.Implement
 			logger = loggerFactory.CreateLogger<ISalaryTypeService>();
 			mapper = _mapper;
 		}
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">InsertSalaryTypeDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> CreateAsync(InsertSalaryTypeDTO obj)
+
+		public async Task<BestCVResponse> CreateAsync(InsertSalaryTypeDTO obj)
 		{
 			var salaryType = mapper.Map<SalaryType>(obj);
 			salaryType.Active = true;
@@ -46,100 +41,74 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 			await salaryRepository.CreateAsync(salaryType);
 			await salaryRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 		}
-		public Task<DionResponse> CreateListAsync(IEnumerable<InsertSalaryTypeDTO> objs)
+		public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertSalaryTypeDTO> objs)
 		{
 			throw new NotImplementedException();
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetAllAsync()
+		public async Task<BestCVResponse> GetAllAsync()
 		{
 			var data = await salaryRepository.FindByConditionAsync(x=>x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<SalaryTypeDTO>>(data);
-			return DionResponse.Success(result);
+			return BestCVResponse.Success(result);
 		}
 
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">salaryTypeId</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> GetByIdAsync(int id)
+
+		public async Task<BestCVResponse> GetByIdAsync(int id)
 		{
 			var data = await salaryRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<SalaryTypeDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
 		}
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="name">salaryTypeName</param>
-		/// <param name="id">salaryTypeId</param>
-		/// <returns>Boolean</returns>
+
 		public async Task<bool> IsSalaryTypeExist(string name, int id)
 		{
 			return await salaryRepository.IsSalaryTypeExistAsync(name, id);
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="id">salaryTypeId</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> SoftDeleteAsync(int id)
+
+		public async Task<BestCVResponse> SoftDeleteAsync(int id)
 		{
 			var data = await salaryRepository.SoftDeleteAsync(id);
 			if (data)
 			{
-				//return DionResponse.Success();
+				//return BestCVResponse.Success();
 				await salaryRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
 
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
 		{
 			throw new NotImplementedException();
 		}
 
-		/// <summary>
-		/// Author : ThanhNd
-		/// CreatedTime : 26/07/2023
-		/// </summary>
-		/// <param name="obj">UpdateSalaryTypeDTO</param>
-		/// <returns>DionResponse</returns>
-		public async Task<DionResponse> UpdateAsync(UpdateSalaryTypeDTO obj)
+
+		public async Task<BestCVResponse> UpdateAsync(UpdateSalaryTypeDTO obj)
 		{
 			var salaryType = await salaryRepository.GetByIdAsync(obj.Id);
 			if (salaryType == null)
 			{
-				return DionResponse.NotFound("Không có dữ liệu", obj);
+				return BestCVResponse.NotFound("Không có dữ liệu", obj);
 			}
 			var updateSalary = mapper.Map(obj, salaryType);
             salaryType.Description = !string.IsNullOrEmpty(salaryType.Description) ? salaryType.Description.ToEscape() : null;
@@ -152,19 +121,19 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
 			await salaryRepository.UpdateAsync(updateSalary);
 
 			await salaryRepository.SaveChangesAsync();
 			
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
-            //return DionResponse.Error("Cập nhật loại lương không thành công");
+            //return BestCVResponse.Error("Cập nhật loại lương không thành công");
 		}
 
-		public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateSalaryTypeDTO> obj)
+		public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateSalaryTypeDTO> obj)
 		{
 			throw new NotImplementedException();
 		}

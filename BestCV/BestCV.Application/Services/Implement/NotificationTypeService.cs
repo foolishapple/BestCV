@@ -28,14 +28,8 @@ namespace BestCV.Application.Services.Implement
             this.notificationTypeRepository = notificationTypeRepository;
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: add notification type 
-        /// </summary>
-        /// <param name="obj">InsertNotificationTypeDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> CreateAsync(InsertNotificationTypeDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertNotificationTypeDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await notificationTypeRepository.IsNameExistAsync(0, obj.Name.Trim());
@@ -47,7 +41,7 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             var newObj = mapper.Map<NotificationType>(obj);
             newObj.Id = 0;
@@ -57,80 +51,57 @@ namespace BestCV.Application.Services.Implement
 
             await notificationTypeRepository.CreateAsync(newObj);
             await notificationTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(newObj);
+            return BestCVResponse.Success(newObj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertNotificationTypeDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertNotificationTypeDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get list notification type 
-        /// </summary>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetAllAsync()
+  
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await notificationTypeRepository.FindByConditionAsync(c => c.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", data);
+                return BestCVResponse.NotFound("Không có dữ liệu.", data);
             }
             var temp = mapper.Map<List<NotificationTypeDTO>>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get notification type by id
-        /// </summary>
-        /// <param name="id">NotificationTypeId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await notificationTypeRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", id);
+                return BestCVResponse.NotFound("Không có dữ liệu.", id);
             }
             var temp = mapper.Map<NotificationTypeDTO>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: soft delete notification type by id
-        /// </summary>
-        /// <param name="id">NotificationTypeId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await notificationTypeRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await notificationTypeRepository.SaveChangesAsync();
-                return DionResponse.Success(id);
+                return BestCVResponse.Success(id);
             }
-            return DionResponse.NotFound("Không có dữ liệu.", id);
+            return BestCVResponse.NotFound("Không có dữ liệu.", id);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: update notification type 
-        /// </summary>
-        /// <param name="obj">UpdateNotificationTypeDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> UpdateAsync(UpdateNotificationTypeDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateNotificationTypeDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await notificationTypeRepository.IsNameExistAsync(obj.Id, obj.Name.Trim());
@@ -140,24 +111,24 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var data = await notificationTypeRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không tìm thấy dữ liệu.", obj);
+                return BestCVResponse.NotFound("Không tìm thấy dữ liệu.", obj);
             }
             var updateObj = mapper.Map(obj, data);
             updateObj.Description = !string.IsNullOrEmpty(updateObj.Description) ? updateObj.Description.ToEscape() : null;
 
             await notificationTypeRepository.UpdateAsync(updateObj);
             await notificationTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateNotificationTypeDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateNotificationTypeDTO> obj)
         {
             throw new NotImplementedException();
         }

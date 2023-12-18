@@ -15,13 +15,13 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ITopFeatureJobService : IServiceQueryBase<int, InsertTopFeatureJobDTO, UpdateTopFeatureJobDTO, TopFeatureJobDTO>
     {
-        //Task<DionResponse> ListTopFeatureJobShowOnHomePageAsync();
+        //Task<BestCVResponse> ListTopFeatureJobShowOnHomePageAsync();
         Task<List<SelectListItem>> ListJobSelected();
         //Task<List<TopFeatureJobAggregates>> searchJobs(Select2Aggregates select2Aggregates);
-        Task<DionResponse> searchJobs(Select2Aggregates select2Aggregates);
-        Task<DionResponse> ListTopFeatureJobShowOnHomePageAsync();
-        Task<DionResponse> SearchingFeatureJob(SearchJobWithServiceParameters parameter);
-        Task<DionResponse> ListFeatureJob();
-        Task<DionResponse> ChangeOrderSort(ChangeTopFeatureJobDTO model);
+        Task<BestCVResponse> searchJobs(Select2Aggregates select2Aggregates);
+        Task<BestCVResponse> ListTopFeatureJobShowOnHomePageAsync();
+        Task<BestCVResponse> SearchingFeatureJob(SearchJobWithServiceParameters parameter);
+        Task<BestCVResponse> ListFeatureJob();
+        Task<BestCVResponse> ChangeOrderSort(ChangeTopFeatureJobDTO model);
     }
 }

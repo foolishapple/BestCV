@@ -26,42 +26,42 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        public Task<DionResponse> CreateAsync(InsertJobSecondaryJobCategoryDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertJobSecondaryJobCategoryDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertJobSecondaryJobCategoryDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertJobSecondaryJobCategoryDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetByIdAsync(long id)
+        public Task<BestCVResponse> GetByIdAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateJobSecondaryJobCategoryDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateJobSecondaryJobCategoryDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateJobSecondaryJobCategoryDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateJobSecondaryJobCategoryDTO> obj)
         {
             throw new NotImplementedException();
         }

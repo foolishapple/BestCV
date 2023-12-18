@@ -26,45 +26,22 @@ namespace BestCV.Infrastructure.Repositories.Implement
             unitOfWork = _unitOfWork;
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime: 26/07/2023
-        /// /// Description: Check candidate email is Existed
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="email"></param>
-        /// <returns></returns>
         public async Task<bool> IsEmailExist(string email)
         {
-            var data = await db.Candidates.AnyAsync(x => x.Email.ToLower().Trim() == email.ToLower().Trim());
+            var data = await db.Candidates.AnyAsync(x => x.Email.ToLower().Trim() == email.ToLower().Trim() && x.Active == true);
             return data;
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime: 26/07/2023
-        /// Description: Check candidate phone is Existed
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="phone"></param>
-        /// <returns></returns>
+
         public async Task<bool> IsPhoneExist(string phone)
         {
-            var data = await db.Candidates.AnyAsync(x => x.Phone == phone);
+            var data = await db.Candidates.AnyAsync(x => x.Phone == phone && x.Active == true);
             return data;
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime: 26/07/2023
-        /// Description: Check candidate username is Existed
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="userName"></param>
-        /// <returns></returns>
         public async Task<bool> IsFullNameExist(string fullName)
         {
-            var data = await db.Candidates.AnyAsync(x => x.FullName.ToLower().Trim() == fullName.ToLower().Trim());
+            var data = await db.Candidates.AnyAsync(x => x.FullName.ToLower().Trim() == fullName.ToLower().Trim() && x.Active == true);
             return data;
         }
 
@@ -74,13 +51,7 @@ namespace BestCV.Infrastructure.Repositories.Implement
             return data;
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created:26/7/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+
         public async Task<Candidate> SignIn(Candidate obj)
         {
             var data = await (from c in db.Candidates
@@ -90,25 +61,13 @@ namespace BestCV.Infrastructure.Repositories.Implement
             return data;
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// CreatedDate: 01/08/2023
-        /// Description: Lấy thông tin ứng viên theo Email
-        /// </summary>
-        /// <param name="email">email</param>
-        /// <returns>Thông tin ứng viên</returns>
+
         public async Task<Candidate?> GetByEmailAsync(string email)
         {
             return await db.Candidates.Where(e => e.Email.Equals(email) && e.Active).FirstOrDefaultAsync();
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// CreatedDate: 01/08/2023
-        /// Description: Lấy thông tin ứng viên theo phone
-        /// </summary>
-        /// <param name="phone">phone</param>
-        /// <returns>Thông tin ứng viên</returns>
+
         public async Task<Candidate?> GetByPhoneAsync(string phone)
         {
             return await db.Candidates.Where(e => e.Phone.Equals(phone) && e.Active).FirstOrDefaultAsync();
@@ -123,25 +82,13 @@ namespace BestCV.Infrastructure.Repositories.Implement
             return Task.CompletedTask;
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 02/08/2023
-        /// Description : Check candidate FacebookId
-        /// </summary>
-        /// <param name="facebookId"></param>
-        /// <returns></returns>
+
         public async Task<Candidate> CheckCandidateByFacebookId(string facebookId)
         {
             return await db.Candidates.Where(x => x.Active && x.FacebookId == facebookId).FirstOrDefaultAsync();
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 02/08/2023
-        /// Description : update FacebookId
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         public Task UpdateFacebookId(Candidate obj)
         {
             db.Attach(obj);
@@ -151,25 +98,13 @@ namespace BestCV.Infrastructure.Repositories.Implement
             return Task.CompletedTask;
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 03/08/2023
-        /// Description : Check candidate LinkedinId
-        /// </summary>
-        /// <param name="linkedinId"></param>
-        /// <returns></returns>
+   
         public async Task<Candidate> CheckCandidateByLinkedinId(string linkedinId)
         {
             return await db.Candidates.Where(x => x.Active && x.LinkedinId == linkedinId).FirstOrDefaultAsync();
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 03/08/2023
-        /// Description : update LinkedinId
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         public Task UpdateLinkedinId(Candidate obj)
         {
             db.Attach(obj);
@@ -178,13 +113,7 @@ namespace BestCV.Infrastructure.Repositories.Implement
 
             return Task.CompletedTask;
         }
-        /// <summary>
-        /// Author : ThanhND
-        /// CreatedTime: 02/08/2023
-        /// Description : LoadData Candidate Aggregates (admin page)
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         public async Task<object> ListCandidateAggregates(CandidateDTParameters parameters)
         {
             var keyword = parameters.Search?.Value;

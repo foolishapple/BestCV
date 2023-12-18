@@ -13,15 +13,9 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IEmployerServicePackageEmployerBenefitService : IServiceQueryBase<int, InsertEmployerServicePackageEmployerBenefitDTO, UpdateEmployerServicePackageEmployerBenefitDTO, EmployerServicePackageEmployerBenefitDTO>
     {
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 10/09/2023
-        /// Description : Lấy danh sách quyền lợi với employerServicePackageId
-        /// </summary>
-        /// <param name="id">employerServicePackageId</param>
-        /// <returns></returns>
-        Task<DionResponse> GetByEmployerServicePackageIdAsync(int id);
 
-        Task<DionResponse> UpdateHasBenefitAsync(int id);
+        Task<BestCVResponse> GetByEmployerServicePackageIdAsync(int id);
+
+        Task<BestCVResponse> UpdateHasBenefitAsync(int id);
     }
 }

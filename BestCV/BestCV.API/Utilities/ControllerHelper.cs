@@ -1,8 +1,8 @@
-﻿using Jobi.Domain.Constants;
+﻿using BestCV.Domain.Constants;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace Jobi.API.Utilities
+namespace BestCV.API.Utilities
 {
     public static class ControllerHelper
     {

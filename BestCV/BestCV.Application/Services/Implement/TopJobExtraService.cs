@@ -31,7 +31,7 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        public async Task<DionResponse> ChangeOrderSort(ChangeOrderSortDTO model)
+        public async Task<BestCVResponse> ChangeOrderSort(ChangeOrderSortDTO model)
         {
             var orderSortUp = mapper.Map<TopJobExtra>(model.SlideUp);
             var orderSortDown = mapper.Map<TopJobExtra>(model.SlideDown);
@@ -46,16 +46,10 @@ namespace BestCV.Application.Services.Implement
             listUpdate.Add(orderSortDown);
             await repository.ChangeOrderSort(listUpdate);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        /// <summary>
-        /// Author HoanNK
-        /// CreatedTime : 08/09/2023
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertTopJobExtraDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertTopJobExtraDTO obj)
         {
             var data = mapper.Map<TopJobExtra>(obj);
             var res = await repository.CheckOrderSort(0, obj.OrderSort);
@@ -71,66 +65,66 @@ namespace BestCV.Application.Services.Implement
             var error = await Validate(data);
             if(error.Count > 0)
             {
-                return DionResponse.BadRequest(error); 
+                return BestCVResponse.BadRequest(error); 
             }
             await repository.CreateAsync(data);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertTopJobExtraDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertTopJobExtraDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await repository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<TopJobExtraDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await repository.GetByIdAsync(id);
             if(data == null)
             {
                 throw new Exception($"Not found top job extra by id: {id}");
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> ListTopJobExtra()
+        public async Task<BestCVResponse> ListTopJobExtra()
         {
             var data = await repository.ListTopJobExtra();
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var data = await repository.SoftDeleteAsync(id);
             if (data)
             {
                 await repository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
             }
             throw new Exception($"Not found top job extra by id: {id}");
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateTopJobExtraDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateTopJobExtraDTO obj)
         {
             var data = await repository.GetByIdAsync(obj.Id);
             
@@ -152,14 +146,14 @@ namespace BestCV.Application.Services.Implement
 
             if (error.Count > 0)
             {
-                return DionResponse.BadRequest(error);
+                return BestCVResponse.BadRequest(error);
             }
             await repository.UpdateAsync(data);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateTopJobExtraDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateTopJobExtraDTO> obj)
         {
             throw new NotImplementedException();
         }
@@ -173,24 +167,24 @@ namespace BestCV.Application.Services.Implement
             return errors;
         }
 
-        public async Task<DionResponse> ListTopJobExtraShowOnHomePageAsync()
+        public async Task<BestCVResponse> ListTopJobExtraShowOnHomePageAsync()
         {
             var data = await repository.ListTopJobExtraShowOnHomePageAsync();
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> SearchingFeatureJob(SearchJobWithServiceParameters parameter)
+        public async Task<BestCVResponse> SearchingFeatureJob(SearchJobWithServiceParameters parameter)
         {
             var data = await repository.SearchingFeatureJob(parameter);
             if(data.DataSource == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

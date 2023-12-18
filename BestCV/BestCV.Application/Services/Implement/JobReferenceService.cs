@@ -28,7 +28,7 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        public async Task<DionResponse> CreateAsync(InsertJobReferenceDTO obj)
+        public async Task<BestCVResponse> CreateAsync(InsertJobReferenceDTO obj)
         {
             // Kiểm tra xem JobId đã tồn tại trong JobSuitable hay chưa
             var isJobIdExist = await repository.IsJobIdExistAsync(obj.JobId);
@@ -38,7 +38,7 @@ namespace BestCV.Application.Services.Implement
             {
                 "Tên công việc đã tồn tại."
             };
-                return DionResponse.BadRequest(errorList);
+                return BestCVResponse.BadRequest(errorList);
             }
 
             var jobReference = mapper.Map<JobReference>(obj);
@@ -49,60 +49,60 @@ namespace BestCV.Application.Services.Implement
 
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             await repository.CreateAsync(jobReference);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertJobReferenceDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertJobReferenceDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetAllAsync()
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await repository.FindByConditionAsync(x => x.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<List<JobReferenceDTO>>(data);
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await repository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
             var result = mapper.Map<JobReferenceDTO>(data);
 
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> ListAggregatesAsync()
+        public async Task<BestCVResponse> ListAggregatesAsync()
         {
             var result = await repository.ListAggregatesAsync();
             if (result == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", result);
+                return BestCVResponse.NotFound("Không có dữ liệu", result);
             }
-            return DionResponse.Success(result);
+            return BestCVResponse.Success(result);
         }
 
-        public async Task<DionResponse> ListJobReferenceOnDetailJob(long jobId)
+        public async Task<BestCVResponse> ListJobReferenceOnDetailJob(long jobId)
         {
             var data = await repository.ListJobReferenceOnDetailJob(jobId);
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
         public async Task<List<SelectListItem>> ListJobSelected()
@@ -110,29 +110,29 @@ namespace BestCV.Application.Services.Implement
             return await repository.ListJobSelected();
         }
 
-        public async Task<DionResponse> SoftDeleteAsync(long id)
+        public async Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             var data = await repository.SoftDeleteAsync(id);
             if (data)
             {
                 await repository.SaveChangesAsync();
-                return DionResponse.Success();
+                return BestCVResponse.Success();
 
             }
-            return DionResponse.NotFound("Không có dữ liệu", data);
+            return BestCVResponse.NotFound("Không có dữ liệu", data);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> UpdateAsync(UpdateJobReferenceDTO obj)
+        public async Task<BestCVResponse> UpdateAsync(UpdateJobReferenceDTO obj)
         {
             var jobReference = await repository.GetByIdAsync(obj.Id);
             if (jobReference == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
 
             // Kiểm tra chỉ khi JobId thay đổi
@@ -145,7 +145,7 @@ namespace BestCV.Application.Services.Implement
                     {
                         "Tên công việc đã tồn tại."
                     };
-                    return DionResponse.BadRequest(errorList);
+                    return BestCVResponse.BadRequest(errorList);
                 }
             }
 
@@ -154,14 +154,14 @@ namespace BestCV.Application.Services.Implement
             var listErrors = new List<string>();
             if (listErrors.Count > 0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
             await repository.UpdateAsync(updateJobReference);
             await repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateJobReferenceDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateJobReferenceDTO> obj)
         {
             throw new NotImplementedException();
         }

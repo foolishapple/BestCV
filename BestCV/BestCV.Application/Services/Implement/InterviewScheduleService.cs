@@ -31,14 +31,8 @@ namespace BestCV.Application.Services.Implement
             _employerRepository = employerRepository;
             _candidateRepository = candidateRepository;
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: Create new interview Schedule
-        /// </summary>
-        /// <param name="obj">interview Schedule DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertInterviewScheduleDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertInterviewScheduleDTO obj)
         {
             var item = _mapper.Map<InterviewSchedule>(obj);
             item.Active = true;
@@ -49,20 +43,14 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: Create new list interview Schedule
-        /// </summary>
-        /// <param name="objs">list interview Schedule DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertInterviewScheduleDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertInterviewScheduleDTO> objs)
         {
             List<string> errors = new();
             var items = objs.Select(c => _mapper.Map<InterviewSchedule>(c));
@@ -74,85 +62,52 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateListAsync(items);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: Get list all interview Schedule
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _repository.FindByConditionAsync(c => c.Active);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: Get interview Schedule by id
-        /// </summary>
-        /// <param name="id">interview Schedule id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var item = await _repository.GetByIdAsync(id);
             if (item == null)
             {
                 throw new Exception($"Not found interview Schedule by id: {id}");
             }
-            return DionResponse.Success(item);
+            return BestCVResponse.Success(item);
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: Soft delete interview Schedule by id
-        /// </summary>
-        /// <param name="id">interview Schedule by id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var result = await _repository.SoftDeleteAsync(id);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(id);
+                return BestCVResponse.Success(id);
             }
             throw new Exception($"Not found interview Schedule by id: {id}");
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: Soft delete list interview Schedule by list interview Schedule id
-        /// </summary>
-        /// <param name="objs">list interview Schedule id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Failed delete</exception>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             var result = await _repository.SoftDeleteListAsync(objs);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(objs);
+                return BestCVResponse.Success(objs);
             }
             throw new Exception($"Failed to soft delete list interview Schedule by list interview Schedule id");
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: Update interview Schedule
-        /// </summary>
-        /// <param name="obj">update interview Schedule DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateAsync(UpdateInterviewScheduleDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateInterviewScheduleDTO obj)
         {
             var item = await _repository.GetByIdAsync(obj.Id);
             if (item == null)
@@ -163,21 +118,14 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: update list interview Schedule
-        /// </summary>
-        /// <param name="obj">list interview Schedule DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateInterviewScheduleDTO> obj)
+
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateInterviewScheduleDTO> obj)
         {
             List<InterviewSchedule> updateItems = new();
             List<string> errors = new();
@@ -194,19 +142,13 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateListAsync(updateItems);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: Validate to interview Schedule
-        /// </summary>
-        /// <param name="obj">interview Schedule object</param>
-        /// <returns></returns>
+
         private async Task<List<string>> Validate(InterviewSchedule obj)
         {
             List<string> errors = new();
@@ -217,40 +159,28 @@ namespace BestCV.Application.Services.Implement
             return errors;
         }
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 22/08/2023
-        /// Description: get list interview Schedule by candidateId
-        /// </summary>
-        /// <param name="candidateId">cadidate id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetListByCandidateId(long candidateId)
+
+        public async Task<BestCVResponse> GetListByCandidateId(long candidateId)
         {
             var checkCandidateExist = await _candidateRepository.GetByIdAsync(candidateId);
             if (checkCandidateExist == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", candidateId);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", candidateId);
             }
             var data = await _repository.GetListInterViewsByCandidateId(candidateId);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// Created: 29/08/2023
-        /// Description: get list interview Schedule by candidateId
-        /// </summary>
-        /// <param name="employerId">cadidate id</param>
-        /// <returns></returns>
-        public async Task<DionResponse> GetListByEmployerId(long employerId)
+ 
+        public async Task<BestCVResponse> GetListByEmployerId(long employerId)
         {
             var checkEmployerExist = await _employerRepository.GetByIdAsync(employerId); 
             if (checkEmployerExist == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu. ", employerId);
+                return BestCVResponse.NotFound("Không có dữ liệu. ", employerId);
             }
             var data = await _repository.GetListInterViewsByEmployerId(employerId);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

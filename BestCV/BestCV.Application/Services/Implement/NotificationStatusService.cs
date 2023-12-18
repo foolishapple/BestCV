@@ -24,14 +24,8 @@ namespace BestCV.Application.Services.Implement
             _logger = loggerFactory.CreateLogger<NotificationStatusService>();
             _mapper = mapper;
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Create new notification status
-        /// </summary>
-        /// <param name="obj">notification status DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertNotificationStatusDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertNotificationStatusDTO obj)
         {
             var item = _mapper.Map<NotificationStatus>(obj);
             item.Active = true;
@@ -39,20 +33,14 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Create new list notification status
-        /// </summary>
-        /// <param name="objs">list notification status DTO</param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateListAsync(IEnumerable<InsertNotificationStatusDTO> objs)
+
+        public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertNotificationStatusDTO> objs)
         {
             List<string> errors = new();
             var items = objs.Select(c => _mapper.Map<NotificationStatus>(c));
@@ -64,85 +52,51 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.CreateListAsync(items);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(objs);
+            return BestCVResponse.Success(objs);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get list all notification status
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await _repository.FindByConditionAsync(c => c.Active);
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Get notification status by id
-        /// </summary>
-        /// <param name="id">notification status id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var item = await _repository.GetByIdAsync(id);
             if (item == null)
             {
                 throw new Exception($"Not found notification status by id: {id}");
             }
-            return DionResponse.Success(item);
+            return BestCVResponse.Success(item);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Soft delete notification status by id
-        /// </summary>
-        /// <param name="id">notification status by id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var result = await _repository.SoftDeleteAsync(id);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(id);
+                return BestCVResponse.Success(id);
             }
             throw new Exception($"Not found notification status by id: {id}");
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Soft delete list notification status by list notification status id
-        /// </summary>
-        /// <param name="objs">list notification status id</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Failed delete</exception>
-        public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+        public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             var result = await _repository.SoftDeleteListAsync(objs);
             if (result)
             {
                 await _repository.SaveChangesAsync();
-                return DionResponse.Success(objs);
+                return BestCVResponse.Success(objs);
             }
             throw new Exception($"Failed to soft delete list notification status by list notification status id");
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Update notification status
-        /// </summary>
-        /// <param name="obj">update notification status DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateAsync(UpdateNotificationStatusDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateNotificationStatusDTO obj)
         {
             var item = await _repository.GetByIdAsync(obj.Id);
             if (item == null)
@@ -153,21 +107,14 @@ namespace BestCV.Application.Services.Implement
             var errors = await Validate(item);
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateAsync(item);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: update list notification status
-        /// </summary>
-        /// <param name="obj">list notification status DTO</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Not found</exception>
-        public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateNotificationStatusDTO> obj)
+
+        public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateNotificationStatusDTO> obj)
         {
             List<NotificationStatus> updateItems = new();
             List<string> errors = new();
@@ -184,19 +131,13 @@ namespace BestCV.Application.Services.Implement
             }
             if (errors.Count > 0)
             {
-                return DionResponse.BadRequest(errors);
+                return BestCVResponse.BadRequest(errors);
             }
             await _repository.UpdateListAsync(updateItems);
             await _repository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: Validate to notification status
-        /// </summary>
-        /// <param name="obj">notification status object</param>
-        /// <returns></returns>
+
         private async Task<List<string>> Validate(NotificationStatus obj)
         {
             List<string> errors = new();

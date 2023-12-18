@@ -1,10 +1,10 @@
 ﻿
-using Jobi.Application.Utilities.SignalRs.Hubs;
+using BestCV.Application.Utilities.SignalRs.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.StaticFiles;
 using Serilog;
 
-namespace Jobi.API.Utilities
+namespace BestCV.API.Utilities
 {
     public static class ApplicationExtensions
     {

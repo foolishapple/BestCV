@@ -19,10 +19,10 @@ namespace BestCV.Application.Services.Interfaces
     public interface ICandidateService : IServiceQueryBase<long, SignupCandidateDTO, UpdateProfileCandidateDTO, CandidateDTO>
     {
        
-        Task<DionResponse> UpdatePasswordCandidate(ChangePasswordDTO obj,long userId);
-        Task<(DionResponse, EmailMessage<CandidateConfirmEmailBody>?)> CandidateSignup (SignupCandidateDTO signupCandidateDTO);
+        Task<BestCVResponse> UpdatePasswordCandidate(ChangePasswordDTO obj,long userId);
+        Task<(BestCVResponse, EmailMessage<CandidateConfirmEmailBody>?)> CandidateSignup (SignupCandidateDTO signupCandidateDTO);
 
-        Task<DionResponse> CheckVerifyCode(string value, string hashCode);
+        Task<BestCVResponse> CheckVerifyCode(string value, string hashCode);
 
         Task ActivateAccount(string email);
 
@@ -30,23 +30,23 @@ namespace BestCV.Application.Services.Interfaces
 
         Task<CandidateMeta> GetEmailByVerifyCode(ConfirmEmailCandidateDTO obj);
 
-        Task<(DionResponse, EmailMessage<CandidateConfirmEmailBody>?)> ReSendEmail(string email);
-        Task<DionResponse> UpdateNotiEmailCandidate(SettingNotiEmailDTO obj);
-        Task<DionResponse> ListCandidateDetailById(long id);
-        Task<DionResponse> SignIn(SigninCandidateDTO obj);
+        Task<(BestCVResponse, EmailMessage<CandidateConfirmEmailBody>?)> ReSendEmail(string email);
+        Task<BestCVResponse> UpdateNotiEmailCandidate(SettingNotiEmailDTO obj);
+        Task<BestCVResponse> ListCandidateDetailById(long id);
+        Task<BestCVResponse> SignIn(SigninCandidateDTO obj);
 
-        Task<DionResponse> UpdateProfileCandidate(UpdateProfileCandidateDTO obj);
-        Task<DionResponse> UpdateCandidateJobSuggestionSetting(UpdateCandidateJobSuggetionSettingDTO obj);
-        Task<DionResponse> SignInWithGoole(SignInWithSocialNetworkDTO obj);
+        Task<BestCVResponse> UpdateProfileCandidate(UpdateProfileCandidateDTO obj);
+        Task<BestCVResponse> UpdateCandidateJobSuggestionSetting(UpdateCandidateJobSuggetionSettingDTO obj);
+        Task<BestCVResponse> SignInWithGoole(SignInWithSocialNetworkDTO obj);
 
-        Task<DionResponse> SignInWithFacebook(SignInWithSocialNetworkDTO obj);
-        Task<DionResponse> SignInWithLinkedIn(SignInWithSocialNetworkDTO obj);
+        Task<BestCVResponse> SignInWithFacebook(SignInWithSocialNetworkDTO obj);
+        Task<BestCVResponse> SignInWithLinkedIn(SignInWithSocialNetworkDTO obj);
 
         bool EmailValidate(string email);
         Task<object> ListCandidateAggregates(CandidateDTParameters parameters);
-        Task<DionResponse> QuickActivatedAsync(long id);
-        Task<DionResponse> ChangePasswordAdminAsync(ChangePasswordDTO obj);
-        Task<DionResponse> ExportExcel(List<CandidateAggregates> data);
+        Task<BestCVResponse> QuickActivatedAsync(long id);
+        Task<BestCVResponse> ChangePasswordAdminAsync(ChangePasswordDTO obj);
+        Task<BestCVResponse> ExportExcel(List<CandidateAggregates> data);
         byte[] DownloadExcel(string fileGuid, string fileName);
         /// <summary>
         ///  Author: DucNN
@@ -55,7 +55,7 @@ namespace BestCV.Application.Services.Interfaces
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        Task<(DionResponse, EmailMessage<ForgotPasswordEmailBody>?)> ForgotPassword(string email);
+        Task<(BestCVResponse, EmailMessage<ForgotPasswordEmailBody>?)> ForgotPassword(string email);
         /// <summary>
         /// Author: DucNN
         /// CreatedDate: 8/8/2023
@@ -100,7 +100,7 @@ namespace BestCV.Application.Services.Interfaces
         /// <param name="hash"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        Task<DionResponse> ResetNewPassword(string code, string hash, string password);
+        Task<BestCVResponse> ResetNewPassword(string code, string hash, string password);
         /// <summary>
         /// Author: TUNGTD
         /// Created: 23/09/2023

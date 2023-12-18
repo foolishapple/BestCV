@@ -28,14 +28,8 @@ namespace BestCV.Application.Services.Implement
             this.postLayoutRepository = postLayoutRepository;
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: add post layout
-        /// </summary>
-        /// <param name="obj">InsertPostLayoutDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> CreateAsync(InsertPostLayoutDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertPostLayoutDTO obj)
         {
             var listErrors = new List<string>();    
             var isNameExist = await postLayoutRepository.IsNameExistAsync(0, obj.Name.Trim());
@@ -46,7 +40,7 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var newObj = mapper.Map<PostLayout>(obj);
@@ -57,81 +51,58 @@ namespace BestCV.Application.Services.Implement
 
             await postLayoutRepository.CreateAsync(newObj);
             await postLayoutRepository.SaveChangesAsync();
-            return DionResponse.Success(newObj);
+            return BestCVResponse.Success(newObj);
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertPostLayoutDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertPostLayoutDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get list post layout
-        /// </summary>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await postLayoutRepository.FindByConditionAsync(c => c.Active);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", data);
+                return BestCVResponse.NotFound("Không có dữ liệu.", data);
             }
             var temp = mapper.Map<List<PostLayoutDTO>>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: get post layout by id
-        /// </summary>
-        /// <param name="id">PostLayoutId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> GetByIdAsync(int id)
+
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await postLayoutRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu.", id);
+                return BestCVResponse.NotFound("Không có dữ liệu.", id);
             }
             var temp = mapper.Map<PostLayoutDTO>(data);
-            return DionResponse.Success(temp);
+            return BestCVResponse.Success(temp);
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: soft delte post layout by id
-        /// </summary>
-        /// <param name="id">PostLayoutId</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
 
             var data = await postLayoutRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await postLayoutRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
 
             }
-            return DionResponse.NotFound("Không có dữ liệu.", id);
+            return BestCVResponse.NotFound("Không có dữ liệu.", id);
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: NhatVi
-        /// CreatedAt: 26/07/2023
-        /// Description: update post layout
-        /// </summary>
-        /// <param name="obj">UpdatePostLayoutDTO</param>
-        /// <returns>DionResponse</returns>
-        public async Task<DionResponse> UpdateAsync(UpdatePostLayoutDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdatePostLayoutDTO obj)
         {
             var listErrors = new List<string>();
             var isNameExist = await postLayoutRepository.IsNameExistAsync(obj.Id, obj.Name.Trim());
@@ -141,13 +112,13 @@ namespace BestCV.Application.Services.Implement
             }
             if (listErrors.Count>0)
             {
-                return DionResponse.BadRequest(listErrors);
+                return BestCVResponse.BadRequest(listErrors);
             }
 
             var data = await postLayoutRepository.GetByIdAsync(obj.Id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", obj);
+                return BestCVResponse.NotFound("Không có dữ liệu", obj);
             }
             var updateObj = mapper.Map(obj, data);
             updateObj.Description = !string.IsNullOrEmpty(updateObj.Description) ? updateObj.Description.ToEscape() : null;
@@ -155,11 +126,11 @@ namespace BestCV.Application.Services.Implement
             await postLayoutRepository.UpdateAsync(updateObj);
 
             await postLayoutRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdatePostLayoutDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdatePostLayoutDTO> obj)
         {
             throw new NotImplementedException();
         }

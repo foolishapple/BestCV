@@ -11,32 +11,14 @@ namespace BestCV.Application.Services.Interfaces
 {
 	public interface ICompanyFieldOfActivityService : IServiceQueryBase<int, InsertCompanyFieldOfActivityDTO, UpdateCompanyFieldOfActivityDTO, CompanyFieldOfActivityDTO>
 	{
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Hard delete Company Field Of Activity
-		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		Task<DionResponse> HardDeleteAsync(int id);
 
-		/// <summary>
-		/// Author: HuyDQ
-		/// Created: 14/08/2023
-		/// Description: get list Company Field Of Activity by company id
-		/// </summary>
-		/// <param name="companyId"></param>
-		/// <returns></returns>
-		Task<DionResponse> GetFieldActivityByCompanyId(int companyId);
+		Task<BestCVResponse> HardDeleteAsync(int id);
 
-		/// <summary>
-		/// Author: HuyDQ
-		/// Created: 14/08/2023
-		/// Description: delete list Company Field Of Activity by company id
-		/// </summary>
-		/// <param name="companyId"></param>
-		/// <returns></returns>
-		Task<DionResponse> DeleteFieldActivityByCompanyId(int companyId);
+
+		Task<BestCVResponse> GetFieldActivityByCompanyId(int companyId);
+
+
+		Task<BestCVResponse> DeleteFieldActivityByCompanyId(int companyId);
 	}
 }
 

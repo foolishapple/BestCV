@@ -11,13 +11,7 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IRolePermissionService : IServiceQueryBase<int,InsertRolePermissionDTO,UpdateRolePermissionDTO, RolePermissionDTO>
     {
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 09/08/2023
-        /// Description: 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        Task<DionResponse> UpdateList(UpdateListRolePermissionDTO obj);
+
+        Task<BestCVResponse> UpdateList(UpdateListRolePermissionDTO obj);
     }
 }

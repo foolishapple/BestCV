@@ -12,6 +12,6 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IMenuTypeService : IServiceQueryBase<int, InsertMenuTypeDTO, UpdateMenuTypeDTO, MenuTypeDTO>
     {
-        Task<DionResponse> GetMenuTypeAsync();
+        Task<BestCVResponse> GetMenuTypeAsync();
     }
 }

@@ -24,14 +24,8 @@ namespace BestCV.Application.Services.Implement
 			_logger = loggerFactory.CreateLogger<FieldOfActivityService>();
 			_mapper = mapper;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Create new Field Of Activity
-		/// </summary>
-		/// <param name="obj">Field Of Activity DTO</param>
-		/// <returns></returns>
-		public async Task<DionResponse> CreateAsync(InsertFieldOfActivityDTO obj)
+
+		public async Task<BestCVResponse> CreateAsync(InsertFieldOfActivityDTO obj)
 		{
 			var item = _mapper.Map<FieldOfActivity>(obj);
 			item.Active = true;
@@ -39,20 +33,14 @@ namespace BestCV.Application.Services.Implement
 			var errors = await Validate(item);
 			if (errors.Count > 0)
 			{
-				return DionResponse.BadRequest(errors);
+				return BestCVResponse.BadRequest(errors);
 			}
 			await _repository.CreateAsync(item);
 			await _repository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Create new list Field Of Activity
-		/// </summary>
-		/// <param name="objs">list Field Of Activity DTO</param>
-		/// <returns></returns>
-		public async Task<DionResponse> CreateListAsync(IEnumerable<InsertFieldOfActivityDTO> objs)
+
+		public async Task<BestCVResponse> CreateListAsync(IEnumerable<InsertFieldOfActivityDTO> objs)
 		{
 			List<string> errors = new();
 			var items = objs.Select(c => _mapper.Map<FieldOfActivity>(c));
@@ -64,85 +52,52 @@ namespace BestCV.Application.Services.Implement
 			}
 			if (errors.Count > 0)
 			{
-				return DionResponse.BadRequest(errors);
+				return BestCVResponse.BadRequest(errors);
 			}
 			await _repository.CreateListAsync(items);
 			await _repository.SaveChangesAsync();
-			return DionResponse.Success(objs);
+			return BestCVResponse.Success(objs);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Get list all Field Of Activity
-		/// </summary>
-		/// <returns></returns>
-		public async Task<DionResponse> GetAllAsync()
+
+		public async Task<BestCVResponse> GetAllAsync()
 		{
 			var data = await _repository.FindByConditionAsync(c => c.Active);
-			return DionResponse.Success(data);
+			return BestCVResponse.Success(data);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Get Field Of Activity by id
-		/// </summary>
-		/// <param name="id">Field Of Activity id</param>
-		/// <returns></returns>
-		/// <exception cref="Exception">Not found</exception>
-		public async Task<DionResponse> GetByIdAsync(int id)
+
+		public async Task<BestCVResponse> GetByIdAsync(int id)
 		{
 			var item = await _repository.GetByIdAsync(id);
 			if (item == null)
 			{
 				throw new Exception($"Not found Field Of Activity by id: {id}");
 			}
-			return DionResponse.Success(item);
+			return BestCVResponse.Success(item);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Soft delete Field Of Activity by id
-		/// </summary>
-		/// <param name="id">Field Of Activity by id</param>
-		/// <returns></returns>
-		/// <exception cref="Exception">Not found</exception>
-		public async Task<DionResponse> SoftDeleteAsync(int id)
+
+		public async Task<BestCVResponse> SoftDeleteAsync(int id)
 		{
 			var result = await _repository.SoftDeleteAsync(id);
 			if (result)
 			{
 				await _repository.SaveChangesAsync();
-				return DionResponse.Success(id);
+				return BestCVResponse.Success(id);
 			}
 			throw new Exception($"Not found Field Of Activity by id: {id}");
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Soft delete list Field Of Activity by list Field Of Activity id
-		/// </summary>
-		/// <param name="objs">list Field Of Activity id</param>
-		/// <returns></returns>
-		/// <exception cref="Exception">Failed delete</exception>
-		public async Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+
+		public async Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
 		{
 			var result = await _repository.SoftDeleteListAsync(objs);
 			if (result)
 			{
 				await _repository.SaveChangesAsync();
-				return DionResponse.Success(objs);
+				return BestCVResponse.Success(objs);
 			}
 			throw new Exception($"Failed to soft delete list Field Of Activity by list Field Of Activity id");
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Update Field Of Activity
-		/// </summary>
-		/// <param name="obj">update Field Of Activity DTO</param>
-		/// <returns></returns>
-		/// <exception cref="Exception">Not found</exception>
-		public async Task<DionResponse> UpdateAsync(UpdateFieldOfActivityDTO obj)
+
+		public async Task<BestCVResponse> UpdateAsync(UpdateFieldOfActivityDTO obj)
 		{
 			var item = await _repository.GetByIdAsync(obj.Id);
 			if (item == null)
@@ -153,21 +108,14 @@ namespace BestCV.Application.Services.Implement
 			var errors = await Validate(item);
 			if (errors.Count > 0)
 			{
-				return DionResponse.BadRequest(errors);
+				return BestCVResponse.BadRequest(errors);
 			}
 			await _repository.UpdateAsync(item);
 			await _repository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: update list Field Of Activity
-		/// </summary>
-		/// <param name="obj">list Field Of Activity DTO</param>
-		/// <returns></returns>
-		/// <exception cref="Exception">Not found</exception>
-		public async Task<DionResponse> UpdateListAsync(IEnumerable<UpdateFieldOfActivityDTO> obj)
+
+		public async Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateFieldOfActivityDTO> obj)
 		{
 			List<FieldOfActivity> updateItems = new();
 			List<string> errors = new();
@@ -184,19 +132,13 @@ namespace BestCV.Application.Services.Implement
 			}
 			if (errors.Count > 0)
 			{
-				return DionResponse.BadRequest(errors);
+				return BestCVResponse.BadRequest(errors);
 			}
 			await _repository.UpdateListAsync(updateItems);
 			await _repository.SaveChangesAsync();
-			return DionResponse.Success(obj);
+			return BestCVResponse.Success(obj);
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 11/08/2023
-		/// Description: Validate to Field Of Activity
-		/// </summary>
-		/// <param name="obj">Field Of Activity object</param>
-		/// <returns></returns>
+
 		private async Task<List<string>> Validate(FieldOfActivity obj)
 		{
 			List<string> errors = new();
@@ -207,21 +149,15 @@ namespace BestCV.Application.Services.Implement
 			return errors;
 		}
 
-		/// <summary>
-		/// Author: HuyDQ
-		/// Created: 16/08/2023
-		/// Description: lấy dữ liệu và đếm xem có bảo nhiêu nhà tuyển dụng có lĩnh vực này
-		/// </summary>
-		/// <param></param>
-		/// <returns></returns>
-		public async Task<DionResponse> LoadDataFilterFielOfActivityHomePageAsync()
+
+		public async Task<BestCVResponse> LoadDataFilterFielOfActivityHomePageAsync()
         {
 			var data = await _repository.LoadDataFilterFielOfActivityHomePageAsync();
 			if (data == null)
 			{
-				return DionResponse.NotFound("Không có dữ liệu", data);
+				return BestCVResponse.NotFound("Không có dữ liệu", data);
 			}
-			return DionResponse.Success(data);
+			return BestCVResponse.Success(data);
 		}
 	}
 }

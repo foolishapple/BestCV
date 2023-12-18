@@ -1,6 +1,6 @@
-using Jobi.Application;
-using Jobi.Infrastructure;
-using Jobi.API.Utilities;
+using BestCV.Application;
+using BestCV.Infrastructure;
+using BestCV.API.Utilities;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

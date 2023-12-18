@@ -28,14 +28,8 @@ namespace BestCV.Application.Services.Implement
             mapper = _mapper;
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// Description : Add menu type
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> CreateAsync(InsertMenuTypeDTO obj)
+
+        public async Task<BestCVResponse> CreateAsync(InsertMenuTypeDTO obj)
         {
             var data = mapper.Map<MenuType>(obj);
             data.Active = true;
@@ -44,39 +38,34 @@ namespace BestCV.Application.Services.Implement
             var error = await Validate(data);
             if(error.Count > 0)
             {
-                return DionResponse.BadRequest(error);
+                return BestCVResponse.BadRequest(error);
             }
 
             await menuTypeRepository.CreateAsync(data);
             await menuTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
 
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertMenuTypeDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertMenuTypeDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// Description : Add menu type
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var data = await menuTypeRepository.FindByConditionAsync(x => x.Active);
             if(data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
 
             var res = mapper.Map<List<MenuTypeDTO>>(data);
-            return DionResponse.Success(res);
+            return BestCVResponse.Success(res);
         }
 
-        public async Task<DionResponse> GetByIdAsync(int id)
+        public async Task<BestCVResponse> GetByIdAsync(int id)
         {
             var data = await menuTypeRepository.GetByIdAsync(id);
             if(data == null)
@@ -84,52 +73,40 @@ namespace BestCV.Application.Services.Implement
                 throw new Exception($"Not found menu type by id: {id}");
             }
 
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> GetMenuTypeAsync()
+        public async Task<BestCVResponse> GetMenuTypeAsync()
         {
             var data = await menuTypeRepository.FindByConditionAsync(x => x.Active && x.Id != 1001 );
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
 
             var res = mapper.Map<List<MenuTypeDTO>>(data);
-            return DionResponse.Success(res);
+            return BestCVResponse.Success(res);
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<DionResponse> SoftDeleteAsync(int id)
+
+        public async Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             var data = await menuTypeRepository.SoftDeleteAsync(id);
             if (data)
             {
                 await menuTypeRepository.SaveChangesAsync();
-                return DionResponse.Success(data);
+                return BestCVResponse.Success(data);
             }
             throw new Exception($"Not found menu type by id: {id}");
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author : HoanNK
-        /// CreatedTime : 31/08/2023
-        /// Description : Update menu type
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateAsync(UpdateMenuTypeDTO obj)
+
+        public async Task<BestCVResponse> UpdateAsync(UpdateMenuTypeDTO obj)
         {
             var data = await menuTypeRepository.GetByIdAsync(obj.Id);
             if (data == null)
@@ -141,14 +118,14 @@ namespace BestCV.Application.Services.Implement
             var error = await Validate(data);
             if (error.Count > 0)
             {
-                return DionResponse.BadRequest(error);
+                return BestCVResponse.BadRequest(error);
             }
             await menuTypeRepository.UpdateAsync(data);
             await menuTypeRepository.SaveChangesAsync();
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateMenuTypeDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateMenuTypeDTO> obj)
         {
             throw new NotImplementedException();
         }

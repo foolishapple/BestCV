@@ -3,7 +3,7 @@
 $(document).ready(function () {
 
 
-    if (localStorage.currentLoggedInUserJobi) {
+    if (localStorage.currentLoggedInUserBestCV) {
         initnoti();
         loadDataAndCountNotifications();
 

@@ -13,8 +13,8 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ICandidateCVService : IServiceQueryBase<long, InsertOrUpdateCandidateCVDTO, InsertOrUpdateCandidateCVDTO, CandidateCV>
     {
-        Task<DionResponse> GetListAsyncByCandidateId(long candidateId);
+        Task<BestCVResponse> GetListAsyncByCandidateId(long candidateId);
 
-        Task<DionResponse> GetListAggregateAsyncByCandidateId(long candidateId);
+        Task<BestCVResponse> GetListAggregateAsyncByCandidateId(long candidateId);
     }
 }

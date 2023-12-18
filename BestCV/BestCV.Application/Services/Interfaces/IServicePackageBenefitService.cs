@@ -13,6 +13,6 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface IServicePackageBenefitService : IServiceQueryBase<int, InsertServicePackageBenefitDTO, UpdateServicePackageBenefitDTO, ServicePackageBenefitDTO>
     {
-        Task<DionResponse> GetListByEmployerServicePackage(int employerServicePackageId);
+        Task<BestCVResponse> GetListByEmployerServicePackage(int employerServicePackageId);
     }
 }

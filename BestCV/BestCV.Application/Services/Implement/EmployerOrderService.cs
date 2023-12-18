@@ -51,67 +51,46 @@ namespace BestCV.Application.Services.Implement
             _employerWalletRepository = employerWalletRepository;
         }
 
-        public Task<DionResponse> CreateAsync(InsertEmployerOrderDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertEmployerOrderDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertEmployerOrderDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertEmployerOrderDTO> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetByIdAsync(long id)
+        public Task<BestCVResponse> GetByIdAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 11/9/2023
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+
         public async Task<object> ListOrderAggregates(DTParameters parameters)
         {
             return await employerOrderRepository.ListOrderAggregates(parameters);
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 11/9/2023
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+ 
         public async Task<List<SelectListItem>> ListOrderStatusSelected()
         {
             return await employerOrderRepository.ListOrderStatusSelected();
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 11/9/2023
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+ 
         public async Task<List<SelectListItem>> ListPaymentMethodSelected()
         {
             return await employerOrderRepository.ListPaymentMethodSelected();
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 11/9/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> QuickIsApprovedAsync(long id)
+
+        public async Task<BestCVResponse> QuickIsApprovedAsync(long id)
         {
             using (var trans = await employerOrderRepository.BeginTransactionAsync())
             {
@@ -190,7 +169,7 @@ namespace BestCV.Application.Services.Implement
                                     await _employerServicePackageEmployerRepository.CreateListAsync(employerServicePackageEmployers);
                                     if(!((await _employerServicePackageEmployerRepository.SaveChangesAsync()) > 0))
                                     {
-                                        return DionResponse.BadRequest(new string[] { "Kích hoạt đơn hàng không thành công" });
+                                        return BestCVResponse.BadRequest(new string[] { "Kích hoạt đơn hàng không thành công" });
                                     }
                                 }
                                 #endregion
@@ -202,11 +181,11 @@ namespace BestCV.Application.Services.Implement
                         if((await employerOrderRepository.SaveChangesAsync()) > 0)
                         {
                             await trans.CommitAsync();
-                            return DionResponse.Success();
+                            return BestCVResponse.Success();
                         }
                         #endregion
                     }
-                    return DionResponse.BadRequest(new string[] { "Kích hoạt đơn hàng không thành công" });
+                    return BestCVResponse.BadRequest(new string[] { "Kích hoạt đơn hàng không thành công" });
                 }
                 catch (Exception e)
                 {
@@ -216,13 +195,8 @@ namespace BestCV.Application.Services.Implement
 
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 11/9/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> AdminDetailAsync(long id)
+
+        public async Task<BestCVResponse> AdminDetailAsync(long id)
         {
             var data = await employerOrderRepository.GetByIdAsync(id);
             if (data != null)
@@ -237,38 +211,32 @@ namespace BestCV.Application.Services.Implement
                 }).ToList();
 
                 // Gán danh sách EmployerDTO vào model.ListEmployer
-                return DionResponse.Success(model);
+                return BestCVResponse.Success(model);
             }
-            return DionResponse.NotFound("Không tìm thấy đơn hàng", data);
+            return BestCVResponse.NotFound("Không tìm thấy đơn hàng", data);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateEmployerOrderDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateEmployerOrderDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateEmployerOrderDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateEmployerOrderDTO> obj)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created: 12/9/2023
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+
         public async Task<EmployerOrderAndOrderDetailDTO> ListOrderDetailByOrderId(long id)
         {
             var aggregatesList = await employerOrderRepository.ListOrderDetailByOrderId(id);
@@ -296,21 +264,15 @@ namespace BestCV.Application.Services.Implement
             return dto;
         }
 
-        /// <summary>
-        /// Author: Nam Anh
-        /// Created:12/9/2023
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<DionResponse> UpdateInfoOrder(UpdateInfoOrderDTO model)
+
+        public async Task<BestCVResponse> UpdateInfoOrder(UpdateInfoOrderDTO model)
         {
             var order = mapper.Map<EmployerOrder>(model);
             await employerOrderRepository.UpdateInfoOrder(order);
-            return DionResponse.Success(model);
+            return BestCVResponse.Success(model);
         }
 
-        public async Task<DionResponse> AddOrder(CreateEmployerOrderDTO model)
+        public async Task<BestCVResponse> AddOrder(CreateEmployerOrderDTO model)
         {
             using (var database = await employerOrderRepository.BeginTransactionAsync())
             {
@@ -350,7 +312,7 @@ namespace BestCV.Application.Services.Implement
 
                     }
                     await database.CommitAsync();
-                    return DionResponse.Success();
+                    return BestCVResponse.Success();
                 }
                 catch
                 {
@@ -360,14 +322,14 @@ namespace BestCV.Application.Services.Implement
             }
         }
 
-        public async Task<DionResponse> ListByEmployerId(long employerId)
+        public async Task<BestCVResponse> ListByEmployerId(long employerId)
         {
             var data = await employerOrderRepository.FindByConditionAsync(x => x.Active && x.EmployerId == employerId);
             if (data.Count == 0)
             {
-                return DionResponse.NotFound("Không tìm thấy dữ liệu", data);
+                return BestCVResponse.NotFound("Không tìm thấy dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
         public async Task<object> PagingByEmployerId(DTPagingEmployerOrderParameters parameters)
@@ -375,35 +337,29 @@ namespace BestCV.Application.Services.Implement
             return await employerOrderRepository.PagingByEmployerId(parameters);
         }
 
-        public async Task<DionResponse> DetailByOrderId(long orderId)
+        public async Task<BestCVResponse> DetailByOrderId(long orderId)
         {
             var data = await employerOrderRepository.DetailByOrderId(orderId);
             if (data == null)
             {
-                return DionResponse.NotFound("Không tìm thấy dữ liệu", data);
+                return BestCVResponse.NotFound("Không tìm thấy dữ liệu", data);
 
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public async Task<DionResponse> CancelOrder(long orderId)
+        public async Task<BestCVResponse> CancelOrder(long orderId)
         {
             var isCanceled = await employerOrderRepository.CancelOrder(orderId);
             if (!isCanceled)
             {
-                return DionResponse.BadRequest(isCanceled);
+                return BestCVResponse.BadRequest(isCanceled);
             }
             await employerOrderRepository.SaveChangesAsync();
-            return DionResponse.Success(isCanceled);
+            return BestCVResponse.Success(isCanceled);
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 21/09/2023
-        /// Description: Update order status
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public async Task<DionResponse> UpdateOrderStatus(UpdateEmployerOrderStatusDTO obj)
+
+        public async Task<BestCVResponse> UpdateOrderStatus(UpdateEmployerOrderStatusDTO obj)
         {
             var order = await employerOrderRepository.GetByIdAsync(obj.OrderId);
             if (order == null)
@@ -414,7 +370,7 @@ namespace BestCV.Application.Services.Implement
             await employerOrderRepository.UpdateAsync(order);
             if ((await employerOrderRepository.SaveChangesAsync()) > 0)
             {
-                return DionResponse.Success();
+                return BestCVResponse.Success();
             }
             throw new Exception($"Failed to updated with order id {obj.OrderId}");
         }

@@ -25,55 +25,43 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
         }
 
-        public Task<DionResponse> CreateAsync(InsertRolePermissionDTO obj)
+        public Task<BestCVResponse> CreateAsync(InsertRolePermissionDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<InsertRolePermissionDTO> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<InsertRolePermissionDTO> objs)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 08/08/2023
-        /// Description: get list all role permission
-        /// </summary>
-        /// <returns></returns>
-        public async Task<DionResponse> GetAllAsync()
+
+        public async Task<BestCVResponse> GetAllAsync()
         {
             var items = await _repository.FindByConditionAsync(c => c.Active);
-            return DionResponse.Success(items);
+            return BestCVResponse.Success(items);
         }
 
-        public Task<DionResponse> GetByIdAsync(int id)
+        public Task<BestCVResponse> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteAsync(int id)
+        public Task<BestCVResponse> SoftDeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<int> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<int> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(UpdateRolePermissionDTO obj)
+        public Task<BestCVResponse> UpdateAsync(UpdateRolePermissionDTO obj)
         {
             throw new NotImplementedException();
         }
-        /// <summary>
-        /// Author: TUNGTD
-        /// Created: 09/08/2023
-        /// Description: Update list role permission DTO
-        /// </summary>
-        /// <param name="obj">update list role permission DTO object</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Failed update</exception>
-        public async Task<DionResponse> UpdateList(UpdateListRolePermissionDTO obj)
+
+        public async Task<BestCVResponse> UpdateList(UpdateListRolePermissionDTO obj)
         {
             using(var trans = await _repository.BeginTransactionAsync())
             {
@@ -102,10 +90,10 @@ namespace BestCV.Application.Services.Implement
                     throw new Exception("Failed to update list role permission");
                 }
             }
-            return DionResponse.Success(obj);
+            return BestCVResponse.Success(obj);
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<UpdateRolePermissionDTO> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<UpdateRolePermissionDTO> obj)
         {
             throw new NotImplementedException();
         }

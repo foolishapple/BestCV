@@ -28,65 +28,60 @@ namespace BestCV.Application.Services.Implement
             _mapper = mapper;
         }
 
-        public Task<DionResponse> CreateAsync(CVTemplate obj)
+        public Task<BestCVResponse> CreateAsync(CVTemplate obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> CreateListAsync(IEnumerable<CVTemplate> objs)
+        public Task<BestCVResponse> CreateListAsync(IEnumerable<CVTemplate> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> GetAllAsync()
+        public Task<BestCVResponse> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<DionResponse> GetByIdAsync(long id)
+        public async Task<BestCVResponse> GetByIdAsync(long id)
         {
             var data = await _cvTemplateRepository.GetByIdAsync(id);
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
 
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
 
-        public Task<DionResponse> SoftDeleteAsync(long id)
+        public Task<BestCVResponse> SoftDeleteAsync(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> SoftDeleteListAsync(IEnumerable<long> objs)
+        public Task<BestCVResponse> SoftDeleteListAsync(IEnumerable<long> objs)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateAsync(CVTemplate obj)
+        public Task<BestCVResponse> UpdateAsync(CVTemplate obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<DionResponse> UpdateListAsync(IEnumerable<CVTemplate> obj)
+        public Task<BestCVResponse> UpdateListAsync(IEnumerable<CVTemplate> obj)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Author: Daniel
-        /// CreatedDate: 22/08/2023
-        /// Description: Lấy tất cả các template CV đã publish
-        /// </summary>
-        public async Task<DionResponse> GetAllPublishAsync()
+        public async Task<BestCVResponse> GetAllPublishAsync()
         {
             var data = await _cvTemplateRepository.GetAllPublishAsync();
             if (data == null)
             {
-                return DionResponse.NotFound("Không có dữ liệu", data);
+                return BestCVResponse.NotFound("Không có dữ liệu", data);
             }
-            return DionResponse.Success(data);
+            return BestCVResponse.Success(data);
         }
     }
 }

@@ -12,24 +12,11 @@ namespace BestCV.Application.Services.Interfaces
 {
     public interface ILicenseService : IServiceQueryBase<long, InsertLicenseDTO, UpdateLicenseDTO, LicenseDTO>
     {
-        public Task<DionResponse> GetListByCompanyId(int companyId);
+        public Task<BestCVResponse> GetListByCompanyId(int companyId);
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// CreatedTime : 07/09/2023
-        /// Description : Lấy danh sách giầy tờ nhà tuyển dụng (dành cho admin)
-        /// </summary>
-        /// <param name="parameters">DTParameters</param>
-        /// <returns>object</returns>
         public Task<object> ListLicenseAggregates(DTParameters parameters);
 
-        /// <summary>
-        /// Author: HuyDQ
-        /// CreatedAt: 07/09/2023
-        /// Description: approve license
-        /// </summary>
-        /// <param name="obj">ApproveLicenseDTO</param>
-        /// <returns>DionResponse</returns>
-        public Task<DionResponse> UpdateApproveStatusLicenseAsync(ApproveLicenseDTO obj);
+
+        public Task<BestCVResponse> UpdateApproveStatusLicenseAsync(ApproveLicenseDTO obj);
     }
 }

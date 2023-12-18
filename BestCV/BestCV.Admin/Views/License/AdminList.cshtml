@@ -1,0 +1,242 @@
+﻿
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Quản lý giấy tờ";
+}
+
+@section Headers{
+
+    <style type="text/css">
+        #tableData thead tr th:nth-child(1),
+        #tableData tbody tr td:nth-child(1),
+        #tableData tfoot tr th:nth-child(1) {
+            width: 70px !important;
+            text-align: center !important;
+        }
+
+        #tableData thead tr th:nth-child(2),
+        #tableData tbody tr td:nth-child(2),
+        #tableData tfoot tr th:nth-child(2) {
+            width: 400px !important;
+            text-align: left !important;
+        }
+
+        #tableData thead tr th:nth-child(3),
+        #tableData tbody tr td:nth-child(3),
+        #tableData tfoot tr th:nth-child(3) {
+            width: 250px !important;
+            text-align: left !important;
+        }
+
+        #tableData thead tr th:nth-child(4),
+        #tableData tbody tr td:nth-child(4),
+        #tableData tfoot tr th:nth-child(4) {
+            width: 300px !important;
+            text-align: center !important;
+        }
+
+        #tableData thead tr th:nth-child(5),
+        #tableData tbody tr td:nth-child(5),
+        #tableData tfoot tr th:nth-child(5) {
+            width: 110px !important;
+            text-align: center !important;
+        }
+
+        #tableData thead tr th:nth-child(6),
+        #tableData tbody tr td:nth-child(6),
+        #tableData tfoot tr th:nth-child(6) {
+            width: 150px !important;
+            text-align: center !important;
+        }
+
+        .search-control {
+            white-space: normal;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+        #btnTableSearch {
+            margin-right: 10px;
+        }
+
+        #the-canvas {
+            border: 1px solid black;
+            direction: ltr;
+            width: 160px;
+            height: auto;
+            object-fit: cover;
+        }
+
+        img{
+            object-fit: cover;
+        }
+    </style>
+}   
+    
+    <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+        <!--begin::Toolbar container-->
+        <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                <!--begin::Title-->
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Quản lý giấy tờ</h1>
+                <!--end::Title-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                    <a href="@Url.Action("Index","Home")" class="text-muted text-hover-primary">Trang chủ</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">Giầy tờ</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">Quản lý giấy tờ</li>
+                    <!--end::Item-->
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page title-->
+        </div>
+        <!--end::Toolbar container-->
+    </div>
+    <!--end::Toolbar-->
+    <!--begin::Content-->
+    <div id="kt_app_content" class="app-content flex-column-fluid">
+        <div id="kt_app_content_container" class="app-container  container-fluid ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header border-0 pt-6">
+                            <!--begin::Card title-->
+                            <div class="card-title">
+                                <!--begin::Search-->
+                                <div class="d-flex align-items-center position-relative my-1">
+                                    <span class="svg-icon svg-icon svg-icon-1 fs-3 position-absolute ms-5 svg_search">
+                                    </span>
+                                    <input type="text" id="table_search_all" data-course-type="search" class="form-control form-control-solid w-250px ps-13" placeholder="Tìm kiếm" />
+                                </div>
+                                <!--end::Search-->
+                            </div>
+                            <div class="card-toolbar">
+                                <!--begin::Toolbar-->
+                                <div class="d-flex justify-content-end d-none" data-kt-user-table-toolbar="base">
+
+                                    <a href="/license/add" target="_blank" class="btn btn-primary">
+                                        <span class="svg-icon svg-icon svg-icon-1 svg_plus p-0">
+                                        </span> Thêm mới
+                                    </a>
+
+                                    <!--end::Add user-->
+                                </div>
+                                <!--end::Toolbar-->
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="tableData" class="table table-row-bordered align-middle table-hover">
+                                <thead>
+                                    <tr class="fw-semibold fs-6 text-muted text-uppercase">
+                                        <th class="column-index">stt</th>
+                                        <th>Công ty</th>
+                                        <th>loại</th>
+                                        <th>file</th>
+                                        <th class="column-date">NGÀY TẠO</th>
+                                        <th class="column-approve">DUYỆT</th>
+                                        <th class="column-action-2">THAO TÁC</th>
+                                    </tr>
+                                </thead>
+                                <thead class="d-none" id="rowSearch">
+                                    <tr class="fs-6 ">
+                                        <td class="column-index"></td>
+
+                                        <td><input type="text" class="form-control tableHeaderFilter" id="searchCompanyName" /></td>
+                                        <td><select class="form-select tableHeaderFilter" multiple="multiple" id="searchLicenseType"></select></td>
+                                        <td></td>
+
+
+                                        <td class="column-date">
+                                            <div class="input-group mb-1 date_picker" id="fillter_startDate" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                                <input id="fillter_startDate_value" readonly type="text" class="form-control tableHeaderFilter" data-td-target="#fillter_startDate" />
+                                                <span class="input-group-text" data-td-target="#fillter_startDate" title="Ngày bắt đầu" data-td-toggle="datetimepicker">
+                                                    <span class="svg-icon svg-icon svg-icon-1 svg_calender">
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <div class="input-group date_picker" id="fillter_endDate" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                                <input id="fillter_endDate_value" readonly type="text" class="form-control tableHeaderFilter" data-td-target="#fillter_endDate" />
+                                                <span class="input-group-text" data-td-target="#fillter_endDate" title="Ngày kết tdúc" data-td-toggle="datetimepicker">
+                                                    <span class="svg-icon svg-icon svg-icon-1 svg_calender">
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+
+                                        <td class="column-approve">
+                                            <select class="form-select dataSelect tableHeaderFilter" id="licenseIsApprovedTable">
+                                                <option value="false">Chưa duyệt</option>
+                                                <option value="true">Đã duyệt</option>
+                                            </select>
+                                        </td>
+
+                                        <th class="text-center column-action-2">
+                                            <div class="search-control">
+                                                <button class="btn btn-primary form-control mb-1" id="btnTableSearch">
+                                                    <span class="svg-icon svg-icon svg-icon-1 svg_search_2 m-0">
+                                                    </span>
+                                                </button>
+                                                <button class="btn btn-secondary form-control" id="btnTableResetSearch">
+                                                    <span class="svg-icon svg-icon svg-icon-1 svg_cancel m-0">
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="fw-semibold fs-6 text-muted text-uppercase">
+                                        <th class="column-index">stt</th>
+                                        <th>Công ty</th>
+                                        <th>loại</th>
+                                        <th>file</th>
+                                        <th class="column-date">NGÀY TẠO</th>
+                                        <th class="column-approve">DUYỆT</th>
+                                        <th class="column-action-2">THAO TÁC</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <script>
+        var updatingId = 0;
+        var updatingObj;
+
+        // Loaded via <script> tag, create shortcut to access PDF.js exports.
+        var pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+        // The workerSrc property shall be specified.
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+    </script>
+
+    <script src="~/assets/js/pages/license.js" asp-append-version="true"></script>
+}

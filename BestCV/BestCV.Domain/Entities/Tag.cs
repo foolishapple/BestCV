@@ -1,4 +1,4 @@
-﻿using Jobi.Core.Entities;
+﻿using BestCV.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Jobi.Domain.Entities
+namespace BestCV.Domain.Entities
 {
     public class Tag : EntityBase<int>
     {

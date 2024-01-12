@@ -411,7 +411,7 @@ templates = {
                             <div style="display: flex; justify-content: space-between;">
                                 <span class="cv-item-content" contenteditable="true"
                                     onclick="onClickElement(this)" style="line-height: 24px; font-size: 14px;">
-                                    <b>Nhóm tình nguyện JOBI</b>
+                                    <b>Nhóm tình nguyện BestCV</b>
                                 </span>
                                 <span class="cv-item-content" contenteditable="true"
                                     onclick="onClickElement(this)"
@@ -443,7 +443,7 @@ templates = {
                             <div style="display: flex; justify-content: space-between;">
                                 <span class="cv-item-content" contenteditable="true"
                                     onclick="onClickElement(this)" style="line-height: 24px; font-size: 14px;">
-                                    <b>Nhân viên xuất sắc của năm công ty JOBI</b>
+                                    <b>Nhân viên xuất sắc của năm công ty BestCV</b>
                                 </span>
                                 <span class="cv-item-content" contenteditable="true"
                                     onclick="onClickElement(this)"
@@ -464,7 +464,7 @@ templates = {
                         <div class="cv-item-content" contenteditable="true" onclick="onClickElement(this)">
                             Anh Nguyễn Văn A - Trưởng phòng Marketing
                             <br>
-                            Công ty JOBI
+                            Công ty BEstCV
                             <br>
                             Điện thoại: 0987654321
                         </div>

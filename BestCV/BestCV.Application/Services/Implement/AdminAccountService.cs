@@ -376,7 +376,7 @@ namespace BestCV.Application.Services.Implement
                 ToEmails = new List<string> { acc.Email },
                 CcEmails = new List<string> { },
                 BccEmails = new List<string> { },
-                Subject = "Thay đổi mật khẩu tài khoản Admin hệ thống Jobi",
+                Subject = "Thay đổi mật khẩu tài khoản Admin hệ thống BestCV",
                 Model = new ForgotPasswordEmailBody()
                 {
                     Fullname = acc.FullName,

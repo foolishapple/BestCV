@@ -417,7 +417,7 @@ namespace BestCV.Application.Services.Implement
                 ToEmails = new List<string> { emp.Email },
                 CcEmails = new List<string> { },
                 BccEmails = new List<string> { },
-                Subject = "Xác thực đăng ký tài khoản nhà tuyển dụng hệ thống Jobi",
+                Subject = "Xác thực đăng ký tài khoản nhà tuyển dụng hệ thống BestCV",
                 Model = new EmployerConfirmEmailBody()
                 {
                     Fullname = emp.Fullname,
@@ -438,7 +438,7 @@ namespace BestCV.Application.Services.Implement
                 ToEmails = new List<string> { emp.Email },
                 CcEmails = new List<string> { },
                 BccEmails = new List<string> { },
-                Subject = "Thay đổi mật khẩu tài khoản nhà tuyển dụng hệ thống Jobi",
+                Subject = "Thay đổi mật khẩu tài khoản nhà tuyển dụng hệ thống BestCV",
                 Model = new ForgotPasswordEmailBody()
                 {
                     Fullname = emp.Fullname,

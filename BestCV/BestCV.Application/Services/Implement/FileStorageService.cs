@@ -19,13 +19,7 @@ namespace BestCV.Application.Services.Implement
 			_webHostEnvironment = webHostEnvironment;
 		}
 
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30/07/2023
-		/// Description: add folder
-		/// </summary>
-		/// <param name="folderPath">folder full path</param>
-		/// <returns></returns>
+
 		public string AddFolder(string folderPath)
 		{
 			int count = 1;
@@ -65,13 +59,7 @@ namespace BestCV.Application.Services.Implement
 			}
 		}
 
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30//0
-		/// Description: Created thumbnail
-		/// </summary>
-		/// <param name="filePath">file image full path</param>
-		/// <param name="image">image</param>
+
 		public async Task<string> CreateThumbnail(string filePath, Image image)//funciton only run in using stream or file
 		{
 			string rootPath = Path.Combine(Path.GetDirectoryName(filePath), FolderUploadConst.FOLDER_THUMB_NAME);
@@ -99,15 +87,7 @@ namespace BestCV.Application.Services.Implement
 			await thumb.SaveAsync(newThumnailsPath);
 			return newThumnailsPath;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 31/07/2023
-		/// Description: save larger file 
-		/// </summary>
-		/// <param name="obj">inset large upload file DTO object</param>
-		/// <param name="rootFolder">folder root path</param>
-		/// <returns></returns>
-		/// <exception cref="Exception">stream null exception</exception>
+
 		public async Task<List<UploadFile>> SaveLargeFile(InsertLargeUploadFileDTO obj, string rootFolder)
 		{
 			List<UploadFile> result = new();
@@ -161,14 +141,7 @@ namespace BestCV.Application.Services.Implement
 			}
 			return result.ToList();
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30/07/2023
-		/// Description: Upload many file 
-		/// </summary>
-		/// <param name="obj">insert upload file DTO</param>
-		/// <param name="rootPath">folder upload full path</param>
-		/// <returns></returns>
+
 		public async Task<List<UploadFile>> SaveManyFile(InsertUploadFileDTO obj,string rootPath)
 		{
 			List<UploadFile> result = new ();
@@ -219,14 +192,7 @@ namespace BestCV.Application.Services.Implement
 			}
 			return result;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 12/06/2023
-		/// Description: Get boundary of file
-		/// </summary>
-		/// <param name="contentType">content tyoe</param>
-		/// <returns></returns>
-		/// <exception cref="InvalidDataException"></exception>
+
 		public string GetBoundary(MediaTypeHeaderValue contentType)
 		{
 			var boundary = HeaderUtilities.RemoveQuotes(contentType.Boundary).Value;
@@ -237,24 +203,14 @@ namespace BestCV.Application.Services.Implement
 			}
 			return boundary;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// </summary>
-		/// <param name="fileSection"></param>
-		/// <param name="filePath"></param>
-		/// <returns></returns>
+
 		public async Task<long> SaveLagreFileAsync(FileMultipartSection fileSection, string filePath)
 		{
 			await using var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, 1024);
 			await fileSection.FileStream?.CopyToAsync(stream);
 			return fileSection.FileStream.Length;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 30/07/2023
-		/// Description: Get root web folder in JOBI storage
-		/// </summary>
-		/// <returns></returns>
+
 		private string GetRootFolderPath()
 		{
 			string rootPath = _webHostEnvironment.ContentRootPath;
@@ -265,14 +221,7 @@ namespace BestCV.Application.Services.Implement
 			}
 			return rootPath;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 01/08/2023
-		/// Description: Save cover photo
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <param name="rootPath"></param>
-		/// <returns></returns>
+
 		public async Task<List<UploadFile>> SaveCoverPhoto(InsertUploadFileDTO obj, string rootPath)
 		{
 			List<UploadFile> result = new();
@@ -321,14 +270,7 @@ namespace BestCV.Application.Services.Implement
 			}
 			return result;
 		}
-		/// <summary>
-		/// Author: TUNGTD
-		/// Created: 01/08/2023
-		/// Description: 
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <param name="rootPath"></param>
-		/// <returns></returns>
+
 		public async Task<List<UploadFile>> SaveAvartar(InsertUploadFileDTO obj, string rootPath)
 		{
 			List<UploadFile> result = new();

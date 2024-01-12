@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Jobi.ScheduledJob": {
+    "BestCV.ScheduledJob": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

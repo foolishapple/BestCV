@@ -23,13 +23,6 @@ namespace BestCV.Infrastructure.Repositories.Implement
             unitOfWork = _unitOfWork;
         }
 
-        /// <summary>
-        /// Author : ThanhNd
-        /// CreatedTime : 27/07/2023
-        /// </summary>
-        /// <param name="name">MenuName</param>
-        /// <param name="id">MenuId</param>
-        /// <returns>True if menu is exist, opposite false </returns>
         public async Task<bool> IsMenuExistAsync(string name, int id, int menuTypeId)
         {
             return await db.Menus.AnyAsync(c => c.Active && c.Name.ToLower().Trim() == name.ToLower().Trim() && c.Id != id && c.MenuTypeId == menuTypeId);

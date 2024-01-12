@@ -22,7 +22,7 @@ namespace BestCV.Web.Controllers
             Rotativa.AspNetCore.ViewAsPdf viewAsPdf = new Rotativa.AspNetCore.ViewAsPdf("DemoViewAsPDF");
             byte[] pdfData = await viewAsPdf.BuildFile(ControllerContext);
             string fullPath = Path.Combine(_hostingEnvironment.WebRootPath, "pdf", "DemoRotativa1.pdf");
-            using (var fileStream = new FileStream(fullPath.Replace("Jobi.Web","Jobi.Storage"), FileMode.Create, FileAccess.Write))
+            using (var fileStream = new FileStream(fullPath.Replace("BestCV.Web","BestCV.Storage"), FileMode.Create, FileAccess.Write))
             {
                 fileStream.Write(pdfData, 0, pdfData.Length);
             }

@@ -38,7 +38,7 @@ namespace BestCV.Admin.Controllers
                     return await systemMenuAdmin.GetAllAsync();
                 });
 
-            ViewBag.MenuAdmin = JsonConvert.SerializeObject(listMenuAdmin.Where(x => x.Active && x.MenuTypeId == MenuConstant.DEFAULT_VALUE_MENU_ADMIN));
+            ViewBag.MenuAdmin = JsonConvert.SerializeObject(listMenuAdmin.Where(x => x.Active && x.MenuTypeId == MenuConstant.DEFAULT_VALUE_MENU_ADMIN && x.Id != 1011));
 
             await base.OnActionExecutionAsync(filterContext, next);
         }
